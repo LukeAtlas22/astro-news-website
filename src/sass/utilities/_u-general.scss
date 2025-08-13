@@ -1,0 +1,72 @@
+@use "../abstracts/" as *;
+
+// Typography related
+
+.text-center {
+  text-align: center;
+  justify-content: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.bold {
+  font-weight: $font-weight-bold;
+}
+
+.semi-bold {
+  font-weight: $font-weight-semi-bold;
+}
+
+.letter-spacing-loose {
+  letter-spacing: $letter-spacing-loose;
+}
+
+// Layout related
+
+.vertically-center {
+  align-items: center;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+// Self Justification & Self Alignment
+
+.justify-self-end {
+  justify-self: end;
+}
+.justify-self-start {
+  justify-self: start;
+}
+.justify-self-center {
+  justify-self: center;
+}
+.align-self-end {
+  align-self: end;
+}
+.align-self-start {
+  align-self: start;
+}
+.align-self-center {
+  align-self: center;
+}
+
+// Others
+.relative {
+  position: relative;
+}
+
+.debug {
+  outline: 2px solid red;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}

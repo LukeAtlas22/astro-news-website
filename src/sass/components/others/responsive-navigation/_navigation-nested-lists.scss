@@ -1,0 +1,110 @@
+@use "mixins/selectors-nested" as *;
+@use "tokens" as *;
+
+// nestedListDesktop: 'navigation__nested-list',
+// nestedListItemDesktop: 'navigation__nested-list-item',
+// nestedLinkDesktop: 'navigation__nested-link',
+// nestedListHamburger: 'navigation__nested-list-hamburger',
+// nestedListItemHamburger: 'navigation__nested-list-item-hamburger',
+// nestedLinkHamburger: 'navigation__nested-link-hamburger',
+
+/*
+Todo: Le nested list dovrebbero avere indipendent breakpoints e possibilità di personalizzazione
+*/
+
+@include Nested-Link-Desktop {
+  display: flex;
+  cursor: pointer;
+  line-height: 1;
+}
+@include Nested-Link-Mobile {
+  display: flex;
+  cursor: pointer;
+  line-height: 1;
+} // Todo - Dove va questo codice (?)
+
+.navigation__list-item {
+  position: relative;
+}
+
+// █▀▄ ██▀ ▄▀▀ █▄▀ ▀█▀ ▄▀▄ █▀▄
+// █▄▀ █▄▄ ▄█▀ █ █  █  ▀▄▀ █▀
+
+.navigation__link {
+  anchor-name: --this-is-a-test; //
+}
+
+@include Nested-List-Desktop {
+  // Custom size token
+  // Tokenize the inset
+
+  position-area: bottom center;
+  width: $nested-nav-width;
+
+  transition: scale $nested-nav-height-transition; // T
+
+  background-color: $nested-nav-background;
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute; // Relative to proper list item
+  scale: 1 0;
+  transform-origin: top;
+  position-anchor: --this-is-a-test; //
+}
+
+@include Nested-List-Desktop-Open {
+  scale: 1;
+}
+
+@include Nested-List-Item-Desktop {
+  background-color: $nested-nav-link-background;
+  color: $nested-nav-color;
+  transition: 
+    background-color $nested-nav-colors-transition,
+    color $nested-nav-colors-transition
+  ;
+  
+}
+
+@include Nested-List-Item-Desktop-Hover {
+  background-color: $nested-nav-link-background-hover;
+}
+
+@include Nested-Link-Desktop {
+  color: inherit;
+  padding-inline: $nested-nav-link-padding-inline;
+  padding-block: $nested-nav-link-padding-block;
+}
+
+// █▄ ▄█ ▄▀▄ ██▄ █ █   ██▀
+// █ ▀ █ ▀▄▀ █▄█ █ █▄▄ █▄▄
+
+@include Nested-List-Mobile {
+  height: 0;
+  overflow: hidden;
+
+  padding-inline: 1rem; // T
+
+  display: flex;
+  flex-direction: column; // T
+  gap: 0rem;
+
+  transition: height 275ms, padding-block 275ms, margin 275ms; // T: 275ms
+}
+
+@include Nested-List-Mobile-Open {
+  padding-block: 1rem;
+  height: auto;
+}
+
+@include Nested-List-Item-Mobile {
+  border-bottom: 1px solid red;
+  border-top: 1px solid red;
+}
+
+@include Nested-Link-Mobile {
+  padding-block: 0.75rem;
+  padding-inline: 0.25rem;
+}

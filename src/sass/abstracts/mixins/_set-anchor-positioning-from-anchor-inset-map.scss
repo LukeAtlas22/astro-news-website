@@ -1,0 +1,7 @@
+@use "sass:map";
+
+@mixin set-anchor-positioning-from-($anchorInsetMap) {
+  @each $insetProperty, $insetValue in $anchorInsetMap {
+    #{$insetProperty}: calc(anchor(#{$insetProperty}) + $insetValue);
+  }
+}

@@ -1,0 +1,5 @@
+@mixin CarouselContainer-If($style-query) {
+  @container --carouse-container style(#{$style-query}) {
+    @content;
+  }
+}

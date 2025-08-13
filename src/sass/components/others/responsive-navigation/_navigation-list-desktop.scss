@@ -1,0 +1,81 @@
+@use "tokens" as *;
+@use "mixins/selectors-desktop" as *;
+@use "../../../abstracts/" as *;
+@use "mixins/apply-padding-right-for-ham-menu" as *;
+
+
+@include NavigationList-Desktop {
+  height: $nav-height; //Todo - Refine this - I need something to retrieve this value
+  min-width: 0;
+  // overflow-y: clip; Removed
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: $nav-position;
+  text-transform: $nav-text-transform;
+  gap: $nav-gap;
+  // position: relative; Testing
+  // Workaround to show the hamburger menu
+  // Don't need to calc, keep same units
+  padding-right: $nav-padding-inline;
+  padding-left: $nav-padding-inline;
+
+  contain: layout;
+}
+
+@container --nav-container style(--display-hamburger-menu: true){
+  @include NavigationList-Desktop{
+    @include applyPaddingRightForHamburgerMenu;
+  }
+}
+
+@include NavigationList-Background-Desktop {
+  background: $nav-background;
+}
+
+// Nav Background Position Workaround
+// #region Pseudo background Calc position
+@include NavigationList-Background-Desktop {
+  @include pseudo-absolute;
+  @if ($nav-position == start) {
+    position-anchor: --last-item;
+    right: calc(
+      anchor(right) - ($nav-padding-inline + $nav-hamburger-menu-size + $nav-gap)
+    );
+    left: calc(0px);
+  }
+  @if ($nav-position == end) {
+    position-anchor: --first-item;
+    left: calc(anchor(left) - $nav-padding-inline);
+    right: calc(0px);
+  }
+
+  top: anchor(top);
+  bottom: anchor(bottom);
+  z-index: -1;
+}
+// #endregion
+
+// Pseudo Breakpoint
+// Workaround to hide last item by default
+@include mq(max, width, $breakpoint-hide-desktop-list) {
+  @include NavigationList-Desktop {
+    width: calc($nav-hamburger-menu-size + ($nav-padding-inline * 2));
+    background-color: $nav-background;
+    anchor-name: none;
+
+    // You don't need extra space for hamburger menu anymore
+    padding-right: 0;
+  }
+
+  // Hiding every list item
+  @include NavigationListItem-Desktop{
+    margin-top: 10rem;
+  }
+
+  @include HamburgerMenu-Desktop {
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+}

@@ -1,0 +1,65 @@
+@use "sass:map";
+@use "sass:list";
+@use "sass:meta";
+@use "colors" as *;
+
+@function clr($color, $shade) {
+  @if map.has-key($colors, $color, $shade) {
+    @return map.get($colors, $color, $shade);
+  } @else {
+    @error '$colors does not have that color!';
+  }
+}
+
+@function getFirstBreakpoint($map) {
+  @return list.nth(map.keys($map), 1);
+}
+
+@function fluid-size($min, $size, $max) {
+  @return #{clamp($min, $size, $max)};
+}
+
+// #region Map Controls
+
+@function does-map-has-key($map, $key) {
+  @return map.has-key($map, $key);
+}
+
+@function is-map($variable) {
+  @return meta.type-of($variable) == "map";
+}
+
+@function does-map-contains-value($map, $value) {
+  @if (meta.type-of($map) != map and $map == $value) {
+    @return true;
+  }
+  @each $key, $val in $map {
+    @if $val == $value {
+      @return true;
+    }
+  }
+  @return false;
+}
+
+// #endregion
+
+@function set-boolean($boolean) {
+  @if ($boolean == "no" or $boolean == "false" or $boolean == false) {
+    @return false;
+  }
+  @if ($boolean == "yes" or $boolean == "true" or $boolean == true) {
+    @return true;
+  }
+  @error ('Wrong value for boolean value: #{$boolean}');
+}
+
+@function set-inset($top, $right, $bottom, $left) {
+  @return $top $right $bottom $left;
+}
+
+/// Utilizes the light-dark CSS function to set two different colors for light version and for dark version of the same theme.
+/// @param {<color>} $light -The color for the light version of the theme
+/// @param {<color>} $dark - The color of the dark version of the theme
+@function set-color($light, $dark) {
+  @return #{light-dark($light, $dark)};
+}

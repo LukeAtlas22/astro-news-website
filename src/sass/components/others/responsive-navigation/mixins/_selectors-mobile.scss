@@ -1,0 +1,53 @@
+@mixin NavigationList-Mobile-WhenHidden{
+  .navigation:not(:has(.hamburger-menu-checkbox:checked)) .navigation__list-hamburger {
+    @content;
+  }
+}
+
+@mixin NavigationList-Mobile {
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__list-hamburger {
+    @content;
+  }
+}
+
+@mixin NavigationList-Mobile-Backdrop{
+  .navigation:has(.hamburger-menu-checkbox:checked)::before{
+    @content;
+  }
+}
+
+@mixin NavigationListItem-Mobile {
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__list-hamburger-item {
+    @content;
+  }
+}
+
+@mixin NavigationListItem-Mobile-Hover{
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__list-hamburger-item:is(:hover) {
+    @content;
+  }
+}
+
+@mixin NavigationListItem-Mobile-Active{
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__list-hamburger-item:is(:active) {
+    @content;
+  }
+}
+
+@mixin NavigationLink-Mobile {
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__link-hamburger {
+    @content;
+  }
+}
+
+@mixin NavigationLink-Mobile-Hover{
+  .navigation:has(.hamburger-menu-checkbox:checked) .navigation__link-hamburger:hover{
+    @content;
+  }
+}
+
+@mixin HamburgerMenu-Mobile {
+  .navigation:has(.hamburger-menu-checkbox:checked) .test-2 {
+    @content;
+  }
+}

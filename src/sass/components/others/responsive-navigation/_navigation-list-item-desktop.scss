@@ -1,0 +1,31 @@
+@use "tokens" as *;
+@use "mixins/selectors-desktop" as *;
+
+// Todo - Allineamento OK (?)
+
+@include NavigationListItem-Desktop {
+  display: flex;
+  background-color: $nav-link-background;
+}
+
+@include NavigationLink-Desktop {
+  display: flex;
+  align-items: center;
+  gap: $nav-link-internal-gap;
+  padding-block: $nav-link-padding-block;
+  padding-inline: $nav-link-padding-inline;
+
+  > span {
+    display: flex;
+    align-items: center;
+  }
+
+  > .icon {
+    width: $nav-link-icon-size;
+    height: $nav-link-icon-size;
+  }
+}
+
+@include NavigationListItem-Desktop-Hover {
+  background-color: $nav-link-background-hover;
+}

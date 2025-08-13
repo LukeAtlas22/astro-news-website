@@ -1,0 +1,58 @@
+@use "../abstracts/" as *;
+
+.splitter-g {
+  display: grid;
+  gap: $grid-gap;
+
+  --first: attr(first type(*));
+  --second: attr(second type(*));
+}
+$template-colums: var(--first) var(--second);
+$default-breakpoint: medium;
+
+@layer mediaQueries {
+  // Default breakpoint
+  .splitter-g:not(.split-at-small, .split-at-large, .split-at-medium) {
+    @include mq(min, width, $default-breakpoint) {
+      grid-template-columns: $template-colums;
+    }
+  }
+
+  .split-at-small {
+    @include mq(min, width, small) {
+      grid-template-columns: $template-colums;
+    }
+  }
+  .split-at-medium {
+    @include mq(min, width, medium) {
+      grid-template-columns: $template-colums;
+    }
+  }
+  .split-at-large {
+    @include mq(min, width, large) {
+      grid-template-columns: $template-colums;
+    }
+  }
+}
+
+@layer adjustments {
+  .splitter-g {
+    & button {
+      justify-self: start;
+      align-self: center;
+    }
+  }
+}
+
+@layer modificators {
+  .splitter-g:is(.stretch-btns) {
+    & button {
+      justify-self: stretch;
+    }
+  }
+  .splitter-g:is(.invert) {
+    > div:nth-child(2) {
+      order: -1 !important;
+    }
+  }
+}

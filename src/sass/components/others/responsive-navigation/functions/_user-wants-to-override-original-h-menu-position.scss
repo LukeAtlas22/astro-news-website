@@ -1,0 +1,14 @@
+@use "../tokens" as *;
+
+@function userWantsToOverrideOriginalPosition() {
+  @if ($m-nav-hamburger-menu-override-original-position == "yes") {
+    @return true;
+  }
+  @if ($m-nav-hamburger-menu-override-original-position == "true") {
+    @return true;
+  }
+  @if ($m-nav-hamburger-menu-override-original-position == true) {
+    @return true;
+  }
+  @return false;
+}

@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "../../../abstracts/" as *;
+@use "tokens" as *;
+
+.carousel__slide::scroll-marker{
+  @include pseudo;
+  @include apply-declarations($from: map.get($carousel-scroll-marker-styles, use-default));
+}
+
+.carousel__container {
+  @include declare-customProperty-by-mediaQuery-map($carousel-scroll-marker-backgrounds-styles-type-map, --scroll-marker-background)
+}
+
+// Only if we use slide-image
+@if (does-map-has-key($carousel-scroll-marker-styles, use-slide-image)){
+  @container --carousel-container style(--scroll-marker-background: use-slide-image) {
+    @include apply-background-image-on-sequence-of-child(
+      $childs-selector: '.carousel__slide',
+      $childs-pseudo-element: '::scroll-marker',
+      $childs-number: 7,
+      $images-path: map.get($carousel-scroll-marker-styles, slide-image-path),
+      $images-path-ending-divisor: map.get($carousel-scroll-marker-styles, divisor),
+      $images-ext: map.get($carousel-scroll-marker-styles, ext),
+    );
+    @include apply-declarations(
+      $on: '.carousel__slide::scroll-marker', 
+      $from: map.get($carousel-scroll-marker-styles, use-slide-image))
+  }
+}
+
+// Only if we use counter numbers
+@if (does-map-has-key($carousel-scroll-marker-styles, use-counter-numbers)){
+  @container --carousel-container style(--scroll-marker-background: use-counter-numbers){
+    .carousel__slide::scroll-marker{
+      content: counter(carousel-slide-counter);
+      @include flex-center;
+      @include apply-declarations($from: map.get($carousel-scroll-marker-styles, use-counter-numbers));
+    }
+  }
+}
+
+

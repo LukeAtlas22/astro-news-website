@@ -1,0 +1,46 @@
+@use "tokens" as *;
+@use "mixins/selectors-desktop" as *;
+@use "mixins/selectors-mobile" as *;
+@use "mixins/selectors-globals" as *;
+@use "functions/user-wants-to-override-original-h-menu-position" as *;
+@use "../../../abstracts/" as *;
+
+input.hamburger-menu-checkbox {
+  display: none;
+}
+
+@include HamburgerMenu-BothDesktopMobile {
+  position: absolute;
+  width: $m-nav-hamburger-menu-size;
+  height: $m-nav-hamburger-menu-size;
+}
+
+@include HamburgerMenu-Desktop {
+  top: (anchor(center));
+  left: calc(anchor(right) + $nav-gap);
+  translate: 0 -50%;
+  position-anchor: --hamburger-menu-anchor;
+
+  background-color: green; // D
+}
+
+@if (userWantsToOverrideOriginalPosition()){
+  @include HamburgerMenu-Mobile {
+    @include toUnset(top, left, translate, position-anchor);
+    @include apply-absolute-inset-property-positioning-from($m-nav-hamburger-menu-inset);
+    position: fixed;
+    background-color: rgb(161, 0, 0); // D
+  }
+}
+
+// #region Dinamically Display Hamburger Menu for Desktop
+@include HamburgerMenu-Desktop {
+  display: none;
+}
+
+@container --nav-container style(--display-hamburger-menu: true) {
+  @include HamburgerMenu-Desktop {
+    display: block;
+  }
+}
+// #endregion

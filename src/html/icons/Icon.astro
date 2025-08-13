@@ -1,0 +1,12 @@
+---
+// This file allows you to pick an icon from the system
+interface Props {
+  id: string,
+}
+
+const { id } = Astro.props;
+---
+
+<svg class="icon">
+  <use xlink:href={"#" + id} href={"#" + id}></use>
+</svg>

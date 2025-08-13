@@ -1,0 +1,11 @@
+@use "sass:string";
+
+///
+/// @param {type} $if -
+/// @param {type} $set -
+/// @param {type} $to -
+/// @example @include CSS-IF($if: "style(--show: false)", $set: "display", $to: "none");
+/// @output
+@mixin CSS-IF($if, $set, $to) {
+  #{$set}: #{"if(#{$if}"}#{":" $to}#{")"};
+}

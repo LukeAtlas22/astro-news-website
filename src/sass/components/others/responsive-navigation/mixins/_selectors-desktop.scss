@@ -1,0 +1,41 @@
+
+@mixin NavigationList-Desktop{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__list{
+    @content;
+  }
+}
+
+@mixin NavigationListItem-Desktop{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__list-item{
+    @content;
+  }
+}
+@mixin NavigationListItem-Desktop-Hover{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__list-item:hover{
+    @content;
+  }
+}
+@mixin NavigationListItem-Desktop-Active{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__list-item:active{
+    @content;
+  }
+}
+
+@mixin NavigationLink-Desktop{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__link{
+    @content;
+  }
+}
+
+
+@mixin NavigationList-Background-Desktop{
+  /* .navigation:not(:has(.hamburger-menu-checkbox:checked)) */ .navigation__list::before{
+    @content;
+  }
+}
+
+@mixin HamburgerMenu-Desktop {
+  .test-2 {
+    @content;
+  }
+}

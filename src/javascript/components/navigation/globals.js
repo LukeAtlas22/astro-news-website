@@ -1,0 +1,1 @@
+export const MINIMUM_ITEMS_TO_SHOW = 1; // Default: 1

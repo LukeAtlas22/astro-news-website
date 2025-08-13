@@ -1,0 +1,14 @@
+**/*.astro
+src/sass/components/others/responsive-navigation/_tokens.scss
+src/sass/components/others/responsive-navigation/_navigation-list-desktop.scss
+src/sass/components/others/responsive-navigation/mixins/_selectors-mobile.scss
+src/sass/components/others/responsive-navigation/mixins/_selectors-desktop.scss
+src/sass/components/others/responsive-navigation/_hamburger-menu.scss
+src/sass/components/others/responsive-navigation/mixins/_selectors-mobile.scss
+src/sass/components/others/responsive-navigation/_navigation.scss
+src/sass/abstracts/mixins/_apply-mediaQuery-declarations-map.scss
+src/sass/components/others/responsive-navigation/mixins/_selectors-nested.scss
+src/sass/components/others/responsive-navigation/_navigation-nested-lists.scss
+src/sass/components/others/macro-layout/_macro-layout.scss
+src/sass/base/_reset.scss
+src/sass/abstracts/_tokens.scss

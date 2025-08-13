@@ -1,0 +1,5 @@
+@use "../tokens" as *;
+
+@mixin applyPaddingRightForHamburgerMenu {
+  padding-right: $nav-hamburger-menu-size + $nav-gap + $nav-padding-inline;
+}

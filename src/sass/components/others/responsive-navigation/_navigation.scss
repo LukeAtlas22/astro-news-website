@@ -1,0 +1,37 @@
+@use "../../../abstracts/" as *;
+@use "tokens" as *;
+@use "sass:string";
+
+// #region Temporaneo
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  background-color: rgb(0, 0, 0);
+  padding-inline: 0.75rem;
+  height: 4rem;
+
+  container-type: size;
+}
+// #endregion Temporaneo
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $nav-gap;
+  min-width: 0;
+
+  font-family: $nav-font-family;
+  font-size: $nav-font-size;
+  font-weight: $nav-font-weight;
+  color: $nav-color;
+  background-color: transparent !important; // Leave it !
+
+  container-type: normal;
+  container-name: --nav-container;
+  anchor-name: --nav-anchor;
+
+  --m-only-show-links-missing-from-desktop-nav: #{set-boolean($m-only-show-links-missing-from-desktop-nav)};
+}

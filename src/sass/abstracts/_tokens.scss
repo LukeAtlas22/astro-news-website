@@ -1,0 +1,198 @@
+@use "colors" as *;
+@use "sizes" as *;
+@use "typography" as *;
+@use "function" as *;
+
+// ====================================== //
+// ▄▀▀ ▄▀▄ █▄ █ ▀█▀ ██▀ ▀▄▀ ▀█▀ █ █ ▄▀▄ █
+// ▀▄▄ ▀▄▀ █ ▀█  █  █▄▄ █ █  █  ▀▄█ █▀█ █▄▄
+// ====================================== //
+
+// Active - Theme
+$active-theme: $default;
+$active-theme-dark: $default-dark;
+
+// Colors
+// $color-text-default: light-dark($color-neutral-700, $color-neutral-300d);
+$color-text-default: set-color($light: $color-neutral-700, $dark: $color-neutral-300d); // Migrate to this function
+$color-background-default: light-dark($color-neutral-100, $color-neutral-900d);
+$color-text-interactive-default: initial;
+$color-text-interactive-hover: initial;
+
+// Letter spacing
+$letter-spacing-loose: 0.16em;
+$letter-spacing-default: 0;
+
+// Body
+$body-font-family: $font-family-base;
+$body-font-size: $font-size-400;
+$body-line-height: 1.5;
+$body-font-weight: $font-weight-default;
+$body-text-color: $color-text-default;
+$body-background-color: $color-background-default;
+
+// General
+$link-color: $color-text-interactive-default;
+$link-color-hover: $color-text-interactive-hover;
+
+// Layout
+$grid-gap: $size-8;
+$flex-group-gap: $size-4;
+
+$hero-padding-block: clamp(15rem, 15vh, 20rem);
+$section-padding-block: clamp($size-12, 10vh, $size-13);
+
+$card-body-padding: clamp($size-8, 3.5vw, $size-12);
+
+$container-min-margin-inline: $size-4;
+$container-max-width: 60rem;
+$container-max-width-narrow: 40rem;
+$container-max-width-wide: 75rem;
+
+// Icons
+$default-icons-width: 2rem;
+$default-icons-height: 2rem;
+
+// Border-radius
+$border-radius-1: $size-2;
+$border-radius-2: $size-4;
+
+// Shadows
+$box-shadow-1: 0 $size-1 $size-4 rgb(0 0 0 / 0.05);
+$box-shadow-2: 0 $size-1 $size-4 rgb(0 0 0 / 0.15);
+
+// ========================================= //
+// ▄▀▀ ▄▀▄ █▄ ▄█ █▀▄ ▄▀▄ █▄ █ ██▀ █▄ █ ▀█▀ ▄▀▀
+// ▀▄▄ ▀▄▀ █ ▀ █ █▀  ▀▄▀ █ ▀█ █▄▄ █ ▀█  █  ▄█▀
+// ========================================= //
+
+// Headings (Titles)
+$heading-font-family: $font-family-accent;
+$heading-font-size-default: $font-size-600;
+$heading-font-weight: $font-weight-bold;
+$heading-color-default: $body-text-color;
+$heading-letter-spacing: $letter-spacing-default;
+$heading-line-height: 1;
+$heading-text-transform: uppercase;
+
+// Buttons
+$button-font-family: $body-font-family;
+$button-font-weight: $font-weight-bold;
+$button-font-size: $font-size-600;
+$button-text-transform: none;
+$button-padding-default: 0.75em 2em;
+$button-padding-default-coarse: 0.85em 2em;
+$button-border: none;
+$button-border-radius: $border-radius-1;
+$button-letter-spacing: 0;
+$button-transition: 275ms ease;
+
+$button-accent-color: $color-neutral-100;
+$button-accent-background: $color-primary-500;
+$button-accent-color-hover: $color-neutral-100;
+$button-accent-background-hover: $color-primary-500;
+
+$button-primary-color: $color-neutral-900;
+$button-primary-background: $color-primary-400;
+$button-primary-color-hover: $color-neutral-900;
+$button-primary-background-hover: $color-primary-500;
+
+// Cards
+$card-flow-spacing: $size-3;
+$card-body-padding: $card-body-padding;
+$card-font-family: $body-font-family;
+$card-font-size: $body-font-size;
+$card-line-height: 1.25;
+$card-text-align: center;
+$card-background-default: $body-background-color;
+$card-color-default: $color-primary-500;
+$card-border-radius: $border-radius-2;
+$card-box-shadow: $box-shadow-1;
+
+$card-heading-font-family: $heading-font-family;
+$card-heading-font-size: $heading-font-size-default;
+$card-heading-font-weight: $heading-font-weight;
+$card-heading-color-default: $heading-color-default;
+$card-heading-letter-spacing: $heading-letter-spacing;
+$card-heading-line-height: $heading-line-height;
+$card-heading-text-transform: $heading-text-transform;
+
+$card-link-font-family: $card-font-family;
+$card-link-font-size: $card-font-size;
+$card-link-font-weight: $font-weight-bold;
+$card-link-color: $card-color-default;
+$card-link-letter-spacing: 1;
+$card-link-text-transform: none;
+
+$card-icons-width: $default-icons-width;
+$card-icons-height: $default-icons-height;
+
+// Header
+$header-block-padding: $size-6 $size-6;
+$header-font-family: $body-font-family;
+$header-font-size: $font-size-500;
+$header-font-weight: $font-weight-default;
+$header-letter-spacing: 0;
+$header-text-transform: inherit;
+$header-background-color: transparent;
+$header-color: inherit;
+
+$header-icons-width: $default-icons-width;
+$header-icons-height: $default-icons-height;
+
+// Navigation primary
+$navigation-font-family: $header-font-family;
+$navigation-font-size: $header-font-size;
+$navigation-font-weight: $header-font-weight;
+$navigation-color: $header-color;
+$navigation-background-color: $header-background-color;
+$navigation-link-padding: 0;
+
+// Footer
+$footer-block-padding: $size-8;
+$footer-font-family: $font-family-accent;
+$footer-font-weight: $font-weight-default;
+$footer-font-size: $body-font-size;
+$footer-letter-spacing: $letter-spacing-loose;
+$footer-text-transform: inherit;
+$footer-background-color: transparent;
+$footer-color: $color-neutral-900;
+
+$footer-list-gap: $flex-group-gap;
+
+$footer-list-padding: $size-6 $size-3;
+$footer-list-font-weight: $font-weight-bold;
+$footer-list-color: $header-color;
+
+$footer-icons-width: $default-icons-width;
+$footer-icons-height: $default-icons-height;
+
+//Form
+$form-col-spacing: $size-6; // Spazio verticale tra campi
+$form-row-spacing: $size-3; // Spazio orizzontale tra campi
+$form-group-spacing: $size-1; // Spazio tra label e input
+$form-label-button-margin-top: $size-5;
+
+$form-label-font-family: $body-font-family;
+$form-label-font-size: $font-size-400;
+$form-label-font-weight: $font-weight-bold;
+$form-label-color: $color-primary-400;
+
+$form-input-font-family: $body-font-family;
+$form-input-font-size: $font-size-400;
+$form-input-font-weight: $font-weight-semi-bold;
+$form-input-color: $color-primary-400;
+$form-input-border-radius: $border-radius-1;
+$form-input-border-default: 3px solid $color-primary-400;
+$form-input-border-hover: 3px solid $color-primary-400;
+$form-input-border-focus: 3px solid $color-primary-500;
+$form-input-background: $color-neutral-100;
+$form-input-padding: $size-3;
+$form-input-transition: 275ms ease;
+
+$form-placeholder-color: $color-primary-400;
+$form-placeholder-font-family: $body-font-family;
+$form-placeholder-font-size: $font-size-400;
+$form-placeholder-font-weight: $font-weight-semi-bold;
+
+//! Need to do icons ma c'è qualcosa di strano in _form.scss

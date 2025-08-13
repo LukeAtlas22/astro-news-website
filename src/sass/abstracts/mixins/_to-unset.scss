@@ -1,0 +1,19 @@
+/// Assign to one or more CSS Property the value: unset
+///
+/// @param {ArgList} $args... - A list of CSS property names to be reset.
+///
+/// @example scss
+///   .box {
+///     @include toUnset(margin, padding, border);
+///   }
+///
+/// @output
+///   margin: unset;
+///   padding: unset;
+///   border: unset;
+///
+@mixin toUnset($args...) {
+  @each $property in $args {
+    #{$property}: unset;
+  }
+}

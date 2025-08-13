@@ -1,0 +1,111 @@
+--- 
+import { splitStringByComma } from "../../javascript/utilities/strings-utilities/string-to-array";
+import { classes } from "../../javascript/components/navigation/utils/getters";
+import Icon from "@icons/Icon.astro";
+
+import type { Navigation } from "@types";
+interface Props extends Navigation {};
+const { links, icons, responsive, nested, base } = Astro.props;
+
+const linksArray = splitStringByComma(links);
+const iconsArray = icons ? splitStringByComma(icons) : null; 
+
+nested?.forEach((nestDirective, i) => console.log(i + 1, ': ', nestDirective));
+
+// Todo - Da refactorare
+--- 
+
+<nav 
+  class={classes.nav} 
+  data-responsive={responsive}
+>
+  <ul class={classes.list}>
+    <label for="hamburger-menu-checkbox" class="test-2" id="hamburger-menu-btn" style="anchor-name: --h-menu;"></label>
+    {
+      linksArray.map((link, i) => {
+        const url = `/${link.toLowerCase()}/`;
+        const nestedObj = nested != undefined ? nested.find(directive => directive.in.toLowerCase() === link.toLowerCase()) : null;
+        const nestedList = nestedObj ? splitStringByComma(nestedObj.nest) : null;
+        if (!nestedObj){
+          return (
+            <li class={classes.items}>
+              <a class={classes.links} href={url}>
+                <span>{link}</span> {iconsArray ? <Icon id={iconsArray[i]} /> : ""}
+              </a>
+            </li>
+          );
+        }
+        else {
+          return (
+            <li class={classes.items}>
+              <a class={classes.links} href={url}>
+                <span>{link}</span> {iconsArray ? <Icon id={iconsArray[i]} /> : ""}
+              </a>
+              <ul class={classes.nestedListDesktop}>
+                {
+                  nestedList.map((link, i) => {
+                    return (
+                      <li class={classes.nestedListItemDesktop}>
+                        <a class={classes.nestedLinkDesktop}>
+                          <span>{link}</span>
+                        </a>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </li>
+          );
+        }
+      })
+    }
+  </ul>
+  <ul class={classes.listHamburger}>
+    {
+      linksArray.map((link, i) => {
+        const url = `/${link.toLowerCase()}/`;
+        const nestedObj = nested != undefined ? nested.find(directive => directive.in.toLowerCase() === link.toLowerCase()) : null;
+        const nestedList = nestedObj ? splitStringByComma(nestedObj.nest) : null;
+        if (!nestedObj){
+          return (
+            <li class={classes.listHamburgerItems}>
+              <a class={classes.linksHamburger} href={url}>
+                <span>{link}</span> {iconsArray ? <Icon id={iconsArray[i]} /> : ""}
+              </a>
+            </li>
+          );
+        }
+        else if (nestedObj) {
+          return (
+            <li class={classes.listHamburgerItems}>
+              <a class={classes.linksHamburger} href={url}>
+                <span>{link}</span> {iconsArray ? <Icon id={iconsArray[i]} /> : ""}
+              </a>
+              <ul class={classes.nestedListHamburger}>
+                {
+                  nestedList.map((link, i) => {
+                    return (
+                      <li class={classes.nestedListItemHamburger}>
+                        <a class={classes.nestedLinkHamburger}>
+                          <span>{link}</span>
+                        </a>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
+            </li>
+          );
+        }
+      })
+    }
+  </ul>
+  <input type="checkbox" class="hamburger-menu-checkbox" name="hamburger-menu-checkbox" id="hamburger-menu-checkbox">
+</nav>
+
+
+<script>
+  import { attachHamburgerMenuToLastItem } from "../../javascript/components/navigation/attach-hamb-menu-to-last-item";
+  attachHamburgerMenuToLastItem()
+</script> 
+

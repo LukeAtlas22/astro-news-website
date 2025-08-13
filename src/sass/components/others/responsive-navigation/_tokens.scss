@@ -1,0 +1,143 @@
+@use "../../../abstracts/function" as *;
+
+// █▀▄ ██▀ ▄▀▀ █▄▀ ▀█▀ ▄▀▄ █▀▄ 
+// █▄▀ █▄▄ ▄█▀ █ █  █  ▀▄▀ █▀  
+
+$nav-font-family: system-ui;
+$nav-font-size: 1.25rem;
+$nav-font-weight: 500;
+$nav-color: white;
+$nav-background: goldenrod; 
+
+$nav-height: 54px;
+$nav-gap: 0.75rem;
+$nav-padding-inline: 0.5rem; // Da lasciare così (?)
+$nav-padding-block: 0;
+$nav-text-transform: auto;
+
+$nav-link-internal-gap: 0.75rem;
+$nav-link-icon-size: 1.5rem; // Default to default icon size
+$nav-link-padding-block: 0.75rem;
+$nav-link-padding-inline: 0.5rem;
+$nav-link-background: red;
+$nav-link-background-hover: purple;
+
+//Todo Coarse - fine | Mutation (?)
+//Todo Migliorare seguendo mobile
+
+$nav-hamburger-menu-size: 2rem;
+$nav-hamburger-menu-gap-from-nav-list: $nav-gap;
+
+
+$breakpoint-hide-desktop-list: 545px; // Todo - Unica cosa che bisogna fare a tries
+
+// Decide where the nav grows, if grows to the left, or to the right - 
+// Toggle between the two states to decide what fits better for ya
+$nav-position: end; // start || end
+
+
+// █▄ ▄█ ▄▀▄ ██▄ █ █   ██▀ 
+// █ ▀ █ ▀▄▀ █▄█ █ █▄▄ █▄▄ 
+// Todo Fare più preset / configurazioni per diversi breakpoints (?)
+// Navigation
+$m-nav-anchor-position: 'hamburger icon'; // TODO STILL viewport || hamburger icon
+// $m-nav-top-1: 4.25rem;    // You can use anchor() and calc(anchor()) if you anchor to hamburger icon
+// $m-nav-left-1: 0;         // --- 
+// $m-nav-right-1: auto;     // ---
+// $m-nav-bottom-1: auto;    // ---
+// Todo: Devo fare in modo di ricordarmi che posso usare anchor() e calc anchor ancorato all'icona hambu
+$m-nav-inset-1: set-inset(
+  $top: 4.25rem, 
+  $right: 0, 
+  $bottom: auto, 
+  $left: 0,
+);
+$m-nav-inset-2: set-inset(
+  $top: 5rem,
+  $right: anchor(right),
+  $left: calc(anchor(right) + -15.5rem),
+  $bottom: auto,
+  //Todo - Inserire anche width & height in questa funzione (?)
+);
+
+$cant-find-name: (
+  1: (
+    at: default,
+    set: (inset: $m-nav-inset-1)
+  ),
+    
+  2: (
+    at: (min, width, 450px),
+    set: (inset: $m-nav-inset-2, width: 'test') //Todo - Oppure farlo qua?
+  ),
+
+  //...
+);
+
+$m-nav-width: auto;
+$m-nav-height: auto;
+$m-nav-padding-block: 0;
+$m-nav-padding-inline: 0;
+
+$m-nav-background: black;
+
+$m-nav-font-family: $nav-font-family;
+$m-nav-font-size: 1.5rem;
+$m-nav-font-weight: 500;
+$m-nav-link-icon-size: $nav-link-icon-size;
+
+// If set to true it only shows links ( in the mobile nav ) that are hidden in the desktop nav - In other words, does not show the links that in the desktop nav have enough space to be shown - So only shows links that are not shown in the desktop nav.
+$m-only-show-links-missing-from-desktop-nav: 'no'; 
+
+$m-nav-link-color: white;
+$m-nav-link-background: green;
+$m-nav-link-color-hover: red;
+$m-nav-link-background-hover: purple;
+$m-nav-link-padding-inline: 1.25rem 1.25rem;
+$m-nav-link-padding-block: 1rem;
+$m-nav-link-justification: space-between;
+$m-nav-link-internal-gap: 2rem;
+$m-nav-link-border-bottom: 1px solid white;
+
+//todo backdrop yes or no
+//todo backdrop opacity
+//todo backdrop bg
+
+// Hamburger Button Icon
+$m-nav-hamburger-menu-size: 2rem;
+$m-nav-hamburger-menu-override-original-position: 'no'; // yes || no
+$m-nav-hamburger-menu-inset: (top: 2rem, right: 2rem);
+
+//navigation__list-hamburger
+
+// █▄ █ ██▀ ▄▀▀ ▀█▀ ██▀ █▀▄ ▄▀▀
+// █ ▀█ █▄▄ ▄█▀  █  █▄▄ █▄▀ ▄█▀
+
+// Desktop
+$nested-nav-width: 10rem;
+
+$nested-nav-icon-size: 24px;
+$nested-nav-font-size: inherit;
+$nested-nav-weight: inherit;
+$nested-nav-font-family: inherit;
+
+$nested-nav-color: inherit;
+$nested-nav-background: red;
+$nested-nav-link-background: transparent;
+$nested-nav-link-background-hover: purple;
+
+$nested-nav-link-padding-inline: 0.25rem;
+$nested-nav-link-padding-block: 0.75rem;
+
+// Transitions
+$nested-nav-height-transition: 265ms;
+$nested-nav-colors-transition: 265ms;
+
+// Mobile
+$m-nested-nav-font-size: inherit;
+$m-nested-nav-font-weight: inherit;
+$m-nested-nav-font-family: inherit;
+$m-nested-nav-color: $m-nav-link-color;
+$m-nested-nav-background: $m-nav-link-background;
+
+// Custom inset / size at -[breakpoint]- ...

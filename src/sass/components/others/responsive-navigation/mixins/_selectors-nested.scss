@@ -1,0 +1,60 @@
+// █▀▄ ██▀ ▄▀▀ █▄▀ ▀█▀ ▄▀▄ █▀▄
+// █▄▀ █▄▄ ▄█▀ █ █  █  ▀▄▀ █▀
+
+@mixin Nested-List-Desktop {
+  .navigation__nested-list {
+    @content;
+  }
+}
+
+@mixin Nested-List-Desktop-Open {
+  .navigation__list-item:is(:hover) .navigation__nested-list {
+    @content;
+  }
+}
+
+@mixin Nested-List-Item-Desktop {
+  .navigation__nested-list-item {
+    @content;
+  }
+}
+@mixin Nested-List-Item-Desktop-Hover {
+  .navigation__nested-list-item:is(:hover) {
+    @content;
+  }
+}
+
+@mixin Nested-Link-Desktop {
+  .navigation__nested-link {
+    @content;
+  }
+}
+
+// █▄ ▄█ ▄▀▄ ██▄ █ █   ██▀
+// █ ▀ █ ▀▄▀ █▄█ █ █▄▄ █▄▄
+
+@mixin Nested-List-Mobile {
+  .navigation__nested-list-hamburger {
+    @content;
+  }
+}
+
+@mixin Nested-List-Mobile-Open {
+  // .navigation__nested-list-hamburger:is(.open) {
+  //   @content;
+  // } < Real
+  .navigation__list-hamburger-item:is(:hover) .navigation__nested-list-hamburger{
+    @content;
+  }
+}
+
+@mixin Nested-List-Item-Mobile {
+  .navigation__nested-list-item-hamburger {
+    @content;
+  }
+}
+@mixin Nested-Link-Mobile {
+  .navigation__nested-link-hamburger {
+    @content;
+  }
+}

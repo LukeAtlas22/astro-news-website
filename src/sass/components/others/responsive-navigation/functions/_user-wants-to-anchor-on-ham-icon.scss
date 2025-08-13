@@ -1,0 +1,8 @@
+@use "../tokens" as *;
+
+@function user-wants-to-anchor-list-on-hamburger-icon() {
+  @if ($m-nav-anchor-position == "hamburger icon") {
+    @return true;
+  }
+  @return false;
+}

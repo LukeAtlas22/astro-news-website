@@ -1,0 +1,5 @@
+@mixin apply-absolute-inset-property-positioning-from($position-map) {
+  @each $insetProperty, $insetValue in $position-map {
+    #{$insetProperty}: $insetValue;
+  }
+}

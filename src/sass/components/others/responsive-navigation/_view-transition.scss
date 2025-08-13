@@ -1,0 +1,24 @@
+// .navigation__list {
+//   view-transition-name: navigation;
+// }
+
+header {
+  view-transition-name: navigation;
+}
+
+::view-transition-old(navigation) {
+  animation: dont-fade 10s infinite;
+}
+
+::view-transition-group(root) {
+  display: none;
+}
+
+@keyframes dont-fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}

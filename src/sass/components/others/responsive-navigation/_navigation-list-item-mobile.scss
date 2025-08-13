@@ -1,0 +1,26 @@
+@use "tokens" as *;
+@use "mixins/selectors-mobile" as *;
+@use "../../../abstracts/" as *;
+
+@include NavigationListItem-Mobile {
+  @include CSS-IF($if: "style(--show: false)", $set: "display", $to: "none");
+}
+
+@include NavigationLink-Mobile {
+  display: flex;
+  align-items: center;
+
+  padding-inline: $m-nav-link-padding-inline;
+  justify-content: $m-nav-link-justification;
+  gap: $m-nav-link-internal-gap;
+  padding-block: $m-nav-link-padding-block;
+
+  border-bottom: $m-nav-link-border-bottom;
+  background-color: $m-nav-link-background;
+  color: $m-nav-link-color;
+}
+
+@include NavigationLink-Mobile-Hover {
+  background-color: $m-nav-link-background-hover;
+  color: $m-nav-link-color-hover;
+}

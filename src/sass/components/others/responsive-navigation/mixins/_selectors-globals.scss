@@ -1,0 +1,5 @@
+@mixin HamburgerMenu-BothDesktopMobile {
+  .test-2 {
+    @content;
+  }
+}

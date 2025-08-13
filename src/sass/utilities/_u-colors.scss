@@ -1,0 +1,31 @@
+@use "../abstracts/" as *;
+
+@each $color, $shade-map in $active-theme {
+  @each $shade, $value in $shade-map {
+    .clr-#{$color}-#{$shade} {
+      @media (prefers-color-scheme: light) {
+        color: $value;
+      }
+    }
+    .bg-#{$color}-#{$shade} {
+      @media (prefers-color-scheme: light) {
+        background-color: $value;
+      }
+    }
+  }
+}
+
+@each $color, $shade-map in $active-theme-dark {
+  @each $shade, $value in $shade-map {
+    .clr-#{$color}-#{$shade} {
+      @media (prefers-color-scheme: dark) {
+        color: $value;
+      }
+    }
+    .bg-#{$color}-#{$shade} {
+      @media (prefers-color-scheme: dark) {
+        background-color: $value;
+      }
+    }
+  }
+}

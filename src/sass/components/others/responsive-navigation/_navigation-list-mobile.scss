@@ -1,0 +1,52 @@
+@use "tokens" as *;
+@use "mixins/selectors-mobile" as *;
+@use "../../../abstracts/" as *;
+@use "functions/user-wants-to-anchor-on-ham-icon";
+
+// Todo (?) Maybe i can remove all the unset, and use a different selector like :not(:has(.hamburger-menu-checkbox:checked))
+// Todo (!) C'è un sacco di roba da Tokenizzare
+// Todo (?) Usare duplication al posto di view transition ??
+
+@include NavigationList-Mobile-WhenHidden {
+  display: none;
+}
+
+@include NavigationList-Mobile {
+  width: $m-nav-width;
+  height: $m-nav-height;
+  position: absolute;
+  // top: $m-nav-top;
+  // left: $m-nav-left;
+  // right: $m-nav-right;
+  // bottom: $m-nav-bottom;
+  inset: $m-nav-inset-1;
+  @include apply-mediaQuery-declarations-map-from($cant-find-name);
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: visible;
+
+  padding-block: $m-nav-padding-block;
+  padding-inline: $m-nav-padding-inline;
+
+  background: $m-nav-background;
+
+  font-family: $m-nav-font-family;
+  font-size: $m-nav-font-size;
+  font-weight: $m-nav-font-weight;
+
+  @if (user-wants-to-anchor-list-on-hamburger-icon()) {
+    position-anchor: --nav-anchor;
+  }
+
+  // Hiding desktop background
+  &::before {
+    display: none;
+  }
+}
+
+// Todo If user wants the backdrop
+@include NavigationList-Mobile-Backdrop {
+  @include pseudo-fixed-inset-0;
+  background-color: transparent;
+}

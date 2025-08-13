@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+.space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-group {
+  display: flex;
+  align-items: center;
+  gap: $flex-group-gap;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.flow {
+  display: grid;
+  gap: $grid-gap;
+}
+
+section {
+  padding-block: $section-padding-block;
+}
+.region,
+.section {
+  padding-block: $section-padding-block;
+}

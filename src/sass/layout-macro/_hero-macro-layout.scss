@@ -1,0 +1,108 @@
+@use "mixins/macro-layouts" as *; 
+
+// Use from the smallest media query to the largest - 
+// Todo - (Note) - Automatic Undisplay item that are not present on the grid-template 
+$Hero-Macro-Layout-Map: (
+  Layout-0: (
+    at: '<= 700px',
+    grid-template: 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA DDD DDD DDD DDD" 0.75fr 
+    "AAA AAA AAA AAA DDD DDD DDD DDD" 0.75fr 
+    "AAA AAA AAA AAA DDD DDD DDD DDD" 1fr / 1fr 1fr 1fr 1.5fr 1.5fr 1fr 1fr 1fr,
+    height: 22.75rem,
+  ),
+  Layout-1: (
+    at: '> 700px',
+    grid-template: 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "EEE EEE EEE EEE BBB BBB BBB BBB" 1fr 
+    "EEE EEE EEE EEE DDD DDD DDD DDD" 0.75fr 
+    "EEE EEE EEE EEE DDD DDD DDD DDD" 0.75fr 
+    "EEE EEE EEE EEE DDD DDD DDD DDD" 1fr / 1fr 1fr 1fr 1.5fr 1.5fr 1fr 1fr 1fr,
+  ),
+  Layout-2: (
+    at: '> 900px',
+    grid-template: 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA DDD DDD DDD DDD" 0.75fr 
+    "EEE EEE EEE EEE DDD DDD DDD DDD" 0.75fr 
+    "EEE EEE EEE EEE DDD DDD DDD DDD" 1fr / 1fr 1fr 1fr 1.5fr 1.5fr 1fr 1fr 1fr,
+  ),
+  Layout-3: (
+    at: '> 1050px',
+    grid-template: 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA BBB BBB BBB BBB" 1fr 
+    "AAA AAA AAA AAA CCC DDD DDD DDD" 1.25fr 
+    "AAA AAA AAA AAA CCC DDD DDD DDD" 0.75fr 
+    "EEE EEE EEE EEE CCC DDD DDD DDD" 0.75fr
+    "EEE EEE EEE EEE CCC DDD DDD DDD" 1.1fr / 1fr 1fr 1fr 1.5fr 1.5fr 1fr 1fr 1fr,
+    // Forse potrei mettere width, height, gap e padding qui...
+    // Todo (!) Height Override
+    // Todo Potrei fare padding personalizzato ? tipo PADX - O magari generarlo in automatico tramite sass.string
+  ),
+);
+
+$Hero-Macro-Layout-Areas: (
+  'area-article-relevant':  'AAA',
+  'area-article-secondary': 'BBB',
+  'area-article-tertiary':  'CCC',
+  'area-article-fourth':    'DDD',
+  'area-article-fifth':     'EEE',
+);
+
+.hero { 
+  @include Create-Macro-Layout(
+    $Hero-Macro-Layout-Map, 
+    $Hero-Macro-Layout-Areas,
+    $Defaults: (height: 33rem),
+    // Todo - Definire un containment area?
+  ); 
+}
+
+// Todo - Will be different for every design - Maybe find a way to do it with Astro?
+// Todo - Magari questo va messo semplicemente da un'altra parte, tipo nel component hero ... 
+// Todo - Oppure creo un macro layout nei component (sass), e lo metto lì
+
+// Temp
+.area-article-relevant{
+  padding-block: 1rem;
+  padding-inline: 1.5rem;
+}
+.area-article-secondary{
+  padding-bottom: 1.5rem;
+  padding-inline: 1.5rem;
+  .article__content{
+    padding-block: 1rem;
+  }
+}
+.area-article-tertiary{
+  
+  padding-block: 1.5rem;
+  
+  // position: absolute; // ! Che figata, praticamente se rimuovi un'area dal flow di un grid-template - Puoi creare buchi nella griglia
+ 
+}
+
+.area-article-fourth{
+  padding-block: 1.5rem;
+  padding-left: 2.75rem;
+  padding-right: 1.5rem;
+}
+
+.area-article-fifth{
+  padding-inline: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}

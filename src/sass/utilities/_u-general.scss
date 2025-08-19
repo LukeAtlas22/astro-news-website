@@ -19,6 +19,10 @@
   font-weight: $font-weight-bold;
 }
 
+.no-break {
+  white-space: nowrap;
+}
+
 .semi-bold {
   font-weight: $font-weight-semi-bold;
 }
@@ -35,6 +39,10 @@
 
 .mx-auto {
   margin-inline: auto;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 // Self Justification & Self Alignment

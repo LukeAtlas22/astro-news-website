@@ -1,0 +1,45 @@
+@use "../../../abstracts/" as *;
+@use "tokens.scss" as *;
+
+.input-group {
+  background-color: $input-group-background;
+  color: $input-group-color;
+  font-family: $input-group-font-family;
+  font-weight: $input-group-font-weight;
+  font-size: $input-group-font-size;
+  letter-spacing: $input-group-letter-spacing;
+
+  border: $input-group-border;
+  border-radius: $input-group-border-radius;
+  box-shadow: $input-group-box-shadow;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__input {
+    width: $input-group-width;
+    padding-inline: $input-group-padding-inline;
+    line-height: 1;
+  }
+  &__input::placeholder {
+    color: $input-group-color;
+  }
+
+  &__button {
+    // Overrides original button component
+    font-family: $input-group-button-font-family;
+    font-weight: $input-group-button-font-weight;
+    font-size: $input-group-button-font-size;
+
+    padding-block: $input-group-padding-block;
+    padding-inline: $input-group-button-padding-inline;
+
+    text-transform: $input-group-button-text-transform;
+
+    border: $input-group-button-border;
+    border-radius: $input-group-border-radius;
+  }
+
+  overflow: hidden;
+}

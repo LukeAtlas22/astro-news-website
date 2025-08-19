@@ -14,10 +14,10 @@ $active-theme-dark: $default-dark;
 
 // Colors
 // $color-text-default: light-dark($color-neutral-700, $color-neutral-300d);
-$color-text-default: set-color($light: $color-neutral-700, $dark: $color-neutral-300d); // Migrate to this function
-$color-background-default: light-dark($color-neutral-100, $color-neutral-900d);
-$color-text-interactive-default: initial;
-$color-text-interactive-hover: initial;
+$color-text-default: set-color($light: $color-neutral-700, $dark: $color-neutral-300d); //Todo Migrate to this function
+$color-background-default: set-color($light: $color-neutral-400, $dark: $color-neutral-700d);
+$color-text-interactive-default: red;
+$color-text-interactive-hover: red;
 
 // Letter spacing
 $letter-spacing-loose: 0.16em;
@@ -47,7 +47,7 @@ $card-body-padding: clamp($size-8, 3.5vw, $size-12);
 $container-min-margin-inline: $size-4;
 $container-max-width: 60rem;
 $container-max-width-narrow: 40rem;
-$container-max-width-wide: 75rem;
+$container-max-width-wide: 77.5rem;
 
 // Icons
 $default-icons-width: 2rem;
@@ -76,21 +76,21 @@ $heading-line-height: 1;
 $heading-text-transform: uppercase;
 
 // Buttons
-$button-font-family: $body-font-family;
+$button-font-family: $font-family-accent;
 $button-font-weight: $font-weight-bold;
-$button-font-size: $font-size-600;
+$button-font-size: $font-size-700;
 $button-text-transform: none;
-$button-padding-default: 0.75em 2em;
+$button-padding-default: 0.65em 1.25em;
 $button-padding-default-coarse: 0.85em 2em;
 $button-border: none;
-$button-border-radius: $border-radius-1;
-$button-letter-spacing: 0;
+$button-border-radius: none;
+$button-letter-spacing: 0.0525em;
 $button-transition: 275ms ease;
 
 $button-accent-color: $color-neutral-100;
-$button-accent-background: $color-primary-500;
+$button-accent-background: $color-secondary-500;
 $button-accent-color-hover: $color-neutral-100;
-$button-accent-background-hover: $color-primary-500;
+$button-accent-background-hover: $color-secondary-600;
 
 $button-primary-color: $color-neutral-900;
 $button-primary-background: $color-primary-400;
@@ -127,20 +127,24 @@ $card-link-text-transform: none;
 $card-icons-width: $default-icons-width;
 $card-icons-height: $default-icons-height;
 
-// Header
-$header-block-padding: $size-6 $size-6;
+// Site Header
+$header-block-padding: $size-9;
 $header-font-family: $body-font-family;
 $header-font-size: $font-size-500;
 $header-font-weight: $font-weight-default;
 $header-letter-spacing: 0;
 $header-text-transform: inherit;
-$header-background-color: transparent;
-$header-color: inherit;
+$header-background-color: $color-neutral-800;
+$header-color: $body-text-color; 
+
+$header-justification: space-between;
+$header-gap: 3rem;
 
 $header-icons-width: $default-icons-width;
 $header-icons-height: $default-icons-height;
 
-// Navigation primary
+// Navigation primary 
+// Todo - Remove this (?)
 $navigation-font-family: $header-font-family;
 $navigation-font-size: $header-font-size;
 $navigation-font-weight: $header-font-weight;

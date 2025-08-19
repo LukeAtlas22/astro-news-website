@@ -1,0 +1,11 @@
+@mixin Title-Small {
+  .article__title--small-title {
+    @content;
+  }
+}
+
+@mixin Title-Full {
+  .article__title--full-title {
+    @content;
+  }
+}

@@ -1,0 +1,17 @@
+---
+import InputGroup from "@components/molecular/InputGroup.astro"
+---
+
+<!--  -->
+
+<header class="header">
+  <div class="container" data-type="wide">
+    <div class="header__layout">
+      <h2 class="heading-1 | clr-neutral-300">Newsletter</h2>
+      <InputGroup 
+        buttons={[{type: 'accent', textContent: 'Search'}]}
+        input={{type: 'text', placeholder:'Search for headlines...'}}
+      /> 
+    </div>
+  </div>
+</header>

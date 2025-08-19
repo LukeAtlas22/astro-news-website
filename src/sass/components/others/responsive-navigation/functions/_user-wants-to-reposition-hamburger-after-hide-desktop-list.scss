@@ -1,0 +1,17 @@
+@use "../tokens" as *;
+@use "../../../../abstracts/" as *;
+@use "sass:meta";
+
+@function user-wants-to-reposition-hamburger-after-hide-desktop-list() {
+  $intent: $after-hide-desktop-list--new-hamburger-inset;
+
+  @if $intent == false {
+    @return false;
+  }
+
+  @if not is-inset-value($intent) {
+    @error "Invalid inset value for hamburger repositioning: #{$intent}";
+  }
+
+  @return true;
+}

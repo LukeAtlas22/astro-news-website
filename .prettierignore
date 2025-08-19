@@ -9,6 +9,14 @@ src/sass/components/others/responsive-navigation/_navigation.scss
 src/sass/abstracts/mixins/_apply-mediaQuery-declarations-map.scss
 src/sass/components/others/responsive-navigation/mixins/_selectors-nested.scss
 src/sass/components/others/responsive-navigation/_navigation-nested-lists.scss
-src/sass/components/others/macro-layout/_macro-layout.scss
+src/sass/layout-macro/*
 src/sass/base/_reset.scss
 src/sass/abstracts/_tokens.scss
+src/sass/base/_font-face.scss
+src/sass/components/_article.scss
+src/sass/components/others/article/templates/preview/template-1.scss
+src/sass/components/others/article/mixins/_article-thumbnail-dark-overlay.scss
+src/sass/components/others/article/templates/preview/*
+src/sass/components/others/article/mixins/_anchor-on-thumbnail.scss
+src/sass/components/others/article/mixins/selectors/metadata/_article-meta.scss
+src/sass/components/others/carousel-2/_carousel-scroll-marker-group.scss

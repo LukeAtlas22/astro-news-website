@@ -1,0 +1,116 @@
+--- 
+import type { Navigation, NavigationItem } from "src/types/navigation";
+import { splitStringByComma } from "src/javascript/utilities/strings-utilities/string-to-array";
+import { classes } from "src/javascript/components/navigation/utils/getters";
+import Icon from "@icons/Icon.astro";
+
+type Props = Navigation;
+const { links, items, responsive, selfContained } = Astro.props;
+console.log(links, items);
+if (links && items ) throw new Error('<Navigation/> says: You cannot use both links & items directive!');
+const linksArray: Array<string> = links && splitStringByComma(links);
+
+// Todo - Need to write for self contained condition
+
+
+// Todo - Da refactorare
+--- 
+{ links && links.length > 0 ?
+  (
+    <nav class={classes.nav} data-responsive={responsive}>
+      <ul class={classes.list}>
+        <label for="hamburger-menu-checkbox" class="test-2" id="hamburger-menu-btn" style="anchor-name: --h-menu;"></label>
+        {
+          linksArray.map((link: string) => (
+            <li class={classes.items}>
+              <a class={classes.links} href={`/${link.toLocaleLowerCase()}`}>
+                <span>{link}</span> 
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class={classes.listHamburger}>
+        {
+          linksArray.map((link: string) => (
+            <li class={classes.listHamburgerItems}>
+              <a class={classes.linksHamburger} href={`/${link.toLocaleLowerCase()}`}>
+                <span>{link}</span> 
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <input type="checkbox" class="hamburger-menu-checkbox" name="hamburger-menu-checkbox" id="hamburger-menu-checkbox">
+    </nav>
+  ) : 
+
+    
+  ( 
+    <nav class={classes.nav} data-responsive={responsive}>
+      <ul class={classes.list}>
+        <label for="hamburger-menu-checkbox" class="test-2" id="hamburger-menu-btn" style="anchor-name: --h-menu;"></label>
+        {
+          items.map((item: NavigationItem) => (
+            <li class={classes.items}>
+              <a class={classes.links} href={`/${item.slug || item.link.toLocaleLowerCase()}`}>
+                <span>{item.link}</span> {item.icon && <Icon id={item.icon}/>}
+              </a>
+              {
+                item.nested && 
+                (
+                  <ul class={classes.nestedListDesktop}>
+                    {
+                       item.nested.map((nestedItem: NavigationItem) => (
+                        <li class={classes.nestedListItemDesktop}>
+                          <a class={classes.nestedLinkDesktop} href={`test`}>
+                            <span>{nestedItem.link}</span> {nestedItem.icon && <Icon id={nestedItem.icon}/>}
+                          </a>
+                        </li> 
+                       ))
+                    }
+                  </ul>
+                )
+              }
+            </li>
+          ))
+        }
+      </ul>
+      <ul class={classes.listHamburger}>
+        {
+          items.map((item: NavigationItem) => (
+            <li class={classes.listHamburgerItems}>
+              <a class={classes.linksHamburger} href={`/${item.slug || item.link.toLocaleLowerCase()}`}>
+                <span>{item.link}</span> {item.icon && <Icon id={item.icon}/>}
+              </a>
+              {
+                item.nested && 
+                (
+                  <ul class={classes.nestedListHamburger}>
+                    {
+                       item.nested.map((nestedItem: NavigationItem) => (
+                        <li class={classes.nestedListItemHamburger}>
+                          <a class={classes.nestedLinkHamburger} href={`test`}>
+                            <span>{nestedItem.link}</span> {nestedItem.icon && <Icon id={nestedItem.icon}/>}
+                          </a>
+                        </li> 
+                       ))
+                    }
+                  </ul>
+                )
+              }
+            </li>
+          ))
+        }
+      </ul>
+      <input type="checkbox" class="hamburger-menu-checkbox" name="hamburger-menu-checkbox" id="hamburger-menu-checkbox">
+    </nav>
+  )
+} 
+
+
+
+<script>
+  import { attachHamburgerMenuToLastItem } from "src/javascript/components/navigation/attach-hamb-menu-to-last-item"
+  attachHamburgerMenuToLastItem()
+</script> 

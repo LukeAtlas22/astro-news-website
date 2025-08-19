@@ -1,11 +1,60 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
+import BaseHead from "./BaseHead.astro";
+import Container from "@components-layout/Container.astro";
+import SiteHeader from "@components/organism/SiteHeader.astro";
+import Navigation from "@components/organism/Navigation.astro";
+interface Props{
+  title: string,
+}
 const { title } = Astro.props;
 ---
 
 <html lang="en">
   <BaseHead {title} />
   <body>
+    <SiteHeader/>
+    <Container type="wide" classList="flex-group space-between no-wrap gap-7 | bg-neutral-700">
+      <!-- <Navigation 
+        items={[
+          {link: 'Test', icon: 'icon-guitar'},
+          {link: 'Test'},
+          {link: 'Test', icon: 'icon-guitar'},
+          {
+            link: 'Test', 
+            icon: 'icon-guitar', 
+            slug: 'mammeta',
+            nested: [
+              {
+                link: 'Hello Nested',
+                icon: 'icon-drum',
+                slug: 'nested'
+              },
+              {
+                link: 'Hello Nested',
+                icon: 'icon-guitar',
+                slug: 'nested'
+              },
+              {
+                link: 'Hello Nested',
+                icon: 'icon-piano',
+                slug: 'nested'
+              }
+            ]
+          },
+          {link: 'Test', icon: 'icon-guitar'},
+          {link: 'Test', icon: 'icon-guitar'},
+          {link: 'Test', icon: 'icon-guitar'},
+          {link: 'Test', icon: 'icon-guitar'},
+        ]}
+      /> -->
+      <Navigation
+        links="Politics, World, Economy, Science & Tech, Business, Travel, Climate, Lifestyle, Food, Sports"
+      />
+      <!-- Meteorolical Info here -->
+      <div class="clr-neutral-200 fs-400 bold | pad-inline-6 | no-break">
+        <p>13:40 |||| 24° C</p>
+      </div>
+    </Container>
     <slot />
   </body>
 </html>

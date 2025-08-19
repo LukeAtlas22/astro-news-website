@@ -1,0 +1,25 @@
+/// Import me as: Article.Metadata.[Mixin]
+
+@mixin Category {
+  .article__metadata--category {
+    @content;
+  }
+}
+
+@mixin Category-Position($position) {
+  .category-wrapper[data-style-position=#{$position}] {
+    @content;
+  }
+}
+
+@mixin Date {
+  .article__metadata--date {
+    @content;
+  }
+}
+
+@mixin Tags {
+  .article__metadata--tags {
+    @content;
+  }
+}

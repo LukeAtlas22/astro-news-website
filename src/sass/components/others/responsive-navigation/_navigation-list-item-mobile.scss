@@ -12,12 +12,19 @@
 
   padding-inline: $m-nav-link-padding-inline;
   justify-content: $m-nav-link-justification;
-  gap: $m-nav-link-internal-gap;
+  gap: $m-nav-link-icon-gap;
   padding-block: $m-nav-link-padding-block;
 
   border-bottom: $m-nav-link-border-bottom;
   background-color: $m-nav-link-background;
   color: $m-nav-link-color;
+  letter-spacing: $m-nav-link-letter-spacing;
+
+  > .icon {
+    order: $m-nav-link-icon-position;
+    width: $m-nav-link-icon-size;
+    height: $m-nav-link-icon-size;
+  }
 }
 
 @include NavigationLink-Mobile-Hover {

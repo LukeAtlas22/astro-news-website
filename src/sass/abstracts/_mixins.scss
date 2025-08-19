@@ -101,3 +101,31 @@
 @mixin debug {
   outline: 2px solid red;
 }
+
+//
+//
+// Screen readers only
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+//
+//
+// Line clamp
+///
+/// @param {type} $n - Specify the maximum number of lines to show
+@mixin line-clamp($n) {
+  display: -webkit-box;
+  overflow: clip;
+  -webkit-line-clamp: $n; /* number of lines to show */
+  line-clamp: $n;
+  -webkit-box-orient: vertical;
+}

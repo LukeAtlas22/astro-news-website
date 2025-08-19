@@ -1,0 +1,35 @@
+---
+import type {InputGroup} from "@types";
+interface Props extends InputGroup {};
+const { showLabel, buttons, input } = Astro.props;
+
+import Input from "@components/atomic/Input.astro";
+import Button from "@components/atomic/Button.astro";
+
+console.log(buttons);
+//Todo Use custom button or use existin button <
+---
+
+<form action="">
+  <div class="input-group">
+    <Input
+      type={input.type}
+      placeholder={input.placeholder}
+      name={input.name || ''}
+      classList="input-group__input"
+    />
+    {
+      buttons.map((button) => (
+        <Button 
+          type={button.type} 
+          classList="input-group__button" 
+          style={button.position && `order: ${button.position}`}>
+          {button.textContent}
+        </Button>
+      ))
+    }
+    
+  </div>
+</form>
+
+<!-- //Todo - Rename this search bar (?) -->

@@ -1,0 +1,8 @@
+---
+import type { Input } from "@types";
+interface Props extends Input {};
+
+const {type, classList, id, name, placeholder} = Astro.props;
+---
+
+<input type={type} name={name} id={id} class={classList} placeholder={placeholder}>

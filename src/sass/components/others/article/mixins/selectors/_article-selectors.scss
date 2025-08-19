@@ -1,0 +1,41 @@
+/// Remember to import the style sheet you are extending
+@mixin Extend($name) {
+  @extend :where(.article:is([data-style-template="#{$name}"]));
+}
+
+@mixin Template($name) {
+  :where(.article:is([data-style-template="#{$name}"])) {
+    @content;
+  }
+}
+
+@mixin Default() {
+  :where(.article) {
+    @content;
+  }
+}
+
+/////////////////////////////////////////////////
+
+@mixin Content {
+  .article__content {
+    @content;
+  }
+}
+@mixin Thumbnail {
+  .article__thumbnail {
+    @content;
+  }
+}
+@mixin Header {
+  .article__header {
+    @content;
+  }
+}
+@mixin Metadata {
+  .article__meta {
+    @content;
+  }
+}
+
+/////////////////////////////////////////////////

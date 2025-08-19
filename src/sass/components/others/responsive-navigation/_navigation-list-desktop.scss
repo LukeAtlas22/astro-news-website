@@ -2,6 +2,8 @@
 @use "mixins/selectors-desktop" as *;
 @use "../../../abstracts/" as *;
 @use "mixins/apply-padding-right-for-ham-menu" as *;
+@use "functions/user-wants-to-reposition-hamburger-after-hide-desktop-list" as *;
+
 
 
 @include NavigationList-Desktop {
@@ -52,7 +54,7 @@
 
   top: anchor(top);
   bottom: anchor(bottom);
-  z-index: -1;
+  
 }
 // #endregion
 
@@ -60,7 +62,7 @@
 // Workaround to hide last item by default
 @include mq(max, width, $breakpoint-hide-desktop-list) {
   @include NavigationList-Desktop {
-    width: calc($nav-hamburger-menu-size + ($nav-padding-inline * 2));
+    width: calc($nav-hamburger-menu-size + ($after-hide-desktop-list--nav-padding-inline * 2));
     background-color: $nav-background;
     anchor-name: none;
 
@@ -74,8 +76,26 @@
   }
 
   @include HamburgerMenu-Desktop {
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
+    @if not user-wants-to-reposition-hamburger-after-hide-desktop-list(){
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+    }    
+    //! Problema
+    /*
+    ! Questo non può essere spostato perchè ha un parent impostato su contain: layout
+    ! Che altera l'effetto di position fixed (il container diventa il dom dell'oggetto)
+    ! Quindi bisognerebbe spostatare l'elemento impostato su contain: layout e non questo
+    */
+  }
+  //! Quindi devo fare così...
+  @if user-wants-to-reposition-hamburger-after-hide-desktop-list(){
+    @include NavigationList-Desktop{ 
+      // Questo è l'item impostato su contain: layout
+      //  .navigation__list (ul)
+      // Ricorda che siamo in una media query
+      inset: $after-hide-desktop-list--new-hamburger-inset;
+      position: fixed;
+    }
   }
 }

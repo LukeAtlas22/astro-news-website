@@ -1,0 +1,25 @@
+@use "sass:string";
+@use "undisplay-items-not-on-grid";
+
+@mixin Macro-Layouts($macro-layout-map, $macro-layout-area){
+  @each $index, $map in $macro-layout-map{
+    $breakpoint: map.get($map, at);
+    $grid-template: map.get($map, grid-template);
+    $query-target: map.get($map, query);
+    $container-name: map.get($map, name);
+    
+    @media (width #{$breakpoint}){
+      grid-template: $grid-template;
+      @include Undisplay-Items-Currently-Not-On-Grid($grid-template, $macro-layout-area)
+    }
+  }
+
+ 
+  @each $selector, $area in $macro-layout-area{
+    .#{$selector}{
+      grid-area: string.unquote($area);
+    }
+  }
+}
+
+// Todo da scrivere - fare in modo che può fare query ANCHE su container

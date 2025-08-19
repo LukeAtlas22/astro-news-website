@@ -1,0 +1,140 @@
+@use "../mixins/selectors/article-selectors" as Article;
+@use "../mixins/selectors/header/article-header" as Article-Header;
+@use "../mixins/selectors/metadata/article-meta" as Article-Metadata;
+@use "@SASS-Abstracts" as *;
+
+// Todo - Tutto qui dentro dev'essere tokenizzato
+
+@include Article.Default {
+  /* Tokenize everything in here */
+  height: 100%;
+
+  // padding-block: 1.25rem; //  Todo - Delegare questo padding al contrainer?
+  // padding-inline: 1.25rem; // Todo - Delegare questo padding al contrainer?
+  // Todo - Renderlo padding agnostic?
+  // Todo - Dunque gestire il padding esternamente?
+  // Todo - Secondo me è meglio renderlo padding agnostic -
+  // Todo - Il padding sarà gestito dal contaiment context dell'articolo -
+
+  background: transparent;
+  color: set-color(
+    $light: $clr-neutral-700,
+    $dark: $clr-neutral-300
+  ); // Todo - Tokenize anyway
+
+  letter-spacing: 1;
+  line-height: 1;
+  font-size: 1;
+  font-weight: 1;
+  font-family: 1;
+
+  @include Article.Header {
+    letter-spacing: 1;
+    line-height: 1;
+    font-size: 1.55rem;
+    font-weight: 1;
+    font-family: 1;
+
+    z-index: 1;
+    /* prettier-ignore */
+    h1, h2, h3, h4, h5, h6 { font-size: 1em; }
+    /* prettier-ignore */
+    @include Article-Header.Title-Small { display: none; }
+    // Importante che almeno uno dei due title venga rimosso dall'accessibility tree
+  }
+
+  @include Article.Metadata {
+    font-size: 1rem;
+  }
+
+  @include Article.Content {
+    letter-spacing: 1;
+    line-height: 1.1;
+    font-size: 1.05rem;
+    font-weight: 1;
+    font-family: 1;
+    overflow-y: auto;
+  }
+
+  @include Article.Thumbnail {
+    anchor-name: --article-thumbnail;
+  }
+
+  @include Article-Metadata.Category {
+    background-color: red;
+    padding: 0.25em;
+    line-height: 1;
+    @include flex-center;
+  }
+
+  // Todo - Da sistemare allocazione
+  @include Article-Metadata.Category-Position("above-header") {
+    position: absolute; // Using absolute will anchor it to the header
+    /*prettier-ignore*/
+    top: calc( 0rem - 0.5rem - 0.25rem ); // Top 0 should be always slightly beyond the header // Always add the gap and the padding of the category
+    left: 1.25rem;
+  }
+
+  @include Article-Metadata.Category-Position("top-left") {
+    position: fixed; // Using fixed will anchor it to the containment context ( the container )
+    top: calc(0rem + 1.25rem); // Todo - Automatize into header padding
+    left: calc(0rem + 1.25rem); // Todo - Automatize into header padding
+  }
+
+  @include Article-Metadata.Category-Position("top-right") {
+    position: fixed; // Using fixed will anchor it to the containment context ( the container )
+    top: calc(0rem + 1.25rem); // Todo - Automatize into header padding
+    right: calc(0rem + 1.25rem); // Todo - Automatize into header padding
+  }
+
+  @include Article-Metadata.Category-Position("custom") {
+    position: fixed;
+    top: 0; // Todo - Si potrebbe settare un token per permettere il posizionamento custom della category wrapper
+    left: 0; // Todo - Si potrebbe settare un token per permettere il posizionamento custom della category wrapper
+  }
+}
+
+// Da finire - Should i include also padding & co - Should i include overlay dark thumbnail (?)
+
+// Category, Tags, ECC
+
+// Automatic Layout Fallbacks - Shrinkin the containmnet context (?)
+// Todo - Da vedere che cosa ne può uscire qua di buono
+// Todo - Da rivedere meglio questi breakpoints e convertirli in em
+//        Todo - Magari tokenizzarli
+@include Article.Default {
+  @container (width <= 250px) {
+    // Fallback to miniature
+    // Only display title
+    @include Article.Metadata {
+      display: none !important;
+    }
+    @include Article.Content {
+      display: none !important;
+    }
+    @include Article.Thumbnail {
+      flex-basis: 100% !important;
+    }
+    @include Article.Header {
+    }
+  }
+
+  // Todo - Questo mi piace
+  // Todo - Da rivedere meglio questi breakpoints e convertirli in em
+  //        Todo - Magari tokenizzarli
+  @container (height <= 200px) or (width <= 225px) {
+    @include Article.Header {
+      @include Article-Header.Title-Full {
+        display: none;
+        // Importante che almeno uno dei due title venga rimosso dall'accessibility tree
+      }
+      @include Article-Header.Title-Small {
+        display: block;
+      }
+
+      @include Article.Metadata {
+        display: none;
+      }
+    }
+  }
+}

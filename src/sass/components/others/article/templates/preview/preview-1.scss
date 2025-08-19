@@ -1,0 +1,54 @@
+@use "@SASS-Abstracts" as *;
+@use "../../mixins/article-meta-hide-description-terms" as *;
+@use "../../mixins/article-thumbnail-dark-overlay" as *;
+@use "../../mixins/anchor-on-thumbnail" as *;
+@use "../../mixins/selectors/article-selectors" as Article;
+@use "../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
+@use "../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+
+
+
+@include Article.Template('preview-1') { 
+  // Todo - This should be only layout directive actually or both? 
+  // Todo - Concerning about font sizes, what i could to it's fake inheritance with a main article-preview-font-size, or even article-font-size
+  display: flex;
+  gap: $size-7;
+
+  
+  // Todo - Il problema che questo padding è in qualche modo gestito dalla macro layout area in cui è posizionato
+  // Todo - Quindi si potrebbe lasciare un padding standard e poi sovrascriverlo direttamente dalla macro layout area
+
+  @include Article.Thumbnail{
+    width: 100%;
+    height: 100%;
+  }
+  @include article-thumbnail-linear-gradient('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)');
+  // Todo Tokenize Transparency Thumbnail Darkner & Dark color & Gradient direction
+
+  @include Article.Header {
+    @include anchor-on-thumbnail();
+    // Todo Da fare varianti: bottom-left | top-left | bottom-right | top-right (?)
+      
+    display: grid; // Todo Defaults !
+    gap: 0.75rem; // I need a default and an overwrite
+    
+    padding-inline: 1.25rem;
+    padding-block: 1.5rem;
+    
+    line-height: 1.25;
+    font-family: inherit;
+    font-weight: bold;
+    // font-size: 1.55rem;
+    color: $clr-neutral-400;
+    background: transparent;
+  }
+  @include Article.Metadata{
+    @include Article-Metadata.Tags{ display: none };
+    // Più crescono le cose, più aggiungo roba, così è ancheo ttimizzato
+    
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    @include HideMetaDescriptionTerms;
+  }
+}

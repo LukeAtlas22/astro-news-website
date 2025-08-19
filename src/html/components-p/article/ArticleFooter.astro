@@ -1,0 +1,10 @@
+---
+import type { ArticleMetaData } from './typescript/types/ArticleMetaData';
+interface Props extends ArticleMetaData {};
+const { title, titleSmall, author, date, category, categoryPosition } = Astro.props;
+
+import ArticleMeta from './ArticleMeta.astro';
+---
+<header class="article__header">
+  <ArticleMeta title={title}, titleSmall={titleSmall}, author={author}, date={date}, category={category} categoryPosition={categoryPosition}/>
+</header>

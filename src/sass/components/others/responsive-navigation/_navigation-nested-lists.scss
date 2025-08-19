@@ -1,4 +1,5 @@
 @use "mixins/selectors-nested" as *;
+@use "../../../abstracts/" as *;
 @use "tokens" as *;
 
 // nestedListDesktop: 'navigation__nested-list',
@@ -14,6 +15,7 @@ Todo: Le nested list dovrebbero avere indipendent breakpoints e possibilità di 
 
 @include Nested-Link-Desktop {
   display: flex;
+  align-items: center;
   cursor: pointer;
   line-height: 1;
 }
@@ -41,21 +43,28 @@ Todo: Le nested list dovrebbero avere indipendent breakpoints e possibilità di 
   position-area: bottom center;
   width: $nested-nav-width;
 
-  transition: scale $nested-nav-height-transition; // T
+  transition: 
+    scale $nested-nav-height-transition,
+    opacity $nested-nav-height-transition - 75ms
+  ; // T
 
   background-color: $nested-nav-background;
+  
 
   display: flex;
   flex-direction: column;
 
   position: absolute; // Relative to proper list item
-  scale: 1 0;
+  scale: 1 0.25; // Using the trick learned from
+  opacity: 0;
+  
   transform-origin: top;
   position-anchor: --this-is-a-test; //
 }
 
 @include Nested-List-Desktop-Open {
   scale: 1;
+  opacity: 1;
 }
 
 @include Nested-List-Item-Desktop {
@@ -73,9 +82,27 @@ Todo: Le nested list dovrebbero avere indipendent breakpoints e possibilità di 
 }
 
 @include Nested-Link-Desktop {
-  color: inherit;
   padding-inline: $nested-nav-link-padding-inline;
   padding-block: $nested-nav-link-padding-block;
+  gap: $nested-nav-link-icon-gap; 
+
+  color: $nested-nav-color;
+  font-family: $nested-nav-font-family;
+  font-weight: $nested-nav-font-weight;
+  font-size: $nested-nav-font-size;
+
+  letter-spacing: $nested-nav-letter-spacing;
+  white-space: nowrap;
+
+  > span {
+    
+  }
+
+  > .icon{
+    width: $nested-nav-icon-size;
+    height: $nested-nav-icon-size;
+    order: $nested-nav-link-icon-position;
+  }
 }
 
 // █▄ ▄█ ▄▀▄ ██▄ █ █   ██▀

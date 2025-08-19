@@ -1,0 +1,28 @@
+---
+
+import type { CollectionEntry } from 'astro:content';
+import type {ArticleStyleTemplate} from './typescript/types/ArticleStyleTemplate';
+import { getArticleTemplate } from './typescript/utils/getArticleTemplate';
+
+interface Props {
+  /**
+   * The article itself, taken from a CMS, or a file.
+   */
+  entry: CollectionEntry<'article'>, // Qui dovrebbe essere entry, perchè ogni article vuole consumare 1 entry.
+  /**
+   * The markdown & style template you want to assign to this article - Can only be what's inside this folder: src\html\components-p\article\templates
+   */
+  template: ArticleStyleTemplate,
+}
+
+const {entry, template, templateDirectives} = Astro.props;
+const ArticleTemplate = await getArticleTemplate(template);  
+---
+
+
+<article class="article" data-style-template={template}>  <!-- This data-attribute will be use also as style modificator -->
+  <ArticleTemplate 
+    entry={entry} 
+    templateDirectives={templateDirectives}
+  />
+</article>

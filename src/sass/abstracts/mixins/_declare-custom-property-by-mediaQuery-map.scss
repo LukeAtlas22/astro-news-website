@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "../../abstracts/mixins" as *;
 @use "../../abstracts/function" as *;
 
@@ -33,12 +34,15 @@
 ///       --buttons-position: display-none;
 ///     }
 ///   }
-@mixin declare-customProperty-by-mediaQuery-map($mediaQuery-values-map, $customProperty){
-  @if (is-map($mediaQuery-values-map)){
+@mixin declare-customProperty-by-mediaQuery-map(
+  $mediaQuery-values-map,
+  $customProperty
+) {
+  @if (is-map($mediaQuery-values-map)) {
     @each $media-query, $values in $mediaQuery-values-map {
-      $type: nth($media-query, 1);
-      $size: nth($media-query, 2);
-      $breakpoint: nth($media-query, 3);
+      $type: list.nth($media-query, 1);
+      $size: list.nth($media-query, 2);
+      $breakpoint: list.nth($media-query, 3);
       @include mq($type, $size, $breakpoint) {
         #{$customProperty}: #{$values};
       }

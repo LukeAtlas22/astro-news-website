@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "sass:list";
 @use "sass:meta";
+@use "sass:math";
 @use "colors" as *;
 
 @function clr($color, $shade) {
@@ -62,4 +63,47 @@
 /// @param {<color>} $dark - The color of the dark version of the theme
 @function set-color($light, $dark) {
   @return #{light-dark($light, $dark)};
+}
+
+//
+
+@function is-inset-value($value) {
+  $len: list.length($value);
+
+  // L'inset accetta da 1 a 4 valori
+  @if $len < 1 or $len > 4 {
+    @return false;
+  }
+
+  // Controllo di ogni elemento
+  @for $i from 1 through $len {
+    $item: list.nth($value, $i);
+    $type: meta.type-of($item);
+
+    @if not(
+      $type ==
+        "number" and
+        (
+          math.unit($item) ==
+            "px" or
+            math.unit($item) ==
+            "rem" or
+            math.unit($item) ==
+            "em" or
+            math.unit($item) ==
+            "%" or
+            math.unit($item) ==
+            ""
+        )
+        // lunghezze, %, 0 senza unità
+      or
+        $item ==
+        auto
+    )
+    {
+      @return false;
+    }
+  }
+
+  @return true;
 }

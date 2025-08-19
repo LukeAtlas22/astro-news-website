@@ -11,19 +11,25 @@
 @include NavigationLink-Desktop {
   display: flex;
   align-items: center;
-  gap: $nav-link-internal-gap;
+  gap: $nav-link-icon-gap;
   padding-block: $nav-link-padding-block;
   padding-inline: $nav-link-padding-inline;
 
   > span {
+    letter-spacing: $nav-letter-spacing;
     display: flex;
     align-items: center;
   }
 
   > .icon {
+    order: $nav-link-icon-position;
     width: $nav-link-icon-size;
     height: $nav-link-icon-size;
   }
+}
+
+@include NavigationLink-Desktop__SelectFirstItem {
+  //...
 }
 
 @include NavigationListItem-Desktop-Hover {

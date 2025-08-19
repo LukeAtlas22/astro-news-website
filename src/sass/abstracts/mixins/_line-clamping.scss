@@ -1,0 +1,14 @@
+// @mixin line-clamp($n) {
+//   display: -webkit-box;
+//   overflow: clip;
+//   -webkit-line-clamp: $n; /* number of lines to show */
+//   line-clamp: $n;
+//   -webkit-box-orient: vertical;
+// }
+
+@mixin line-clamp-fade($lines, $line-height: 1.5) {
+  max-height: calc($lines * 1em * $line-height);
+  overflow: hidden;
+
+  mask-image: linear-gradient(180deg, #000 70%, rgba(0, 0, 0, 0));
+}

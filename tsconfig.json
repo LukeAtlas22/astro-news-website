@@ -7,11 +7,13 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/html/components/*"],
+      "@components-layout/*": ["src/html/components-layout/*"],
       "@layouts/*": ["src/html/layouts/*"],
       "@pages/*": ["src/html/pages/*"],
       "@icons/*": ["src/html/icons/*"],
       "@types": ["src/types"], // Questi si riferiscono a un file, e non a una cartella
       "@utils": ["src/utils"], // Questi si riferiscono a un file, e non a una cartella
+      "@SASS-Abstracts": ["src/sass/abstracts"],
     }
   }
 }

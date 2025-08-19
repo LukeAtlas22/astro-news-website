@@ -1,0 +1,64 @@
+@use "@SASS-Abstracts" as *;
+@use "../../mixins/article-meta-hide-description-terms" as *;
+@use "../../mixins/article-thumbnail-dark-overlay" as *;
+@use "../../mixins/anchor-on-thumbnail" as *;
+@use "../../mixins/selectors/article-selectors" as Article;
+@use "../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
+@use "../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+
+@include Article.Template('preview-4'){
+  display: flex;
+  column-gap: 2rem;
+  
+
+  > div:nth-child(1){
+    flex-basis: 45%;
+  }
+  > div:nth-child(2){
+    flex-basis: 55%;
+    display: grid;
+    align-content: space-between;
+    gap: 0.75rem;
+  }
+
+  @include Article.Header{  
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.45;
+    // Todo - Qui abbiamo un problemino 
+  }
+
+  @include Article.Content{
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.25;
+    overflow-y: auto;
+    @include line-clamp(4);
+    color: $color-primary-600;
+  }
+
+  @include Article.Metadata{
+    font-size: 0.75rem;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    @include HideMetaDescriptionTerms;
+  }
+
+  @container (height < 200px){
+    @include Article.Content{
+      @include line-clamp(3);
+    }
+
+    > div:nth-child(1){
+      flex-basis: 30%;
+    }
+
+    > div:nth-child(2){
+      flex-basis: 70%;
+    }
+  }
+}

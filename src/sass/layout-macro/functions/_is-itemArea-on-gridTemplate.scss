@@ -1,0 +1,11 @@
+@use "sass:string";
+
+@function is-item-on-grid($item, $grid) {
+  $string-template: inspect($grid);
+
+  @if str-index($string-template, $item) {
+    @return true;
+  }
+
+  @return false;
+}

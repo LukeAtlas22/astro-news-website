@@ -1,39 +1,43 @@
 @use "../../../abstracts/function" as *;
+@use "../../../abstracts/" as *;
 
 // █▀▄ ██▀ ▄▀▀ █▄▀ ▀█▀ ▄▀▄ █▀▄ 
 // █▄▀ █▄▄ ▄█▀ █ █  █  ▀▄▀ █▀  
 
-$nav-font-family: system-ui;
-$nav-font-size: 1.25rem;
-$nav-font-weight: 500;
-$nav-color: white;
-$nav-background: goldenrod; 
+$nav-font-family: $font-family-accent;
+$nav-font-size: 1.2rem;
+$nav-font-weight: 700;
+$nav-color: $clr-neutral-300;
+$nav-background: transparent; 
 
-$nav-height: 54px;
-$nav-gap: 0.75rem;
-$nav-padding-inline: 0.5rem; // Da lasciare così (?)
+$nav-height: 60.8px; // Todo - This gives me problem, maybe theres a way to retrieve
+// Todo - Dev'essere uguale all'altezza di 1 navigation item desktop
+// Todo - O almeno del container della nav
+// Todo - Dovrebbe essere preso con js
+$nav-gap: 0.25rem;
+$nav-padding-inline: 0rem; 
 $nav-padding-block: 0;
 $nav-text-transform: auto;
+$nav-letter-spacing: 0.075em;
 
-$nav-link-internal-gap: 0.75rem;
+$nav-link-padding-block: 1rem;
+$nav-link-padding-inline: 1.25rem;
 $nav-link-icon-size: 1.5rem; // Default to default icon size
-$nav-link-padding-block: 0.75rem;
-$nav-link-padding-inline: 0.5rem;
-$nav-link-background: red;
-$nav-link-background-hover: purple;
-
-//Todo Coarse - fine | Mutation (?)
-//Todo Migliorare seguendo mobile
+$nav-link-icon-position: -1; // 0 => Right || -1 => Left
+$nav-link-icon-gap: 0.45rem;
+$nav-link-background: $clr-neutral-700;
+$nav-link-background-hover: $clr-primary-600;
 
 $nav-hamburger-menu-size: 2rem;
-$nav-hamburger-menu-gap-from-nav-list: $nav-gap;
-
-
+$nav-hamburger-menu-gap-from-nav-list: 1rem; 
 $breakpoint-hide-desktop-list: 545px; // Todo - Unica cosa che bisogna fare a tries
+     $after-hide-desktop-list--nav-padding-inline: 0rem; // Use custom or set on nav-padding-inline
+     $after-hide-desktop-list--new-hamburger-inset: 3.25rem 1rem auto auto; // Since navigation it's on contain: layout - This will move the entire navigation__list element in order to reposition the hamburger icon | Most of the time will be false
+     //...
 
 // Decide where the nav grows, if grows to the left, or to the right - 
 // Toggle between the two states to decide what fits better for ya
-$nav-position: end; // start || end
+$nav-position: start; // start || end
 
 
 // █▄ ▄█ ▄▀▄ ██▄ █ █   ██▀ 
@@ -46,29 +50,30 @@ $m-nav-anchor-position: 'hamburger icon'; // TODO STILL viewport || hamburger ic
 // $m-nav-right-1: auto;     // ---
 // $m-nav-bottom-1: auto;    // ---
 // Todo: Devo fare in modo di ricordarmi che posso usare anchor() e calc anchor ancorato all'icona hambu
-$m-nav-inset-1: set-inset(
-  $top: 4.25rem, 
+$m-nav-inset-fullwidth: set-inset( /* Maybe you want to be name intent revealing with those insets */
+  $top: 8rem, /*Re-arrange this every time*/
   $right: 0, 
   $bottom: auto, 
   $left: 0,
 );
-$m-nav-inset-2: set-inset(
-  $top: 5rem,
+$m-nav-inset-for-large-displays: set-inset( /* Maybe you want to be name intent revealing with those insets */
+  $top: anchor(bottom),
   $right: anchor(right),
   $left: calc(anchor(right) + -15.5rem),
   $bottom: auto,
   //Todo - Inserire anche width & height in questa funzione (?)
-);
+); 
+// You can even specify inset for medium displays, tables, landscape, etc...
 
 $cant-find-name: (
   1: (
     at: default,
-    set: (inset: $m-nav-inset-1)
+    set: (inset: $m-nav-inset-fullwidth, position: fixed) // Use fixed for apply on viewport
   ),
     
   2: (
-    at: (min, width, 450px),
-    set: (inset: $m-nav-inset-2, width: 'test') //Todo - Oppure farlo qua?
+    at: (min, width, $breakpoint-hide-desktop-list), // Sometimes you want this to be the same of $breakpoint-hide-desktop-list
+    set: (inset: $m-nav-inset-for-large-displays) //Todo - Oppure farlo qua?
   ),
 
   //...
@@ -79,25 +84,31 @@ $m-nav-height: auto;
 $m-nav-padding-block: 0;
 $m-nav-padding-inline: 0;
 
-$m-nav-background: black;
+$m-nav-background: $nav-background;
 
 $m-nav-font-family: $nav-font-family;
-$m-nav-font-size: 1.5rem;
-$m-nav-font-weight: 500;
+$m-nav-font-size: 1.2rem;
+$m-nav-font-weight: 600;
 $m-nav-link-icon-size: $nav-link-icon-size;
+$m-nav-link-icon-position: 0;
 
 // If set to true it only shows links ( in the mobile nav ) that are hidden in the desktop nav - In other words, does not show the links that in the desktop nav have enough space to be shown - So only shows links that are not shown in the desktop nav.
-$m-only-show-links-missing-from-desktop-nav: 'no'; 
+$m-only-show-links-missing-from-desktop-nav: 'yes'; //Todo Da mettere in Astro (?)
+// Se la metto in Astro però diventa framework dipendent
+// Se la lascio così invece sto gestendo interactivity da qui
+// Qual è la scelta migliore?
 
-$m-nav-link-color: white;
-$m-nav-link-background: green;
-$m-nav-link-color-hover: red;
-$m-nav-link-background-hover: purple;
-$m-nav-link-padding-inline: 1.25rem 1.25rem;
-$m-nav-link-padding-block: 1rem;
+$m-nav-link-color: $nav-color;
+$m-nav-link-background: $nav-link-background;
+$m-nav-link-color-hover: $nav-color;
+$m-nav-link-background-hover: $nav-link-background-hover;
+$m-nav-link-padding-inline: 1.25rem;
+$m-nav-link-padding-block: 0.5rem;
 $m-nav-link-justification: space-between;
-$m-nav-link-internal-gap: 2rem;
-$m-nav-link-border-bottom: 1px solid white;
+$m-nav-link-icon-gap: 2rem;
+$m-nav-link-border-bottom: 1px solid $nav-color;
+
+$m-nav-link-letter-spacing: $nav-letter-spacing;
 
 //todo backdrop yes or no
 //todo backdrop opacity
@@ -114,17 +125,21 @@ $m-nav-hamburger-menu-inset: (top: 2rem, right: 2rem);
 // █ ▀█ █▄▄ ▄█▀  █  █▄▄ █▄▀ ▄█▀
 
 // Desktop
-$nested-nav-width: 10rem;
+$nested-nav-width: auto;
 
-$nested-nav-icon-size: 24px;
 $nested-nav-font-size: inherit;
-$nested-nav-weight: inherit;
+$nested-nav-font-weight: 500;
 $nested-nav-font-family: inherit;
+$nested-nav-letter-spacing: 0.04em;
+$nested-nav-icon-size: 2rem;
 
-$nested-nav-color: inherit;
-$nested-nav-background: red;
+$nested-nav-link-icon-gap: 0.75rem;
+$nested-nav-link-icon-position: $nav-link-icon-position; // 0 | -1
+
+$nested-nav-color: $clr-neutral-300;
+$nested-nav-background: $clr-neutral-700;
 $nested-nav-link-background: transparent;
-$nested-nav-link-background-hover: purple;
+$nested-nav-link-background-hover: $clr-primary-600;
 
 $nested-nav-link-padding-inline: 0.25rem;
 $nested-nav-link-padding-block: 0.75rem;

@@ -1,4 +1,4 @@
-@use "../../../abstracts/" as *;
+@use "../abstracts/" as *;
 @use "sass:map";
 @use "sass:meta";
 
@@ -30,10 +30,6 @@
       grid-template: $grid-template;
     }
   }
-
-  /* Removing items that are not on the grid-template yet */
-  grid-auto-columns: 0px;
-  grid-auto-rows: 0px;
 }
 
 @mixin at($breakpoint){
@@ -122,11 +118,9 @@ $Macro-Layout-Map: (
 .macro-layout {
   display: grid;
   min-height: 100vh;
-
-  @include Macro-Layouts($Macro-Layout-Map);
-  
   row-gap: 2rem;
   
+  @include Macro-Layouts($Macro-Layout-Map);
 }
 
 .red{

@@ -3,27 +3,20 @@
 @use "../../../abstracts/" as *;
 @use "functions/user-wants-to-anchor-on-ham-icon";
 
-// Todo (?) Maybe i can remove all the unset, and use a different selector like :not(:has(.hamburger-menu-checkbox:checked))
 // Todo (!) C'è un sacco di roba da Tokenizzare
-// Todo (?) Usare duplication al posto di view transition ??
 
 @include NavigationList-Mobile-WhenHidden {
   display: none;
 }
 
 @include NavigationList-Mobile {
+  z-index: 99;
   width: $m-nav-width;
   height: $m-nav-height;
   position: absolute;
-  // top: $m-nav-top;
-  // left: $m-nav-left;
-  // right: $m-nav-right;
-  // bottom: $m-nav-bottom;
-  inset: $m-nav-inset-1;
+  // inset: $m-nav-inset-1; // What is this
   @include apply-mediaQuery-declarations-map-from($cant-find-name);
 
-  flex-direction: column;
-  flex-wrap: nowrap;
   overflow-y: visible;
 
   padding-block: $m-nav-padding-block;
@@ -37,7 +30,7 @@
 
   @if (user-wants-to-anchor-list-on-hamburger-icon()) {
     position-anchor: --nav-anchor;
-  }
+  } // Todo Da rimuovere
 
   // Hiding desktop background
   &::before {

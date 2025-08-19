@@ -1,71 +1,115 @@
 // Global Tokens
-$clr-primary-500: #007bff;
-$clr-primary-600: #0056b3;
-$clr-primary-400: #66b2ff;
+// Primary (Green)
+$clr-primary-400: #85a185;
+$clr-primary-500: #678767;
+$clr-primary-600: #04594d;
+$clr-primary-700: #03423a;
 
-$clr-neutral-900: #212529;
-$clr-neutral-800: #343a40;
-$clr-neutral-700: #495057;
-$clr-neutral-600: #6c757d;
-$clr-neutral-500: #adb5bd;
-$clr-neutral-400: #ced4da;
-$clr-neutral-300: #dee2e6;
-$clr-neutral-200: #e9ecef;
-$clr-neutral-100: #f8f9fa;
+$clr-secondary-400: #a86a6b;
+$clr-secondary-500: #8e4042;
+$clr-secondary-600: #6c3132;
+
 $clr-neutral-000: #ffffff;
+$clr-neutral-100: #fffff4;
+$clr-neutral-200: #fdfdfd;
+$clr-neutral-300: #e9e9e9;
+$clr-neutral-400: #d5d5d5;
+$clr-neutral-500: #9a9a9a;
+$clr-neutral-600: #6d6d6d;
+$clr-neutral-700: #1a1a1a;
+$clr-neutral-800: #020809;
+$clr-neutral-900: #000000;
 
-// Generate custom properties from globals tokens
 $default: (
   primary: (
     400: $clr-primary-400,
     500: $clr-primary-500,
     600: $clr-primary-600,
+    700: $clr-primary-700,
   ),
-
+  secondary: (
+    400: $clr-secondary-400,
+    500: $clr-secondary-500,
+    600: $clr-secondary-600,
+  ),
   neutral: (
     000: $clr-neutral-000,
     100: $clr-neutral-100,
+    200: $clr-neutral-200,
     300: $clr-neutral-300,
+    400: $clr-neutral-400,
     500: $clr-neutral-500,
+    600: $clr-neutral-600,
     700: $clr-neutral-700,
+    800: $clr-neutral-800,
     900: $clr-neutral-900,
   ),
 );
+
 $default-dark: (
   primary: (
     400d: $clr-primary-400,
     500d: $clr-primary-500,
     600d: $clr-primary-600,
+    700d: $clr-primary-700,
   ),
-
+  secondary: (
+    400d: $clr-secondary-400,
+    500d: $clr-secondary-500,
+    600d: $clr-secondary-600,
+  ),
   neutral: (
+    000d: $clr-neutral-000,
     100d: $clr-neutral-100,
+    200d: $clr-neutral-200,
     300d: $clr-neutral-300,
+    400d: $clr-neutral-400,
     500d: $clr-neutral-500,
+    600d: $clr-neutral-600,
     700d: $clr-neutral-700,
+    800d: $clr-neutral-800,
     900d: $clr-neutral-900,
   ),
 );
 
-// Contextual Tokens light
+// Contextual Tokens Light (completi)
 $color-primary-400: var(--primary-400);
 $color-primary-500: var(--primary-500);
 $color-primary-600: var(--primary-600);
+$color-primary-700: var(--primary-700);
+
+$color-secondary-400: var(--secondary-400);
+$color-secondary-500: var(--secondary-500);
+$color-secondary-600: var(--secondary-600);
 
 $color-neutral-000: var(--neutral-000);
 $color-neutral-100: var(--neutral-100);
+$color-neutral-200: var(--neutral-200);
 $color-neutral-300: var(--neutral-300);
+$color-neutral-400: var(--neutral-400);
 $color-neutral-500: var(--neutral-500);
+$color-neutral-600: var(--neutral-600);
 $color-neutral-700: var(--neutral-700);
+$color-neutral-800: var(--neutral-800);
 $color-neutral-900: var(--neutral-900);
 
-// Contextual Tokens dark
+// Contextual Tokens Dark (completi con suffisso 'd')
 $color-primary-400d: var(--primary-400d);
 $color-primary-500d: var(--primary-500d);
 $color-primary-600d: var(--primary-600d);
+$color-primary-700d: var(--primary-700d);
 
+$color-secondary-400d: var(--secondary-400d);
+$color-secondary-500d: var(--secondary-500d);
+$color-secondary-600d: var(--secondary-600d);
+
+$color-neutral-000d: var(--neutral-000d);
 $color-neutral-100d: var(--neutral-100d);
+$color-neutral-200d: var(--neutral-200d);
 $color-neutral-300d: var(--neutral-300d);
+$color-neutral-400d: var(--neutral-400d);
 $color-neutral-500d: var(--neutral-500d);
+$color-neutral-600d: var(--neutral-600d);
 $color-neutral-700d: var(--neutral-700d);
+$color-neutral-800d: var(--neutral-800d);
 $color-neutral-900d: var(--neutral-900d);

@@ -11,6 +11,13 @@
   background-color: $header-background-color;
   color: $header-color;
 
+  &__layout {
+    display: flex;
+    align-items: center;
+    justify-content: $header-justification;
+    gap: $header-gap;
+  }
+
   .icon {
     width: $header-icons-width;
     height: $header-icons-height;

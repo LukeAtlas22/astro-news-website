@@ -16,8 +16,11 @@
   .margin-#{$sizeName} {
     margin: $sizeValue;
   }
-  .padding-block-#{$sizeName} {
+  .pad-block-#{$sizeName} {
     padding-block: $sizeValue;
+  }
+  .pad-inline-#{$sizeName} {
+    padding-inline: $sizeValue;
   }
 }
 
@@ -37,8 +40,11 @@
   .margin-fluid-#{$sizeName} {
     margin: $sizeValue;
   }
-  .padding-block-fluid-#{$sizeName} {
+  .pad-block-fluid-#{$sizeName} {
     padding-block: $sizeValue;
+  }
+  .pad-inline-fluid-#{$sizeName} {
+    padding-inline: $sizeValue;
   }
 }
 

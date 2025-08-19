@@ -9,10 +9,10 @@ body {
   background-color: $body-background-color;
 }
 
-a {
+:where(a) {
   color: $link-color;
 }
 
-a:is(:hover, :focus) {
+:where(a:is(:hover, :focus)) {
   color: $link-color-hover;
 }

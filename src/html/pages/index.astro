@@ -1,14 +1,102 @@
 ---
 import "../../sass/main.scss"; // SCSS, Don't delete
-import BaseHead from "@components/BaseHead.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import Container from "@components-layout/Container.astro";
 import IconSystem from "@icons/IconSystem.astro";
+
+import Article from "../components-p/article/Article.astro";
+import { getCollection, getEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import type { CollectionKey } from "astro:content";
+
+import ArticleList from "@components/organism/ArticleList.astro";
+
+const articlePrimary: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-1');
+if (!articlePrimary) throw new Error('No article found')
+const articleSecondary: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-2');
+if (!articleSecondary) throw new Error('No article found');
+const articleTertiaty: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-3');
+if (!articleTertiaty) throw new Error('No article found');
+const articleFour: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-4');
+if (!articleFour) throw new Error('No article found');
+
+// Qui faccio le entry - con getCollection - a ogni article gli devo dare un entry, magari specificandola attraverso il titolo dell'articolo, o un humanId alike
+// La cosa certa è che article si deve prendere un entry
 ---
 
-<BaseHead />
+<BaseLayout title="Home | News Website">
 
-<BaseLayout>
-  
+  <Container type="wide">
+    <div class="hero" macro-layout-here> 
+      <div class="area-article-relevant | bg-neutral-200"> <!--  Todo --- Farò un Component chiamato <Area> ? -->
+        <Article
+          entry={articlePrimary}
+          template="preview-1"
+          templateDirectives={{
+            show: ['category']
+          }}
+        />
+      </div> 
+      <div class="area-article-secondary | bg-neutral-700">
+        <!-- Todo - Forse questo Component deve chiamarsi ArticlePreview -->
+          <Article
+            entry={articleSecondary}
+            template="preview-2"
+          />
+      </div> 
+      <div class="area-article-tertiary | bg-neutral-200">
+        <Article
+          entry={articleTertiaty}
+          template="preview-1"
+        />
+      </div>
+      <div class="area-article-fourth | bg-neutral-200">
+        <Article
+          entry={articleFour}
+          template="preview-3"
+        />
+      </div>
+      <div class="area-article-fifth | bg-neutral-200">
+        <Article
+          entry={articleSecondary}
+          template="preview-4"
+        />
+      </div>
+    </div>
+  </Container>
+
+  <Container type="wide">
+    <div class="pad-block-5 pad-inline-5 | flex-group | gap-7">
+      <h3 class="fs-800 nobreak">Latest News</h3>
+      <div class="line" style="height: 2px; width: 50%; background: black;"></div>
+    </div>
+  </Container>
+
+  <!-- Just testing -->
+  <Container type="wide">
+    
+    <ul 
+    style="margin-inline: auto; width: 37rem; height: auto; display: grid; gap: 2rem; background: rgb(240, 240, 240); padding: 2rem;"
+    >
+    
+    <h2 class="text-center fs-700">Trending Headline</h2>
+
+    <Article entry={articlePrimary} template="preview-4"/>
+    <div style="height:1px; width:100; background:gray;"></div>
+    <Article entry={articlePrimary} template="preview-4"/>
+    <div style="height:1px; width:100; background:gray;"></div>
+    <Article entry={articlePrimary} template="preview-4"/>
+    <div style="height:1px; width:100; background:gray;"></div>
+    <Article entry={articlePrimary} template="preview-4"/>
+    <div style="height:1px; width:100; background:gray;"></div>
+    <Article entry={articlePrimary} template="preview-4"/>
+    <div style="height:1px; width:100; background:gray;"></div>
+
+    </ul>
+  </Container>
+
+  </Container>
+
 </BaseLayout>
 
 <IconSystem />

@@ -1,0 +1,48 @@
+@use "@SASS-Abstracts" as *;
+@use "../../mixins/article-meta-hide-description-terms" as *;
+@use "../../mixins/article-thumbnail-dark-overlay" as *;
+@use "../../mixins/anchor-on-thumbnail" as *;
+@use "../../mixins/selectors/article-selectors" as Article;
+@use "../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
+@use "../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+// Todo - Da rivedere un po, mi sembra troppo complesso, prediligere un po più di semplicità
+@use "./preview-1.scss" as *; // Important for extend
+
+@use "../../../../../abstracts/mixins/line-clamping" as *;
+
+@include Article.Template('preview-2') { 
+  
+  @include Article.Extend('preview-1');
+
+  // padding-block: 1.25rem; // Todo Making it padding agnostic for now
+  display: flex;
+
+  @include Article.Content{
+    flex-basis: 40%;
+    font-size: 1.1rem;
+    color: $clr-neutral-300;
+    overflow: clip;
+    
+    > p{
+      line-height: 1.45;
+      @include line-clamp-fade(9, 1.45);
+    }
+
+  }
+  @include Article.Thumbnail{
+    flex-basis: 60%;
+  }
+  @include Article.Header{
+    padding-inline: 0.75rem;
+    padding-block: 0.25rem;
+  }
+  @include Article.Metadata{
+    @include Article-Metadata.Tags{ display: none };
+    // Più crescono le cose, più aggiungo roba, così è ancheo ttimizzato
+    
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    @include HideMetaDescriptionTerms;
+  }
+}

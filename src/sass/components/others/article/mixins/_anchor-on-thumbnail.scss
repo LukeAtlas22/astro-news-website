@@ -1,0 +1,9 @@
+@mixin anchor-on-thumbnail {
+  position: absolute;
+  position-anchor: --article-thumbnail;
+
+  left: anchor(left);
+  bottom: anchor(bottom);
+}
+
+

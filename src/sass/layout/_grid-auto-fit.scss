@@ -10,6 +10,7 @@
   --grid-items-size-medium: attr(min-medium type(<length>), var(--grid-items-size));
 
   --min: var(--grid-items-size-small);
+
   @include mq(min, width, small) {
     --min: var(--grid-items-size-medium);
   }

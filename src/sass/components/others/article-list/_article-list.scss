@@ -1,0 +1,24 @@
+@use "@SASS-Abstracts" as *;
+
+.article-list {
+  --article-width: #{"attr(article-width type(*))"}; // Todo This can be tokenized as well
+  --article-height: #{"attr(article-height type(*))"}; // Todo This can be tokenized as well
+  --article-padding: #{"attr(article-padding type(*))"}; // Todo This can be tokenized as well
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  > li {
+    height: var(--article-height);
+    width: var(--article-width);
+  }
+
+  > li > .article[data-style-template="preview-3"] {
+    padding: var(--article-padding);
+    // Todo - Token as article in list token < Same as preview-2 header padding article in list
+    background-color: $clr-neutral-200;
+  }
+  > li > .article[data-style-template="preview-1"] > .article__header {
+    padding: var(--article-padding);
+  }
+}

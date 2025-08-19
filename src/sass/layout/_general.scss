@@ -1,30 +1,28 @@
 @use "../abstracts/" as *;
 
-.space-between {
+:where(.space-between) {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.flex-group {
+:where(.flex-group) {
   display: flex;
   align-items: center;
   gap: $flex-group-gap;
 }
 
-.wrap {
+:where(.wrap) {
   flex-wrap: wrap;
 }
 
-.flow {
+:where(.flow) {
   display: grid;
   gap: $grid-gap;
 }
 
-section {
-  padding-block: $section-padding-block;
-}
-.region,
-.section {
+:where(body > section),
+:where(main > section),
+:where(.region, .section) {
   padding-block: $section-padding-block;
 }

@@ -1,0 +1,27 @@
+@use "../../../abstracts/" as *;
+
+$input-group-width: clamp(5rem, 41cqw, 36rem);
+
+$input-group-font-family: $font-family-base;
+$input-group-font-size: 1.35rem;
+$input-group-font-weight: 500;
+$input-group-letter-spacing: 1;
+
+$input-group-background: $clr-primary-700;
+$input-group-color: $clr-neutral-400;
+
+$input-group-padding-inline: clamp(1rem, 5.75vw, 4.25rem);
+$input-group-padding-block: 1rem;
+
+$input-group-border: none;
+$input-group-border-radius: none;
+$input-group-box-shadow: none;
+
+// Defaults on button component
+$input-group-button-font-family: $button-font-family;
+$input-group-button-font-size: $button-font-size;
+$input-group-button-font-weight: $button-font-weight;
+$input-group-button-padding-inline: 1.25em;
+$input-group-button-text-transform: $button-text-transform;
+$input-group-button-border: $button-border;
+$input-group-button-border-radius: $button-border-radius;

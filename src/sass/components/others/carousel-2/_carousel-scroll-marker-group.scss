@@ -28,7 +28,7 @@
     // Self alignment & sizing
     justify-self: $carousel-scroll-marker-group-self-justification;
     align-self: $carousel-scroll-marker-group-self-alignment;
-    block-size: map-get(map-get($carousel-scroll-marker-styles, use-default), height);
+    block-size: map.get(map.get($carousel-scroll-marker-styles, use-default), height);
     writing-mode: $carousel-scroll-marker-group-orientations-map + -lr;
 
     // Anchor
@@ -66,7 +66,7 @@
 
 
 // If use slide image
-@if (map-has-key($map: $carousel-scroll-marker-styles, $key: use-slide-image)){
+@if (map.has-key($map: $carousel-scroll-marker-styles, $key: use-slide-image)){
   $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-slide-image, $get: width);
   $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
   $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-slide-image); // A.K.A - Inline padding
@@ -83,7 +83,7 @@
 }
 
 // If use counter numbers
-@if (map-has-key($map: $carousel-scroll-marker-styles, $key: use-counter-numbers)){
+@if (map.has-key($map: $carousel-scroll-marker-styles, $key: use-counter-numbers)){
   $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-counter-numbers, $get: width);
   $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
   $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers);

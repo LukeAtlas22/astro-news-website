@@ -1,0 +1,67 @@
+---
+import type { ArticleMetaData } from './typescript/types/ArticleMetaData';
+interface Props extends any {};
+const {
+  title, 
+  titleSmall, 
+  author, 
+  date,
+  readTime, 
+  category, 
+  categoryPosition = 'above-header', // Giving a default
+  tags} 
+= Astro.props;
+---
+    <!--  Todo - Questo si può fare meglio -->
+  {
+    title &&
+    <div class="article__title">
+      <h2 class="article__title--full-title">{title}</h2>
+      <h2 class="article__title--small-title">{titleSmall}</h2>
+    </div>
+  }
+  {
+    (author || date) &&
+    <dl class="article__meta">
+
+      {
+        author &&
+        <div>
+          <dt>Author</dt>
+          <dd>{author}</dd>
+        </div>
+      }
+      {
+        date &&
+        <div> 
+          <dt>Date of pubblication</dt>
+          <dd><time datetime={date}>{date}</time></dd>
+        </div>
+      }
+
+      (category || readTime) &&
+        <div class="category-and-readtime-wrapper">
+          {
+            category &&
+              <dt>Category</dt>
+              <dd>
+                <ul> 
+                  {
+                    category.map(category => (<li><a class="article__metadata--category">{category}</a></li>))
+                  }
+                </ul>
+              </dd>
+            </div>
+          }
+          {
+            readTime &&
+            <div>
+              <dt>Reading time</dt>
+              <dd>{readTime}</dd>
+            </div>
+          }
+        </div>
+    </dl>
+  }
+
+  {/* Se hai bisogno di un layout leggermente diverso, duplica questo file e chiamalo AricleMeta-Layout-2.astro , Dunque potrai aggiungere facilmente nuovi wrappers */}

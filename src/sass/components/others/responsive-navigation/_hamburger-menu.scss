@@ -17,9 +17,16 @@ input.hamburger-menu-checkbox {
 
 @include HamburgerMenu-Desktop {
   top: (anchor(center));
-  left: calc(anchor(right) + $nav-gap);
+  left: calc(anchor(right) + $nav-hamburger-menu-gap-from-nav-list); // Todo Need to inject this in the script
   translate: 0 -50%;
   position-anchor: --hamburger-menu-anchor;
+
+  // position: absolute;
+  // right: 1rem; // Todo I need to extrapolate this from:
+  // /*
+  //   link padding inline
+  //   nav padding inline
+  // */
 
   background-color: green; // D
 }

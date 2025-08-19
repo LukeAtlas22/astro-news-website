@@ -1,0 +1,12 @@
+---
+interface Props{
+  type: 'primary' | 'accent'
+  classList: string
+  style?: any,
+}
+const {classList, type, style} = Astro.props;
+---
+
+<button class={`button | ${classList}`} data-type={type} style={style}>
+  <slot>
+</button>

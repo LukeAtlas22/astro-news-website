@@ -23,15 +23,19 @@ const { Content } = await render(entry);
   </div>
   <div>
     <ArticleHeader
-      title={entry.data.title},
-      titleSmall={entry.data.titleSmall}
+      ArticleDataOBJ = {{
+        title: entry.data.title,
+        titleSmall: entry.data.titleSmall,
+      }}
     />
     <ArticleContent>
       <Content/>
     </ArticleContent>
     <ArticleFooter
-      author={entry.data.author}
-      date={entry.data.pubblicationDate}
+      ArticleDataOBJ = {{
+        author: entry.data.author,
+        pubblicationDate: entry.data.pubblicationDate,
+      }}
     />
   </div>
 </Fragment>

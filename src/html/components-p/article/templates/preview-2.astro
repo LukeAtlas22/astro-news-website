@@ -8,15 +8,17 @@ import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
 interface Props { 
-  entry: CollectionEntry<'articles'> 
+  entry: CollectionEntry<'article'> 
 }; 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 <Fragment>
   <ArticleHeader
-    title={entry.data.title},
-    titleSmall={entry.data.titleSmall}
+    ArticleDataOBJ = {{
+      title: entry.data.title,
+      titleSmall: entry.data.titleSmall,
+    }}
   />
   <ArticleContent>
     <Content/>

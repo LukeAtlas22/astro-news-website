@@ -1,0 +1,56 @@
+---
+import type { ArticleDataOBJ } from "../typescript/types/ArticleDataOBJ";
+const { article } = Astro.props as { article: ArticleDataOBJ };
+// Type of article is the Collection Schema of the CollectionEntry<'article'> with everything as optional
+
+---
+    <!--  Todo - Questo si può fare meglio -->
+  {
+    article.title &&
+    <div class="article__title">
+      <h2 class="article__title--full-title">{article.title}</h2>
+      <h2 class="article__title--small-title">{article.titleSmall}</h2>
+    </div>
+  }
+  {
+    (article.author || article.pubblicationDate) &&
+    <dl class="article__meta">
+
+      {
+        article.author &&
+        <div>
+          <dt>Author</dt>
+          <dd>{article.author}</dd>
+        </div>
+      }
+      {
+        article.pubblicationDate &&
+        <div> 
+          <dt>Date of pubblication</dt>
+          <dd><time datetime={article.pubblicationDate}>{article.pubblicationDate}</time></dd>
+        </div>
+      }
+      {
+        article.category &&
+        <div class="category-wrapper" data-style-position={article.categoryPosition}> {/* Qui bisogna mettere poi ogni classe che definisce il meta data, per poterli gestire singolarmente */}
+          <dt>Category</dt>
+          <dd>
+            <ul> {/* Bisogna anche fare classi per gestire ogni li di tags e category ecc */}
+              {
+                article.category.map((category: string) => (<li><a class="article__metadata--category">{category}</a></li>))
+              }
+            </ul>
+          </dd>
+        </div>
+      }
+      {
+        article.readTime &&
+        <div>
+          <dt>Reading Time</dt>
+          <dd>{article.readTime}</dd>
+        </div>
+      }
+    </dl>
+  }
+
+  {/* Se hai bisogno di un layout leggermente diverso, duplica questo file e chiamalo AricleMeta-Layout-1.astro , Dunque potrai aggiungere facilmente nuovi wrappers */}

@@ -15,6 +15,19 @@ const getArticleTemplate = async function (template: ArticleStyleTemplate): Prom
   return articleTemplate;
 }
 
+const getMetaArticleTemplate = async function (template: number): Promise<AstroComponentFactory>{
+  let metaTemplate: AstroComponentFactory;
+
+  try {
+    metaTemplate = (await import(`../../templates-meta/ArticleMeta-Layout-${template}.astro`)).default;
+  } catch (err) {
+    throw new AstroError(
+      `<Article/> says: The Meta Template - '${template}' - Does not exist! Please make sure you're declaring an existing Meta template`
+    )
+  }
+  return metaTemplate;
+}
+
 export {
-  getArticleTemplate, //...
+  getArticleTemplate, getMetaArticleTemplate, //...
 };

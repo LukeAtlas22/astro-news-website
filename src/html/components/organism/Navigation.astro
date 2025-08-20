@@ -6,7 +6,7 @@ import Icon from "@icons/Icon.astro";
 
 type Props = Navigation;
 const { links, items, responsive, selfContained } = Astro.props;
-console.log(links, items);
+//console.log(links, items);
 if (links && items ) throw new Error('<Navigation/> says: You cannot use both links & items directive!');
 const linksArray: Array<string> = links && splitStringByComma(links);
 

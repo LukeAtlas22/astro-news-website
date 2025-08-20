@@ -6,7 +6,7 @@ import ArticleThumbnail from '../ArticleThumbnail.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props { 
-  entry: CollectionEntry<'articles'> 
+  entry: CollectionEntry<'article'> 
 }; 
 const { entry, templateDirectives } = Astro.props;
 
@@ -32,12 +32,12 @@ if (templateDirectives?.styles)
 ---
 <Fragment>
   <ArticleHeader
-    title={entry.data.title},
-    titleSmall={entry.data.titleSmall}
-    author={entry.data.author},
-    date={entry.data.pubblicationDate},
-    {...customTemplateDirectives}
-    {...customStyleDirectives}
+    ArticleDataOBJ = {{
+      title: entry.data.title,
+      titleSmall: entry.data.titleSmall, // Devo fare che title trattiene sempre titleSmall
+      author: entry.data.author, // Devo nidificare cose all'interno di author, tipo name, address, ecc
+      pubblicationDate: entry.data.pubblicationDate,
+    }}
   />
   <ArticleThumbnail
     src={entry.data.thumbnail.src}

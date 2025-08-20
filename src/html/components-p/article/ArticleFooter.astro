@@ -1,10 +1,15 @@
 ---
-import type { ArticleMetaData } from './typescript/types/ArticleMetaData';
-interface Props extends ArticleMetaData {};
-const { title, titleSmall, author, date, category, categoryPosition } = Astro.props;
+import { getMetaArticleTemplate } from './typescript/utils/getArticleTemplate';
+import type { ArticleDataOBJ } from './typescript/types/ArticleDataOBJ';
 
-import ArticleMeta from './ArticleMeta.astro';
+interface Props {
+  ArticleDataOBJ: ArticleDataOBJ,
+  MetaLayoutTemplate?: number,
+}
+
+const { ArticleDataOBJ, MetaLayoutTemplate = 0, } = Astro.props;
+const ArticleMeta = await getMetaArticleTemplate(MetaLayoutTemplate);
 ---
-<header class="article__header">
-  <ArticleMeta title={title}, titleSmall={titleSmall}, author={author}, date={date}, category={category} categoryPosition={categoryPosition}/>
-</header>
+<footer class="article__footer">
+  <ArticleMeta article={ArticleDataOBJ}/>
+</footer>

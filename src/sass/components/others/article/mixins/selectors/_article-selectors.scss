@@ -32,6 +32,11 @@
     @content;
   }
 }
+@mixin Footer {
+  .article__footer {
+    @content;
+  }
+}
 @mixin Metadata {
   .article__meta {
     @content;

@@ -18,10 +18,11 @@
     flex-basis: 55%;
     display: grid;
     align-content: space-between;
-    gap: 0.75rem;
+    
   }
 
   @include Article.Header{  
+    
     display: flex;
     align-items: center;
     font-size: 1rem;

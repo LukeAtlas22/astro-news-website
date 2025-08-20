@@ -1,24 +1,35 @@
 @use "@SASS-Abstracts" as *;
+@use "../article/mixins/selectors/article-selectors" as Article;
 
+$test-padding: 1.5rem;
+
+// Everything should be tokenized
 .article-list {
-  --article-width: #{"attr(article-width type(*))"}; // Todo This can be tokenized as well
-  --article-height: #{"attr(article-height type(*))"}; // Todo This can be tokenized as well
-  --article-padding: #{"attr(article-padding type(*))"}; // Todo This can be tokenized as well
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-
-  > li {
-    height: var(--article-height);
-    width: var(--article-width);
+  @include create-grid-auto-fit($min-item-width: 320px);
+  column-gap: 2rem;
+  row-gap: 2rem;
+  padding: 0;
+  &__item {
+    aspect-ratio: 1/0.75;
+    container-type: size;
   }
 
-  > li > .article[data-style-template="preview-3"] {
-    padding: var(--article-padding);
-    // Todo - Token as article in list token < Same as preview-2 header padding article in list
-    background-color: $clr-neutral-200;
+  &__item {
+    @include Article.Template("preview-3") {
+      background: $clr-neutral-200;
+      padding: $test-padding;
+    }
+    @include Article.Template("preview-1") {
+      @include Article.Header {
+        padding: $test-padding;
+      }
+    }
   }
-  > li > .article[data-style-template="preview-1"] > .article__header {
-    padding: var(--article-padding);
-  }
+  // Todo - As an organism will always override properties of the owned components
+
+  // Todo - Poi - questa tipologia di component in particolare, deve avere accesso all'articolo interno
+  // Todo - Per poter sovrascrivere, all'occorrenza: padding, sizing, e eventualmente altro - Dato che è un organismo
+  // Todo - Potremmo rendere più esplicita questa parte utilizzando Access-Article.Template($name-template). e Access-Article(che accede a every article)
+
+  // Todo - Forse creare un .article-list generica è un po troppo overthinking, magari la rifacciamo ogni volta che si presenta una lista
 }

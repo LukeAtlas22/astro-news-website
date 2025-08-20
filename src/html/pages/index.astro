@@ -1,5 +1,4 @@
 ---
-import "../../sass/main.scss"; // SCSS, Don't delete
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Container from "@components-layout/Container.astro";
 import IconSystem from "@icons/IconSystem.astro";
@@ -9,7 +8,7 @@ import { getCollection, getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { CollectionKey } from "astro:content";
 
-import ArticleList from "@components/organism/ArticleList.astro";
+import List from '@components/utilities/List.astro';
 
 const articlePrimary: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-1');
 if (!articlePrimary) throw new Error('No article found')
@@ -65,35 +64,39 @@ if (!articleFour) throw new Error('No article found');
     </div>
   </Container>
 
+  
   <Container type="wide">
-    <div class="pad-block-5 pad-inline-5 | flex-group | gap-7">
-      <h3 class="fs-800 nobreak">Latest News</h3>
-      <div class="line" style="height: 2px; width: 50%; background: black;"></div>
+    <div class="splitter-g" first="65.75%" second="1fr" style="margin-top: 2.25rem;">
+        <div>
+          <h2 class="fs-800 | text-center " style="padding-bottom: 1.5rem;">Latest News</h2>
+          <List className="article-list">
+            <Article entry={articlePrimary}, template="preview-1"/>
+            <Article entry={articlePrimary}, template="preview-1"/>
+            <Article entry={articlePrimary}, template="preview-3"/>
+            <Article entry={articlePrimary}, template="preview-3"/>
+            <Article entry={articlePrimary}, template="preview-1"/>
+            <Article entry={articlePrimary}, template="preview-1"/>
+            <Article entry={articlePrimary}, template="preview-3"/>
+            <Article entry={articlePrimary}, template="preview-3"/>
+          </List>
+        </div>
+        <div class="bg-neutral-200">
+          <h2 class="pad-block-4 | text-center">Trending Headlines</h2>
+          <List className="article-list-secondary">
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+            <Article entry={articlePrimary}, template="preview-4"/>
+          </List>
+        </div>
     </div>
   </Container>
 
-  <!-- Just testing -->
-  <Container type="wide">
-    
-    <ul 
-    style="margin-inline: auto; width: 37rem; height: auto; display: grid; gap: 2rem; background: rgb(240, 240, 240); padding: 2rem;"
-    >
-    
-    <h2 class="text-center fs-700">Trending Headline</h2>
-
-    <Article entry={articlePrimary} template="preview-4"/>
-    <div style="height:1px; width:100; background:gray;"></div>
-    <Article entry={articlePrimary} template="preview-4"/>
-    <div style="height:1px; width:100; background:gray;"></div>
-    <Article entry={articlePrimary} template="preview-4"/>
-    <div style="height:1px; width:100; background:gray;"></div>
-    <Article entry={articlePrimary} template="preview-4"/>
-    <div style="height:1px; width:100; background:gray;"></div>
-    <Article entry={articlePrimary} template="preview-4"/>
-    <div style="height:1px; width:100; background:gray;"></div>
-
-    </ul>
-  </Container>
+  
 
   </Container>
 

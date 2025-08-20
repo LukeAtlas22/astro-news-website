@@ -1,0 +1,26 @@
+///
+/// Only width will get handled from here - You will have to manually adjust, on every grid-item:
+/// - aspect/ratio
+/// - ...
+/// @output
+@mixin create-grid-auto-fit($min-item-width) {
+  // Todo - Remember, for simplicity - This wants to consume agnostic size elements...
+  // Todo - So it would really like to handle the sizing of the elements that contains, as organism
+  // Todo - And it might also wants to be contained inside a container-type structure
+
+  // Todo - It might want to be cointained inline
+
+  // ! Ricorda che questo svolge un compito diverso rispetto ad ArticleList (SRP)
+  // ! Responsabilità unica: LAYOUT
+  // ! Anzi rilancio sul principio SRP di prima, facciamo responsabilità unica: creare auto fit
+  // !      Tutto il resto, come gap, padding, margins ecc - viene gestito component locally
+
+  width: 100%;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-columns: repeat(auto-fit, (minmax(#{$min-item-width}, 1fr)));
+
+  > * {
+    width: 100%;
+  }
+}

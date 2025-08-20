@@ -1,7 +1,6 @@
 ---
 
 import type { CollectionEntry } from 'astro:content';
-import type {ArticleStyleTemplate} from './typescript/types/ArticleStyleTemplate';
 import { getArticleTemplate } from './typescript/utils/getArticleTemplate';
 
 interface Props {
@@ -12,7 +11,7 @@ interface Props {
   /**
    * The markdown & style template you want to assign to this article - Can only be what's inside this folder: src\html\components-p\article\templates
    */
-  template: ArticleStyleTemplate,
+  template: string,
   /**
    * Some specific template, directive - That can make very tiny changes to a specific template - Only use it if you have one unique alteration of a well-established template - In any other case prefer the creation of a new template !
    */

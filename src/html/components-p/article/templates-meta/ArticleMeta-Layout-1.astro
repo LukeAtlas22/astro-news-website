@@ -1,63 +1,53 @@
 ---
-import type { ArticleMetaData } from './typescript/types/ArticleMetaData';
-interface Props extends any {};
-const {
-  title, 
-  titleSmall, 
-  author, 
-  date,
-  readTime, 
-  category, 
-  categoryPosition = 'above-header', // Giving a default
-  tags} 
-= Astro.props;
+import type { ArticleDataOBJ } from "../typescript/types/ArticleDataOBJ";
+const { article } = Astro.props as { article: ArticleDataOBJ };
 ---
     <!--  Todo - Questo si può fare meglio -->
   {
-    title &&
+    article.title &&
     <div class="article__title">
-      <h2 class="article__title--full-title">{title}</h2>
-      <h2 class="article__title--small-title">{titleSmall}</h2>
+      <h2 class="article__title--full-title">{article.title}</h2>
+      <h2 class="article__title--small-title">{article.titleSmall}</h2>
     </div>
   }
   {
-    (author || date) &&
+    (article.author || article.pubblicationDate) &&
     <dl class="article__meta">
-
-      {
-        author &&
-        <div>
-          <dt>Author</dt>
-          <dd>{author}</dd>
-        </div>
-      }
-      {
-        date &&
-        <div> 
-          <dt>Date of pubblication</dt>
-          <dd><time datetime={date}>{date}</time></dd>
-        </div>
-      }
-
+      <div class="article__meta--wrapper-1">
+        {
+          article.author &&
+          <div>
+            <dt>Author</dt>
+            <dd>{article.author}</dd>
+          </div>
+        }
+        {
+          article.pubblicationDate &&
+          <div> 
+            <dt>Date of pubblication</dt>
+            <dd><time datetime={article.pubblicationDate}>{article.pubblicationDate}</time></dd>
+          </div>
+        }
+      </div>
       (category || readTime) &&
-        <div class="category-and-readtime-wrapper">
+        <div class="article__meta--wrapper-2">
           {
-            category &&
+            article.category &&
               <dt>Category</dt>
               <dd>
                 <ul> 
                   {
-                    category.map(category => (<li><a class="article__metadata--category">{category}</a></li>))
+                    article.category.map(category => (<li><a class="article__metadata--category">{category}</a></li>))
                   }
                 </ul>
               </dd>
             </div>
           }
           {
-            readTime &&
+            article.readTime &&
             <div>
               <dt>Reading time</dt>
-              <dd>{readTime}</dd>
+              <dd>{article.readTime}</dd>
             </div>
           }
         </div>

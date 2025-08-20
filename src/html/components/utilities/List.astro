@@ -1,0 +1,34 @@
+---
+import { AstroError } from 'astro/errors';
+import { parseHTML } from 'linkedom'
+const html = await Astro.slots.render('default')
+const { document } = parseHTML(html)
+const children = Array.from(document.children);
+
+const { className, type = 'unordered' } = Astro.props as { className: string, type: 'unordered' | 'ordered' };
+if (type !== 'unordered' && type !== 'ordered') throw new AstroError('Wrong type for <List/>');
+
+const wrappedChildren = children.map(child => {
+  const li = document.createElement('li');
+  li.classList.add(`${className}__item`);
+  li.appendChild(child);
+  return li;
+})
+
+---
+{
+  (type === 'unordered') &&
+  <ul class={className}>
+      {wrappedChildren}
+  </ul>
+}
+{
+  (type === 'ordered') &&
+  <ol class={className}>
+      {wrappedChildren}
+  </ol>
+}
+
+{/* This component generates a ul, and wraps every children inside an <li> */}
+
+

@@ -1,0 +1,26 @@
+---
+import BaseLayoutEmpty from "@layouts/BaseLayoutEmpty.astro";
+---
+
+<BaseLayoutEmpty title="Testing">
+  <ul class="test-grid-auto-fit">
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+    <li class="grid-element"></li>
+  </ul>
+</BaseLayoutEmpty>
+
+<style>
+  body{
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: #242427;
+    color: rgb(240, 240, 240);
+  }
+</style>

@@ -1,0 +1,42 @@
+@use "@SASS-Abstracts" as *;
+@use "../article/mixins/selectors/article-selectors" as Article;
+
+// Everything in here should be tokenized
+$test-gap: 1.25rem;
+.article-list-secondary {
+  padding: 1.25rem;
+  display: grid;
+  gap: $test-gap;
+
+  &__item {
+    aspect-ratio: 1/0.325;
+    container-type: size;
+
+    /* Setting a line between items */
+    box-sizing: content-box; // Allowing the sizing for the line between items
+    border-bottom: 1px solid rgba(100, 100, 100, 0.521);
+    padding-bottom: $test-gap;
+    // Todo - I actually i could make a mixin for this thing
+    //
+
+    @include Article.Every {
+      column-gap: 1.5rem;
+      @include Article.Header {
+        line-height: 1;
+        font-size: 1.05rem;
+        @include line-clamp(3);
+      }
+      @include Article.Content {
+        line-height: 1.1;
+        font-size: 0.8rem;
+        @include line-clamp(3);
+      }
+      @include Article.Metadata {
+        font-size: 0.75rem;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+// As an organism, it can override own component properties.

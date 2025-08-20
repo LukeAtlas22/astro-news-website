@@ -8,26 +8,7 @@ import type { CollectionEntry } from 'astro:content';
 interface Props { 
   entry: CollectionEntry<'article'> 
 }; 
-const { entry, templateDirectives } = Astro.props;
-
-
-let customTemplateDirectives;
-if (templateDirectives?.show)
-  customTemplateDirectives = Object.fromEntries(templateDirectives.show.map(key => [key, entry.data[key]]));
-
-let customStyleDirectives;
-if (templateDirectives?.styles)
-  customStyleDirectives = templateDirectives.styles;
-
-// Todo - Non mi piace neanche - forse è più conveniente avere solo templates fissi e invariabili - Overcomplicated da gestire
-// Todo - Forse avere solo templates  fissi è più conveniente...
-// Magari potrei lasciarlo solo hardcoded su preview-1 giusto per la category
-
-  
-/* 
-  Potrei crearmi tipo degli oggetti: What do you want to show in the header? & What do you want to show in the footer? E settare semplicemente un sì e no e 
-  di questo modo automatizzare tutto -- Non lo so però meglio di no forse
-*/
+const { entry } = Astro.props;
 
 ---
 <Fragment>

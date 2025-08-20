@@ -2,12 +2,7 @@
 title: "Democrats Overhaul Party’s Primary Calendar, Upending a Political Tradition"
 titleSmall: "Small title placeholder"
 subtitle: "ABC"
-author:
-  {
-    name: "Luca Di Nuzzo",
-    avatar: "american-flag.jpg",
-    address: "example.org/lucadinuzzo",
-  }
+author: "Luca Di Nuzzo"
 readTime: 2
 pubblicationDate: "2000-08-11"
 category: ["Politica"]

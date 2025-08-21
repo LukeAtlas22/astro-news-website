@@ -1,10 +1,10 @@
 ---
 /** Ogni preview consuma un entry e un template - Quindi si occupa di costruire la HTML View dell'article */
 
-import ArticleHeader from '../ArticleHeader.astro';
-import ArticleThumbnail from '../ArticleThumbnail.astro';
-import ArticleFooter from '../ArticleFooter.astro';
-import ArticleContent from '../ArticleContent.astro';
+import ArticleHeader from '../../ArticleHeader.astro';
+import ArticleThumbnail from '../../ArticleThumbnail.astro';
+import ArticleFooter from '../../ArticleFooter.astro';
+import ArticleContent from '../../ArticleContent.astro';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
@@ -27,6 +27,7 @@ const { Content } = await render(entry);
         title: entry.data.title,
         titleSmall: entry.data.titleSmall,
       }}
+      MetaLayoutType="News"
     />
     <ArticleContent>
       <Content/>
@@ -36,6 +37,7 @@ const { Content } = await render(entry);
         author: entry.data.author,
         pubblicationDate: entry.data.pubblicationDate,
       }}
+      MetaLayoutType="News"
     />
   </div>
 </Fragment>

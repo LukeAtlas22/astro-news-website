@@ -5,7 +5,18 @@ subtitle: "ABC"
 author: "Luca Di Nuzzo"
 readTime: 2
 pubblicationDate: "2000-08-11"
-category: ["Politica"]
+category:
+  [
+    "Politica",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+    "Cronaca",
+  ]
 tags: []
 thumbnail: { src: "american-flag.jpg", altText: "American flag" }
 ---

@@ -1,0 +1,22 @@
+@use "@SASS-Article-Selectors" as Article;
+@use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
+@use "@SASS-Article-Selectors-Metadata-Author" as Article-Metadata-Author;
+@use "preview-1.scss";
+
+@include Article.Template('preview-1.2'){
+  @include Article.Extend('preview-1');
+
+  @include Article-Metadata.Category-Wrapper{
+    display: flex;
+    gap: 0.5rem;
+  }
+  @include Article-Metadata.Category{
+           
+  }
+}
+
+.article{
+  anchor-name: --article-box;
+}
+
+// Vedi quanto è facile creare nuovi templates?

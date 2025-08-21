@@ -1,16 +1,12 @@
 ---
-
 import type { CollectionEntry } from 'astro:content';
-import { getArticleTemplate } from './typescript/utils/getArticleTemplate';
+import Article from "./Article.astro";
 
 interface Props {
   /**
    * The article itself, taken from a CMS, or a file.
    */
   entry: CollectionEntry<'article'>, // Qui dovrebbe essere entry, perchè ogni article vuole consumare 1 entry.
-
-  type: 'News' | 'BlogPost' | 'Recipe',
-
   /**
    * The markdown & style template you want to assign to this article - Can only be what's inside this folder: src\html\components-p\article\templates
    */
@@ -21,16 +17,8 @@ interface Props {
   templateDirectives?: string,
 }
 
-const {entry, type, template, templateDirectives} = Astro.props;
-const ArticleTemplate = await getArticleTemplate(type, template);  
+const {entry, template, templateDirectives} = Astro.props;
 ---
 
 
-<article class="article" data-style-template={template}>  <!-- This data-attribute will be use also as style modificator -->
-  <ArticleTemplate 
-    entry={entry} 
-    templateDirectives={templateDirectives}
-  />
-  <a href="/redirect-to-the-article-own-link" class="article__own-link" data-style-anchor-to="header"></a>
-  <!-- Make that you call this inside the template, and append directly to the fragment. -->
-</article>
+<Article type="News", entry={entry} template={template}, templateDirectives={templateDirectives}/>

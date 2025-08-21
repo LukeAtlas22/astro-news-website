@@ -20,24 +20,26 @@ const { article } = Astro.props as { article: ArticleDataOBJ };
         article.author &&
         <div>
           <dt>Author</dt>
-          <dd>{article.author}</dd>
+          <dd><a href="author-click" class="article__author">{article.author}</a></dd> {/* Temporaney */}
         </div>
       }
       {
         article.pubblicationDate &&
         <div> 
           <dt>Date of pubblication</dt>
-          <dd><time datetime={article.pubblicationDate}>{article.pubblicationDate}</time></dd>
+          <dd><a href="dateclick">
+            <time datetime={article.pubblicationDate} class="article__date">{article.pubblicationDate}</time>
+          </a></dd>
         </div>
       }
       {
         article.category &&
-        <div class="category-wrapper" data-style-position={article.categoryPosition}> {/* Qui come facciamo? */}
+        <div> {/* Qui come facciamo? */}
           <dt>Category</dt>
           <dd>
-            <ul> {/* Bisogna anche fare classi per gestire ogni li di tags e category ecc */}
+            <ul class="category-wrapper" data-style-position={article.categoryPosition}> {/* Bisogna anche fare classi per gestire ogni li di tags e category ecc */}
               {
-                article.category.map((category: string) => (<li><a class="article__metadata--category">{category}</a></li>))
+                article.category.map((category: string) => (<li><a href='category-click' class="article__metadata--category">{category}</a></li>))
               }
             </ul>
           </dd>

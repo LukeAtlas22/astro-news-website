@@ -129,3 +129,18 @@
   line-clamp: $n;
   -webkit-box-orient: vertical;
 }
+
+/// Allows you do to position:absolute & inset() - You can then, choose the inset (for all the four inset properties)
+/// Positive values expand the inset
+/// Negative values will shrink it down
+/// @param {<length>} $inset-value - CSS Length to express the inset value, default is: 0rem
+/// @example
+///   @include absolute-anchor-inset(0.25rem)
+///   @include absolute-anchor-inset(0)
+@mixin absolute-anchor-inset($inset-value: 0rem) {
+  position: absolute;
+  top: calc(anchor(top) + ($inset-value * -1));
+  left: calc(anchor(left) + ($inset-value * -1));
+  right: calc(anchor(right) + ($inset-value * -1));
+  bottom: calc(anchor(bottom) + ($inset-value * -1));
+}

@@ -1,29 +1,31 @@
 ---
 /** Ogni preview consuma un entry e un template - Quindi si occupa di costruire la HTML View dell'article */
-
-import ArticleHeader from '../ArticleHeader.astro';
-import ArticleContent from '../ArticleContent.astro';
+import ArticleHeader from '../../ArticleHeader.astro';
+import ArticleThumbnail from '../../ArticleThumbnail.astro';
 import type { CollectionEntry } from 'astro:content';
-import { render } from 'astro:content';
 
 interface Props { 
   entry: CollectionEntry<'article'> 
 }; 
 const { entry } = Astro.props;
-const { Content } = await render(entry);  
-
 ---
 <Fragment>
   <ArticleHeader
-     ArticleDataOBJ = {{
+    ArticleDataOBJ = {{
       title: entry.data.title,
       titleSmall: entry.data.titleSmall, // Devo fare che title trattiene sempre titleSmall
       author: entry.data.author, // Devo nidificare cose all'interno di author, tipo name, address, ecc
       pubblicationDate: entry.data.pubblicationDate,
+      category: entry.data.category,
+      categoryPosition: 'top-left',
     }}
+    MetaLayoutType = 'News'
   />
-  <div class="line"></div>
-  <ArticleContent>
-    <Content/>
-  </ArticleContent>
+  <ArticleThumbnail
+    src={entry.data.thumbnail.src}
+    alt={entry.data.thumbnail.altText}
+  />
+  <!-- As last item of every preview -->
+  <!-- Call the ArticlePermaLink item & specify where you want anchoring the link -->
+  <!-- header || full-box || thumbnail-image -->
 </Fragment>

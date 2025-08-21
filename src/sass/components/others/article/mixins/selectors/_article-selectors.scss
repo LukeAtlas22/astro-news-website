@@ -21,6 +21,11 @@
 }
 
 /////////////////////////////////////////////////
+@mixin OwnLink {
+  .article__own-link {
+    @content;
+  }
+}
 
 @mixin Content {
   .article__content {

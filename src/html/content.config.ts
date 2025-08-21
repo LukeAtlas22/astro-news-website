@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob, file } from 'astro/loaders';
 
 export const articleSchema = z.object({
   title: z.string(),
@@ -17,6 +18,7 @@ export const articleSchema = z.object({
 
 //! Use the loader here
 const article = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/article" }),
   schema: articleSchema,
 });
 

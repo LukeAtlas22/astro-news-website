@@ -1,14 +1,13 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Container from "@components-layout/Container.astro";
-import IconSystem from "@icons/IconSystem.astro";
-
-import Article from "../components-p/article/Article.astro";
-import { getCollection, getEntry } from "astro:content";
+import Container from "@utilities/containers/Container.astro";
+import IconSystem from "@utilities/icons/IconSystem.astro";
+import Article from "@components-p/article/NewsArticle.astro";
+import { getEntry } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import type { CollectionKey } from "astro:content";
 
-import List from '@components/utilities/List.astro';
+
+import List from "@utilities/lists/List.astro";
 
 const articlePrimary: CollectionEntry<'article'> | undefined = await getEntry('article', 'article-1');
 if (!articlePrimary) throw new Error('No article found')
@@ -30,10 +29,7 @@ if (!articleFour) throw new Error('No article found');
       <div class="area-article-relevant | bg-neutral-200"> <!--  Todo --- Farò un Component chiamato <Area> ? -->
         <Article
           entry={articlePrimary}
-          template="preview-1"
-          templateDirectives={{
-            show: ['category']
-          }}
+          template="preview-1.2"
         />
       </div> 
       <div class="area-article-secondary | bg-neutral-700">

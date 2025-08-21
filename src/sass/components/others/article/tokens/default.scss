@@ -1,39 +1,42 @@
-$article-default-font-family
-$article-default-font-size
-$article-default-font-weight
-$article-default-line-height
-$article-default-letter-spacing
-$article-default-color
-$article-default-background
+@use "@SASS-Abstracts" as *;
 
-$article-default-header-font-family
-$article-default-header-font-size
-$article-default-header-font-weight
-$article-default-header-line-height
-$article-default-header-letter-spacing
-$article-default-header-color
-$article-default-header-background
+$article-default-font-family: $body-font-family;
+$article-default-font-size: 1rem;
+$article-default-font-weight: 500;
+$article-default-line-height: 1.25;
+$article-default-letter-spacing: 1;
+$article-default-text-decoration: none;
+$article-default-text-transform: auto;
+$article-default-color: $body-text-color;
+$article-default-background: $body-background-color;
 
-$article-default-author-font-family
-$article-default-author-font-size
-$article-default-author-font-weight
-$article-default-author-line-height
-$article-default-author-letter-spacing
-$article-default-author-color
-$article-default-author-background
+$article-default-header-font-family: $body-font-family;
+$article-default-header-font-size: 1.25rem;
+$article-default-header-font-weight: 500;
+$article-default-header-line-height: 0.95;
+$article-default-header-letter-spacing: 1.1;
+$article-default-header-text-decoration: none;
+$article-default-header-text-transform: auto;
+$article-default-header-color: $heading-color-default;
+$article-default-header-background: transparent;
 
-$article-default-date-font-family
-$article-default-date-font-size
-$article-default-date-font-weight
-$article-default-date-line-height
-$article-default-date-letter-spacing
-$article-default-date-color
-$article-default-date-background
+// Author, Pubblication Date, Category, Etc...
+$article-default-meta-font-family: $heading-font-family;
+$article-default-meta-font-size: 1rem;
+$article-default-meta-font-weight: 600;
+$article-default-meta-line-height: 1.35;
+$article-default-meta-letter-spacing: 1.1;
+$article-default-meta-color: $body-text-color;
+$article-default-meta-background: transparent;
 
-$article-default-category-font-family
-$article-default-category-font-size
-$article-default-category-font-weight
-$article-default-category-line-height
-$article-default-category-letter-spacing
-$article-default-category-color
-$article-default-category-background
+$article-default-category-font-family: $heading-font-family;
+$article-default-category-font-size: 1.25rem;
+$article-default-category-font-weight: 600;
+$article-default-category-line-height: 1.25;
+$article-default-category-letter-spacing: 1;
+$article-default-category-color: white;
+$article-default-category-background: red;
+$article-default-category-border: none;
+$article-default-category-border-radius: 0;
+
+// Todo - Facciamo che font family, viene gestita solamente di default

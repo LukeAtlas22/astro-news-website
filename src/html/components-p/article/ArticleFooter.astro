@@ -5,10 +5,11 @@ import type { ArticleDataOBJ } from './typescript/types/ArticleDataOBJ';
 interface Props {
   ArticleDataOBJ: ArticleDataOBJ,
   MetaLayoutTemplate?: number,
+  MetaLayoutType: string,
 }
 
-const { ArticleDataOBJ, MetaLayoutTemplate = 0, } = Astro.props;
-const ArticleMeta = await getMetaArticleTemplate(MetaLayoutTemplate);
+const { ArticleDataOBJ, MetaLayoutType, MetaLayoutTemplate = 0, } = Astro.props;
+const ArticleMeta = await getMetaArticleTemplate(MetaLayoutType, MetaLayoutTemplate);
 ---
 <footer class="article__footer">
   <ArticleMeta article={ArticleDataOBJ}/>

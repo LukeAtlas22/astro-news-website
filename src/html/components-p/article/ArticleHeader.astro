@@ -4,12 +4,14 @@ import type { ArticleDataOBJ } from './typescript/types/ArticleDataOBJ';
 
 interface Props {
   ArticleDataOBJ: ArticleDataOBJ,
+  MetaLayoutType: string,
   MetaLayoutTemplate?: number,
 }
 
-const { ArticleDataOBJ, MetaLayoutTemplate = 0 } = Astro.props;
-const ArticleMeta = await getMetaArticleTemplate(MetaLayoutTemplate);
+const { ArticleDataOBJ, MetaLayoutType, MetaLayoutTemplate = 0 } = Astro.props;
+const ArticleMeta = await getMetaArticleTemplate(MetaLayoutType, MetaLayoutTemplate);
 ---
 <header class="article__header">
   <ArticleMeta article={ArticleDataOBJ}/>
+  
 </header>

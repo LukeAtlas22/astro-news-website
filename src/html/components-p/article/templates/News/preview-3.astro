@@ -1,27 +1,30 @@
 ---
 /** Ogni preview consuma un entry e un template - Quindi si occupa di costruire la HTML View dell'article */
 
-import ArticleHeader from '../ArticleHeader.astro';
-import ArticleThumbnail from '../ArticleThumbnail.astro';
+import ArticleHeader from '../../ArticleHeader.astro';
+import ArticleContent from '../../ArticleContent.astro';
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 
 interface Props { 
   entry: CollectionEntry<'article'> 
 }; 
 const { entry } = Astro.props;
+const { Content } = await render(entry);  
 
 ---
 <Fragment>
   <ArticleHeader
-    ArticleDataOBJ = {{
+     ArticleDataOBJ = {{
       title: entry.data.title,
       titleSmall: entry.data.titleSmall, // Devo fare che title trattiene sempre titleSmall
       author: entry.data.author, // Devo nidificare cose all'interno di author, tipo name, address, ecc
       pubblicationDate: entry.data.pubblicationDate,
     }}
+    MetaLayoutType="News"
   />
-  <ArticleThumbnail
-    src={entry.data.thumbnail.src}
-    alt={entry.data.thumbnail.altText}
-  />
-</Fragment>
+  <div class="line"></div>
+  <ArticleContent>
+    <Content/>
+  </ArticleContent>
+ </Fragment>

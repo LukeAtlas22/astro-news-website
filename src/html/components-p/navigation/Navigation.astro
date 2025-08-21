@@ -1,8 +1,8 @@
 --- 
-import type { Navigation, NavigationItem } from "src/types/navigation";
+import type { Navigation, NavigationItem } from "src/html/components-p/navigation/typescript/types/navigation";
 import { splitStringByComma } from "src/javascript/utilities/strings-utilities/string-to-array";
 import { classes } from "src/javascript/components/navigation/utils/getters";
-import Icon from "@icons/Icon.astro";
+import Icon from "src/html/utilities/icons/Icon.astro";
 
 type Props = Navigation;
 const { links, items, responsive, selfContained } = Astro.props;
@@ -15,6 +15,9 @@ const linksArray: Array<string> = links && splitStringByComma(links);
 
 // Todo - Da refactorare
 --- 
+
+<!-- Todo - Possiamo fixare questo component, usando composition, proprio come abbiamo fatto con <Article/> -->
+
 { links && links.length > 0 ?
   (
     <nav class={classes.nav} data-responsive={responsive}>

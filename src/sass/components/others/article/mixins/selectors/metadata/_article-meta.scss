@@ -1,7 +1,12 @@
 /// Import me as: Article.Metadata.[Mixin]
 
 @mixin Category {
-  .article__metadata--category {
+  .article__metadata--category /*.article__category-links-wrapper*/ { // Some old testing, erase if u dont need it anymore
+    @content;
+  }
+}
+@mixin Category-Wrapper{
+  .category-wrapper /*.article__category-links-wrapper*/ { // Some old testing, erase if u dont need it anymore
     @content;
   }
 }
@@ -13,13 +18,13 @@
 }
 
 @mixin Date {
-  .article__metadata--date {
+  .article__date {   // Todo Come lo vogliamo chiamare? usiamo metadata oppure no?
     @content;
   }
 }
 
 @mixin Tags {
-  .article__metadata--tags {
+  .article__metadata--tags { // Todo Come lo vogliamo chiamare? usiamo metadata oppure no?
     @content;
   }
 }

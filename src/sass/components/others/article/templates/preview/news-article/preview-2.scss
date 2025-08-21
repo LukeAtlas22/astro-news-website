@@ -1,26 +1,28 @@
 @use "@SASS-Abstracts" as *;
-@use "../../mixins/article-meta-hide-description-terms" as *;
-@use "../../mixins/article-thumbnail-dark-overlay" as *;
-@use "../../mixins/anchor-on-thumbnail" as *;
-@use "../../mixins/selectors/article-selectors" as Article;
-@use "../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
-@use "../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+@use "../../../mixins/article-meta-hide-description-terms" as *;
+@use "../../../mixins/article-thumbnail-dark-overlay" as *;
+@use "../../../mixins/anchor-on-thumbnail" as *;
+@use "../../../mixins/selectors/article-selectors" as Article;
+@use "../../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
+@use "../../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
 // Todo - Da rivedere un po, mi sembra troppo complesso, prediligere un po più di semplicità
 @use "./preview-1.scss" as *; // Important for extend
 
-@use "../../../../../abstracts/mixins/line-clamping" as *;
+@use "../../../../../../abstracts/mixins/line-clamping" as *;
+
 
 @include Article.Template('preview-2') { 
-  
+
   @include Article.Extend('preview-1');
 
-  // padding-block: 1.25rem; // Todo Making it padding agnostic for now
   display: flex;
 
   @include Article.Content{
     flex-basis: 40%;
     font-size: 1.1rem;
+    font-weight: normal;
     color: $clr-neutral-300;
+    background: transparent;
     overflow: clip;
     
     > p{

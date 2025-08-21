@@ -1,0 +1,12 @@
+---
+interface Props{
+  type: 'narrow' | 'regular' | 'wide',
+  classList?: string,
+  contain?: 'inline-size' | 'size',
+}
+const {type, classList, contain} = Astro.props;
+---
+
+<div class={`container | ${classList}`} data-type={type} data-contain={contain}>
+  <slot></slot>
+</div>

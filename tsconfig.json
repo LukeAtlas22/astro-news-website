@@ -6,14 +6,24 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/html/components/*"],
-      "@components-layout/*": ["src/html/components-layout/*"],
-      "@layouts/*": ["src/html/layouts/*"],
+      // Astro 
       "@pages/*": ["src/html/pages/*"],
-      "@icons/*": ["src/html/icons/*"],
-      "@types": ["src/types"], // Questi si riferiscono a un file, e non a una cartella
+      "@layouts/*": ["src/html/layouts/*"],
+      // HTML - Utilities 
+      "@utilities/*": ["src/html/utilities/*"],
+      // HTML - Components
+      "@components/*": ["src/html/components/*"],
+      "@components-p/*": ["src/html/components-p/*"],
+      // Sass
+      "@SASS-Abstracts": ["src/sass/abstracts"], // Leave like that, with no *
+      "@SASS-Article-Selectors": ["src/sass/components/others/article/mixins/selectors/_article-selectors.scss"], 
+      "@SASS-Article-Selectors-Header": ["src/sass/components/others/article/mixins/selectors/header/_article-header.scss"], 
+      "@SASS-Article-Selectors-Metadata": ["src/sass/components/others/article/mixins/selectors/metadata/_article-meta.scss"], 
+      "@SASS-Article-Selectors-Metadata-Author": ["src/sass/components/others/article/mixins/selectors/metadata/_article-meta-author.scss"], 
+      
+      // Typescript
+      "@types": ["src/html/components-p/navigation/typescript/types"], // Questi si riferiscono a un file, e non a una cartella
       "@utils": ["src/utils"], // Questi si riferiscono a un file, e non a una cartella
-      "@SASS-Abstracts": ["src/sass/abstracts"],
     }
   }
 }

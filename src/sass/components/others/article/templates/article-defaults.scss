@@ -2,19 +2,16 @@
 @use "../mixins/selectors/header/article-header" as Article-Header;
 @use "../mixins/selectors/metadata/article-meta" as Article-Metadata;
 @use "@SASS-Abstracts" as *;
+@use "../tokens/default.scss" as *;
 
 // Todo - Tutto qui dentro dev'essere tokenizzato
 
 @include Article.Default {
   /* Tokenize everything in here */
   height: 100%;
+  width: 100%;
 
-  // padding-block: 1.25rem; //  Todo - Delegare questo padding al contrainer?
-  // padding-inline: 1.25rem; // Todo - Delegare questo padding al contrainer?
-  // Todo - Renderlo padding agnostic?
-  // Todo - Dunque gestire il padding esternamente?
-  // Todo - Secondo me è meglio renderlo padding agnostic -
-  // Todo - Il padding sarà gestito dal contaiment context dell'articolo -
+  // Will be padding & size agnostic
 
   background: transparent;
   color: set-color(
@@ -22,18 +19,19 @@
     $dark: $clr-neutral-300
   ); // Todo - Tokenize anyway
 
-  letter-spacing: 1;
-  line-height: 1;
-  font-size: 1;
-  font-weight: 1;
-  font-family: 1;
-
   @include Article.Header {
-    letter-spacing: 1;
-    line-height: 1;
-    font-size: 1.55rem;
-    font-weight: 1;
-    font-family: 1;
+    font-family: $article-default-header-font-family;
+    font-size: $article-default-header-font-size;
+    font-weight: $article-default-header-font-weight;
+    line-height: $article-default-header-line-height;
+    letter-spacing: $article-default-header-letter-spacing;
+    text-decoration: $article-default-header-text-decoration;
+    text-transform: $article-default-header-text-transform;
+
+    text-wrap: pretty;
+
+    color: $article-default-header-color;
+    background: $article-default-header-background;
 
     z-index: 1;
     /* prettier-ignore */
@@ -43,23 +41,43 @@
     // Importante che almeno uno dei due title venga rimosso dall'accessibility tree
   }
 
-  @include Article.Metadata {
-    font-size: 1rem;
-  }
-
   @include Article.Content {
-    letter-spacing: 1;
-    line-height: 1.1;
+    font-family: 1;
     font-size: 1.05rem;
     font-weight: 1;
-    font-family: 1;
+    letter-spacing: 1;
+    line-height: 1.1;
+    text-decoration: 1;
+    text-transform: 1;
+    text-wrap: balance;
+    color: 1;
+    background: 1;
+
     overflow-y: auto;
   }
 
+  @include Article.Metadata {
+    font-family: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    color: 1;
+    background: 1;
+
+    border: none;
+    border-radius: none;
+    box-shadow: none;
+  }
+
   @include Article.Thumbnail {
+    display: flex;
+    height: 100%;
     anchor-name: --article-thumbnail;
   }
 
+  @include Article-Metadata.Category-Wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
   @include Article-Metadata.Category {
     background-color: red;
     padding: 0.25em;

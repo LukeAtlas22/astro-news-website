@@ -1,0 +1,70 @@
+@use "../mixins/selectors/article-selectors" as Article;
+@use "../mixins/selectors/header/article-header" as Article-Header;
+@use "../mixins/selectors/metadata/article-meta" as Article-Metadata;
+@use "@SASS-Abstracts" as *;
+@use "../tokens/default.scss" as *;
+
+@include Article.Every {
+  @include Article.OwnLink {
+    pointer-events: auto;
+
+    @include absolute-anchor-inset(0rem);
+    z-index: -99;
+    background-color: rgba(255, 0, 0, 0.151); // Todo not have color - always transparent
+    cursor: pointer;
+
+    &[data-style-anchor-to="header"] {
+      position-anchor: --article-header;
+    }
+    &[data-style-anchor-to="thumbnail"] {
+      position-anchor: --article-thumbnail;
+    }
+    &[data-style-anchor-to="full-box"] {
+      position-anchor: none;
+      inset: 0;
+    }
+  }
+}
+
+@include Article.Every {
+  pointer-events: none;
+  * {
+    pointer-events: none;
+  }
+
+  
+  // Todo Qui bisogna ancora fare i vari selector, poi vediamo domani
+  .article__author { // ? MEMO - Non usare questa all'interno soltanto di Header o di Footer nel link system
+    pointer-events: auto;
+  }
+
+
+  @include Article-Metadata.Category {
+    pointer-events: auto;
+  }
+
+  @include Article-Metadata.Date {
+    pointer-events: auto;
+    background-color: blue;
+  }
+}
+
+@include Article.Every {
+  @include Article.Header {
+    anchor-name: --article-header;
+  }
+}
+
+//Todo - Ora devo semplicemente assegnare - Pointer Events Auto a tutti gli elementi che lo richiedono
+
+//Todo - Poi - Possiamo fare cose tipo
+
+//Todo:  .article:has(.article__own-link:is(:hover))
+//Todo:  Per targettare quando l'user ha hoverato l'intero article e all'interno possiamo accedere
+//Todo:  {
+//Todo      > .article__header
+//Todo      > .article__footer
+//Todo      > .article__header .title
+//Todo   }
+//Todo   Alle varie componentistiche, o semplicemente giocarcela con article - per ogni template
+//Todo   Dovremo costruire una buona interfaccia sass per questo

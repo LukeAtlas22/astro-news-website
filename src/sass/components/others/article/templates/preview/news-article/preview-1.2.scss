@@ -6,12 +6,13 @@
 @include Article.Template('preview-1.2'){
   @include Article.Extend('preview-1');
 
-  @include Article-Metadata.Category-Wrapper{
-    display: flex;
+  @include Article-Metadata.Category-List{
     gap: 0.5rem;
   }
   @include Article-Metadata.Category{
-           
+    font-size: 1rem;
+    font-weight: bold;       
+    padding: 0.25rem;
   }
 }
 

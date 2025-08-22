@@ -28,9 +28,11 @@ const ArticleTemplate = await getArticleTemplate(type, template);
 
 <article class="article" data-style-template={template}>  <!-- This data-attribute will be use also as style modificator -->
   <ArticleTemplate 
-    entry={entry} 
-    templateDirectives={templateDirectives}
+  entry={entry} 
+  templateDirectives={templateDirectives} 
   />
-  <a href="/redirect-to-the-article-own-link" class="article__own-link" data-style-anchor-to="header"></a>
+  <a href="/redirect-to-the-article-own-link" aria-label="to the article" class="article__own-link" data-style-anchor-to="header"></a>
   <!-- Make that you call this inside the template, and append directly to the fragment. -->
+  <!-- Sarebbe davvero perfetto se questo link fosse sempre il primo elemento focussabile -->
+   {/* templateDirectives should be deprecated from now */}
 </article>

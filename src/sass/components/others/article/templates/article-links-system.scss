@@ -7,9 +7,10 @@
 @include Article.Every {
   @include Article.OwnLink {
     pointer-events: auto;
+    order: -99; // First in the focus order?
 
     @include absolute-anchor-inset(0rem);
-    z-index: -99;
+    z-index: 0;
     background-color: rgba(255, 0, 0, 0.151); // Todo not have color - always transparent
     cursor: pointer;
 
@@ -26,13 +27,15 @@
   }
 }
 
+
+//? MEMO - Assegnare pointer-events: auto - A tutti gli item che saranno cliccabili, è essenziale ! 
+//? MEMO - Se crei nuovi item, ricorda di cambiare la proprietà pointer-events !
+
 @include Article.Every {
   pointer-events: none;
   * {
     pointer-events: none;
-  }
-
-  
+  }  
   // Todo Qui bisogna ancora fare i vari selector, poi vediamo domani
   .article__author { // ? MEMO - Non usare questa all'interno soltanto di Header o di Footer nel link system
     pointer-events: auto;
@@ -51,6 +54,7 @@
 
 @include Article.Every {
   @include Article.Header {
+    z-index: 99;
     anchor-name: --article-header;
   }
 }

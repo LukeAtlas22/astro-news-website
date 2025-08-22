@@ -1,30 +1,41 @@
 /// Import me as: Article.Metadata.[Mixin]
 
-@mixin Category {
-  .article__metadata--category /*.article__category-links-wrapper*/ { // Some old testing, erase if u dont need it anymore
+@mixin Category-Wrapper{
+  .article__category-wrapper { 
     @content;
   }
 }
-@mixin Category-Wrapper{
-  .category-wrapper /*.article__category-links-wrapper*/ { // Some old testing, erase if u dont need it anymore
+@mixin Category-Wrapper-Position($position) {
+  .article__category-wrapper[data-style-position=#{$position}] {
+    @content;
+  }
+}
+@mixin Category-List{
+  .article__category-list{
+    @content;
+  }
+}
+@mixin Category {
+  .article__category { 
     @content;
   }
 }
 
-@mixin Category-Position($position) {
-  .category-wrapper[data-style-position=#{$position}] {
-    @content;
-  }
-}
 
 @mixin Date {
-  .article__date {   // Todo Come lo vogliamo chiamare? usiamo metadata oppure no?
+  .article__pubblication-date {   
     @content;
   }
 }
 
-@mixin Tags {
-  .article__metadata--tags { // Todo Come lo vogliamo chiamare? usiamo metadata oppure no?
+@mixin Tags { // Todo - Già che ho category, questo dovrebbe rimanere?
+  .article__tags {
+    @content;
+  }
+}
+
+@mixin Read-Time{
+  .article__reading-time{
     @content;
   }
 }

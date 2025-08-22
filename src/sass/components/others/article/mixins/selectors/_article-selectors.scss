@@ -48,7 +48,7 @@
   }
 }
 @mixin Metadata {
-  .article__meta {
+  .article__metadata-list {
     @content;
   }
 }

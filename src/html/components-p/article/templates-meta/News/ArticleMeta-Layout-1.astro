@@ -2,6 +2,9 @@
 import type { ArticleDataOBJ } from "../typescript/types/ArticleDataOBJ";
 const { article } = Astro.props as { article: ArticleDataOBJ };
 ---
+    {/* - Questo non è ancora stato usato, bisogna scriverlo, è soltanto un esempio di come anche a livello micro - La struttura dati dell'article può cambiare */}
+    {/* - In questo esempio tipo abbiamo creato 2 wrapper, uno contenente author e date, e l'altro contenente category e readTime, facilmente movibili */}
+    {/* - Per assecondare particolari necessità di layout */}
     <!--  Todo - Questo si può fare meglio -->
   {
     article.title &&

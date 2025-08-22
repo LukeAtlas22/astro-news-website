@@ -74,38 +74,39 @@
     anchor-name: --article-thumbnail;
   }
 
-  @include Article-Metadata.Category-Wrapper {
+  @include Article-Metadata.Category-List {
     display: flex;
     flex-wrap: wrap;
+    > li {
+      @include flex-center;
+    }
   }
   @include Article-Metadata.Category {
-    background-color: red;
-    padding: 0.25em;
-    line-height: 1;
-    @include flex-center;
+    background-color: $clr-primary-700;
+    padding: 0.25rem;
   }
 
   // Todo - Da sistemare allocazione
-  @include Article-Metadata.Category-Position("above-header") {
+  @include Article-Metadata.Category-Wrapper-Position("above-header") {
     position: absolute; // Using absolute will anchor it to the header
     /*prettier-ignore*/
     top: calc( 0rem - 0.5rem - 0.25rem ); // Top 0 should be always slightly beyond the header // Always add the gap and the padding of the category
     left: 1.25rem;
   }
 
-  @include Article-Metadata.Category-Position("top-left") {
+  @include Article-Metadata.Category-Wrapper-Position("top-left") {
     position: fixed; // Using fixed will anchor it to the containment context ( the container )
     top: calc(0rem + 1.25rem); // Todo - Automatize into header padding
     left: calc(0rem + 1.25rem); // Todo - Automatize into header padding
   }
 
-  @include Article-Metadata.Category-Position("top-right") {
+  @include Article-Metadata.Category-Wrapper-Position("top-right") {
     position: fixed; // Using fixed will anchor it to the containment context ( the container )
     top: calc(0rem + 1.25rem); // Todo - Automatize into header padding
     right: calc(0rem + 1.25rem); // Todo - Automatize into header padding
   }
 
-  @include Article-Metadata.Category-Position("custom") {
+  @include Article-Metadata.Category-Wrapper-Position("custom") {
     position: fixed;
     top: 0; // Todo - Si potrebbe settare un token per permettere il posizionamento custom della category wrapper
     left: 0; // Todo - Si potrebbe settare un token per permettere il posizionamento custom della category wrapper

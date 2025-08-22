@@ -1,5 +1,5 @@
 ---
-import type { ArticleDataOBJ } from "../typescript/types/ArticleDataOBJ";
+import type { ArticleDataOBJ } from "@components-p/article/typescript/types/ArticleDataOBJ";
 const { article } = Astro.props as { article: ArticleDataOBJ };
 // Type of article is the Collection Schema of the CollectionEntry<'article'> with everything as optional
 
@@ -14,7 +14,7 @@ const { article } = Astro.props as { article: ArticleDataOBJ };
   }
   {
     (article.author || article.pubblicationDate) &&
-    <dl class="article__meta">
+    <dl class="article__metadata-list">
 
       {
         article.author &&
@@ -27,19 +27,25 @@ const { article } = Astro.props as { article: ArticleDataOBJ };
         article.pubblicationDate &&
         <div> 
           <dt>Date of pubblication</dt>
-          <dd><a href="dateclick">
-            <time datetime={article.pubblicationDate} class="article__date">{article.pubblicationDate}</time>
-          </a></dd>
+          <dd>
+            <a href="dateclick"> 
+              <time datetime={article.pubblicationDate} class="article__pubblication-date">{article.pubblicationDate}</time>
+            </a>
+          </dd>
         </div>
       }
       {
         article.category &&
-        <div> {/* Qui come facciamo? */}
+        <div class="article__category-wrapper" data-style-position={article.categoryPosition}> {/* Qui come facciamo? */}
           <dt>Category</dt>
           <dd>
-            <ul class="category-wrapper" data-style-position={article.categoryPosition}> {/* Bisogna anche fare classi per gestire ogni li di tags e category ecc */}
+            <ul class="article__category-list"> 
               {
-                article.category.map((category: string) => (<li><a href='category-click' class="article__metadata--category">{category}</a></li>))
+                article.category.map((category: string) => (
+                  <li class="article__category-list-item">
+                    <a href='category-click' class="article__category">{category}</a>
+                  </li>
+                ))
               }
             </ul>
           </dd>
@@ -49,7 +55,9 @@ const { article } = Astro.props as { article: ArticleDataOBJ };
         article.readTime &&
         <div>
           <dt>Reading Time</dt>
-          <dd>{article.readTime}</dd>
+          <dd class="article__reading-time">
+            <a href="read-time-click">{article.readTime}</a>
+          </dd>
         </div>
       }
     </dl>

@@ -27,7 +27,7 @@ $news-article: (
     title-word-spacing: 0px,
     title-text-decoration: none,
     title-text-transform: D.$article-heading-text-transform,
-    title-color: D.$article-text-color-on-thumbnail,
+    title-color: D.$article-heading-color-on-thumbnail,
     title-background: transparent,
     
     metadata-wrapper-gap: 3rem,
@@ -35,7 +35,7 @@ $news-article: (
     metadata-font-weight: 600,
     metadata-letter-spacing: 0,
     metadata-word-spacing: 0,
-    metadata-text-color: D.$article-metadata-text-color-on-thumbnail,
+    metadata-text-color: D.$article-metadata-color-on-thumbnail,
     metadata-background: D.$article-metadata-background-on-thumbnail,
   ),
 
@@ -98,7 +98,7 @@ $news-article: (
     metadata-font-weight: 500,
     metadata-letter-spacing: 0,
     metadata-word-spacing: 0,
-    metadata-text-color: 0,
-    metadata-background: 0,
+    metadata-text-color: D.$article-metadata-color,
+    metadata-background: D.$article-metadata-background,
   )
 );

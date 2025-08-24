@@ -1,7 +1,11 @@
-@forward "templates/article-defaults.scss";
-@forward "templates/preview/news-article/preview-1.scss";
-@forward "templates/preview/news-article/preview-1.2.scss";
-@forward "templates/preview/news-article/preview-2.scss";
-@forward "templates/preview/news-article/preview-3.scss"; // Però secondo me questa dovrebbe avere proprio un altro nome rispetto alle altre 2
-@forward "templates/preview/news-article/preview-4.scss"; // Però secondo me questa dovrebbe avere proprio un altro nome rispetto alle altre 2
+// ! I moduli che non esportano tokens o funzioni riutilizzabili, devono essere esportati con @use
+
+@use "templates/article-defaults.scss";
+@use "templates/preview/news-article/preview-1.scss";
+@forward "templates/preview/news-article/preview-1.2.scss"; // Todo fixare questo namespace
+@use "templates/preview/news-article/preview-2.scss";
+@use "templates/preview/news-article/preview-2--inverted.scss";
+@use "templates/preview/news-article/preview-3.scss"; // Però secondo me questa dovrebbe avere proprio un altro nome rispetto alle altre 2
+@use "templates/preview/news-article/preview-4.scss"; // Però secondo me questa dovrebbe avere proprio un altro nome rispetto alle altre 2
+@use "templates/preview/news-article/preview-4--inverted.scss";
 @forward "templates/article-links-system.scss";

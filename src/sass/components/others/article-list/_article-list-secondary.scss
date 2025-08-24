@@ -32,7 +32,7 @@ $test-gap: 1.25rem;
         @include line-clamp(3);
       }
       @include Article.Metadata {
-        font-size: 0.75rem;
+        font-size: 0.6rem;
         white-space: nowrap;
       }
     }

@@ -6,15 +6,21 @@
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
 @use "@SASS-Article-Selectors-Metadata-Author" as Article-Metadata-Author;
 
+@use "tokens.scss" as *;
+@use "./../../../functions/getArticleToken" as *;
 
+$-Template: "preview-1";
+$-Map: $news-article;
+@function Token($token){
+  @return getArticleToken($token, $-Map, $-Template);
+}
+
+//Todo Inserire solo Tokens Logici e Sensati per ogni template, tipo nel template che contempla le category sopra, non inseriremo $header-anchor, perchè sarà (deciso da noi) impossibile spostare l'header in alto dove ci sono le category
+
+// Todo - Magari potrei fare un'astrazione tipo... $article-text-color-on-thumbnail, e $article-text-color-default, per rendere le cose più facile, e poi usarlo a cascata.
 
 @include Article.Template('preview-1') { 
-  // Todo - This should be only layout directive actually or both? 
-  // Todo - Concerning about font sizes, what i could to it's fake inheritance with a main article-preview-font-size, or even article-font-size
-  display: flex;
-  gap: $size-7;
-
-  @include Article.Thumbnail{
+    @include Article.Thumbnail{
     width: 100%;
     height: 100%;
   }
@@ -22,28 +28,55 @@
   // Todo Tokenize Transparency Thumbnail Darkner & Dark color & Gradient direction
 
   @include Article.Header {
-    @include anchor-on-thumbnail();
-    // Todo Da fare varianti: bottom-left | top-left | bottom-right | top-right (?)
-      
-    display: grid; 
-    gap: 0.75rem; 
-    
-    padding-inline: 1.25rem;
-    padding-block: 1.15rem;
-    
-    line-height: 1.25;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 1.55rem;
+    @include anchor-on-thumbnail('bottom');
 
-    color: $clr-neutral-400;
-    background: transparent;
-  }
+    padding-inline: Token(header-padding-inline);
+    padding-block: Token(header-padding-block);
+
+    text-align: Token(text-alignment);
+    justify-content: Token(text-alignment);
+    
+    @include Article.Metadata{  
+      display: grid;
+      gap: Token(header-gap);
+
+      @include HideMetaDescriptionTerms;
   
-  @include Article.Metadata{  
-    display: flex;
-    gap: 2rem;
-    font-size: 0.9rem;
-    @include HideMetaDescriptionTerms;
+     @include Article-Metadata.Title{
+        font-size: Token(title-font-size);
+        font-weight: Token(title-font-weight);
+        line-height: Token(title-line-height);
+        line-clamp: Token(title-line-clamp);
+        letter-spacing: Token(title-letter-spacing);
+        word-spacing: Token(title-word-spacing);
+        text-decoration: Token(title-text-decoration);
+        text-transform: Token(title-text-transform);
+        color: Token(title-color);
+        background: Token(title-background);
+      }
+  
+      @include Article-Metadata.Wrapper-Horizontal('Every'){ 
+        gap: Token(metadata-wrapper-gap);
+        font-size: Token(metadata-font-size);
+        font-weight: Token(metadata-font-weight);
+        letter-spacing: Token(metadata-letter-spacing);
+        word-spacing: Token(metadata-word-spacing);
+        justify-content: Token(text-alignment);
+        color: Token(metadata-text-color);
+        background: Token(metadata-background);
+
+        @container (width < 250px){
+          display: none;
+        }
+      }
+    }
   }
+}
+
+@include Article.Template--When-Hovering-Own-Link('preview-1'){
+  
+}
+
+@include Article.Every--When-Focus-Own-Link{
+  
 }

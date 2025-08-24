@@ -54,3 +54,12 @@ section,
 article {
   contain: layout;
 } // Containment for better performance
+
+:where(h1,h2,h3,h4,h5,h6){
+  text-wrap-style: balance;
+  text-rendering: optimizeLegibility;
+}
+:where(p){
+  text-wrap-style: pretty;
+  text-rendering: optimizeSpeed;
+}

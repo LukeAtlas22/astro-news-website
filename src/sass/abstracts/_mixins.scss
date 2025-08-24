@@ -123,11 +123,13 @@
 ///
 /// @param {type} $n - Specify the maximum number of lines to show
 @mixin line-clamp($n) {
-  display: -webkit-box;
-  overflow: clip;
-  -webkit-line-clamp: $n; /* number of lines to show */
-  line-clamp: $n;
-  -webkit-box-orient: vertical;
+  @if (not($n == none or meta.type-of($n) != number or $n == 0)) {
+    display: -webkit-box;
+    overflow: clip;
+    -webkit-line-clamp: $n; /* number of lines to show */
+    line-clamp: $n;
+    -webkit-box-orient: vertical;
+  }
 }
 
 /// Allows you do to position:absolute & inset() - You can then, choose the inset (for all the four inset properties)

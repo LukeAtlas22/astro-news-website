@@ -20,6 +20,47 @@
   }
 }
 
+// #region Hovering & Focus-Visible
+
+/// It **can not** be nested - **Do not nest** this inside Article.Template or Article.Every
+@mixin Every--When-Hovering-Own-Link {
+  :where(.article:has(.article__own-link:hover)) {
+    @content;
+  }
+}
+/// It **can not** be nested - **Do not nest** this inside Article.Template or Article.Every
+@mixin Template--When-Hovering-Own-Link($name) {
+  :where(.article:is([data-style-template="#{$name}"]):has(.article__own-link:hover)) {
+    @content;
+  }
+}
+
+/// It **can not** be nested - **Do not nest** this inside Article.Template or Article.Every
+/// 
+/// Here, you can write styles when users focuses the Article Own-Link by keyboard
+/// - You can override the default style of the Article-Own-Link Outline
+/// - You can set a custom outline, maybe animated borders
+/// - You can write styles that attach to the article's components, such as like, header, content, metadata, author, etc... Only when the user focuses the article
+/// - Basically , anything you want on everything you want, strictly when the uses focusses the article own link box
+@mixin Every--When-Focus-Own-Link {
+  :where(.article:has(.article__own-link:focus-visible)) {
+    @content;
+  }
+}
+/// It **can not** be nested - **Do not nest** this inside Article.Template or Article.Every
+/// 
+/// Here, you can write styles when users focuses the Article Own-Link by keyboard
+/// - You can override the default style of the Article-Own-Link Outline
+/// - You can set a custom outline, maybe animated borders
+/// - You can write styles that attach to the article's components, such as like, header, content, metadata, author, etc... Only when the user focuses the article
+/// - Basically , anything you want on everything you want, strictly when the uses focusses the article own link box
+@mixin Template--When-Focus-Own-Link($name) {
+  :where(.article:is([data-style-template="#{$name}"]):has(.article__own-link:focus-visible)) {
+    @content;
+  }
+}
+// #endregion
+
 /////////////////////////////////////////////////
 @mixin OwnLink {
   .article__own-link {

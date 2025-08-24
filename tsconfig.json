@@ -17,6 +17,7 @@
       // Sass
       "@SASS-Abstracts": ["src/sass/abstracts"], // Leave like that, with no *
       "@SASS-Article-Selectors": ["src/sass/components/others/article/mixins/selectors/_article-selectors.scss"], 
+      "@SASS-Article-Selectors-I": ["src/sass/components/others/article/mixins/selectors/_article-selectors-interactive.scss"], 
       "@SASS-Article-Selectors-Header": ["src/sass/components/others/article/mixins/selectors/header/_article-header.scss"], 
       "@SASS-Article-Selectors-Metadata": ["src/sass/components/others/article/mixins/selectors/metadata/_article-meta.scss"], 
       "@SASS-Article-Selectors-Metadata-Author": ["src/sass/components/others/article/mixins/selectors/metadata/_article-meta-author.scss"], 

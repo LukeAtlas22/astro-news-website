@@ -1,0 +1,50 @@
+@use "sass:map";
+@use "sass:list";
+
+$BaseMap: null !default;
+$BaseTemplate: null !default;
+
+@function Error-NoMapOrTemplate(){
+  @error 'You need to config the map and the template with the "with" keyword ';
+}
+
+@function Error-Invalid-MapEntry($map, $template, $articleToken){
+  @error 'the entry #{$articleToken} in the #{$map} of the #{$template} template is null ! \n Maybe you dont want to use this property \n Maybe you chose the wrong map \n Maybe you chose the wrong template \n Maybe you forgot to declare this token ';
+}
+
+@function is-Valid-MapEntry($map, $template, $articleToken){
+  @return (map.get(map.get($map, $template), $articleToken) != null);
+}
+
+@function getToken-FromTemplate($map, $template, $articleToken){
+  $articleToken: list.nth($articleToken, 1);
+  @if (not is-Valid-MapEntry($map, $template, $articleToken)) {@return Error-Invalid-MapEntry($map, $template, $articleToken)};
+  @return map.get(map.get($map, $template), $articleToken);
+}
+
+@function getToken-FromTemplate-Subpart($map, $template, $articleToken){
+  $sub-part: list.nth($articleToken, 1); 
+  $articleToken: list.nth($articleToken, 2);
+  $nested-map: map.get(map.get($map, $template), $sub-part);
+  @if (not is-Valid-MapEntry($map, $template, $sub-part)) {@return Error-Invalid-MapEntry($map, $template, $sub-part)};
+  @if (map.get($nested-map, $articleToken == null)) {@error 'Token does not exist on subpart: #{$sub-part}'};
+  @return map.get($nested-map, $articleToken);
+}
+
+@function getArticleToken($articleToken, $map, $template){
+  // $map: $BaseMap;
+  // $template: $BaseTemplate;
+  
+  @if ($map == null or $template == null) { @return Error-NoMapOrTemplate() };
+
+  $n: list.length($articleToken);
+
+  @if ($n == 1) {
+    @return getToken-FromTemplate($map, $template, $articleToken);
+  }
+
+  @if ($n == 2) {
+    @return getToken-FromTemplate-Subpart($map, $template, $articleToken);
+  }
+}
+

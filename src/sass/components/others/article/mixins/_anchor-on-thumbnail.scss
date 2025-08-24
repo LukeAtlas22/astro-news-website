@@ -1,9 +1,19 @@
-@mixin anchor-on-thumbnail {
+@mixin anchor-on-thumbnail($position: 'bottom') {
+  @if ($position != 'bottom' and $position != 'top'){@error ' Wrong position for anchor on thumbnail '};
   position: absolute;
   position-anchor: --article-thumbnail;
 
-  left: anchor(left);
-  bottom: anchor(bottom);
+  
+  @if ($position == 'bottom'){
+    left: anchor(left);
+    right: anchor(right);
+    bottom: anchor(bottom);
+  } 
+  @else if ($position == 'top') {
+    left: anchor(left);
+    top: anchor(top);
+    right: anchor(right);
+  }
 }
 
 

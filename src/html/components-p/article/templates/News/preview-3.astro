@@ -3,6 +3,7 @@
 
 import ArticleHeader from '../../ArticleHeader.astro';
 import ArticleContent from '../../ArticleContent.astro';
+import ArticleLink from '@components-p/article/ArticleLink.astro';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
@@ -27,4 +28,6 @@ const { Content } = await render(entry);
   <ArticleContent>
     <Content/>
   </ArticleContent>
+  
+  <ArticleLink slug="article-test", position="full-box"></ArticleLink>
  </Fragment>

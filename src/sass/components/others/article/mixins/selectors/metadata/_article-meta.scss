@@ -1,5 +1,62 @@
 /// Import me as: Article.Metadata.[Mixin]
 
+/// Allows you to target-select an horizontal (flex) wrapper inside the Article Metadata List Structure
+/// You can select every horizontal wrapper by using the parameter: 0 (as number) or 'Every'
+/// You can select then, a particular wrapper by using his index relative to the metadata list.
+/// @param {<number> | <'Every'>} $nth-of-type - The index of the wrapper you need to select - Use 'Every' or 0 - To select every wrapper
+@mixin Wrapper-Horizontal($nth-of-type: null) {
+  @if (not $nth-of-type) {@error(
+    'You need to specify the nth-of-type of the wrapper - Use - 'Every' or 0: for everyone - 1: for the first - 2: for the second, and so on...'  
+  )};
+  @if ($nth-of-type == 'Every' or $nth-of-type == 0) {
+    :where(.article-metadata__wrapper-horizontal){
+      @content;
+    }
+  } @else {
+    :where(div.article-metadata__wrapper-horizontal:nth-of-type(#{$nth-of-type + 1})){
+      @content;
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+@mixin Title-Wrapper{
+  
+}
+@mixin Title {
+  .article__title{
+    @content;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+@mixin Author-Wrapper{
+
+}
+@mixin Author{
+.article__author{
+  @content;
+}
+}
+@mixin Author-Avatar{
+
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+@mixin Date-Wrapper{ // Todo - To change in pubblication date (we may have last modification date)
+
+}
+@mixin Date {  // Todo - To change in pubblication date (we may have last modification date)
+  .article__pubblication-date {   
+    @content;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////
+
 @mixin Category-Wrapper{
   .article__category-wrapper { 
     @content;
@@ -21,21 +78,21 @@
   }
 }
 
+////////////////////////////////////////////////////////////////////////////
 
-@mixin Date {
-  .article__pubblication-date {   
+@mixin Read-Time-Wrapper{
+
+}
+@mixin Read-Time{
+  .article__reading-time{
     @content;
   }
 }
+
+////////////////////////////////////////////////////////////////////////////
 
 @mixin Tags { // Todo - Già che ho category, questo dovrebbe rimanere?
   .article__tags {
-    @content;
-  }
-}
-
-@mixin Read-Time{
-  .article__reading-time{
     @content;
   }
 }

@@ -1,0 +1,33 @@
+@use "@SASS-Abstracts" as *;
+
+//! Todo Gli article defaults li facciamo in variabili
+//! Oltre agli article default, potrei fare degli article-contextual component related, tipo: article-text-default, article-background-default, article-heading-text, $article-text-color-on-thumbnail
+
+// Defaults Tokens : 
+
+$article-text-font-family: $body-font-family;
+$article-heading-font-family: $heading-font-family;
+$article-metadata-font-family: $body-font-family;
+
+$article-text-font-weight: $font-weight-default;
+$article-heading-font-weight: $font-weight-bold;
+$article-metadata-font-weight: $font-weight-semi-bold;
+
+$article-heading-text-transform: none;
+
+$article-text-color: $clr-primary-600;
+$article-text-color-on-thumbnail: $clr-neutral-300;
+$article-heading-color: $heading-color-default;
+$article-heading-color-on-thumbnail: $clr-neutral-300;
+
+$article-text-background: transparent;
+
+$article-metadata-text-color: $color-text-default;
+$article-metadata-background: transparent;
+$article-metadata-text-color-on-thumbnail: $clr-neutral-300;
+$article-metadata-background-on-thumbnail: transparent;
+
+$article-metadata-link-color: $link-color; // Todo Fixare i links
+$article-metadata-link-color-hover: $link-color-hover;
+$article-metadata-link-color-on-thumbnail: $link-color;
+$article-metadata-link-color-on-thumbnail-hover: $link-color-hover;

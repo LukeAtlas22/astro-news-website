@@ -16,14 +16,17 @@ $test-padding: 1.5rem;
 
   &__item {
     @include Article.Template("preview-3") {
+      // ! Should this be like that?
       background: $clr-neutral-200;
       padding: $test-padding;
     }
     @include Article.Template("preview-1") {
+      // ! Should this be like that?
       @include Article.Header {
         padding: $test-padding;
       }
     }
+    // ! Maybe... I could make proper props, like props that list item reads and act by consequence...
   }
   // Todo - As an organism will always override properties of the owned components
 

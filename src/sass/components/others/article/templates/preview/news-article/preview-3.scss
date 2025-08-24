@@ -14,18 +14,19 @@
 
   
   @include Article.Header{
-    line-height: 1;
-    display: grid;
-    gap: 1rem;
+    @include Article.Metadata{
+      @include HideMetaDescriptionTerms;
+      display: grid;
+      gap: 0.75rem;
+      
+      @include Article-Metadata.Title { font-size: 1.25rem; line-height: 1.15; }
+      @include Article-Metadata.Wrapper-Horizontal(0){ gap: 2rem;} // Todo Can be tokenable on... $horizontal-wrapper-gap &| $horizontal-wrapper-justification &| - $gap-between x and y
+      @include Article-Metadata.Author{ font-size: 0.85rem;}
+      @include Article-Metadata.Date{ font-size: 0.85rem;}
+    }
+    
   }
 
-  @include Article.Metadata{
-    display: flex;
-    align-items: center;
-    font-size: 0.85rem;
-    gap: 1.75rem;
-    @include HideMetaDescriptionTerms;
-  }
 
   @include Article.Content{
     color: $clr-primary-600;
@@ -38,3 +39,4 @@
   }
 
 }
+

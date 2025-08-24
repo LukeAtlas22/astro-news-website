@@ -1,0 +1,12 @@
+---
+interface Props {
+  slug: string, // Todo - Gonna change this in future.
+  position: 'header' | 'full-box' | 'thumbnail' 
+}
+
+const { slug = '/redirect-to-the-article-own-link', position } = Astro.props;
+---
+<a href={slug} aria-label="to the article" class="article__own-link" data-style-anchor-to={position}></a>
+{/* Make that you call this inside the template, and append directly to the fragment. */}
+{/* Sarebbe davvero perfetto se questo link fosse sempre il primo elemento focussabile */}
+{/* Every template, by default, should call this component */}

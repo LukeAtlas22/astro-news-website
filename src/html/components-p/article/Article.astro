@@ -9,7 +9,7 @@ interface Props {
    */
   entry: CollectionEntry<'article'>, // Qui dovrebbe essere entry, perchè ogni article vuole consumare 1 entry.
 
-  type: 'News' | 'BlogPost' | 'Recipe',
+  type: 'News' | 'BlogPost' | 'Recipe', // ?
 
   /**
    * The markdown & style template you want to assign to this article - Can only be what's inside this folder: src\html\components-p\article\templates
@@ -31,8 +31,4 @@ const ArticleTemplate = await getArticleTemplate(type, template);
   entry={entry} 
   templateDirectives={templateDirectives} 
   />
-  <a href="/redirect-to-the-article-own-link" aria-label="to the article" class="article__own-link" data-style-anchor-to="header"></a>
-  <!-- Make that you call this inside the template, and append directly to the fragment. -->
-  <!-- Sarebbe davvero perfetto se questo link fosse sempre il primo elemento focussabile -->
-   {/* templateDirectives should be deprecated from now */}
 </article>

@@ -1,1 +1,12 @@
 You can make every template you want.
+
+If you want to extend a template that already exist, with something more or something less - Just do like this:
+  - Create a new template, called the same way of the original one
+    - Example: 
+      - Original template: preview-2
+      - New template extended from preview-2 name: preview-2.1
+  - The tokens from the original template will be extended to the new one.
+  - If you need a brand new template with brand new tokens, then you need to create a new template.
+  
+Template Names (Da vedere)
+  - Template names should be meaninful, but its very hard to make them like that - For now i am using numbers

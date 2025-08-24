@@ -6,45 +6,84 @@
 @use "../../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
 @use "../../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
 // Todo - Da rivedere un po, mi sembra troppo complesso, prediligere un po più di semplicità
-@use "./preview-1.scss" as *; // Important for extend
-
 @use "../../../../../../abstracts/mixins/line-clamping" as *;
 
+// @use "./preview-1.scss" as *; // Important for extend - Decided to not extend anymore, since it does not respect the  Liskov Substitution Principle
 
+@use "tokens.scss" as *;
+$-TemplateName: "preview-2";
+@use "../../../functions/getArticleToken" as *;
+@function Token($token){
+  @return getArticleToken($token, $news-article, $-TemplateName)
+};
+
+// =========== T O K E N S ===========
+
+// Todo - Come idea mi piace - Potrei fare una struttura qua, utile soltanto a estrapolare i token da una mappa più grande.
+// Todo - Tipo
+// Todo -   $-title-font-size: getArticleToken('typeName', 'templateName', 'subpartName', 'property')
+// Todo -   $-title-font-size: getArticleToken('NewsArticle', 'preview-2', 'title', 'fontSize')
+// Todo -   Esporre un interfaccia del genere, molto modulare e utile che poi può essere usata da tutte le altre tipologie di article, come blogpost, recipe, card, ecc
+
+// Todo - Oppure fare semplicemente un file tokens, dentro ogni tipologia di article
+// Todo - Dunque questo file contiene tutti i tokens di tutte le varie templates sotto questo namespace
+// Todo - [templateName]-[subpartName]-[property]
+// Todo - Il file utilizza importa i tokens del main design
+// Todo - In questo modo però sto decidendo che mai e poi mai avrò un design che contempla un article che sia tipo news, e un article che sia tipo blogpost - Il che ha senso
+// =========== T O K E N S ===========
+
+
+//? Memo - Ricorda che sono padding agnostic
 @include Article.Template('preview-2') { 
-
-  @include Article.Extend('preview-1');
+// ! Actually - Since this, extends the preview-1 - It should be named preview-1.3 for logical reasons
+  //@include Article.Extend('preview-1');
+  // Todo - In realtà non dovrebbe estendere proprio. è troppo diversa.
 
   display: flex;
+  gap: Token(gap);
 
   @include Article.Content{
-    flex-basis: 40%;
-    font-size: 1.1rem;
-    font-weight: normal;
-    color: $clr-neutral-300;
-    background: transparent;
+    flex-basis: Token(content-space);
+    font-size: Token(content-font-size);
+    font-weight: Token(content-font-weight);
+    color: Token(content-color);
+    background: Token(content-background);
     overflow: clip;
-    
     > p{
-      line-height: 1.45;
-      @include line-clamp-fade(9, 1.45);
+      line-height: Token(content-line-height);
+      letter-spacing: Token(content-letter-spacing);
+      word-spacing: Token(content-word-spacing);
+      @include line-clamp-fade(Token(content-line-clamp-fade), Token(content-line-height));
+    }
+  }
+
+  @include article-thumbnail-linear-gradient('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)'); // Todo - Da rivedere
+  @include Article.Thumbnail{
+    order: Token(invert);
+    flex-basis: Token(thumbnail-space);
+  }
+
+  @include Article.Header{
+    @include anchor-on-thumbnail('bottom');
+    padding-inline: Token(header-padding-inline);
+    padding-block: Token(header-padding-block);
+    
+
+    @include Article.Metadata{
+      @include HideMetaDescriptionTerms;
     }
 
-  }
-  @include Article.Thumbnail{
-    flex-basis: 60%;
-  }
-  @include Article.Header{
-    padding-inline: 0.75rem;
-    padding-block: 0.25rem;
-  }
-  @include Article.Metadata{
-    @include Article-Metadata.Tags{ display: none };
-    // Più crescono le cose, più aggiungo roba, così è ancheo ttimizzato
-    
-    display: flex;
-    gap: 2rem;
-    font-size: 0.9rem;
-    @include HideMetaDescriptionTerms;
-  }
+    @include Article-Metadata.Title{
+      color: Token(title-color);
+      background: Token(title-background);
+      font-size: Token(title-font-size);
+      font-weight: Token(title-font-weight);
+      line-height: Token(title-line-height);
+      letter-spacing: Token(title-letter-spacing);
+      word-spacing: Token(title-word-spacing);
+      text-decoration: Token(title-text-decoration);
+      text-transform: Token(title-text-transform);
+      @include line-clamp(Token(title-line-clamp))
+    }
+  }  
 }

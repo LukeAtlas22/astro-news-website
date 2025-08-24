@@ -1,0 +1,24 @@
+
+@use "../../../mixins/selectors/article-selectors" as Article;
+@use "preview-2.scss";
+
+@use "tokens.scss" as *;
+@use "./../../../functions/getArticleToken" as *;
+
+$-Template: "preview-2";
+$-Map: $news-article;
+@function Token($token){
+  @return getArticleToken($token, $-Map, $-Template);
+}
+
+@include Article.Template('preview-2--inverted'){
+  @include Article.Extend('preview-2');
+
+  @include Article.Thumbnail{
+    order: 0;
+  }
+  @include Article.Content{
+    order: Token(invert);
+  }
+}
+

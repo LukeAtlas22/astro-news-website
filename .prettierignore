@@ -21,3 +21,5 @@ src/sass/components/others/article/mixins/_anchor-on-thumbnail.scss
 src/sass/components/others/article/mixins/selectors/metadata/_article-meta.scss
 src/sass/components/others/carousel-2/_carousel-scroll-marker-group.scss
 src/sass/components/others/article/templates/article-links-system.scss
+src/sass/components/others/article/mixins/selectors/_article-selectors.scss
+src/sass/components/others/article/functions/_getArticleToken.scss

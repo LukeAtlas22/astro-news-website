@@ -5,47 +5,77 @@
 @use "../../../mixins/selectors/article-selectors" as Article;
 @use "../../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
 @use "../../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+@use "tokens.scss" as *;
+@use "./../../../functions/getArticleToken" as *;
+
+$-Template: "preview-4";
+$-Map: $news-article;
+@function Token($token){
+  @return getArticleToken($token, $-Map, $-Template);
+}
+
+// ==================================================
 
 @include Article.Template('preview-4'){
   display: flex;
-  column-gap: 2rem;
-  
+  column-gap: Token(gap);
 
-  > div:nth-child(1){
-    flex-basis: 45%;
+  > div.article-thumbnail-container { 
+    flex-basis: Token(thumbnail-space);
   }
-  > div:nth-child(2){
-    flex-basis: 55%;
+  > div.article-content-container { 
+    flex-basis: Token(content-space);
     display: grid;
     align-content: space-between;
-    
-  }
-
-  @include Article.Header{  
-    
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    line-height: 1.45;
-    // Todo - Qui abbiamo un problemino 
-  }
-
-  @include Article.Content{
-    font-size: 0.8rem;
-    font-weight: 600;
-    line-height: 1.25;
-    overflow-y: auto;
-    @include line-clamp(4);
-    color: $color-primary-600;
+    order: Token(invert);
   }
 
   @include Article.Metadata{
-    font-size: 0.75rem;
-    font-weight: 500;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
     @include HideMetaDescriptionTerms;
+  }
+
+  @include Article.Header{  
+    @include Article.Metadata{
+      @include Article-Metadata.Title{
+        width: 100%;
+        font-size: Token(title-font-size);
+        font-weight: Token(title-font-weight);
+        letter-spacing: Token(title-letter-spacing);
+        word-spacing: Token(title-word-spacing);
+        text-decoration: Token(title-text-decoration);
+        text-transform: Token(title-text-transform);
+
+        color: Token(title-color);
+        background: Token(title-background);
+      }
+    }
+  }
+
+  @include Article.Content{
+    font-size: Token(content-font-size);
+    font-weight: Token(content-font-weight);
+    line-height: Token(content-line-height);
+    letter-spacing: Token(content-letter-spacing);
+    word-spacing: Token(content-word-spacing);
+
+    color: Token(content-color);
+    background: Token(content-background);
+
+    overflow-y: auto;
+  }
+
+  @include Article.Footer{
+    @include Article.Metadata{
+      font-size: Token(metadata-font-size);
+      font-weight: Token(metadata-font-weight);
+      letter-spacing: Token(metadata-letter-spacing);
+      word-spacing: Token(metadata-word-spacing);
+      color: Token(metadata-text-color);
+      background: Token(metadata-background);
+
+      @include Article-Metadata.Wrapper-Horizontal(0){
+        justify-content: space-between;
+      }
+    }
   }
 }

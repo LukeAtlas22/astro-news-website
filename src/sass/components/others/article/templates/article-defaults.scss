@@ -66,6 +66,11 @@
     border: none;
     border-radius: none;
     box-shadow: none;
+
+    @include Article-Metadata.Wrapper-Horizontal("Every") {
+      display: flex;
+      width: 100%;
+    }
   }
 
   @include Article.Thumbnail {
@@ -125,13 +130,17 @@
   @container (width <= 250px) {
     // Fallback to miniature
     // Only display title
-    @include Article.Metadata {
-      display: none !important;
-    }
+
+    // @include Article.Metadata {
+    //   display: none !important;
+    // } // ! Todo - This needs a review ^ Maybe we should delete, and handle this kind of thing in own-preview stylesheet | Yes i agree
+
     @include Article.Content {
+      // ! This also? And we only keep here things related to the titles small and full
       display: none !important;
     }
     @include Article.Thumbnail {
+      // ! This also? And we only keep here things related to the titles small and full
       flex-basis: 100% !important;
     }
     @include Article.Header {
@@ -151,9 +160,9 @@
         display: block;
       }
 
-      @include Article.Metadata {
-        display: none;
-      }
+      // @include Article.Metadata {
+      //   display: none;
+      // } // ! Todo - This needs a review ^ | Maybe we should delete, and handle this kind of thing in own-preview stylesheet | Yes i agree
     }
   }
 }

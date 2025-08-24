@@ -16,12 +16,6 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 <Fragment>
-  <div class="article-thumbnail-container">
-    <ArticleThumbnail
-      src={entry.data.thumbnail.src}
-      alt={entry.data.thumbnail.altText}
-    />
-  </div>
   <div class="article-content-container">
     <ArticleHeader
       ArticleDataOBJ = {{
@@ -39,6 +33,12 @@ const { Content } = await render(entry);
         pubblicationDate: entry.data.pubblicationDate,
       }}
       MetaLayoutType="News"
+    />
+  </div>
+  <div class="article-thumbnail-container">
+    <ArticleThumbnail
+      src={entry.data.thumbnail.src}
+      alt={entry.data.thumbnail.altText}
     />
   </div>
   

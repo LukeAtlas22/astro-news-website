@@ -1,6 +1,7 @@
 ---
 /** Ogni preview consuma un entry e un template - Quindi si occupa di costruire la HTML View dell'article */
 import ArticleHeader from '../../ArticleHeader.astro';
+import ArticleLink from '@components-p/article/ArticleLink.astro';
 import ArticleThumbnail from '../../ArticleThumbnail.astro';
 import type { CollectionEntry } from 'astro:content';
 
@@ -23,4 +24,6 @@ const { entry } = Astro.props;
     src={entry.data.thumbnail.src}
     alt={entry.data.thumbnail.altText}
   />
+  
+  <ArticleLink slug="article-test", position="full-box"></ArticleLink>
 </Fragment>

@@ -9,6 +9,7 @@ export default defineConfig({
     // Silence on mixed decl sass warnings
     vite: {
         css: {
+            devSourcemap: true,
             preprocessorOptions: {
                 scss: {
                     quietDeps: true,

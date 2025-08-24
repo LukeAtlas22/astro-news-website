@@ -7,11 +7,9 @@
 @include Article.Every {
   @include Article.OwnLink {
     pointer-events: auto;
-    order: -99; // First in the focus order?
 
     @include absolute-anchor-inset(0rem);
     z-index: 0;
-    background-color: rgba(255, 0, 0, 0.151); // Todo not have color - always transparent
     cursor: pointer;
 
     &[data-style-anchor-to="header"] {
@@ -48,7 +46,7 @@
 
   @include Article-Metadata.Date {
     pointer-events: auto;
-    background-color: blue;
+    
   }
 }
 

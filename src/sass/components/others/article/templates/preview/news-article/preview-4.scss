@@ -4,14 +4,9 @@
 @use "@SASS-Article-Selectors" as Article;
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
 
-@use "tokens.scss" as *;
-@use "./../../../functions/getArticleToken" as *;
-
-$-Template: "preview-4";
-$-Map: $news-article;
-@function Token($token){
-  @return getArticleToken($token, $-Map, $-Template);
-}
+@use "../../../tokens-wrapper" as *;
+$-Map: $news-article; $-Template: "preview-4";
+@function Token($token){ @return getArticleToken($token, $-Map, $-Template); }
 
 // ==================================================
 

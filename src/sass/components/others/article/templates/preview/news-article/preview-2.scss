@@ -9,12 +9,14 @@
 
 // @use "./preview-1.scss" as *; // Important for extend - Decided to not extend anymore, since it does not respect the  Liskov Substitution Principle
 
-@use "tokens.scss" as *;
-$-TemplateName: "preview-2";
-@use "../../../functions/getArticleToken" as *;
-@function Token($token){
-  @return getArticleToken($token, $news-article, $-TemplateName)
-};
+// Todo - Vorrei wrappare tutta questa roba
+@use "../../../tokens-wrapper" as *;
+$-Map: $news-article; $-Template: "preview-2";
+@function Token($token){ @return getArticleToken($token, $-Map, $-Template); }
+/* 
+Todo In modo tale da poter fare tipo solo... 
+*/
+// Todo
 
 //? Memo - Ricorda che sono padding agnostic
 @include Article.Template('preview-2') { 
@@ -40,7 +42,7 @@ $-TemplateName: "preview-2";
     }
   }
 
-  @include article-utils-thumbnail-overlay('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)'); // Todo - Da rivedere
+  @include article-utils-thumbnail-overlay('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)'); // Todo - Da rivedere - forse c'è un modo migliore per farlo
   @include Article.Thumbnail{
     order: Token(invert);
     flex-basis: Token(thumbnail-space);

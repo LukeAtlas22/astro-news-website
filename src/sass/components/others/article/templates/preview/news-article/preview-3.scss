@@ -4,37 +4,61 @@
 @use "@SASS-Article-Selectors" as Article;
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
 
+@use "../../../tokens-wrapper" as *;
+$-Map: $news-article; /* && */ $-Template: "preview-3";
+@function Token($token){ @return getArticleToken($token, $-Map, $-Template); }
 
 
 @include Article.Template('preview-3'){
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  justify-content: Token(vertical-justification);
+  gap: Token(vertical-gap);
 
-  
   @include Article.Header{
     @include Article.Metadata{
       @include article-utils-hide-meta-description-terms;
       display: grid;
-      gap: 0.75rem;
-      
-      @include Article-Metadata.Title { font-size: 1.25rem; line-height: 1.15; }
-      @include Article-Metadata.Wrapper-Horizontal(0){ gap: 2rem;} // Todo Can be tokenable on... $horizontal-wrapper-gap &| $horizontal-wrapper-justification &| - $gap-between x and y
-      @include Article-Metadata.Author{ font-size: 0.85rem;}
-      @include Article-Metadata.Date{ font-size: 0.85rem;}
+      gap: Token(header-gap);
+  
+      @include Article-Metadata.Title { 
+        font-size: Token(title-font-size);
+        font-weight: Token(title-font-weight);
+        line-height: Token(title-line-height);
+        letter-spacing: Token(title-letter-spacing);
+        word-spacing: Token(title-word-spacing);
+        text-decoration: Token(title-text-decoration);
+        text-transform: Token(title-text-transform);
+      }
+
+      @include Article-Metadata.Wrapper-Horizontal(0) { 
+        gap: Token(metadata-wrapper-gap); 
+
+        font-size: Token(metadata-font-size);
+        font-weight: Token(metadata-font-weight);
+        letter-spacing: Token(metadata-letter-spacing);
+        word-spacing: Token(metadata-word-spacing);
+        text-decoration: Token(metadata-text-decoration);
+        text-transform: Token(metadata-text-transform);
+        
+      } 
     }
     
   }
 
-
   @include Article.Content{
-    color: $clr-primary-600;
-    @include line-clamp(5)
+    font-size: Token(content-font-size);
+    font-weight: Token(content-font-weight);
+    line-height: Token(content-line-height);
+    letter-spacing: Token(content-letter-spacing);
+    word-spacing: Token(content-word-spacing);
+    
+    @include line-clamp(Token(content-line-clamp));
   }
 
   .line{
     height: 1px;
-    background-color: rgba(44, 44, 44, 0.250); //Tokenize color line
+    background: Token(line-color);
   }
 
 }

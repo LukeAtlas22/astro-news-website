@@ -1,7 +1,7 @@
+@use "@SASS-Abstracts" as *;
+@use "../tokens/defaults.scss" as *;
 @use "../mixins/selectors/article-selectors" as Article;
 @use "../mixins/selectors/metadata/article-meta" as Article-Metadata;
-@use "@SASS-Abstracts" as *;
-@use "../tokens/default.scss" as *;
 
 @include Article.Every {
   @include Article.OwnLink {

@@ -1,9 +1,10 @@
-// █▄ █ ██▀ █   █ ▄▀▀    ▄▀▄ █▀▄ ▀█▀ █ ▄▀▀ █   ██▀    ▀█▀ ▄▀▄ █▄▀ ██▀ █▄ █ ▄▀▀ 
-// █ ▀█ █▄▄ ▀▄▀▄▀ ▄█▀    █▀█ █▀▄  █  █ ▀▄▄ █▄▄ █▄▄     █  ▀▄▀ █ █ █▄▄ █ ▀█ ▄█▀ 
+@use "./defaults.scss" as D;
 
-@use "../../../tokens/default.scss" as D;
 
-// Template Specific Tokens: 
+// █▄ █ ██▀ █   █ ▄▀▀    ▄▀▄ █▀▄ ▀█▀ █ ▄▀▀ █   ██▀ 
+// █ ▀█ █▄▄ ▀▄▀▄▀ ▄█▀    █▀█ █▀▄  █  █ ▀▄▄ █▄▄ █▄▄ 
+
+// Todo - Dovrei dare dei nomi più specifici a questi preview
 
 $news-article: (
   
@@ -69,6 +70,38 @@ $news-article: (
     content-background: transparent,
   ),
 
+  preview-3: (
+    vertical-gap: 1rem,
+    vertical-justification: space-between,
+    
+    header-gap: 0.75rem,
+
+    title-font-size: 1.25rem,
+    title-font-weight: 500,
+    title-line-height: 1.15em,
+    title-letter-spacing: 1,
+    title-word-spacing: 1,
+    title-text-decoration: 1,
+    title-text-transform: 1,
+
+    metadata-wrapper-gap: 2rem,
+    metadata-font-size: 0.85rem,
+    metadata-font-weight: 400,
+    metadata-letter-spacing: 1,
+    metadata-word-spacing: 1,
+    metadata-text-decoration: none,
+    metadata-text-transform: none,
+    
+    line-color: rgba(0, 0, 0, 0.308), // Todo - Use a token
+
+    content-font-size: 1rem,
+    content-font-weight: 500,
+    content-line-height: 1.15,
+    content-line-clamp: 5,
+    content-letter-spacing: 1,
+    content-word-spacing: 1,
+  ),
+
   // Template: [NameTemplate] - Variant: [NameVariant]
   preview-4: (
     invert: 0, //? 0 || -1 => Order between content & thumbnail
@@ -102,3 +135,25 @@ $news-article: (
     metadata-background: D.$article-metadata-background,
   )
 );
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// ██▄ █   ▄▀▄ ▄▀     █▀▄ ▄▀▄ ▄▀▀ ▀█▀ 
+// █▄█ █▄▄ ▀▄▀ ▀▄█    █▀  ▀▄▀ ▄█▀  █  
+
+$blog-post: (
+  // Your tokens here...
+);
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+// █▀▄ ██▀ ▄▀▀ █ █▀▄ ██▀ 
+// █▀▄ █▄▄ ▀▄▄ █ █▀  █▄▄ 
+
+$recipe: (
+  // Your tokens here...
+)
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+/// ....

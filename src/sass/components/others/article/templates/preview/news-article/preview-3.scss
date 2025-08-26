@@ -40,10 +40,8 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
         word-spacing: Token(metadata-word-spacing);
         text-decoration: Token(metadata-text-decoration);
         text-transform: Token(metadata-text-transform);
-        
       } 
     }
-    
   }
 
   @include Article.Content{
@@ -52,7 +50,7 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
     line-height: Token(content-line-height);
     letter-spacing: Token(content-letter-spacing);
     word-spacing: Token(content-word-spacing);
-    
+
     @include line-clamp(Token(content-line-clamp));
   }
 
@@ -60,6 +58,5 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
     height: 1px;
     background: Token(line-color);
   }
-
 }
 

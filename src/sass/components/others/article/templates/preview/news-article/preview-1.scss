@@ -8,9 +8,7 @@
 $-Map: $news-article; $-Template: "preview-1";
 @function Token($token){ @return getArticleToken($token, $-Map, $-Template); } // Todo - Questa funzione andrebbe generalizzata. 
 
-//Todo Inserire solo Tokens Logici e Sensati per ogni template, tipo nel template che contempla le category sopra, non inseriremo $header-anchor, perchè sarà (deciso da noi) impossibile spostare l'header in alto dove ci sono le category
-
-// Todo - Magari potrei fare un'astrazione tipo... $article-text-color-on-thumbnail, e $article-text-color-default, per rendere le cose più facile, e poi usarlo a cascata.
+// Note - Inserire solo Tokens Logici e Sensati per ogni template, tipo nel template che contempla le category sopra, non inseriremo $header-anchor, perchè sarà (deciso da noi) impossibile spostare l'header in alto dove ci sono le category
 
 @include Article.Template('preview-1') { 
     @include Article.Thumbnail{
@@ -19,7 +17,6 @@ $-Map: $news-article; $-Template: "preview-1";
   }
 
   @include article-utils-thumbnail-overlay('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)');
-  
   // Todo Tokenize Transparency Thumbnail Darkner & Dark color & Gradient direction
 
   @include Article.Header {

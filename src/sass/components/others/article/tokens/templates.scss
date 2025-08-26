@@ -127,6 +127,8 @@ $news-article: (
     content-color: D.$article-text-color, 
     content-background: D.$article-text-background,
 
+    metadata-wrapper-gap: 2rem,
+    metadata-wrapper-justification: space-between,
     metadata-font-size: 0.75rem,
     metadata-font-weight: 500,
     metadata-letter-spacing: 0,

@@ -68,7 +68,8 @@ $-Map: $news-article; $-Template: "preview-4";
       background: Token(metadata-background);
 
       @include Article-Metadata.Wrapper-Horizontal(0){
-        justify-content: space-between;
+        gap: Token(metadata-wrapper-gap);
+        justify-content: Token(metadata-wrapper-justification);
       }
     }
   }

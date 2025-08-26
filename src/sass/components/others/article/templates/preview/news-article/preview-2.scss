@@ -4,26 +4,12 @@
 @use "@SASS-Article-Selectors" as Article;
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
 
-// Todo - Da rivedere un po, mi sembra troppo complesso, prediligere un po più di semplicità
-@use "../../../../../../abstracts/mixins/line-clamping" as *;
-
-// @use "./preview-1.scss" as *; // Important for extend - Decided to not extend anymore, since it does not respect the  Liskov Substitution Principle
-
-// Todo - Vorrei wrappare tutta questa roba
 @use "../../../tokens-wrapper" as *;
 $-Map: $news-article; $-Template: "preview-2";
 @function Token($token){ @return getArticleToken($token, $-Map, $-Template); }
-/* 
-Todo In modo tale da poter fare tipo solo... 
-*/
-// Todo
 
 //? Memo - Ricorda che sono padding agnostic
 @include Article.Template('preview-2') { 
-// ! Actually - Since this, extends the preview-1 - It should be named preview-1.3 for logical reasons
-  //@include Article.Extend('preview-1');
-  // Todo - In realtà non dovrebbe estendere proprio. è troppo diversa.
-
   display: flex;
   gap: Token(gap);
 

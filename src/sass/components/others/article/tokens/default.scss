@@ -1,42 +1,31 @@
 @use "@SASS-Abstracts" as *;
 
-$article-default-font-family: $body-font-family;
-$article-default-font-size: 1rem;
-$article-default-font-weight: 500;
-$article-default-line-height: 1.25;
-$article-default-letter-spacing: 1;
-$article-default-text-decoration: none;
-$article-default-text-transform: auto;
-$article-default-color: $body-text-color;
-$article-default-background: $body-background-color;
+$article-text-font-family: $body-font-family;
+$article-heading-font-family: $body-font-family;
+$article-metadata-font-family: $body-font-family;
 
-$article-default-header-font-family: $body-font-family;
-$article-default-header-font-size: 1.25rem;
-$article-default-header-font-weight: 500;
-$article-default-header-line-height: 0.95;
-$article-default-header-letter-spacing: 1.1;
-$article-default-header-text-decoration: none;
-$article-default-header-text-transform: auto;
-$article-default-header-color: $heading-color-default;
-$article-default-header-background: transparent;
+$article-text-font-weight: $font-weight-default;
+$article-heading-font-weight: $font-weight-bold;
+$article-metadata-font-weight: $font-weight-semi-bold;
 
-// Author, Pubblication Date, Category, Etc...
-$article-default-meta-font-family: $heading-font-family;
-$article-default-meta-font-size: 1rem;
-$article-default-meta-font-weight: 600;
-$article-default-meta-line-height: 1.35;
-$article-default-meta-letter-spacing: 1.1;
-$article-default-meta-color: $body-text-color;
-$article-default-meta-background: transparent;
+$article-heading-text-transform: none;
 
-$article-default-category-font-family: $heading-font-family;
-$article-default-category-font-size: 1.25rem;
-$article-default-category-font-weight: 600;
-$article-default-category-line-height: 1.25;
-$article-default-category-letter-spacing: 1;
-$article-default-category-color: white;
-$article-default-category-background: red;
-$article-default-category-border: none;
-$article-default-category-border-radius: 0;
+$article-text-color: $clr-primary-600;
+$article-text-color-on-thumbnail: $clr-neutral-300;
+$article-heading-color: $heading-color-default;
+$article-heading-color-on-thumbnail: $clr-neutral-300;
 
-// Todo - Facciamo che font family, viene gestita solamente di default
+$article-text-background: transparent;
+$article-text-background-on-thumbnail: transparent;
+$article-heading-background: transparent;
+$article-heading-background-on-thumbnail: transparent;
+
+$article-metadata-color: $color-text-default;
+$article-metadata-background: transparent;
+$article-metadata-color-on-thumbnail: $clr-neutral-300;
+$article-metadata-background-on-thumbnail: transparent;
+
+$article-metadata-link-color: $link-color; // Todo Fixare i links
+$article-metadata-link-color-hover: $link-color-hover;
+$article-metadata-link-color-on-thumbnail: $link-color;
+$article-metadata-link-color-on-thumbnail-hover: $link-color-hover;

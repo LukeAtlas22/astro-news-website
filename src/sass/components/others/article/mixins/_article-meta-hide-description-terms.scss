@@ -1,8 +1,0 @@
-@use "@SASS-Abstracts" as *;
-
-@mixin HideMetaDescriptionTerms {
-  dt {
-    // This will hide visually, but keep in the Accessibility Tree
-    @include sr-only;
-  }
-}

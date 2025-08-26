@@ -1,0 +1,74 @@
+@use "../../tokens" as *;
+@use "../masking" as *;
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 90deg;
+  inherits: false;
+}
+
+$card-foreground: transparent;
+$borders-thickness: 3px;
+$borders-external-glow: 2.25rem;
+
+// Borders
+
+$transparancy: transparent;
+$clr-1: #00a2ff;
+$clr-2: #1348ac;
+$clr-3: #153e97;
+
+$speed: 5.5s;
+
+/* Aesthetic */
+.card {
+  position: relative; // < Also important - Or it has to be contain:layout || container-type: inline-size || container-type: size
+  height: 34rem;
+  width: 24rem;
+  background-color: $card-foreground; // < This is important
+}
+// ------------
+
+.borders-wrapper {
+  border-radius: inherit; // < This is important
+  background-color: inherit; // < This is important
+  z-index: -99;
+  inset: 0;
+}
+
+.borders-wrapper[data-position="absolute"] {
+  position: absolute;
+}
+.borders-wrapper[data-position="fixed"] {
+  position: fixed;
+}
+
+.borders {
+  border-radius: inherit; // < Also important
+  position: absolute;
+  z-index: -1;
+
+  background: conic-gradient(
+    from var(--gradient-angle),
+    $clr-1,
+    $clr-2,
+    $clr-3,
+    $clr-2,
+    $clr-1
+  );
+  animation: fancy-borders-conic-gradient $speed linear infinite;
+
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: $borders-thickness;
+  inset: calc(($borders-thickness * -1) - $borders-thickness);
+}
+
+@keyframes fancy-borders-conic-gradient {
+  0% {
+    --gradient-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+  }
+}

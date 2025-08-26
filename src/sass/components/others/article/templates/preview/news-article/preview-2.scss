@@ -1,10 +1,9 @@
 @use "@SASS-Abstracts" as *;
-@use "../../../mixins/article-meta-hide-description-terms" as *;
-@use "../../../mixins/article-thumbnail-dark-overlay" as *;
-@use "../../../mixins/anchor-on-thumbnail" as *;
-@use "../../../mixins/selectors/article-selectors" as Article;
-@use "../../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
-@use "../../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+
+@use "@SASS-Article-Utilities" as *;
+@use "@SASS-Article-Selectors" as Article;
+@use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
+
 // Todo - Da rivedere un po, mi sembra troppo complesso, prediligere un po più di semplicità
 @use "../../../../../../abstracts/mixins/line-clamping" as *;
 
@@ -16,22 +15,6 @@ $-TemplateName: "preview-2";
 @function Token($token){
   @return getArticleToken($token, $news-article, $-TemplateName)
 };
-
-// =========== T O K E N S ===========
-
-// Todo - Come idea mi piace - Potrei fare una struttura qua, utile soltanto a estrapolare i token da una mappa più grande.
-// Todo - Tipo
-// Todo -   $-title-font-size: getArticleToken('typeName', 'templateName', 'subpartName', 'property')
-// Todo -   $-title-font-size: getArticleToken('NewsArticle', 'preview-2', 'title', 'fontSize')
-// Todo -   Esporre un interfaccia del genere, molto modulare e utile che poi può essere usata da tutte le altre tipologie di article, come blogpost, recipe, card, ecc
-
-// Todo - Oppure fare semplicemente un file tokens, dentro ogni tipologia di article
-// Todo - Dunque questo file contiene tutti i tokens di tutte le varie templates sotto questo namespace
-// Todo - [templateName]-[subpartName]-[property]
-// Todo - Il file utilizza importa i tokens del main design
-// Todo - In questo modo però sto decidendo che mai e poi mai avrò un design che contempla un article che sia tipo news, e un article che sia tipo blogpost - Il che ha senso
-// =========== T O K E N S ===========
-
 
 //? Memo - Ricorda che sono padding agnostic
 @include Article.Template('preview-2') { 
@@ -57,20 +40,20 @@ $-TemplateName: "preview-2";
     }
   }
 
-  @include article-thumbnail-linear-gradient('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)'); // Todo - Da rivedere
+  @include article-utils-thumbnail-overlay('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)'); // Todo - Da rivedere
   @include Article.Thumbnail{
     order: Token(invert);
     flex-basis: Token(thumbnail-space);
   }
 
   @include Article.Header{
-    @include anchor-on-thumbnail('bottom');
+    @include article-utils-anchor-on-thumbnail('bottom');
     padding-inline: Token(header-padding-inline);
     padding-block: Token(header-padding-block);
     
 
     @include Article.Metadata{
-      @include HideMetaDescriptionTerms;
+      @include article-utils-hide-meta-description-terms;
     }
 
     @include Article-Metadata.Title{

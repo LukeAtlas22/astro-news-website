@@ -1,6 +1,6 @@
 @use "@SASS-Article-Selectors" as Article;
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
-@use "@SASS-Article-Selectors-Metadata-Author" as Article-Metadata-Author;
+ 
 @use "preview-1.scss";
 
 @include Article.Template('preview-1.2'){
@@ -15,9 +15,3 @@
     padding: 0.25rem;
   }
 }
-
-.article{
-  anchor-name: --article-box;
-}
-
-// Vedi quanto è facile creare nuovi templates?

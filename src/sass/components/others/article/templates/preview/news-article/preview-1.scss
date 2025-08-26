@@ -1,10 +1,9 @@
 @use "@SASS-Abstracts" as *;
-@use "../../../mixins/article-meta-hide-description-terms" as *;
-@use "../../../mixins/article-thumbnail-dark-overlay" as *;
-@use "../../../mixins/anchor-on-thumbnail" as *;
+
+@use "@SASS-Article-Utilities" as *;
 @use "@SASS-Article-Selectors" as Article;
 @use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
-@use "@SASS-Article-Selectors-Metadata-Author" as Article-Metadata-Author;
+ 
 
 @use "tokens.scss" as *;
 @use "./../../../functions/getArticleToken" as *;
@@ -12,7 +11,7 @@
 $-Template: "preview-1";
 $-Map: $news-article;
 @function Token($token){
-  @return getArticleToken($token, $-Map, $-Template);
+  @return getArticleToken($token, $-Map, $-Template); // Todo - Questa funzione andrebbe generalizzata.
 }
 
 //Todo Inserire solo Tokens Logici e Sensati per ogni template, tipo nel template che contempla le category sopra, non inseriremo $header-anchor, perchè sarà (deciso da noi) impossibile spostare l'header in alto dove ci sono le category
@@ -24,11 +23,13 @@ $-Map: $news-article;
     width: 100%;
     height: 100%;
   }
-  @include article-thumbnail-linear-gradient('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)');
+
+  @include article-utils-thumbnail-overlay('to bottom, transparent 5%, rgba(0, 0, 0, 0.750)');
+  
   // Todo Tokenize Transparency Thumbnail Darkner & Dark color & Gradient direction
 
   @include Article.Header {
-    @include anchor-on-thumbnail('bottom');
+    @include article-utils-anchor-on-thumbnail('bottom');
 
     padding-inline: Token(header-padding-inline);
     padding-block: Token(header-padding-block);
@@ -40,7 +41,7 @@ $-Map: $news-article;
       display: grid;
       gap: Token(header-gap);
 
-      @include HideMetaDescriptionTerms;
+      @include article-utils-hide-meta-description-terms;
   
      @include Article-Metadata.Title{
         font-size: Token(title-font-size);

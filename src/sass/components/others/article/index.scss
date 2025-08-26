@@ -9,3 +9,4 @@
 @use "templates/preview/news-article/preview-4.scss"; // Però secondo me questa dovrebbe avere proprio un altro nome rispetto alle altre 2
 @use "templates/preview/news-article/preview-4--inverted.scss";
 @forward "templates/article-links-system.scss";
+@use "templates/article-defaults-interactive.scss";

@@ -1,0 +1,22 @@
+---
+interface Props{
+  position: 'absolute' | 'fixed';
+  glow: boolean,
+}
+const { position, glow } = Astro.props;
+---
+
+{
+  (glow === false) &&
+  <div class="borders-wrapper" data-position={position} data-glow='false'>
+    <div class="borders"></div>
+  </div>
+}
+
+{
+  (glow === true) &&
+  <div class="borders-wrapper" data-position={position} data-glow='true'>
+    <div class="borders"></div>
+    <div class="borders__external-glow"></div>
+  </div>
+}

@@ -1,0 +1,14 @@
+@use "../mixins/selectors/article-selectors" as Article;
+@use "@SASS-Abstracts" as *;
+
+
+@include Article.Every {
+}
+
+@include Article.Every--When-Hovering-Own-Link {
+}
+
+@include Article.Every--When-Focus-Own-Link {
+}
+
+

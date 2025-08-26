@@ -1,3 +1,6 @@
+
+// Todo - In realtà questo potrebbe diventare universale
+// Todo - Tipo: position-anchor($on: --article-thumbnail, $direction: bottom)
 @mixin anchor-on-thumbnail($position: 'bottom') {
   @if ($position != 'bottom' and $position != 'top'){@error ' Wrong position for anchor on thumbnail '};
   position: absolute;

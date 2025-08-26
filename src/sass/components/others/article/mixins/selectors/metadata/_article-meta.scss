@@ -21,11 +21,18 @@
 
 ////////////////////////////////////////////////////////////////////////////
 
-@mixin Title-Wrapper{
-  
-}
-@mixin Title {
+@mixin Title { // Note - Non sono sicuro se modificare questo in wrapper o meno, in realtà non è un wrapper perchè mostra sempre e solo 1 elemento (o full o brief)
   .article__title{
+    @content;
+  }
+}
+@mixin Title--Small{
+  .article__title--small-title{ // Todo - Cambia questo in small, o sintetic per tutto il code
+    @content;
+  }
+}
+@mixin Title--Full{
+  .article__title--full-title{
     @content;
   }
 }

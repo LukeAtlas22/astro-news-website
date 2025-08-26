@@ -1,0 +1,19 @@
+{
+  "printWidth": 1000,
+  "proseWrap": "preserve",
+  
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "plugins": [ "prettier-plugin-astro" ],
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": { "parser": "astro" }
+    },
+    {
+      "files": "*.scss",
+      "options": { "parser": "scss" }
+    }
+  ]
+}

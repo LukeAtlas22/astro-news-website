@@ -1,76 +1,50 @@
 @use "../mixins/selectors/article-selectors" as Article;
-@use "../mixins/selectors/header/article-header" as Article-Header;
 @use "../mixins/selectors/metadata/article-meta" as Article-Metadata;
 @use "@SASS-Abstracts" as *;
 @use "../tokens/default.scss" as *;
 
 // Todo - Tutto qui dentro dev'essere tokenizzato
+// Note - Abbiamo deciso che props come font-size e font-weight vengono gestite dal template di turno - I default saranno veramente essenziali
+// Todo - Maybe set max width on every template?
 
 @include Article.Default {
   /* Tokenize everything in here */
   height: 100%;
   width: 100%;
 
-  // Will be padding & size agnostic
+  anchor-name: --article-box; // Note - Per alcuni template che hanno qualcosa anchored su tutta la box (fixed forse)
 
-  background: transparent;
-  color: set-color(
-    $light: $clr-neutral-700,
-    $dark: $clr-neutral-300
-  ); // Todo - Tokenize anyway
 
-  @include Article.Header {
-    font-family: $article-default-header-font-family;
-    font-size: $article-default-header-font-size;
-    font-weight: $article-default-header-font-weight;
-    line-height: $article-default-header-line-height;
-    letter-spacing: $article-default-header-letter-spacing;
-    text-decoration: $article-default-header-text-decoration;
-    text-transform: $article-default-header-text-transform;
+  // Note Will be padding & size agnostic
 
-    text-wrap: pretty;
-
-    color: $article-default-header-color;
-    background: $article-default-header-background;
-
+  @include Article-Metadata.Title {
     z-index: 1;
-    /* prettier-ignore */
-    h1, h2, h3, h4, h5, h6 { font-size: 1em; }
-    /* prettier-ignore */
-    @include Article-Header.Title-Small { display: none; }
-    // Importante che almeno uno dei due title venga rimosso dall'accessibility tree
+    
+    font-family: $article-heading-font-family;
+
+    color: $article-heading-color;
+    background: $article-heading-background;
+
+    :where(h1, h2, h3, h4, h5, h6) { font-size: 1em }
+
+    @include Article-Metadata.Title--Small { display: none; }
+    // Note - Importante che almeno uno dei due title venga rimosso dall'accessibility tree
   }
 
   @include Article.Content {
-    font-family: 1;
-    font-size: 1.05rem;
-    font-weight: 1;
-    letter-spacing: 1;
-    line-height: 1.1;
-    text-decoration: 1;
-    text-transform: 1;
-    text-wrap: balance;
-    color: 1;
-    background: 1;
-
+    font-family: $article-text-font-family;
+    color: $article-text-color;
+    background: $article-text-background;
+    
     overflow-y: auto;
   }
 
   @include Article.Metadata {
-    font-family: 1;
-    font-size: 1rem;
-    font-weight: 500;
-    color: 1;
-    background: 1;
-
-    border: none;
-    border-radius: none;
-    box-shadow: none;
-
-    @include Article-Metadata.Wrapper-Horizontal("Every") {
-      display: flex;
-      width: 100%;
-    }
+    font-family: $article-metadata-font-family;
+    color: $article-metadata-color;
+    background: $article-metadata-background;
+    
+    @include Article-Metadata.Wrapper-Horizontal("Every") { display: flex; width: 100% }
   }
 
   @include Article.Thumbnail {
@@ -91,7 +65,15 @@
     padding: 0.25rem;
   }
 
-  // Todo - Da sistemare allocazione
+
+  // Note - Default that needs to be overridden
+  @include Article-Metadata.Title{ font-size: 1.75rem; line-height: 1}
+  @include Article.Metadata{ font-size: 1rem; line-height: 1}
+  @include Article.Content { font-size: 1rem; line-height: 1}
+
+  
+  // Todo - Da sistemare allocazione !
+
   @include Article-Metadata.Category-Wrapper-Position("above-header") {
     position: absolute; // Using absolute will anchor it to the header
     /*prettier-ignore*/
@@ -152,11 +134,11 @@
   //        Todo - Magari tokenizzarli
   @container (height <= 200px) or (width <= 225px) {
     @include Article.Header {
-      @include Article-Header.Title-Full {
+      @include Article-Metadata.Title--Full {
         display: none;
         // Importante che almeno uno dei due title venga rimosso dall'accessibility tree
       }
-      @include Article-Header.Title-Small {
+      @include Article-Metadata.Title--Small {
         display: block;
       }
 

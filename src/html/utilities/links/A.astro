@@ -1,0 +1,8 @@
+---
+import Borders from "@components-p/fancy-borders/Borders.astro"
+---
+
+<a href="#" class="link-with-borders"> {/* Nome classe da rivedere */}
+  <slot/>
+  <Borders position='absolute' glow={false}/>
+</a>

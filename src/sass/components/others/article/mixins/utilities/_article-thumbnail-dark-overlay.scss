@@ -1,5 +1,7 @@
 @use "@SASS-Abstracts" as *;
-@mixin article-thumbnail-linear-gradient($linear-gradient: 'to bottom, transparent 30%, rgba(0, 0, 0, 0.604)') {
+// Todo - Mi ricordo che questo era da fixare
+// Todo - New name: apply-overlay-on-thumbnail
+@mixin thumbnail-overlay($linear-gradient: 'to bottom, transparent 30%, rgba(0, 0, 0, 0.604)') {
   .article__thumbnail::before {
     @include pseudo-absolute;
     position-anchor: --article-thumbnail;

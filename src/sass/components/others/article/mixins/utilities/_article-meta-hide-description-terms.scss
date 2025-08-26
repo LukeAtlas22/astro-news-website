@@ -1,0 +1,6 @@
+@use "@SASS-Abstracts" as *;
+
+// Todo - Anche questo potrebbe diventare universale, ma comunque tenendolo in article-utils-hide-meta-description-terms
+@mixin hide-meta-description-terms {
+  dt { @include sr-only; /* This will hide visually, but keep in the Accessibility Tree */ }
+}

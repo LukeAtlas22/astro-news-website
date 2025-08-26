@@ -1,10 +1,9 @@
 @use "@SASS-Abstracts" as *;
-@use "../../../mixins/article-meta-hide-description-terms" as *;
-@use "../../../mixins/article-thumbnail-dark-overlay" as *;
-@use "../../../mixins/anchor-on-thumbnail" as *;
-@use "../../../mixins/selectors/article-selectors" as Article;
-@use "../../../mixins/selectors/metadata/article-meta" as Article-Metadata; 
-@use "../../../mixins/selectors/metadata/article-meta-author" as Article-Metadata-Author;
+
+@use "@SASS-Article-Utilities" as *;
+@use "@SASS-Article-Selectors" as Article;
+@use "@SASS-Article-Selectors-Metadata" as Article-Metadata; 
+
 
 
 @include Article.Template('preview-3'){
@@ -15,7 +14,7 @@
   
   @include Article.Header{
     @include Article.Metadata{
-      @include HideMetaDescriptionTerms;
+      @include article-utils-hide-meta-description-terms;
       display: grid;
       gap: 0.75rem;
       

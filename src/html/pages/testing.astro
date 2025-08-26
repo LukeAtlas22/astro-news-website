@@ -1,0 +1,21 @@
+---
+import BaseLayoutEmpty from "@layouts/BaseLayoutEmpty.astro";
+import A from "@utilities/links/A.astro";
+---
+
+<BaseLayoutEmpty title="Test">
+  <div class="card">
+    <div class="borders-wrapper">
+      <div class="borders"></div>
+      <div class="foreground"></div>
+    </div>
+  </div>
+</BaseLayoutEmpty>
+
+<style>
+  body{
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+  }
+</style>

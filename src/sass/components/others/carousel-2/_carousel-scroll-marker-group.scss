@@ -64,7 +64,7 @@
       scroll-marker-group: after;
 
       &::scroll-marker-group { 
-
+        outline: 5px solid red !important;
         position: absolute; 
         position-anchor: --carousel;
         
@@ -79,7 +79,7 @@
         }
     
         @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) { // BOTTOM
-          bottom: calc(anchor(bottom) + var(--scroll-marker-position-inset--anchor-bottom));
+          bottom: calc(anchor(bottom) + var(--scroll-marker-position-inset--anchor-bottom) - 1.5rem);
         }
     
         @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {   // LEFT
@@ -123,11 +123,27 @@
           prop-name: justification,
           as: justify-self
         ),
+        (
+          prop-name: outline,
+        ),
+        (
+          prop-name: outline-offset
+        ),
+        (
+          prop-name: outline-radius,
+          as: border-radius,
+        ),
       )
     );
 
-    
-    block-size: var(--scroll-marker-size);
+    // Note - Anche questo è importante
+    // it has to contemplate - Max scaling ratio
+    // It has to contemplate - Max outline + outline offset ratio
+    // Note - Bisognerebbe aggiungere un calcolo matematico per questo 1.75
+    // Note questo 1.75 serve a non far tagliare il marker dell'overflow
+    // Note da rivedere un po
+    block-size: calc(var(--scroll-marker-size) * 1.75);
+
     align-self: $carousel-scroll-marker-group-self-alignment;
     
     writing-mode: horizontal-tb;
@@ -149,25 +165,24 @@
     anchor-name: --scroll-marker-group;
     // Internal markers
     display: flex;
-    grid-auto-flow: column;
-    justify-content: center;
-    align-items: center;
-    overflow-y: visible;
+    justify-content: center; // Note queste proprietà sono strane
+    align-items: center; 
+    overflow: auto;
     scrollbar-width: none;
-    scroll-behavior: smooth;
-    // Qui posso fare una view transition che li scala appena entrano in view...
-    
+    scroll-behavior: smooth;    
   }
 }
 
-
-
+// Note - Questa dovrebbe essere la prima cosa, o almeno una delle prime
 // █▄ █ ▄▀▄ █ █ █ ▄▀  ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █       █ █▄ █ █   █ █▄ █ ██▀    ▄▀▀ █ ▀█▀ ██▀       ▄▀▀ ▄▀▄ █   ▄▀▀ █ █ █   ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █ 
 // █ ▀█ █▀█ ▀▄▀ █ ▀▄█ █▀█  █  █ ▀▄▀ █ ▀█       █ █ ▀█ █▄▄ █ █ ▀█ █▄▄    ▄█▀ █ █▄▄ █▄▄       ▀▄▄ █▀█ █▄▄ ▀▄▄ ▀▄█ █▄▄ █▀█  █  █ ▀▄▀ █ ▀█ 
 
   $scroll-marker-inline-size: var(--scroll-marker-size);
   $scroll-marker-group-gap: var(--scroll-marker-group-gap);
-  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); // Note probabile anche questo in css var (?)
+
+  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); 
+  // Note probabile anche questo in css var (?)
+  // Note - Sì questa va fatta in CSS VAR
 
   .carousel::scroll-marker-group{
     inline-size: calc(
@@ -175,6 +190,20 @@
       ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
       ( $scroll-marker-group-margins-from-buttons )
     ); 
+
+    // Note - Questa è importante
+    /* Prevent carousel stretching along the navigation */
+    // Note - Magari qui possiamo migliorarlo, con javascript per avere sempre la miglior vista
+    // Note - Magari possiamo migliorarlo con qualche css per far vedere che è presente un overflow
+    // Note - Considerare l'uso di animation timeline scroll 
+    // Note - Per risolvere il clipping, potrei fare che se c'è overflow metto un po di box shadow
+    @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
+      max-inline-size: $carousel-width;
+      
+    }
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
+      max-inline-size: $carousel-height;
+    }
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,7 +221,7 @@
   $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
   $buttons-width: $carousel-buttons-width;
   @container --carousel-container style(--buttons-position: inside-navigation){
-    .carousel::scroll-marker-group{
+    .carousel::scroll-marker-group {
       margin-inline: calc(
         $buttons-width +
         $buttons-margins -

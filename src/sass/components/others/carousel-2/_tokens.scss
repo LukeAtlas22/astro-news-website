@@ -1,11 +1,15 @@
 @use "../../../abstracts" as *;
 
 $carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
-$carousel-height: clamp(10rem, 85cqw, 27.75rem); //Container: 'container' | Only use cqw
+$carousel-height: 425px; //Container: 'container' | Only use cqw
 $carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
 
-$carousel-sizing-behaviour: stretch-with-navigation; // stretch-with-navigation || ignore-navigation-size
+$carousel-sizing-behaviour: ignore-navigation-size; // stretch-with-navigation || ignore-navigation-size
+// Note - Secondo me questa complica molto le cose - 
+// Note - Togliamola, e facciamo che l'unica fonte di verità per le dimensioni del carosello è carousel width e height.
+// Note - In fondo, quand'è che avrò bisogno di un carosello che stretcha appresso alla navigation? mi sembra assurdo
+//
 
 $carousel-slide-width: 100%;
 $carousel-slide-height: 100%;
@@ -66,13 +70,13 @@ $carousel-buttons-positions-map: (
 );
 $carousel-buttons-position-outside-carousel: (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-inside-carousel:  (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
-$carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.5rem);
+$carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.725rem); // Note - Magari c'è un modo automatico per farlo?
 $carousel-buttons-position-right-carousel:   (horizontal-offset: 1.25rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-left-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-inside-navigation: (
-  margins-from-scroll-markers-group-when-default: 1rem,             // Only works with buttons position inside navigation
-  margins-from-scroll-markers-group-when-use-counter-numbers: 2rem, // Only works with buttons position inside navigation
-  margins-from-scroll-markers-group-when-use-slide-image: 2rem,     // Only works with buttons position inside navigation
+  margins-from-scroll-markers-group-when-default: 0rem,             // Only works with buttons position inside navigation
+  margins-from-scroll-markers-group-when-use-counter-numbers: 0rem, // Only works with buttons position inside navigation
+  margins-from-scroll-markers-group-when-use-slide-image: 0rem,     // Only works with buttons position inside navigation
 );
 $carousel-buttons-borders: 0px 0px 0px 2px white; // It's a box shadow but we use it as border
 $carousel-buttons-box-shadows: $carousel-buttons-borders;
@@ -101,16 +105,19 @@ $carousel-buttons-arrow-icon-outline-color: white;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: inside-frame, // Done
-    position-inset: (top: 2rem, right: 1rem), // Todo - Almost Done, Problema con defaults (container querys with ANDs)
+    position: after, // Done
+    position-inset: (top: 1rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
     orientation: horizontal, // Done
-    justification: right, // Done
+    justification: center, // Done
     alignment: center, // Note - I don't know if this should be here
 
     gap: 1.25rem, // Done
     
-    marker-size: 32px, // Done 
-    marker-border-radius: 0, // Note - forse meglio gestirlo nella mappa style
+    outline: none,        // Done 
+    outline-offset: none, // Done
+    outline-radius: none, // Done
+    
+    marker-size: 24px, // Done 
     marker-style: default, // Done
   ),
 
@@ -122,8 +129,11 @@ $carousel-navigation:( // Note - Name is temporaney
 
     gap: 2.25rem, // Note - Aggiungerò anche il gap
     
-    marker-size: 64px, // Note - we won't handle size anymore in the style map
-    marker-border-radius:  1, 
+    outline: none,
+    outline-offset: none,
+    outline-radius: none,
+    
+    marker-size: 52px, // Note - we won't handle size anymore in the style map
     marker-style: slide-image, // default | counter-numbers | slide-own-image
   ),
 );
@@ -137,17 +147,22 @@ $carousel-scroll-marker-styles:( // Note qui va bene
   // Memo - Do not declare width or height in here
   default:(
     border-radius: 100vw,
-    background-color: red,
-    background-color-hover: red,
-    background-color-active: red,
-    background-color-target-current: red,
-    border: 2px solid $body-background-color, //! Used as border offset
-    box-shadow: 0px 0px 0px 2px white,
-    box-shadow-hover: 0px 0px 0px 2px white,
-    box-shadow-active: 0px 0px 0px 2px white,
-    box-shadow-target-current: 0px 0px 0px 2px white,
+    background-color: pink,
+    background-color-hover: rgb(253, 106, 131),
+    background-color-active: rgb(243, 36, 71),
+    background-color-target-current: rgb(253, 23, 61),
+
+    // Note - Decidemmo di usare box-shadow perchè outline dava problemi in fase di transitioning 
+    // Note - Comunque, meglio l'outline, non mi va di usare box-shadow
+
+    outline: 2px solid rgba(255, 255, 255, 0.479),
+    outline-hover: 2px solid rgba(255, 255, 255, 0.699),
+    outline-active: 2px solid rgba(255, 255, 255, 0.76),
+    outline-target-current: 2px solid rgba(255, 255, 255, 0.76),
+    outline-offset: 3.25px,
+
     scale-hover: 1.1,
-    scale-target-current: 1.25,
+    scale-target-current: 1.25, // Note this has to be inferred as max scroll marker scale ratio
     transition: 375ms,
   ),
 

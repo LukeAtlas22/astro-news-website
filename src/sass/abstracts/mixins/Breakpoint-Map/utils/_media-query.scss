@@ -1,0 +1,5 @@
+@mixin Media-Query($breakpoint){
+  @media screen and #{$breakpoint}{ // Don't put parenthesis around breakpoint
+    @content;
+  }
+}

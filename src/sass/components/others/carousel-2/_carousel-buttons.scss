@@ -202,10 +202,6 @@
 
 
   // Position 6 - Inside Navigation
-  .carousel__container{
-    --scroll-marker-group-orientation: #{$carousel-scroll-marker-group-orientations-map};
-    /*Make this map (?)*/
-  }
   @container --carousel-container style(--buttons-position: inside-navigation) {
     @include BothButtons{
       position-anchor: --scroll-marker-group;

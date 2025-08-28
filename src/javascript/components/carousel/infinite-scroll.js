@@ -33,21 +33,13 @@ export function byDuplicateElements(e){
 
 
 function isLastSibling(slide){
-    if(slide.nextElementSibling == null)
-        return true;
-    else return false;
+    return slide.nextElementSibling === null;
 }
 function isFirstSibling(slide){
-    if(slide.previousElementSibling == null)
-        return true;
-    else return false;
+    return slide.previousElementSibling === null;
 }
-
-
 function IsMiddleSibling(slide){
-    if(slide.nextElementSibling != null && slide.previousElementSibling != null)
-        return true;
-    else return false;
+    return (slide.previousElementSibling !== null && slide.nextElementSibling !== null)
 }
 
 function CSS_ChangeOrder({targetEl, order}){

@@ -1,0 +1,61 @@
+---
+  import List from "@utilities/lists/List.astro"
+  import { getSlotLength } from "@utilities/lists/utils/getSlotLength"
+
+  const html = await Astro.slots.render('default');
+  const slideAmount = getSlotLength(html);
+
+  interface Props {
+    infiniteScroll: boolean,
+    autoplay: boolean,
+    /**
+     * In seconds
+     */
+    interval?: number,
+
+    class?: string,
+    style?: string, 
+  }
+
+  const {
+  infiniteScroll,
+  autoplay,
+  interval = 3.75,
+
+  class: className,
+  style,
+  ...props
+  } = Astro.props;
+---
+
+{/* Vuole essere contenuto */}
+
+<div class="carousel__anchor-scope | carousel__container">
+  <div class="carousel__wrapper"> {/* This fires some containers query on the parent - DO NOT REMOVE */}
+    
+      <List
+        type="unordered"
+        class="carousel"
+        classItems="carousel__slide"
+        data-infinite-scroll={infiniteScroll}
+        data-autoplay={autoplay}
+        data-interval={interval}
+        style=`--carousel-slide-amount: ${slideAmount}`
+      >
+        <slot></slot>
+      </List>
+  
+      <button class="carousel__button--right">
+        <div class="icon-container"></div>
+      </button>
+      <button class="carousel__button--left">
+        <div class="icon-container"></div>
+      </button>
+
+  </div>
+</div>
+
+<script >
+  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll'))
+    console.log('I will make the scroll infinite !');
+</script>

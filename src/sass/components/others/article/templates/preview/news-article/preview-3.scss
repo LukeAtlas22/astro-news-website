@@ -29,6 +29,9 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
         word-spacing: Token(title-word-spacing);
         text-decoration: Token(title-text-decoration);
         text-transform: Token(title-text-transform);
+
+        color: Token(title-color);
+        background: Token(title-background);
       }
 
       @include Article-Metadata.Wrapper-Horizontal(0) { 
@@ -40,6 +43,9 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
         word-spacing: Token(metadata-word-spacing);
         text-decoration: Token(metadata-text-decoration);
         text-transform: Token(metadata-text-transform);
+
+        color: Token(metadata-color);
+        background: Token(metadata-background);
       } 
     }
   }
@@ -52,6 +58,9 @@ $-Map: $news-article; /* && */ $-Template: "preview-3";
     word-spacing: Token(content-word-spacing);
 
     @include line-clamp(Token(content-line-clamp));
+
+    color: Token(content-color);
+    background: Token(content-background);
   }
 
   .line{

@@ -88,29 +88,54 @@ $carousel-buttons-arrow-icon-outline: 0.75;
 $carousel-buttons-arrow-icon-outline-offset: 0;
 $carousel-buttons-arrow-icon-outline-color: white;
 
-$carousel-scroll-marker-group-positions-map: (
-  (min, width, 1000px): after,
-  (max, width, 1000px): inside-frame,
-); // none !! before || after || inside-frame
-$carousel-scroll-marker-group-orientations-map: horizontal; // vertical || horizontal
-/*Todo: Make this map? */ $carousel-scroll-marker-group-self-justification: center; // It does not work with position inside-frame
-/*Todo: Make this map? */ $carousel-scroll-marker-group-self-alignment: center; // Leave it - Questo si può anche togliere dato che sarà sempre center
-/*Todo: Make this map? */ $carousel-scroll-marker-group-gap: 1.75rem;
-$carousel-scroll-marker-group-height: clamp(0.95rem, 6.75cqw, 2rem); //Todo - Tokenize default height
-$carousel-scroll-marker-backgrounds-styles-type-map:(
-  (min, width, 1400px): use-slide-image,
-  (max, width, 1400px): use-counter-numbers,
-  (max, width, 1000px): use-default
-);
-$carousel-scroll-marker-group-inside-frame--AnchorInsetMap: (
-  top: 2rem,
-  right: 1rem,
+// ▄▀▀ ▄▀▀ █▀▄ ▄▀▄ █   █      █▄ ▄█ ▄▀▄ █▀▄ █▄▀ ██▀ █▀▄    ▄▀  █▀▄ ▄▀▄ █ █ █▀▄ 
+// ▄█▀ ▀▄▄ █▀▄ ▀▄▀ █▄▄ █▄▄    █ ▀ █ █▀█ █▀▄ █ █ █▄▄ █▀▄    ▀▄█ █▀▄ ▀▄▀ ▀▄█ █▀  
+
+// Note - Sarà importante esporre una buona documentazione
+// Note - Questa mappa astrae il lavoro di preoccuparsi del posizionamento dello scroll marker group
+// Note - Tutto ciò relativo al posizionamento viene effettuato qui dentro (SRP)
+
+
+// Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
+// Note - Sarà importante creare una buona documentazione - Con tanti examples
+
+$carousel-navigation:( // Note - Name is temporaney
+  'default': (
+    position: inside-frame, // Done
+    position-inset: (top: 2rem, right: 1rem), // Todo - Almost Done, Problema con defaults (container querys with ANDs)
+    orientation: horizontal, // Done
+    justification: right, // Done
+    alignment: center, // Note - I don't know if this should be here
+
+    gap: 1.25rem, // Done
+    
+    marker-size: 32px, // Done 
+    marker-border-radius: 0, // Note - forse meglio gestirlo nella mappa style
+    marker-style: default, // Done
+  ),
+
+  '(width > 1000px)': (
+    position: before, // before | after | inside-frame
+    orientation: vertical, // vertical | horizontal
+    justification: center, // left | center | right
+    alignment: center, // only center - may be removed
+
+    gap: 2.25rem, // Note - Aggiungerò anche il gap
+    
+    marker-size: 64px, // Note - we won't handle size anymore in the style map
+    marker-border-radius:  1, 
+    marker-style: slide-image, // default | counter-numbers | slide-own-image
+  ),
 );
 
-$carousel-scroll-marker-styles:(
-  use-default:(
-    width: clamp(0.95rem, 6.75cqw, 2rem),
-    height: clamp(0.95rem, 6.75cqw, 2rem),
+$carousel-scroll-marker-group-self-alignment: center; // Notes - Questo si può anche togliere dato che sarà sempre center // - Rimuoverla (?)
+
+
+
+// Note - Rivedere i tokens della mappa style
+$carousel-scroll-marker-styles:( // Note qui va bene
+  // Memo - Do not declare width or height in here
+  default:(
     border-radius: 100vw,
     background-color: red,
     background-color-hover: red,
@@ -126,10 +151,12 @@ $carousel-scroll-marker-styles:(
     transition: 375ms,
   ),
 
-  slide-image-path:'https://picsum.photos/800/400?random', divisor: '=', ext: '',
-  use-slide-image:(
-    width: clamp(1.25rem, 6.75cqw, 2.5rem),
-    height: clamp(1.25rem, 6.75cqw, 2.5rem),
+  slide-image-path:'https://picsum.photos/800/400?random', divisor: '=', ext: '', 
+  // Note - Qui non so se conviene farlo così... 
+  // Note - Forse potrei usare Astro - 
+  // Note - Magari potrei usare dei mini-placeholder per delle immagini molto piccole estrapolate con getImage e caricarli solo se nella mappa layout c'è "slide-image"
+  // Memo - Do not declare width or height in here
+  slide-image:(
     background-color: transparent,
     background-color-hover: transparent,
     background-color-active: transparent,
@@ -139,9 +166,8 @@ $carousel-scroll-marker-styles:(
     background-position: center,
   ),
 
-  use-counter-numbers:(
-    width: clamp(1.25rem, 6.75cqw, 2.5rem),
-    height: clamp(1.25rem, 6.75cqw, 2.5rem),
+  // Memo - Do not declare width or height in here
+  counter-numbers:(
     background-color: black,
     background-color-hover: black,
     background-color-active: black,

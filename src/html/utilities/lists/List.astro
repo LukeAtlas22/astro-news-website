@@ -5,26 +5,40 @@ const html = await Astro.slots.render('default')
 const { document } = parseHTML(html)
 const children = Array.from(document.children);
 
-const { className, type = 'unordered' } = Astro.props as { className: string, type: 'unordered' | 'ordered' };
+interface Props {
+  class: string,
+  type: 'unordered' | 'ordered',
+  style: string,
+  classItems?: string,
+};
+const { 
+  type = 'unordered', 
+  class: className, 
+  style,
+  classItems = `${className}__item`, 
+  ...props
+  } = Astro.props;
+
 if (type !== 'unordered' && type !== 'ordered') throw new AstroError('Wrong type for <List/>');
 
 const wrappedChildren = children.map(child => {
   const li = document.createElement('li');
-  li.classList.add(`${className}__item`);
+  li.classList.add(classItems);
   li.appendChild(child);
   return li;
 })
 
+{/* Migliorare: Fare solo 1 statement */}
 ---
 {
   (type === 'unordered') &&
-  <ul class={className}>
+  <ul class={className} style={style} {...props}>
       {wrappedChildren}
   </ul>
 }
 {
   (type === 'ordered') &&
-  <ol class={className}>
+  <ol class={className} style={style} {...props}>
       {wrappedChildren}
   </ol>
 }

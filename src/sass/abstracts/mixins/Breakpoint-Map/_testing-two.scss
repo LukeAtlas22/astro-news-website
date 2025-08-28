@@ -1,0 +1,66 @@
+@use "utils/media-query" as *;
+@use "functions/prop-exist" as *;
+@use "sass:map";
+@use "sass:meta";
+
+@mixin write-declaration($css-prop, $value){
+  #{$css-prop}: #{$value};
+}
+
+$SUBMAP_KEY: sub-map;
+@function Submap-Request-Specified-On($props-map){
+  @return map.has-key($props-map, $SUBMAP_KEY);
+}
+
+@mixin Assign-Props($Map, $props-map, $breakpoint-props-map){
+  @each $prop in $props-map {
+    
+    @if Submap-Request-Specified-On($prop) {
+      $sub-map-name: map.get($prop, sub-map);
+      $sub-map: map.get($breakpoint-props-map, $sub-map-name);
+
+      $prop-name: map.get($prop, prop-name);
+
+      $css-prop: $prop-name;
+        @if (map.get($prop, as)) {$css-prop: map.get($prop, as)}
+
+      $value: null;
+      @if ($sub-map){
+        $value: map.get($sub-map, $prop-name);
+      }
+
+      @if ($value){
+        @include write-declaration($css-prop, $value);
+      }
+    }
+
+    @if not Submap-Request-Specified-On($prop) {
+
+      $prop-name: map.get($prop, prop-name);
+      @if not prop-exists-in-breakpoints-map($Map, $prop-name) {@error('The key: ', $prop-name, ' does not exist in any breakpoint of: ', $Map)}
+      
+      $css-prop: $prop-name;
+        @if (map.get($prop, as)) {$css-prop: map.get($prop, as)}
+      
+      $value: map.get($breakpoint-props-map, $prop-name);
+  
+      @if $value != null {
+        #{$css-prop}: #{$value};
+      }
+    }
+  }
+}
+
+
+@mixin Retrive-Multiple-Properties($Map, $props-map) {
+  @each $breakpoint, $breakpoint-props-map in $Map {
+    @if ($breakpoint == 'default'){
+      @include Assign-Props($Map, $props-map, $breakpoint-props-map);
+    }
+    @else if ($breakpoint != 'default') {
+      @include Media-Query(#{$breakpoint}) {
+        @include Assign-Props($Map, $props-map, $breakpoint-props-map);
+      }
+    }
+  }
+}

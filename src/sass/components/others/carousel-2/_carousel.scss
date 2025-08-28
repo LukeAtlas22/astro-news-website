@@ -1,45 +1,43 @@
 @use "../../../abstracts/" as *;
 @use "tokens" as *;
 
+$-carousel-scroll-marker-group-height: var(scroll-marker-size);
+
 .carousel__container {
-  @include declare-customProperty-by-mediaQuery-map(
-    $mediaQuery-values-map: $carousel-scroll-marker-group-orientations-map,
-    $customProperty: --scroll-marker-group-orientation
-  );
+  margin-inline: auto;
+  width: $carousel-width;
+  height: $carousel-height;
 }
 
 .carousel__wrapper {
-  margin-inline: auto;
-  width: $carousel-width;
-
   @container --carousel-container not style(--scroll-marker-group-position: inside-frame){
     height: calc(
       $carousel-height +
         $carousel-gap-between-carousel-and-navigation +
-        $carousel-scroll-marker-group-height
+        var(--scroll-marker-size)
     );
   }
 
-  // if $carousel-scroll-marker-group-positions-map contains inside-frame
   @container --carousel-container style(--scroll-marker-group-position: inside-frame){
     height: $carousel-height;
-
   }
   
   gap: $carousel-gap-between-carousel-and-navigation;
+
   display: grid;
 }
 
 .carousel__wrapper {
-  @if (does-map-contains-value($map: $carousel-scroll-marker-group-positions-map, $value: before)) { 
-    @if (does-map-contains-value($map: $carousel-scroll-marker-group-orientations-map, $value: vertical)) {
+  @if (true) { 
+    @if (true) {
       @container --carousel-container 
-        style(--scroll-marker-group-position: before) and
+        style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
           grid-template-columns: min-content 1fr;
       }
     }
-    @if (does-map-contains-value($map: $carousel-scroll-marker-group-orientations-map, $value: horizontal)) {
+    
+    @if (true) {
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and
         style(--scroll-marker-group-orientation: horizontal) {
@@ -48,15 +46,15 @@
     }
   }
 
-  @if (does-map-contains-value($map: $carousel-scroll-marker-group-positions-map, $value: after)) {
-    @if (does-map-contains-value($map: $carousel-scroll-marker-group-orientations-map, $value: vertical)) {
+  @if (true) {
+    @if (true) {
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: vertical) {
           grid-template-columns: 1fr min-content;
         }
     }
-    @if (does-map-contains-value($map: $carousel-scroll-marker-group-orientations-map, $value: horizontal)) {
+    @if (true) {
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: horizontal) {

@@ -1,0 +1,33 @@
+---
+  import BaseLayoutEmpty from "@layouts/BaseLayoutEmpty.astro";
+  import Carousel from "@components-p/carousel/Carousel.astro";
+---
+
+<BaseLayoutEmpty title="Carousel Testing">
+  <Carousel infiniteScroll autoplay>
+    {/* Qui vanno gli item che possono essere:
+          Immagini
+          Video
+          Articles
+          Insomma, di tutto - Dev'essere item-agonstic
+
+          All'interno di Carousel usiamo List Utility per automatizzare la creazione di <li></li>
+
+          Però prima c'è un wall : Bisogna trovare e imparare un'ottima libreria multimediale per immagini e video.
+    */}  
+    
+    <div style="height: 100%; background: purple"></div>
+    <div style="height: 100%; background: goldenrod"></div>
+    <div style="height: 100%; background: blue"></div>
+  </Carousel>
+</BaseLayoutEmpty>
+
+{/* Temporaney */}
+<style>
+  body{
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+  }
+</style>
+{/* Temporaney */}

@@ -9,8 +9,8 @@ category: ["News"]
 tags: []
 thumbnail:
   {
-    src: "../../../public/baloon.jpg",
-    altText: "President speaking at white house",
+    src: "./src/content/images/baloon.jpg",
+    altText: "Testing",
   }
 ---
 

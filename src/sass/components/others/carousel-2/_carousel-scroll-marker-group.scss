@@ -3,104 +3,189 @@
 @use "../../../abstracts/" as *;
 @use "sass:map";
 
+
+// Note - Magari questa roba potrebbe essere spostata in position o positioning
+ 
+@function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
+
 .carousel__container{
-  @include declare-customProperty-by-mediaQuery-map(
-    $mediaQuery-values-map: $carousel-scroll-marker-group-positions-map, 
-    $customProperty: --scroll-marker-group-position
+  @include Breakpoint-Map--Retrive-Multiple-Properties(
+    $Map: $carousel-navigation, 
+    $props-map: (
+      (
+        prop-name: position,
+        as: --scroll-marker-group-position,
+      ),
+      (
+        prop-name: orientation,
+        as: --scroll-marker-group-orientation,
+      ),
+      (
+        prop-name: gap,
+        as: --scroll-marker-group-gap, // Need like that because we use it in calculations
+      ),
+      (
+        prop-name: marker-size,
+        as: --scroll-marker-size,
+      ),
+
+      /* Evalutating anchor position insets for navigation (scroll marker group) */
+      (
+        sub-map: position-inset,
+        prop-name: top,
+        as: --scroll-marker-position-inset--anchor-top,
+      ),
+      (
+        sub-map: position-inset,
+        prop-name: right,
+        as: --scroll-marker-position-inset--anchor-right,
+      ),
+      (
+        sub-map: position-inset,
+        prop-name: bottom,
+        as: --scroll-marker-position-inset--anchor-bottom,
+      ),
+      (
+        sub-map: position-inset,
+        prop-name: left,
+        as: --scroll-marker-position-inset--anchor-left,
+      ),
+      /* ========================================================================= */
+    )
   );
 }
-.carousel {
-  scroll-marker-group: var(--scroll-marker-group-position);
 
-  @if(does-map-contains-value($map: $carousel-scroll-marker-group-positions-map, $value: inside-frame)){
+.carousel {
+  scroll-marker-group: var(--scroll-marker-group-position); 
+  // Note forse potrei wrappare questa variabile in una function tipo Dinamyc-CSS-Variable per migliorare la lettura del codice
+
+  @if User-Needs(position inside-frame) {
     @container --carousel-container style(--scroll-marker-group-position: inside-frame){
       scroll-marker-group: after;
+
       &::scroll-marker-group { 
+
         position: absolute; 
         position-anchor: --carousel;
-        @include set-anchor-positioning-from-($carousel-scroll-marker-group-inside-frame--AnchorInsetMap);
+        
+        /* Applying varous anchor insets for the insets of the navigation ============================= */
+
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-top) {    // TOP
+          top: calc(anchor(top) + var(--scroll-marker-position-inset--anchor-top));
+        }
+    
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-right) {  // RIGHT
+          right: calc(anchor(right) + var(--scroll-marker-position-inset--anchor-right));
+        }
+    
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) { // BOTTOM
+          bottom: calc(anchor(bottom) + var(--scroll-marker-position-inset--anchor-bottom));
+        }
+    
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {   // LEFT
+          left: calc(anchor(left) + var(--scroll-marker-position-inset--anchor-left));
+        }
+
+        /* ============================================================================================ */
+
+        /* Applying - Fallback - Default ============================= */
+        // Note - I don't know why this is not working
+        // @container --carousel-container 
+        //   not style(--scroll-marker-position-inset--anchor-top),
+        //   not style(--scroll-marker-position-inset--anchor-right),
+        //   not style(--scroll-marker-position-inset--anchor-bottom), 
+        //   not style(--scroll-marker-position-inset--anchor-left){
+        //     outline: 5px solid red !important;
+        //   }
       }
     }
+
   }
+
+  // Note - Magari questa roba potrebbe essere spostata in position o positioning ^^
+  // -----------------------------------------------------------------------------
 
   &::scroll-marker-group {
 
+    gap: var(--scroll-marker-group-gap); // Leave it
+
+    // Note - Richiede che venga passato il numero di slide in qualche modo <- 
+    // Note - Prima usava JS - Ora usa Astro (Passing the props in style attr)
+    // inline-size: map.get(map.get($carousel-scroll-marker-styles, use-default), width); - Questo si può togliere
+    
     // Self alignment & sizing
-    justify-self: $carousel-scroll-marker-group-self-justification;
+    
+
+    @include Breakpoint-Map--Retrive-Multiple-Properties( 
+      $Map: $carousel-navigation,
+      $props-map:(
+        (
+          prop-name: justification,
+          as: justify-self
+        ),
+      )
+    );
+
+    
+    block-size: var(--scroll-marker-size);
     align-self: $carousel-scroll-marker-group-self-alignment;
-    block-size: map.get(map.get($carousel-scroll-marker-styles, use-default), height);
-    writing-mode: $carousel-scroll-marker-group-orientations-map + -lr;
+    
+    writing-mode: horizontal-tb;
+    // if user needs orientation vertical
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical){ // Note valutare come vogliamo fare questo
+      writing-mode: vertical-lr;
+    }
+
+    flex-direction: row;
+    // if User-Needs direction invert
+    @container --carousel-container style(--scroll-marker-group-direction: invert){ // Note valutare come vogliamo fare questo
+      flex-direction: row-reverse;
+    }
+
+
+    // Note - Inoltre si è detto che questo organismo deve controllare i suoi markers, size < 
 
     // Anchor
     anchor-name: --scroll-marker-group;
-
-    //inline-size
-    inline-size: map.get(map.get($carousel-scroll-marker-styles, use-default), width);
-    
     // Internal markers
-    display: grid;
+    display: flex;
     grid-auto-flow: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     overflow-y: visible;
-    gap: $carousel-scroll-marker-group-gap;
     scrollbar-width: none;
     scroll-behavior: smooth;
     // Qui posso fare una view transition che li scala appena entrano in view...
+    
   }
 }
 
-@if (true){ //Always, only need this for scope
-  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-slide-image, $get: width);
-  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
-  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+
+
+// █▄ █ ▄▀▄ █ █ █ ▄▀  ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █       █ █▄ █ █   █ █▄ █ ██▀    ▄▀▀ █ ▀█▀ ██▀       ▄▀▀ ▄▀▄ █   ▄▀▀ █ █ █   ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █ 
+// █ ▀█ █▀█ ▀▄▀ █ ▀▄█ █▀█  █  █ ▀▄▀ █ ▀█       █ █ ▀█ █▄▄ █ █ ▀█ █▄▄    ▄█▀ █ █▄▄ █▄▄       ▀▄▄ █▀█ █▄▄ ▀▄▄ ▀▄█ █▄▄ █▀█  █  █ ▀▄▀ █ ▀█ 
+
+  $scroll-marker-inline-size: var(--scroll-marker-size);
+  $scroll-marker-group-gap: var(--scroll-marker-group-gap);
+  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); // Note probabile anche questo in css var (?)
 
   .carousel::scroll-marker-group{
-      inline-size: calc(
-        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
-        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
-        ( $scroll-marker-group-margins-from-buttons )
-      );
-    }
-}
-
-
-// If use slide image
-@if (map.has-key($map: $carousel-scroll-marker-styles, $key: use-slide-image)){
-  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-slide-image, $get: width);
-  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
-  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-slide-image); // A.K.A - Inline padding
-
-  @container --carousel-container style(--scroll-marker-background: use-slide-image){
-    .carousel::scroll-marker-group{
-      inline-size: calc(
-        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
-        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
-        ( $scroll-marker-group-margins-from-buttons )
-      );
-    }
+    inline-size: calc(
+      ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
+      ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
+      ( $scroll-marker-group-margins-from-buttons )
+    ); 
   }
-}
 
-// If use counter numbers
-@if (map.has-key($map: $carousel-scroll-marker-styles, $key: use-counter-numbers)){
-  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-counter-numbers, $get: width);
-  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
-  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers);
-
-  @container --carousel-container style(--scroll-marker-background: use-counter-numbers){
-    .carousel::scroll-marker-group{
-      inline-size: calc(
-        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
-        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
-        ( $scroll-marker-group-margins-from-buttons )
-      );
-    }
-  }
-}
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+
+// Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
+// Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
 ////////////////////////////////////////////////////
+/// Notes - I don't know where this should be
+/// 
 //Todo - Da sistemare meglio
 //! Setting inline margins if buttons position it's inside navigation
 @if (true){ // If to do
@@ -131,8 +216,4 @@
       );
     }
   }
-}
-//! Temp
-.carousel__container{
-  --scroll-marker-group-orientation: #{$carousel-scroll-marker-group-orientations-map};
 }

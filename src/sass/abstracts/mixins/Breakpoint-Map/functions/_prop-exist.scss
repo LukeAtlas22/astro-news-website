@@ -1,0 +1,9 @@
+@use "sass:map";
+@function prop-exists-in-breakpoints-map($Map, $prop) {
+  @each $breakpoint, $props in $Map {
+    @if map.has-key($props, $prop) {
+      @return true;
+    }
+  }
+  @return false;
+}

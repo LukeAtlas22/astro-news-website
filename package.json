@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "astro": "^5.12.0",
-    "linkedom": "^0.18.11",
-    "sass": "^1.89.2"
+    "astro-simple-art-direction": "^1.0.8",
+    "linkedom": "^0.18.11"
   },
   "devDependencies": {
     "postcss-scss": "^4.0.9",
+    "sass": "^1.91.0",
     "stylelint": "^16.23.1"
   }
 }

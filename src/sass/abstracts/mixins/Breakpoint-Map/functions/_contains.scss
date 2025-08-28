@@ -1,0 +1,35 @@
+@function does-map-contains--key($map, $target-key) {
+  @each $breakpoint, $props-map in $map {
+    @each $key, $value in $props-map {
+      @if $key == $target-key {
+        @return true;
+      }
+    }
+  }
+  @return false;
+}
+
+@function does-map-contains--value($map, $target-value) {
+  @each $breakpoint, $props-map in $map {
+    @each $key, $value in $props-map {
+      @if $value == $target-value {
+        @return true;
+      }
+    }
+  }
+  @return false;
+}
+
+/// Don't use ':'
+/// @example
+/// does-map-contains--entry($map, (position after))
+@function does-map-contains--entry($map, $target-entry) {
+  @each $breakpoint, $props-map in $map {
+    @each $entry in $props-map {
+      @if $entry == $target-entry {
+        @return true;
+      }
+    }
+  }
+  @return false;
+}

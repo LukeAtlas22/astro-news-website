@@ -1,4 +1,4 @@
-@use "./defaults.scss" as D;
+@use "./defaults.scss" as Defaults;
 
 
 // █▄ █ ██▀ █   █ ▄▀▀    ▄▀▄ █▀▄ ▀█▀ █ ▄▀▀ █   ██▀ 
@@ -7,12 +7,6 @@
 // Todo - Dovrei dare dei nomi più specifici a questi preview
 
 $news-article: (
-  
-  // [NameTemplate]--[NameVariant]: (
-  // token-1: test,
-  // token-1: test,
-  //);
-
   preview-1: (
     text-alignment: left,
 
@@ -27,8 +21,8 @@ $news-article: (
     title-letter-spacing: 0px,
     title-word-spacing: 0px,
     title-text-decoration: none,
-    title-text-transform: D.$article-heading-text-transform,
-    title-color: D.$article-heading-color-on-thumbnail,
+    title-text-transform: Defaults.$article-heading-text-transform,
+    title-color: Defaults.$article-heading-color-on-thumbnail,
     title-background: transparent,
     
     metadata-wrapper-gap: 3rem,
@@ -36,8 +30,8 @@ $news-article: (
     metadata-font-weight: 600,
     metadata-letter-spacing: 0,
     metadata-word-spacing: 0,
-    metadata-text-color: D.$article-metadata-color-on-thumbnail,
-    metadata-background: D.$article-metadata-background-on-thumbnail,
+    metadata-text-color: Defaults.$article-metadata-color-on-thumbnail,
+    metadata-background: Defaults.$article-metadata-background-on-thumbnail,
   ),
 
   preview-2: (
@@ -56,9 +50,9 @@ $news-article: (
     title-letter-spacing: 0px,
     title-word-spacing: 0px,
     title-text-decoration: none,
-    title-text-transform: D.$article-heading-text-transform,
-    title-color: D.$article-heading-color-on-thumbnail,
-    title-background: transparent,
+    title-text-transform: Defaults.$article-heading-text-transform,
+    title-color: Defaults.$article-heading-color-on-thumbnail,
+    title-background: Defaults.$article-heading-background-on-thumbnail,
 
     content-font-size: 1.1rem,
     content-font-weight: normal,
@@ -66,8 +60,8 @@ $news-article: (
     content-line-clamp-fade: 9.75, 
     content-letter-spacing: 0,
     content-word-spacing: 0,
-    content-color: D.$article-text-color-on-thumbnail,
-    content-background: transparent,
+    content-color: Defaults.$article-text-color-on-thumbnail,
+    content-background: Defaults.$article-text-background-on-thumbnail,
   ),
 
   preview-3: (
@@ -83,6 +77,8 @@ $news-article: (
     title-word-spacing: 1,
     title-text-decoration: 1,
     title-text-transform: 1,
+    title-color: Defaults.$article-heading-color,
+    title-background: Defaults.$article-heading-background,
 
     metadata-wrapper-gap: 2rem,
     metadata-font-size: 0.85rem,
@@ -91,20 +87,24 @@ $news-article: (
     metadata-word-spacing: 1,
     metadata-text-decoration: none,
     metadata-text-transform: none,
+    metadata-color: Defaults.$article-metadata-color,
+    metadata-background: Defaults.$article-metadata-background,
     
     line-color: rgba(0, 0, 0, 0.308), // Todo - Use a token
 
-    content-font-size: 1rem,
+    content-font-size: 0.85rem,
     content-font-weight: 500,
-    content-line-height: 1.15,
+    content-line-height: 1.45,
     content-line-clamp: 5,
     content-letter-spacing: 1,
     content-word-spacing: 1,
+    content-color: Defaults.$article-text-color,
+    content-background: Defaults.$article-text-background,
   ),
 
   // Template: [NameTemplate] - Variant: [NameVariant]
   preview-4: (
-    invert: 0, //? 0 || -1 => Order between content & thumbnail
+    invert: 0, // ? -  0 || -1 => Order between content & thumbnail
     thumbnail-space: 45%,
     content-space: 55%,
     gap: 2rem,
@@ -114,8 +114,8 @@ $news-article: (
     title-letter-spacing: 0px,
     title-word-spacing: 0px,
     title-text-decoration: none,
-    title-text-transform: D.$article-heading-text-transform,
-    title-color: D.$article-heading-color, 
+    title-text-transform: Defaults.$article-heading-text-transform,
+    title-color: Defaults.$article-heading-color, 
     title-background: transparent,
 
     content-font-size: 0.8rem,
@@ -124,8 +124,8 @@ $news-article: (
     content-line-clamp: 4,
     content-letter-spacing: 1,
     content-word-spacing: 1,
-    content-color: D.$article-text-color, 
-    content-background: D.$article-text-background,
+    content-color: Defaults.$article-text-color, 
+    content-background: Defaults.$article-text-background,
 
     metadata-wrapper-gap: 2rem,
     metadata-wrapper-justification: space-between,
@@ -133,8 +133,8 @@ $news-article: (
     metadata-font-weight: 500,
     metadata-letter-spacing: 0,
     metadata-word-spacing: 0,
-    metadata-text-color: D.$article-metadata-color,
-    metadata-background: D.$article-metadata-background,
+    metadata-text-color: Defaults.$article-metadata-color,
+    metadata-background: Defaults.$article-metadata-background,
   )
 );
 

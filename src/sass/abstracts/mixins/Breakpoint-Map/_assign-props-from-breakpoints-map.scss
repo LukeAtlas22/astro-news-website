@@ -1,0 +1,15 @@
+@use "helpers/media-query" as *;
+@use "assign-prop-from-simple-map" as *;
+
+@mixin Consume-PropsDirectives-ForEach-Breakpoint-Map($Map, $props-directives-map) {
+  @each $breakpoint, $breakpoint-inner-map in $Map {
+    @if ($breakpoint == 'default'){
+      @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
+    }
+    @else if ($breakpoint != 'default') {
+      @include Media-Query(#{$breakpoint}) {
+        @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
+      }
+    }
+  }
+}

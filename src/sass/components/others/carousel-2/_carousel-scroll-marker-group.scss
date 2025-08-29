@@ -3,15 +3,16 @@
 @use "../../../abstracts/" as *;
 @use "sass:map";
 
-
 // Note - Magari questa roba potrebbe essere spostata in position o positioning
- 
+
 @function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
 
+ 
+
 .carousel__container{
-  @include Breakpoint-Map--Retrive-Multiple-Properties(
+  @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
     $Map: $carousel-navigation, 
-    $props-map: (
+    $props-directives-map: (
       (
         prop-name: position,
         as: --scroll-marker-group-position,
@@ -56,6 +57,9 @@
 }
 
 .carousel {
+
+  
+
   scroll-marker-group: var(--scroll-marker-group-position); 
   // Note forse potrei wrappare questa variabile in una function tipo Dinamyc-CSS-Variable per migliorare la lettura del codice
 
@@ -116,9 +120,9 @@
     // Self alignment & sizing
     
 
-    @include Breakpoint-Map--Retrive-Multiple-Properties( 
+    @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map( 
       $Map: $carousel-navigation,
-      $props-map:(
+      $props-directives-map:(
         (
           prop-name: justification,
           as: justify-self
@@ -136,12 +140,8 @@
       )
     );
 
-    // Note - Anche questo è importante
-    // it has to contemplate - Max scaling ratio
-    // It has to contemplate - Max outline + outline offset ratio
-    // Note - Bisognerebbe aggiungere un calcolo matematico per questo 1.75
+
     // Note questo 1.75 serve a non far tagliare il marker dell'overflow
-    // Note da rivedere un po
     block-size: calc(var(--scroll-marker-size) * 1.75);
 
     align-self: $carousel-scroll-marker-group-self-alignment;
@@ -181,22 +181,17 @@
   $scroll-marker-group-gap: var(--scroll-marker-group-gap);
 
   $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); 
-  // Note probabile anche questo in css var (?)
-  // Note - Sì questa va fatta in CSS VAR
+  // Todo - This should be a css var
 
   .carousel::scroll-marker-group{
     inline-size: calc(
       ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
       ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
-      ( $scroll-marker-group-margins-from-buttons )
+      ( $scroll-marker-group-margins-from-buttons )  // Todo - This should be a css var
     ); 
 
-    // Note - Questa è importante
+
     /* Prevent carousel stretching along the navigation */
-    // Note - Magari qui possiamo migliorarlo, con javascript per avere sempre la miglior vista
-    // Note - Magari possiamo migliorarlo con qualche css per far vedere che è presente un overflow
-    // Note - Considerare l'uso di animation timeline scroll 
-    // Note - Per risolvere il clipping, potrei fare che se c'è overflow metto un po di box shadow
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
       max-inline-size: $carousel-width;
       
@@ -209,6 +204,7 @@
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+// Todo Da fixare questo giù
 
 // Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
 // Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation

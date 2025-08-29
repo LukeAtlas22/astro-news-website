@@ -1,0 +1,47 @@
+@use "sass:map";
+@use "sass:meta";
+@use "prop-directive-type" as Prop-Directive;
+
+// ================ U T I L I T I E S ===========================
+
+@mixin write-declaration-if-value-exist($css-prop, $value){
+  @if ($value) { #{$css-prop}: #{$value} };
+}
+
+
+@function Submap-Request-Specified-On($props-directives-map){
+  @return map.has-key($props-directives-map, Prop-Directive.$SUBMAP_KEY);
+}
+
+@function get-prop-name($prop-directive){
+  @return map.get($prop-directive, Prop-Directive.$NAME_KEY);
+}
+
+@function resolve-css-prop-name($prop-directive) {
+  $css-prop: map.get($prop-directive, prop-name);
+  @if (map.get($prop-directive, Prop-Directive.$CSS_ALIAS)) {
+    $css-prop: map.get($prop-directive, Prop-Directive.$CSS_ALIAS);
+  }
+  @return $css-prop;
+}
+
+@function get-submap($map, $prop-directive){
+  $sub-map-name: map.get($prop-directive, sub-map);
+  $sub-map: map.get($map, $sub-map-name);
+  @return $sub-map;
+}
+
+
+/// @return {null | CSS-Value} -
+@function get-value-from-submap($sub-map, $prop-name){
+  @if (not $sub-map) {@return null};
+
+  $value: map.get($sub-map, $prop-name);
+  @return $value;
+}
+
+@function get-value-from-map($map, $prop-name){
+  @return map.get($map, $prop-name);
+}
+
+// ================================================================

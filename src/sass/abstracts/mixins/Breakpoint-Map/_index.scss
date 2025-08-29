@@ -5,5 +5,5 @@
 
 // Mixins
 
-@forward "testing-one" as Breakpoint-Map--*;
-@forward "testing-two" as Breakpoint-Map--*;
+@forward "assign-props-from-breakpoints-map" as Breakpoints-Map--*;
+@forward "assign-prop-from-simple-map" as Simple-Map--*;

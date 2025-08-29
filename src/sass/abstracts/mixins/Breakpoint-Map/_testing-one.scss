@@ -3,6 +3,8 @@
 @use "utils/media-query" as *;
 // Note - Da qualche parte mi servirà una function validate breakpoint / media query
 
+// ! Questo non lo utilizziamo più, ora facciamo tutto con l'altro, che permette di usare sia multiple prop che singole.
+
 /// Allows you to extrapolate a single value from every breakpoint of a breakpoint-map | Then, you can assign this values, (responsively) to a CSS-Variable | If a breakpoint doesn't not meant to have the property, then, it doesn't make anything for that specific breakpoint.
 /// @param {type} $Map - A breakpoint only map - Every breakpoint of the map contains a list of key-value pair. 
 /// @param {type} $CSS-Variable - The custom property on which you want to assign the different values, for the different breakpoint

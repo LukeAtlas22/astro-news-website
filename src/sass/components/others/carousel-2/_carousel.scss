@@ -67,15 +67,17 @@
 .carousel {
   margin-inline: auto;
   position: relative;
-  @if ($carousel-sizing-behaviour == ignore-navigation-size) {         
-    // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
-    width: $carousel-width;
-    height: $carousel-height;
-  } @else if ($carousel-sizing-behaviour == stretch-with-navigation) { 
-    // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
-    width: 100%;
-    height: 100%;
-  }
+  width: $carousel-width;
+  height: $carousel-height;
+  // @if ($carousel-sizing-behaviour == ignore-navigation-size) {         
+  //   // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
+  //   width: $carousel-width;
+  //   height: $carousel-height;
+  // } @else if ($carousel-sizing-behaviour == stretch-with-navigation) { 
+  //   // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
+  //   width: 100%;
+  //   height: 100%;
+  // }
   background: $carousel-background;
   align-items: center; // Don't justify
   border-radius: $carousel-border-radius;

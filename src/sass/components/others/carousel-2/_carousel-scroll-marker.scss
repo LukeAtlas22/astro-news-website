@@ -2,16 +2,28 @@
 @use "../../../abstracts/" as *;
 @use "tokens" as *;
 
+
+// ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▄ ▄█ ▄▀▄ █▀▄  // =================================================
+// ▄█▀  █   █  █▄▄ █▄▄    █ ▀ █ █▀█ █▀   // =================================================
+
 .carousel__container {
-  @include Breakpoint-Map--Retrive-Multiple-Properties(
+  @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
     $Map: $carousel-navigation, 
-    $props-map: (
+    $props-directives-map: (
       (
         prop-name: marker-style,
         as: --scroll-marker-style,
       ),
-    ));
+    )
+  );
 }
+
+// ==========================================================================================
+
+
+
+// █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  // ===========================================================
+// █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  // ============================================================
 
 .carousel__slide::scroll-marker{
   @include pseudo;
@@ -19,17 +31,29 @@
   height: var(--scroll-marker-size);
   flex-shrink: 0;
 
-  // █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀ 
-  // █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  
-
+  --look-here: look;
   @include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
+  // Note Deprecare in favore di Consume-PropsDirective Mixins ?
+
+  background-clip: padding-box;
+  outline: none; // Gives animation problems - Use box-shadow instead
+  
+
+  
 }
 
+// ==========================================================================================
 
-// ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀ 
-// ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄ 
+
+
+// ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀ // ==============================================
+// ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄ // ==============================================
 
 @if (true){ // Todo - Need to fix those ifs
+  // Note - Questo dovrebbe essere fatto con Astro, getImage <-
+  // Note - Di norma, le immagini dei markers, non saranno mai prese da internet
+  // Note - Dovrebbe esistere una directory particolare tipo: Carousel Scroll Marker Images
+
   @container --carousel-container style(--scroll-marker-style: slide-image) {
     @include apply-background-image-on-sequence-of-child(
       $childs-selector: '.carousel__slide',
@@ -45,9 +69,12 @@
   }
 }
 
+// ==========================================================================================
 
-// ▄▀▀ ▄▀▄ █ █ █▄ █ ▀█▀ ██▀ █▀▄    █▄ █ █ █ █▄ ▄█ ██▄ ██▀ █▀▄ 
-// ▀▄▄ ▀▄▀ ▀▄█ █ ▀█  █  █▄▄ █▀▄    █ ▀█ ▀▄█ █ ▀ █ █▄█ █▄▄ █▀▄ 
+
+
+// ▄▀▀ ▄▀▄ █ █ █▄ █ ▀█▀ ██▀ █▀▄    █▄ █ █ █ █▄ ▄█ ██▄ ██▀ █▀▄ // =============================
+// ▀▄▄ ▀▄▀ ▀▄█ █ ▀█  █  █▄▄ █▀▄    █ ▀█ ▀▄█ █ ▀ █ █▄█ █▄▄ █▀▄ // =============================
 
 @if (true){ // Todo - Need to fix those ifs
   @container --carousel-container style(--scroll-marker-style: counter-numbers){
@@ -59,4 +86,4 @@
   }
 }
 
-
+// ==========================================================================================

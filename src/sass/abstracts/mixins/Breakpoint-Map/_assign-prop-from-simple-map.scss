@@ -1,0 +1,26 @@
+@use "helpers/media-query" as *;
+@use "helpers/utilities" as *;
+@use "functions/prop-exist" as *;
+
+// Note - Alternative name: Selective-Apply-Declarations
+@mixin Consume-PropsDirective-Over-Map($props-directives-map, $map){
+  @each $prop-directive in $props-directives-map {
+    
+    @if Submap-Request-Specified-On($prop-directive) {
+      $prop-name: get-prop-name($prop-directive);
+      $css-prop: resolve-css-prop-name($prop-directive);
+      $sub-map: get-submap($map, $prop-directive);
+      $value: get-value-from-submap($sub-map, $prop-name);
+
+      @include write-declaration-if-value-exist($css-prop, $value);
+    }
+
+    @if not Submap-Request-Specified-On($prop-directive) {
+      $prop-name: get-prop-name($prop-directive);
+      $css-prop: resolve-css-prop-name($prop-directive);
+      $value: get-value-from-map($map, $prop-name);
+      
+      @include write-declaration-if-value-exist($css-prop, $value);
+    }
+  }
+}

@@ -1,7 +1,9 @@
 @use "../../../abstracts" as *;
 
+// Todo - Maybe it wants to be contained "size" (?)
+
 $carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
-$carousel-height: 425px; //Container: 'container' | Only use cqw
+$carousel-height: clamp(10rem, 65cqw, 27.75rem); //Container: 'container' | Only use cqw
 $carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
 
@@ -145,6 +147,10 @@ $carousel-scroll-marker-group-self-alignment: center; // Notes - Questo si può 
 // Note - Rivedere i tokens della mappa style
 $carousel-scroll-marker-styles:( // Note qui va bene
   // Memo - Do not declare width or height in here
+  
+  // ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀ 
+  // ▄█▀  █   █  █▄▄ █▄▄    █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  
+
   default:(
     border-radius: 100vw,
     background-color: pink,
@@ -155,17 +161,33 @@ $carousel-scroll-marker-styles:( // Note qui va bene
     // Note - Decidemmo di usare box-shadow perchè outline dava problemi in fase di transitioning 
     // Note - Comunque, meglio l'outline, non mi va di usare box-shadow
 
-    outline: 2px solid rgba(255, 255, 255, 0.479),
-    outline-hover: 2px solid rgba(255, 255, 255, 0.699),
-    outline-active: 2px solid rgba(255, 255, 255, 0.76),
-    outline-target-current: 2px solid rgba(255, 255, 255, 0.76),
+    
+    //outline-visible: 3px solid goldenrod, // Todo - Bisogna fixare questo problema nel mixin. Magari usiamo un nuovo mixin, tipo Simple Map sulla falsariga di Breakpoint Map che ci permette di scegliere la prop di arrivo in css
+
+    
+    box-shadow: 0px 0px 0px 0.25px red,
+    box-shadow-hover: 0px 0px 0px 0.25px red,
+    box-shadow-active: 0px 0px 0px 0.25px cyan,
+    box-shadow-target-current: 0px 0px 0px 0.3px white,
+
+    // Box shadow offset
+    border: 3px solid transparent,   
+ 
+    // Keyboard navigation
+    outline-focus-visible: 1.25px solid rgb(147, 147, 255),
     outline-offset: 3.25px,
+
+    // Note - Non voglio usare outline
+    // Memo - all'interno di ::Scroll-marker ci sarà outline: none
+    // ! Outline da problemi di animazione su questo marker element
+    // Todo Dobbiamo comunque risolvere il problema -visible nel mixin
 
     scale-hover: 1.1,
     scale-target-current: 1.25, // Note this has to be inferred as max scroll marker scale ratio
     transition: 375ms,
   ),
 
+  // Note - Forse per questo bisogna usare javascript, per ottimizzarlo bene.
   slide-image-path:'https://picsum.photos/800/400?random', divisor: '=', ext: '', 
   // Note - Qui non so se conviene farlo così... 
   // Note - Forse potrei usare Astro - 
@@ -187,15 +209,16 @@ $carousel-scroll-marker-styles:( // Note qui va bene
     background-color-hover: black,
     background-color-active: black,
     background-color-target-current: black,
+    // Note - If things does not change - I may want to use Selective-Assignment to Better abstract naming conventions.
     color: gray,
     color-hover: gray,
     color-active: white,
     color-target-current: #fff, // Strange behaviour - Use -active
-    border: 4px solid $body-background-color, //! Used as border offset
     box-shadow: 0px 0px 0px 2px gray,
     box-shadow-hover: 0px 0px 0px 2px gray,
     box-shadow-active: 0px 0px 0px 2px white,
     box-shadow-target-current: 0px 0px 0px 2px white,
+    border: 4px solid transparent, //! Used as border offset
     font-family: Arial, 
     font-size: 1.75rem,
     font-weight: bold,

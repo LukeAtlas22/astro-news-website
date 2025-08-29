@@ -15,6 +15,10 @@
 
     class?: string,
     style?: string, 
+
+
+    imagesDirectory?: string,              // Qui ci torniamo, praticamente dobbiamo fare 2 carousel, uno normale, e uno che ha la possibiità di scegliere semplicemente una image directory nelle prop
+    imagesDirectoryScrollMarkers?: string, // Qui ci torniamo, praticamente dobbiamo fare 2 carousel, uno normale, e uno che ha la possibiità di scegliere semplicemente una image directory nelle prop
   }
 
   const {
@@ -44,6 +48,8 @@
       >
         <slot></slot>
       </List>
+
+      
   
       <button class="carousel__button--right">
         <div class="icon-container"></div>

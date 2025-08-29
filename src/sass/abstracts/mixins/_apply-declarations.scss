@@ -44,19 +44,29 @@
     @if (doesSubstringExist($in: $property, $check: -hover)) {
       $property: remove-substring($property, -hover);
       $on-hover: push($map: $on-hover,$entry: ($property: $value),);
-    } @else if (doesSubstringExist($in: $property, $check: -active)) {
+    }
+
+    @else if (doesSubstringExist($in: $property, $check: -active)) {
       $property: remove-substring($property, -active);
       $on-active: push($map: $on-active,$entry: ($property: $value),);
-    } @else if (doesSubstringExist($in: $property, $check: -focus)) {
+    }
+
+    @else if (doesSubstringExist($in: $property, $check: -focus-visible)) { //Todo: spostare questa prima di focus
+      $property: remove-substring($property, -focus-visible);
+      $on-focus-visible: push($map: $on-focus-visible,$entry: ($property: $value),);
+    } 
+
+    @else if (doesSubstringExist($in: $property, $check: -focus)) {
       $property: remove-substring($property, -focus);
       $on-focus: push($map: $on-focus,$entry: ($property: $value),);
-    } @else if (doesSubstringExist($in: $property, $check: -visible)) { //Todo: spostare questa prima di focus
-      $property: remove-substring($property, -visible);
-      $on-focus-visible: push($map: $on-focus-visible,$entry: ($property: $value),);
-    } @else if (doesSubstringExist($in: $property, $check: -target-current)) {
+    }
+    
+    @else if (doesSubstringExist($in: $property, $check: -target-current)) {
       $property: remove-substring($property, -target-current);
-      $on-target-current: push($map: $on-active,$entry: ($property: $value),);
-    } @else {
+      $on-target-current: push($map: $on-target-current, $entry: ($property: $value),);
+    }
+
+    @else {
       $on-normal: push($map: $on-normal,$entry: ($property: $value),);
     }
   }

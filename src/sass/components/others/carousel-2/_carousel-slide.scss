@@ -1,8 +1,8 @@
 @use "../../../abstracts/" as *;
+
 @use "tokens" as *;
-@use "carousel-functions/carousel-functions.scss" as Carousel;
-@use "carousel-mixins/on-snap-changed" as *;
-@use "carousel-mixins/on-snap-changing" as *;
+@use "abstract/" as *;
+
 
 .carousel__slide {
   @include create-container(
@@ -37,9 +37,10 @@
   }
 }
 
-// View timeline
+// █ █ █ ██▀ █   █    ▀█▀ █ █▄ ▄█ ██▀ █   █ █▄ █ ██▀ 
+// ▀▄▀ █ █▄▄ ▀▄▀▄▀     █  █ █ ▀ █ █▄▄ █▄▄ █ █ ▀█ █▄▄ // Note rimuovi quando ri-organizzato
 .carousel__slide {
-  view-timeline-axis: Carousel.getAxis();
+  view-timeline-axis: Carousel-Utils-getScrollDirection();
   view-timeline-name: --carousel-slide-view-timeline;
 }
 
@@ -65,9 +66,10 @@
 }
 
 //! Siamo arrivati a un punto un po' complicato in cui dobbiamo decidere se questo carosello sarà poi possibile farlo diventare uno slider, un tv show slider, insomma, estenderlo anche a tipi molto diversi di caroselli, oppure lasciarlo così e magari creare altri components
-@mixin Carousel-Slide-on-ScrollViewTimeline() {
+@mixin Carousel-Slide-on-ScrollViewTimeline() { // Note volevamo scrivere questo mixin
   //? The animations inside this mixin, will base their timeline on the slides of the carousels.
 }
+// Note - Perchè ho messo mixin e non include?
 
 //Todo: Spostare questi due mixins da un'altra parte, e magari anche gli include
 //Todo: Potrei fare un modulo... on snap changing e on snap changed non so...
@@ -79,13 +81,20 @@
   Quindi potrei creare un file a parte, dove l'utente va a scrivere i propri stili del proprio design, on scroll snap changing, on scroll snap changed, on scroll view timeline, eccetera...
 */
 
-@include Carousel-Slide-is-ScrollSnapChanging() {
+// ============================================================================================================================================================
+// ============================================================================================================================================================
+
+
+
+@include Carousel-Slide-is-ScrollSnapChanging {
   // Here goes the content when a scroll snap changing event is fired on a slide
   // Here, you can only select things inside the slide.
 
   //.carousel__slide:is(.scroll-snap-changing){
 
   //}
+
+  // Note qui non funziona? che succede?
 }
 
 @include Carousel-Slide-is-ScrollSnapChanged() {
@@ -126,19 +135,19 @@
     }
   }
   .carousel__slide:nth-child(1) {
-    background-color: red;
+    background-color: rgba(51, 206, 198, 0.753);
   }
   .carousel__slide:nth-child(2) {
-    background-color: red;
+    background-color: rgb(168, 157, 53);
   }
   .carousel__slide:nth-child(3) {
-    background-color: red;
+    background-color: rgb(105, 119, 40);
   }
   .carousel__slide:nth-child(4) {
-    background-color: red;
+    background-color: rgb(36, 96, 175);
   }
   .carousel__slide:nth-child(5) {
-    background-color: red;
+    background-color: rgb(185, 35, 165);
   }
   .carousel__slide:nth-child(6) {
     background-color: red;

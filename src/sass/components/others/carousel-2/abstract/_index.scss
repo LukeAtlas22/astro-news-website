@@ -1,0 +1,12 @@
+// Utilities - Functions
+
+@forward "function/carousel-functions.scss" as Carousel-Utils-*;
+
+// Mixins
+
+@forward "mixins/snap-change-event/on-snap-changed" as Carousel-*;
+@forward "mixins/snap-change-event/on-snap-changing" as Carousel-*;
+
+// Selectors
+
+@forward "mixins/selectors/buttons-selectors"; // Note - Per ora lasciamo così, poi potrei fare as Buttons-SEL-

@@ -30,7 +30,7 @@
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
-          grid-template-columns: var(--scroll-marker-size) $carousel-width; 
+          grid-template-columns: var(--scroll-markers-size) $carousel-width; 
           // Note - Potrei migliorarlo così
           // Note - Carousel-width diventerebbe una CSS-Variable, e la userei in ogni breakpoint
           

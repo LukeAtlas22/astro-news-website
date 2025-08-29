@@ -1,6 +1,11 @@
 ---
   import BaseLayoutEmpty from "@layouts/BaseLayoutEmpty.astro";
   import Carousel from "@components-p/carousel/Carousel.astro";
+
+  import image1 from "../../content/images/american-flag.jpg";
+  import image2 from "../../content/images/baloon.jpg";
+  import image3 from "../../content/images/test.webp";
+  import Image from "astro/components/Image.astro";
 ---
 
 <BaseLayoutEmpty title="Carousel Testing">
@@ -19,7 +24,9 @@
     <div style="height: 100%; background: purple"></div>
     <div style="height: 100%; background: goldenrod"></div>
     <div style="height: 100%; background: blue"></div>
-   <div class="testing-1" style="position-anchor: --test-scroll-marker-anchor"></div>
+    <!-- <Image src={image1} alt="test"/>
+    <Image src={image2} alt="test"/>
+    <Image src={image3} alt="test"/> -->
   </Carousel>
 </BaseLayoutEmpty>
 

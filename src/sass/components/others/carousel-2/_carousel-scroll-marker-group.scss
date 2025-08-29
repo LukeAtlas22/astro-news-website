@@ -1,13 +1,13 @@
 @use "tokens" as *;
-@use "carousel-functions/carousel-functions.scss" as Carousel;
 @use "../../../abstracts/" as *;
 @use "sass:map";
 
-// Note - Magari questa roba potrebbe essere spostata in position o positioning
+// !! Migliorare Organizzazione
+// !! Migliorare Organizzazione
+// !! Migliorare Organizzazione
+// !! Migliorare Organizzazione
 
 @function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
-
- 
 
 .carousel__container{
   @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
@@ -22,12 +22,27 @@
         as: --scroll-marker-group-orientation,
       ),
       (
+        prop-name: alignment,
+        as: --scroll-marker-group-alignment,
+      ),
+      (
         prop-name: gap,
         as: --scroll-marker-group-gap, // Need like that because we use it in calculations
       ),
+
+      // Markers
+
       (
-        prop-name: marker-size,
-        as: --scroll-marker-size,
+        prop-name: markers-size,
+        as: --scroll-markers-size,
+      ),
+      (
+        prop-name: markers-justification,
+        as: --scroll-marker-group-content-justify,
+      ),
+      (
+        prop-name: markers-direction,
+        as: --scroll-marker-group-direction,
       ),
 
       /* Evalutating anchor position insets for navigation (scroll marker group) */
@@ -56,9 +71,8 @@
   );
 }
 
-.carousel {
 
-  
+.carousel {
 
   scroll-marker-group: var(--scroll-marker-group-position); 
   // Note forse potrei wrappare questa variabile in una function tipo Dinamyc-CSS-Variable per migliorare la lettura del codice
@@ -68,7 +82,6 @@
       scroll-marker-group: after;
 
       &::scroll-marker-group { 
-        outline: 5px solid red !important;
         position: absolute; 
         position-anchor: --carousel;
         
@@ -111,22 +124,30 @@
 
   &::scroll-marker-group {
 
-    gap: var(--scroll-marker-group-gap); // Leave it
+  
+    block-size: calc(var(--scroll-markers-size) * 1.75); // Leave the 1.75 (Treeshold to avoid overflow-clip)
+    
+    writing-mode: horizontal-tb;
 
-    // Note - Richiede che venga passato il numero di slide in qualche modo <- 
-    // Note - Prima usava JS - Ora usa Astro (Passing the props in style attr)
-    // inline-size: map.get(map.get($carousel-scroll-marker-styles, use-default), width); - Questo si può togliere
+    outline: 2px solid red !important;
+
+    justify-self: var(--scroll-marker-group-alignment);
     
-    // Self alignment & sizing
+    display: flex;
+    flex-direction: row;
+    justify-content: var(--scroll-marker-group-content-justify); // Note queste proprietà sono strane
+    align-items: center; 
+    gap: var(--scroll-marker-group-gap); 
     
+    overflow: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;    
+
+    anchor-name: --scroll-marker-group;
 
     @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map( 
       $Map: $carousel-navigation,
       $props-directives-map:(
-        (
-          prop-name: justification,
-          as: justify-self
-        ),
         (
           prop-name: outline,
         ),
@@ -140,64 +161,44 @@
       )
     );
 
+    // Orientation
 
-    // Note questo 1.75 serve a non far tagliare il marker dell'overflow
-    block-size: calc(var(--scroll-marker-size) * 1.75);
-
-    align-self: $carousel-scroll-marker-group-self-alignment;
-    
-    writing-mode: horizontal-tb;
-    // if user needs orientation vertical
-    @container --carousel-container style(--scroll-marker-group-orientation: vertical){ // Note valutare come vogliamo fare questo
+    // Todo - If user needs orientation
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical){ 
       writing-mode: vertical-lr;
+      align-self: var(--scroll-marker-group-alignment);      
     }
-
-    flex-direction: row;
-    // if User-Needs direction invert
-    @container --carousel-container style(--scroll-marker-group-direction: invert){ // Note valutare come vogliamo fare questo
+  
+    // Flex direction (Markers direction)
+    // Todo - If user needs markers orientation
+    @container --carousel-container style(--scroll-marker-group-direction: invert){ 
       flex-direction: row-reverse;
     }
-
-
-    // Note - Inoltre si è detto che questo organismo deve controllare i suoi markers, size < 
-
-    // Anchor
-    anchor-name: --scroll-marker-group;
-    // Internal markers
-    display: flex;
-    justify-content: center; // Note queste proprietà sono strane
-    align-items: center; 
-    overflow: auto;
-    scrollbar-width: none;
-    scroll-behavior: smooth;    
   }
+
 }
 
 // Note - Questa dovrebbe essere la prima cosa, o almeno una delle prime
-// █▄ █ ▄▀▄ █ █ █ ▄▀  ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █       █ █▄ █ █   █ █▄ █ ██▀    ▄▀▀ █ ▀█▀ ██▀       ▄▀▀ ▄▀▄ █   ▄▀▀ █ █ █   ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █ 
-// █ ▀█ █▀█ ▀▄▀ █ ▀▄█ █▀█  █  █ ▀▄▀ █ ▀█       █ █ ▀█ █▄▄ █ █ ▀█ █▄▄    ▄█▀ █ █▄▄ █▄▄       ▀▄▄ █▀█ █▄▄ ▀▄▄ ▀▄█ █▄▄ █▀█  █  █ ▀▄▀ █ ▀█ 
-
-  $scroll-marker-inline-size: var(--scroll-marker-size);
-  $scroll-marker-group-gap: var(--scroll-marker-group-gap);
+// Navigation Inline Size Calculation
 
   $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); 
   // Todo - This should be a css var
 
+  $-CALCULATION-Of-Inline-Size-Carousel-Navigation: calc(
+    ( var(--scroll-markers-size) * var(--carousel-slide-amount) ) +
+    ( var(--scroll-marker-group-gap) * var(--carousel-slide-amount)) +
+    $scroll-marker-group-margins-from-buttons   // Todo - This should be a css var
+  ); 
+
   .carousel::scroll-marker-group{
-    inline-size: calc(
-      ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
-      ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
-      ( $scroll-marker-group-margins-from-buttons )  // Todo - This should be a css var
-    ); 
-
-
-    /* Prevent carousel stretching along the navigation */
+    inline-size: $-CALCULATION-Of-Inline-Size-Carousel-Navigation;
+    
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
-      max-inline-size: $carousel-width;
-      
+      max-inline-size: $carousel-width; // Note - Those may become vars 
     }
+
     @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
-      max-inline-size: $carousel-height;
+      max-inline-size: $carousel-height; // Note - Those may become vars
     }
   }
 
@@ -207,10 +208,10 @@
 // Todo Da fixare questo giù
 
 // Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
-// Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
+
 ////////////////////////////////////////////////////
-/// Notes - I don't know where this should be
-/// 
+// Notes - I don't know where this should be
+// Notes - I wish i can do this in a different way
 //Todo - Da sistemare meglio
 //! Setting inline margins if buttons position it's inside navigation
 @if (true){ // If to do

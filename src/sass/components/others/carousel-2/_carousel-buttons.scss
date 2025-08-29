@@ -1,8 +1,8 @@
 @use "sass:map";
 @use "tokens" as *;
 @use "../../../abstracts/" as *;
-@use "../../../icons/" as *;
-@use "carousel-mixins/selectors" as *;
+@use "../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
+@use "abstract/" as *;
 
 //Todo: Ho bisogno di settare alcune ifs, per migliorare la performance di questo codice.
 //Todo: Molte ifs andranno settate
@@ -25,8 +25,6 @@
   }
 
   @include BothButtons() {
-    position: absolute;
-    position-anchor: --carousel;
     width: $carousel-buttons-width;
     height: $carousel-buttons-height;
     border-radius: $carousel-buttons-border-radius;
@@ -109,10 +107,17 @@
     }
   }
 
+  @include BothButtons {
+    position: absolute;
+    position-anchor: --carousel;
+  }
+
   // Translating back in y to element size
   @include BothButtons() {
     translate: 0 -50%;
   }
+
+  // Note - Potrei rimuovere questa variabile e usare un semplice offset-vertical && offset-horizontal - Tramite CSS Var.
 
   // Position 1 - Outside carousel
   @container style(--buttons-position: outside-carousel) {
@@ -229,6 +234,67 @@
       }
       @include BothButtons(){
         translate: -50% 0;
+      }
+    }
+  }
+
+  // anchor(<anchor-name> <anchor-side>, <length-percentage>)
+  @container --carousel-container style(--buttons-position: align-on-navigation-and-space-between){
+    @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
+      @include BothButtons{
+        // Both translated -50% in vertical axys
+      }
+      @include PrevButton{
+        top: anchor(--scroll-marker-group center);
+        left: anchor(--carousel left);
+      }
+      @include NextButton {
+        top: anchor(--scroll-marker-group center);
+        right: anchor(--carousel right);
+      }
+    }
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
+      @include BothButtons{
+        translate: 50% 0;
+      }
+      @include PrevButton{
+        top: anchor(--carousel top);
+        right: anchor(--scroll-marker-group center);
+      }
+      @include NextButton {
+        bottom: anchor(--carousel bottom);
+        right: anchor(--scroll-marker-group center);
+      }
+    }
+  }
+
+  // Note - Potrei fare in ogni anchor, un offset-top, offset-right, offset-bottom, offset-left - Come CSS VAR
+  // anchor(<anchor-name> <anchor-side>, <length-percentage>)
+    @container --carousel-container style(--buttons-position: custom-two){
+    @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
+      @include BothButtons{
+        
+      }
+      @include PrevButton{
+        top: anchor(--scroll-marker-group center);
+        right: calc(anchor(--scroll-marker-group left) + 1rem);
+      }
+      @include NextButton {
+        top: anchor(--scroll-marker-group center);
+        left: anchor(--scroll-marker-group right);
+      }
+    }
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
+      @include BothButtons{
+        translate: 50% 0;
+      }
+      @include PrevButton{
+        top: anchor(--carousel top);
+        right: anchor(--scroll-marker-group center);
+      }
+      @include NextButton {
+        bottom: anchor(--carousel bottom);
+        right: anchor(--scroll-marker-group center);
       }
     }
   }

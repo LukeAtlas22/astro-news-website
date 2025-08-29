@@ -1,0 +1,11 @@
+@use "../../tokens" as *;
+@use "sass:map";
+
+@function getScrollDirection() {
+  @if ($carousel-scroll-direction == horizontal) {
+    @return x;
+  }
+  @if ($carousel-scroll-direction == vertical) {
+    @return y;
+  }
+}

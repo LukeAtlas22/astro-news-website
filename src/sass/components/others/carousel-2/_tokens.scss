@@ -34,6 +34,18 @@ $carousel-scroll-auto-scroll-speed: 2225; // in ms
 $carousel-gap-between-carousel-and-navigation: 2.5rem;
 
 $carousel-buttons-display: yes; // yes || no - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
+$carousel-buttons: (
+  'default': (
+    width: clamp(3.75rem, 10vw, 4.5rem),
+    height: clamp(3.75rem, 10vw, 4.5rem),
+    orientation: horizontal,
+    position: feet-carousel,
+    position-offset: (y: 2.25rem, x: 2.25rem),
+
+    border: 0px solid red,
+    border-radius: 120vw,
+  ),
+);
 $carousel-buttons-width: clamp(3.75rem, 10vw, 4.5rem);
 $carousel-buttons-height: clamp(3.75rem, 10vw, 4.5rem);
 $carousel-buttons-border-radius: 120vw;
@@ -57,7 +69,8 @@ $carousel-buttons-positions-change-property: --buttons-position; //Leave it like
  * - right-carousel
  * - display-none
  * - inside-navigation
- *
+ * - vertical-align-on-navigation
+ * - vertical-align-on-navigation-horizontal-space-between // Note- Find better name
  * - Sintassi media query:
  * - ([min || max], width, breakpoint)
  *
@@ -68,8 +81,12 @@ $carousel-buttons-positions-change-property: --buttons-position; //Leave it like
  * )
  */
 $carousel-buttons-positions-map: (
-  feet-carousel
-);
+  custom-two // Note- Find better name
+); // Note - Vorrei anche aggiungere un'altra posizione, tipo outside navigation - O dare un modo per allineare sia alla navigation che al carousel
+// Note - Questa cosa potrebbe essere fatta specificando 2 diversi anchor name nella funzione anchor
+
+// Note - L'idea è rimuovere tutta questa roba, e usare semplicemente un horizontal-offset e un vertical-offset nella mia breakpoint map
+// Note - Codice più semplice, più pulito e più ottimale
 $carousel-buttons-position-outside-carousel: (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-inside-carousel:  (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.725rem); // Note - Magari c'è un modo automatico per farlo?
@@ -85,6 +102,8 @@ $carousel-buttons-box-shadows: $carousel-buttons-borders;
 $carousel-buttons-background: transparent; 
 $carousel-buttons-color: red; 
 
+// Note - Per ora non ci preoccuperemo dell'icona
+
 $carousel-buttons-arrow-icon-shape: 1; // The SVG Shape (1-3)
 $carousel-buttons-arrow-icon-inset: 0;
 $carousel-buttons-arrow-icon-rescale: 1; // Leave it
@@ -94,96 +113,75 @@ $carousel-buttons-arrow-icon-outline: 0.75;
 $carousel-buttons-arrow-icon-outline-offset: 0;
 $carousel-buttons-arrow-icon-outline-color: white;
 
+// Note - Non posso gestire il size dell'icona? wut? - Forse ho un modo più ottimizzato per farlo, sfruttrando Astro, senza usare background-image
+
+
 // ▄▀▀ ▄▀▀ █▀▄ ▄▀▄ █   █      █▄ ▄█ ▄▀▄ █▀▄ █▄▀ ██▀ █▀▄    ▄▀  █▀▄ ▄▀▄ █ █ █▀▄ 
 // ▄█▀ ▀▄▄ █▀▄ ▀▄▀ █▄▄ █▄▄    █ ▀ █ █▀█ █▀▄ █ █ █▄▄ █▀▄    ▀▄█ █▀▄ ▀▄▀ ▀▄█ █▀  
 
-// Note - Sarà importante esporre una buona documentazione
-// Note - Questa mappa astrae il lavoro di preoccuparsi del posizionamento dello scroll marker group
-// Note - Tutto ciò relativo al posizionamento viene effettuato qui dentro (SRP)
-
-
-// Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
-// Note - Sarà importante creare una buona documentazione - Con tanti examples
-
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: after, // Done
+    position: after, 
     position-inset: (top: 1rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
-    orientation: horizontal, // Done
-    justification: center, // Done
-    alignment: center, // Note - I don't know if this should be here
+    orientation: horizontal, 
+    alignment: center, 
+    
+    // Todo - Qui andrebbe inserito anche max-size, però per far si che funzioni, bisogna risalire in cima, e refactorare il codice prima
+    // Todo - con la mappa breakpoint, dedicata al carousel, dopodichè far diventare width & height una css var
+    // Todo - dopodichè avremo i mezzi per implementare il max size
 
-    gap: 1.25rem, // Done
+    gap: 1.25rem, 
     
-    outline: none,        // Done 
-    outline-offset: none, // Done
-    outline-radius: none, // Done
+    outline: none,        
+    outline-offset: none, 
+    outline-radius: none, 
     
-    marker-size: 24px, // Done 
-    marker-style: default, // Done
+    markers-direction: auto,
+    markers-justification: center,
+    markers-size: 24px, 
+    markers-style: default, 
   ),
 
   '(width > 1000px)': (
-    position: before, // before | after | inside-frame
-    orientation: vertical, // vertical | horizontal
-    justification: center, // left | center | right
-    alignment: center, // only center - may be removed
+    position: before, 
+    orientation: vertical, 
+    alignment: center,
 
-    gap: 2.25rem, // Note - Aggiungerò anche il gap
+    gap: 2.25rem, 
     
     outline: none,
     outline-offset: none,
     outline-radius: none,
     
-    marker-size: 52px, // Note - we won't handle size anymore in the style map
-    marker-style: slide-image, // default | counter-numbers | slide-own-image
+    markers-justification: start,
+    markers-size: 52px, 
+    markers-style: slide-image, 
   ),
 );
 
-$carousel-scroll-marker-group-self-alignment: center; // Notes - Questo si può anche togliere dato che sarà sempre center // - Rimuoverla (?)
 
-
-
-// Note - Rivedere i tokens della mappa style
-$carousel-scroll-marker-styles:( // Note qui va bene
-  // Memo - Do not declare width or height in here
-  
-  // ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀ 
-  // ▄█▀  █   █  █▄▄ █▄▄    █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  
+$carousel-scroll-marker-styles: (  // Do not declare width or height in here  
 
   default:(
+    // Todo - I may still to want to use my Selective-Property-Assignment for better name abstractions
     border-radius: 100vw,
     background-color: pink,
     background-color-hover: rgb(253, 106, 131),
     background-color-active: rgb(243, 36, 71),
     background-color-target-current: rgb(253, 23, 61),
-
-    // Note - Decidemmo di usare box-shadow perchè outline dava problemi in fase di transitioning 
-    // Note - Comunque, meglio l'outline, non mi va di usare box-shadow
-
-    
-    //outline-visible: 3px solid goldenrod, // Todo - Bisogna fixare questo problema nel mixin. Magari usiamo un nuovo mixin, tipo Simple Map sulla falsariga di Breakpoint Map che ci permette di scegliere la prop di arrivo in css
-
-    
+  
     box-shadow: 0px 0px 0px 0.25px red,
     box-shadow-hover: 0px 0px 0px 0.25px red,
     box-shadow-active: 0px 0px 0px 0.25px cyan,
     box-shadow-target-current: 0px 0px 0px 0.3px white,
 
-    // Box shadow offset
-    border: 3px solid transparent,   
+    border: 3px solid transparent, // Use as offset  
  
-    // Keyboard navigation
-    outline-focus-visible: 1.25px solid rgb(147, 147, 255),
+    outline-focus-visible: 1.25px solid rgb(147, 147, 255), // Note - Outline still gives animation problems
     outline-offset: 3.25px,
 
-    // Note - Non voglio usare outline
-    // Memo - all'interno di ::Scroll-marker ci sarà outline: none
-    // ! Outline da problemi di animazione su questo marker element
-    // Todo Dobbiamo comunque risolvere il problema -visible nel mixin
-
     scale-hover: 1.1,
-    scale-target-current: 1.25, // Note this has to be inferred as max scroll marker scale ratio
+    scale-target-current: 1.25, 
     transition: 375ms,
   ),
 
@@ -218,13 +216,22 @@ $carousel-scroll-marker-styles:( // Note qui va bene
     box-shadow-hover: 0px 0px 0px 2px gray,
     box-shadow-active: 0px 0px 0px 2px white,
     box-shadow-target-current: 0px 0px 0px 2px white,
+    // Note - Mettere nella documentazione che puoi fare override di questo tipo, e poi rimuovere da qui
     border: 4px solid transparent, //! Used as border offset
+    
     font-family: Arial, 
     font-size: 1.75rem,
     font-weight: bold,
     text-decoration: none,
   ),
 );
+
+// Note - Sarà importante esporre una buona documentazione
+// Note - Questa mappa astrae il lavoro di preoccuparsi del posizionamento dello scroll marker group
+// Note - Tutto ciò relativo al posizionamento viene effettuato qui dentro (SRP)
+
+// Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
+// Note - Sarà importante creare una buona documentazione - Con tanti examples
   
 $carousel-debug-mode-on: no; // yes || no
 

@@ -1,26 +1,44 @@
 @use "helpers/media-query" as *;
 @use "helpers/utilities" as *;
 @use "functions/prop-exist" as *;
+@use "sass:meta";
+
+@use "helpers/literal-string-union-interface" as *;
 
 // Note - Alternative name: Selective-Apply-Declarations
 @mixin Consume-PropsDirective-Over-Map($props-directives-map, $map){
   @each $prop-directive in $props-directives-map {
     
+    $prop-name: get-prop-name($prop-directive);
+    $css-prop: resolve-css-prop-name($prop-directive);
+    $value: null;
+
     @if Submap-Request-Specified-On($prop-directive) {
-      $prop-name: get-prop-name($prop-directive);
-      $css-prop: resolve-css-prop-name($prop-directive);
       $sub-map: get-submap($map, $prop-directive);
       $value: get-value-from-submap($sub-map, $prop-name);
-
-      @include write-declaration-if-value-exist($css-prop, $value);
     }
-
     @if not Submap-Request-Specified-On($prop-directive) {
-      $prop-name: get-prop-name($prop-directive);
-      $css-prop: resolve-css-prop-name($prop-directive);
       $value: get-value-from-map($map, $prop-name);
-      
-      @include write-declaration-if-value-exist($css-prop, $value);
     }
+
+    @if ($value and Validation-Requested($prop-directive)){
+      // Note - Tutto questo tree andrebbe fatto a parte
+      $validator: get-validation-hook($prop-directive);
+      
+      @if Is-Literal-String-Union-Validation($validator) {
+        $union-template: get-literal-string-union-template-map($validator);
+        $value: execute-literal-string-union-validation($value, $union-template);
+      }
+      
+      @else {
+        $validation-function: construct-validation-function($validator);
+        @if not validate-value($validation-function, $value) {
+          @error 'The value "#{$value}" is not a valid: < #{$validator} > -';
+        }
+      }
+
+    }
+
+    @include write-declaration-if-value-exist($css-prop, $value);
   }
 }

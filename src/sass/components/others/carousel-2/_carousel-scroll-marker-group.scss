@@ -2,6 +2,8 @@
 @use "../../../abstracts/" as *;
 @use "sass:map";
 
+@use "abstract/globals/globals" as Glob;
+
 // !! Migliorare Organizzazione
 // !! Migliorare Organizzazione
 // !! Migliorare Organizzazione
@@ -16,18 +18,22 @@
       (
         prop-name: position,
         as: --scroll-marker-group-position,
+        validation-hook: (literal-string-union, Glob.$NAVIGATION_POSITIONS),
       ),
       (
         prop-name: orientation,
         as: --scroll-marker-group-orientation,
+        validation-hook: axis-long-name,
       ),
       (
         prop-name: alignment,
         as: --scroll-marker-group-alignment,
+        validation-hook: self-alignment,
       ),
       (
         prop-name: gap,
         as: --scroll-marker-group-gap, // Need like that because we use it in calculations
+        validation-hook: length,
       ),
 
       // Markers
@@ -35,6 +41,7 @@
       (
         prop-name: markers-size,
         as: --scroll-markers-size,
+        validation-hook: length,
       ),
       (
         prop-name: markers-justification,
@@ -43,6 +50,7 @@
       (
         prop-name: markers-direction,
         as: --scroll-marker-group-direction,
+        validation-hook: (literal-string-union, (auto, invert)),
       ),
 
       /* Evalutating anchor position insets for navigation (scroll marker group) */
@@ -50,21 +58,25 @@
         sub-map: position-inset,
         prop-name: top,
         as: --scroll-marker-position-inset--anchor-top,
+        validation-hook: length,
       ),
       (
         sub-map: position-inset,
         prop-name: right,
         as: --scroll-marker-position-inset--anchor-right,
+        validation-hook: length,
       ),
       (
         sub-map: position-inset,
         prop-name: bottom,
         as: --scroll-marker-position-inset--anchor-bottom,
+        validation-hook: length,
       ),
       (
         sub-map: position-inset,
         prop-name: left,
         as: --scroll-marker-position-inset--anchor-left,
+        validation-hook: length,
       ),
       /* ========================================================================= */
     )
@@ -112,7 +124,6 @@
         //   not style(--scroll-marker-position-inset--anchor-right),
         //   not style(--scroll-marker-position-inset--anchor-bottom), 
         //   not style(--scroll-marker-position-inset--anchor-left){
-        //     outline: 5px solid red !important;
         //   }
       }
     }
@@ -128,8 +139,6 @@
     block-size: calc(var(--scroll-markers-size) * 1.75); // Leave the 1.75 (Treeshold to avoid overflow-clip)
     
     writing-mode: horizontal-tb;
-
-    outline: 2px solid red !important;
 
     justify-self: var(--scroll-marker-group-alignment);
     

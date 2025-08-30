@@ -1,12 +1,22 @@
 @use "sass:map";
-@use "tokens" as *;
-@use "../../../abstracts/" as *;
-@use "../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
-@use "abstract/" as *;
+@use "../tokens" as *;
+@use "../../../../abstracts/" as *;
+@use "../../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
+@use "../abstract/" as *;
 
-//Todo: Ho bisogno di settare alcune ifs, per migliorare la performance di questo codice.
-//Todo: Molte ifs andranno settate
-//Todo: Le if dovranno essere fatte sulla entry di alcune mappe, in particolare sul valore. Quindi mi serviranno alcune funzioni tipo - map-has-entry o map-has-value o map-contains (per farlo sia sul value che sulla key)
+@use "../abstract/globals/globals" as Glob;
+
+// Todo - Ci vorrebbe una main if - Che wrappa tutto questo - Questo dev'essere iniettato nel codice, soltanto se l'utente desidera utilizzare i buttons - 
+// ! - Creare una variabile - Use buttons on website?
+
+// Todo - Tutta l'astrazione dei buttons dev'essere wrappata intorno a un @if - Se l'utente desidera effettivamente usare i buttons AT all sul suo carosello
+
+// Note ora servono principalmente due mappature
+// Note - Un mixin mappa il layout, le cose relative al layout devono essere necessariamente CSS - Var, perchè saranno di utilità di tutto il codice del carosello
+// Note - L'altra mappatura ingaggia lo stile, e può essere semplici CSS Props.
+
+
+
 
 @if ($carousel-buttons-display != yes) {
   @include BothButtons() {
@@ -25,8 +35,8 @@
   }
 
   @include BothButtons() {
-    width: $carousel-buttons-width;
-    height: $carousel-buttons-height;
+    width: var(--buttons-width);
+    height: var(--buttons-height);
     border-radius: $carousel-buttons-border-radius;
   }
 
@@ -65,12 +75,6 @@
   // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
   // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
 
-  .carousel__container {
-    @include declare-customProperty-by-mediaQuery-map(
-      $mediaQuery-values-map: $carousel-buttons-orientations-map, 
-      $customProperty: --buttons-orientation,
-    );
-  }
   @include NextButton() {
     @container style(--buttons-orientation: horizontal) {
       rotate: 90deg;
@@ -97,15 +101,6 @@
   // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
   // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█
 
-  .carousel__container {
-    //? Setting carousel buttons position
-    @if ($carousel-buttons-display == yes) {
-      @include declare-customProperty-by-mediaQuery-map(
-        $mediaQuery-values-map: $carousel-buttons-positions-map,
-        $customProperty: $carousel-buttons-positions-change-property
-      );
-    }
-  }
 
   @include BothButtons {
     position: absolute;
@@ -118,69 +113,78 @@
   }
 
   // Note - Potrei rimuovere questa variabile e usare un semplice offset-vertical && offset-horizontal - Tramite CSS Var.
+  // Note - Sarebbe meglio usare inline e block perchè oppure vertical e horizontal (?) -
 
   // Position 1 - Outside carousel
   @container style(--buttons-position: outside-carousel) {
     @include NextButton() {
-      top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
-      left: calc(anchor(right) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
+      top: calc(anchor(center) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
-      right: calc(anchor(left) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
+      top: calc(anchor(center) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
   }
 
   // Position 2 - Inside carousel
   @container style(--buttons-position: inside-carousel) {
     @include NextButton() {
-      top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
-      right: calc(anchor(right) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
+      top: calc(anchor(center) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
-      left: calc(anchor(left) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
+      top: calc(anchor(center) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
   }
 
   // Position 3 - Feet carousel
   @container style(--buttons-position: feet-carousel) {
+    @include BothButtons {
+      translate: none;
+    }
+
     @include NextButton() {
-      top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-      right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+      top: calc(anchor(bottom) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-      left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+      top: calc(anchor(bottom) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
   }
 
   // Position 4 - Head carousel
   @container style(--buttons-position: head-carousel) {
+    @include BothButtons {
+      translate: none;
+    }
+
     @include NextButton() {
-      bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-      right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+      bottom: calc(anchor(top) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-      left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+      bottom: calc(anchor(top) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
   }
 
   // Position 5 - Right carousel
   @container style(--buttons-position: right-carousel) {
     @include NextButton() {
-      bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-      left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+      bottom: calc(anchor(bottom) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-      left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+      top: calc(anchor(top) + var(--buttons-position-vertical-offset));
+      left: calc(anchor(right) + var(--buttons-position-horizontal-offset));
     }
 
     @include BothButtons() {
@@ -191,13 +195,13 @@
   // Position 6 - Left carousel
   @container style(--buttons-position: left-carousel) {
     @include NextButton() {
-      bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-      right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+      bottom: calc(anchor(bottom) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
 
     @include PrevButton() {
-      top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-      right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+      top: calc(anchor(top) + var(--buttons-position-vertical-offset));
+      right: calc(anchor(left) + var(--buttons-position-horizontal-offset));
     }
 
     @include BothButtons() {
@@ -239,10 +243,11 @@
   }
 
   // anchor(<anchor-name> <anchor-side>, <length-percentage>)
+  // Memo - No need to offset here.
   @container --carousel-container style(--buttons-position: align-on-navigation-and-space-between){
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
       @include BothButtons{
-        // Both translated -50% in vertical axys
+        
       }
       @include PrevButton{
         top: anchor(--scroll-marker-group center);
@@ -270,18 +275,18 @@
 
   // Note - Potrei fare in ogni anchor, un offset-top, offset-right, offset-bottom, offset-left - Come CSS VAR
   // anchor(<anchor-name> <anchor-side>, <length-percentage>)
-    @container --carousel-container style(--buttons-position: custom-two){
+    @container --carousel-container style(--buttons-position: align-on-navigation){
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
       @include BothButtons{
         
       }
       @include PrevButton{
         top: anchor(--scroll-marker-group center);
-        right: calc(anchor(--scroll-marker-group left) + 1rem);
+        right: calc(anchor(--scroll-marker-group left) + var(--buttons-position-horizontal-offset));
       }
       @include NextButton {
         top: anchor(--scroll-marker-group center);
-        left: anchor(--scroll-marker-group right);
+        left: calc(anchor(--scroll-marker-group right) + var(--buttons-position-horizontal-offset));
       }
     }
     @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
@@ -289,11 +294,11 @@
         translate: 50% 0;
       }
       @include PrevButton{
-        top: anchor(--carousel top);
+        bottom: calc(anchor(--scroll-marker-group top) + var(--buttons-position-vertical-offset));
         right: anchor(--scroll-marker-group center);
       }
       @include NextButton {
-        bottom: anchor(--carousel bottom);
+        top: calc(anchor(--scroll-marker-group bottom) + var(--buttons-position-vertical-offset));
         right: anchor(--scroll-marker-group center);
       }
     }

@@ -1,0 +1,7 @@
+@use "is-literal-string-union" as *;
+
+$self-alignments: (start, center, end, left, right);
+
+@function is-self-alignment($value){
+  @return is-literal-string-union($value, $union-template: $self-alignments);
+}

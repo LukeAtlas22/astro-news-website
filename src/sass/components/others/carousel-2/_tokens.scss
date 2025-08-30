@@ -36,16 +36,22 @@ $carousel-gap-between-carousel-and-navigation: 2.5rem;
 $carousel-buttons-display: yes; // yes || no - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
 $carousel-buttons: (
   'default': (
+    // Layout
     width: clamp(3.75rem, 10vw, 4.5rem),
     height: clamp(3.75rem, 10vw, 4.5rem),
     orientation: horizontal,
-    position: feet-carousel,
-    position-offset: (y: 2.25rem, x: 2.25rem),
+    position: align-on-navigation-and-space-between,
+    position-offset: (horizontal: 4rem, vertical: 2rem), // Todo - Validation Hook? <length> (?) 
 
-    border: 0px solid red,
-    border-radius: 120vw,
+    // Note - Come vogliamo gestire lo style diversamente dal layout ? Facciamo tutto qui?
+    // Style
+    border: 0px solid red, // Todo
+    border-radius: 120vw, // Todo
   ),
 );
+
+
+
 $carousel-buttons-width: clamp(3.75rem, 10vw, 4.5rem);
 $carousel-buttons-height: clamp(3.75rem, 10vw, 4.5rem);
 $carousel-buttons-border-radius: 120vw;
@@ -69,8 +75,8 @@ $carousel-buttons-positions-change-property: --buttons-position; //Leave it like
  * - right-carousel
  * - display-none
  * - inside-navigation
- * - vertical-align-on-navigation
- * - vertical-align-on-navigation-horizontal-space-between // Note- Find better name
+ * - align-on-navigation // Note - Temporaney name
+ * - align-on-navigation-and-space-between // Note - Temporaney name | Maybe too long (?)
  * - Sintassi media query:
  * - ([min || max], width, breakpoint)
  *
@@ -81,12 +87,14 @@ $carousel-buttons-positions-change-property: --buttons-position; //Leave it like
  * )
  */
 $carousel-buttons-positions-map: (
-  custom-two // Note- Find better name
+  align-on-navigation // Note- Find better name
 ); // Note - Vorrei anche aggiungere un'altra posizione, tipo outside navigation - O dare un modo per allineare sia alla navigation che al carousel
 // Note - Questa cosa potrebbe essere fatta specificando 2 diversi anchor name nella funzione anchor
 
 // Note - L'idea è rimuovere tutta questa roba, e usare semplicemente un horizontal-offset e un vertical-offset nella mia breakpoint map
 // Note - Codice più semplice, più pulito e più ottimale
+
+// Note - Oppure potrei lasciarli di default... non saprei...
 $carousel-buttons-position-outside-carousel: (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-inside-carousel:  (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.725rem); // Note - Magari c'è un modo automatico per farlo?
@@ -122,7 +130,7 @@ $carousel-buttons-arrow-icon-outline-color: white;
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
     position: after, 
-    position-inset: (top: 1rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
+    position-inset: (top: 2rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
     orientation: horizontal, 
     alignment: center, 
     
@@ -130,7 +138,7 @@ $carousel-navigation:( // Note - Name is temporaney
     // Todo - con la mappa breakpoint, dedicata al carousel, dopodichè far diventare width & height una css var
     // Todo - dopodichè avremo i mezzi per implementare il max size
 
-    gap: 1.25rem, 
+    gap: 1rem, 
     
     outline: none,        
     outline-offset: none, 

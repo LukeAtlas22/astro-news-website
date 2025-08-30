@@ -1,0 +1,7 @@
+@use "is-literal-string-union" as *;
+
+$axis-long-names: (vertical, horizontal);
+
+@function is-axis-long-name($value){
+  @return is-literal-string-union($value, $union-template: $axis-long-names);
+}

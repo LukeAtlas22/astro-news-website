@@ -1,0 +1,18 @@
+@use "sass:meta";
+@use "sass:map";
+
+@function is-literal-string-union($value, $union-template) {
+  @if meta.type-of($union-template) != 'list' and meta.type-of($union-template) != 'map' {
+    @error "Il parametro $union-template deve essere una lista o una mappa di stringhe.";
+  }
+
+  $items: if(meta.type-of($union-template) == 'map', map.keys($union-template), $union-template);
+
+  @each $item in $items {
+    @if $value == $item {
+      @return true;
+    }
+  }
+
+  @return false;
+}

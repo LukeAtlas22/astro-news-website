@@ -2,12 +2,32 @@
 @use "sass:meta";
 @use "prop-directive-type" as Prop-Directive;
 
+@use "../../../function/validations" as *;
+
+
 // ================ U T I L I T I E S ===========================
 
 @mixin write-declaration-if-value-exist($css-prop, $value){
   @if ($value) { #{$css-prop}: #{$value} };
 }
 
+@function validate-value($validation-function, $value){
+  @return meta.call($validation-function, $value);
+}
+
+@function construct-validation-function($validator-fn-name){
+  $function-name: "is-#{$validator-fn-name}";
+  $function: meta.get-function($function-name);
+  @return $function;
+}
+
+@function get-validation-hook($prop-directive){
+  @return map.get($prop-directive, Prop-Directive.$VALIDATION_HOOK_KEY);
+}
+
+@function Validation-Requested($prop-directive){
+  @return map.has-key($prop-directive, Prop-Directive.$VALIDATION_HOOK_KEY);
+}
 
 @function Submap-Request-Specified-On($props-directives-map){
   @return map.has-key($props-directives-map, Prop-Directive.$SUBMAP_KEY);

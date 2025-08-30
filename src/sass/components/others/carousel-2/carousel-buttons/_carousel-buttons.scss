@@ -18,34 +18,32 @@
 
 
 
-
 @if ($carousel-buttons-display != yes) {
   @include BothButtons() {
     display: none;
+    
   }
 }
+
 
 @if ($carousel-buttons-display == yes){
 
   // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
   // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
+  @include BothButtons-Artificial-Afters {
+    // Note - Future implementations such as...
+    // Note - Fancy borders, advanced box shadows, ecc.
+    
+  }
+
+  
 
   @include BothButtons() {
-    border-radius: $carousel-buttons-border-radius;
-  }
-
-  @include BothButtonsPseudo{
-    content: "";
+    content: ""; // Notes - Here we gonna tokenize our variable for the icon font
     cursor: pointer;
-    
-    //opacity: 0;
-    // z-index: 1; //?Putting the pseudoelements over the normal elements
-    // Questo non serve più - Da ora lavoriamo solo con gli pseudo-element
   }
 
-  // Only apply style on Real-DOM Buttons (for optimization)
-  // Note - Ma perchè poi ho scelto di usare questi buttons DOM se nell'implementazione non li usiamo proprio per hokkare il click? - Ah, per l'icona.
-  @include BothButtonsDOM(){
+  @include BothButtons(){
   
     @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
       $Map: $carousel-buttons-style,
@@ -73,33 +71,33 @@
     background-clip: content-box;
   }
 
-  @include BothButtonsDOM{
-    opacitY: 0;
+  @include BothButtons--Disabled{
+    
   }
-  @include BothButtonsPseudo{
-    opacity: 1;
-  }
-  
-  .carousel::scroll-button(right){
-    anchor-name: --test-right-button;
-  }
-  
-  // @include BothButtonsDOM--Active{
 
-  // }
-  // @include BothButtonsDOM--Focus-Visible{
+  @include BothButtons--Hover{
+    scale: 1.25;
+    // Note - Qui ho un problema di logica
+    // Note - Se il carosello è scroll-direction su x - dovrei mettere in opacity-0 i buttons up n down
+    // Note - Se invece il carosello è scroll-directoin su y - l'opposto
+  }
 
-  // }
-  
-  // @include BothButtonsDOM--Disabled{} // Note da vedere come fare nei mixin sel
+  @include BothButtons--Active{
+    
+  }
+
+  @include BothButtons--Focus-Visible{
+    
+  }
+
  
 
   // █ ▄▀▀ ▄▀▄ █▄ █
-  // █ ▀▄▄ ▀▄▀ █ ▀█
+  // █ ▀▄▄ ▀▄▀ █ ▀█ // Notes - Questa è tutta da rifare
 
   $icon-url: getIcon($arrow-icons-map, $carousel-buttons-arrow-icon-shape);
 
-  @include BothButtonsDOM() {
+  @include BothButtons() {
     @include flex-center;
     @include setIconOn(
       $url: $icon-url,

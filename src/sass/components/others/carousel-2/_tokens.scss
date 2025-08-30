@@ -82,8 +82,7 @@ $carousel-buttons-style: (
     border: 2px solid red, // Done
     border-radius: 0vw, // Done
     border-offset: 10px, // Done (It's padding)
-    outline: 2px solid goldenrod, // Note - Tokenize on Default Design Outline
-    outline-offset: 2.75px,
+    
     transition: 275ms, // Note - Tokenize on Default Design Transition
 
     hover: ( 
@@ -99,6 +98,10 @@ $carousel-buttons-style: (
     disabled: (
       opacity: 0.75,
       cursor: error,
+    ),
+    focus-visible: (
+      outline: 2px solid goldenrod, // Note - Tokenize on Default Design Outline
+      outline-offset: 2.75px,
     )
   ),
 );

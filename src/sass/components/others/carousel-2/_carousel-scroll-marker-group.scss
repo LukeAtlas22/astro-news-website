@@ -4,10 +4,7 @@
 
 @use "abstract/globals/globals" as Glob;
 
-// !! Migliorare Organizzazione
-// !! Migliorare Organizzazione
-// !! Migliorare Organizzazione
-// !! Migliorare Organizzazione
+
 
 @function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
 
@@ -97,21 +94,21 @@
         position: absolute; 
         position-anchor: --carousel;
         
-        /* Applying varous anchor insets for the insets of the navigation ============================= */
 
-        @container --carousel-container style(--scroll-marker-position-inset--anchor-top) {    // TOP
+
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-top) {   
           top: calc(anchor(top) + var(--scroll-marker-position-inset--anchor-top));
         }
     
-        @container --carousel-container style(--scroll-marker-position-inset--anchor-right) {  // RIGHT
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-right) { 
           right: calc(anchor(right) + var(--scroll-marker-position-inset--anchor-right));
         }
     
-        @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) { // BOTTOM
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) { 
           bottom: calc(anchor(bottom) + var(--scroll-marker-position-inset--anchor-bottom) - 1.5rem);
         }
     
-        @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {   // LEFT
+        @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {   
           left: calc(anchor(left) + var(--scroll-marker-position-inset--anchor-left));
         }
 
@@ -153,6 +150,8 @@
     scroll-behavior: smooth;    
 
     anchor-name: --scroll-marker-group;
+
+    
 
     @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map( 
       $Map: $carousel-navigation,

@@ -1,17 +1,35 @@
+
+// Note - In attesa che i valori next e prev di scroll-button() diventino disponibili, //utilizziamo questo meccanismo
+ 
+// Note - Non eliminare gli artificial afters / befores
+// Note - Perchè in futuro serviranno a fare cose fancy tipo *animated borders*, //eventuali *box shadows alternative*, eccetera.
+
+
+@mixin BothButtons-Artificial-Afters {
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev {
+    @content;
+  }
+}
+
+// Note qui andrebbe migliorato il codice
+// Note - Devo fare distinzione tra visible e artificial after
+
+// Todo - Inoltre nel main codice soltanto una pair di bottoni dev'essere visibile, quando il carosello è in flow orizzontale, soltanto right e left, quando è in flow verticale, soltanto up e down - Possiamo semplicemente usare display none e display block per risolvere questo problema
+ 
 @mixin BothButtons {
-  .carousel__button--right,
-  .carousel__button--left,
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev,
   .carousel::scroll-button(right),
   .carousel::scroll-button(down),
   .carousel::scroll-button(left),
   .carousel::scroll-button(up) {
     @content;
   }
-  //! In attesa che i valori next e prev di scroll-button() diventino disponibili, utilizziamo questo meccanismo
 }
 
 @mixin NextButton {
-  .carousel__button--right,
+  .carousel__button-artificial-after--next,
   .carousel::scroll-button(right),
   .carousel::scroll-button(down) {
     @content;
@@ -19,55 +37,53 @@
 }
 
 @mixin PrevButton {
-  .carousel__button--left,
+  .carousel__button-artificial-after--prev,
   .carousel::scroll-button(left),
   .carousel::scroll-button(up) {
     @content;
   }
 }
 
-@mixin BothButtonsPseudo {
-  .carousel::scroll-button(right),
-  .carousel::scroll-button(down),
-  .carousel::scroll-button(left),
-  .carousel::scroll-button(up) {
-    @content;
-  }
-}
-
-@mixin BothButtonsDOM {
-  .carousel__button--right,
-  .carousel__button--left {
-    @content;
-  }
-}
-
-
-@mixin BothButtonsDOM--Hover{
-  .carousel__button--right:is(:hover),
-  .carousel__button--left:is(:hover) { 
-    @content;
-  }
-}
-
-@mixin BothButtonsDOM--Active{
-  .carousel__button--right:is(:active),
-  .carousel__button--left:is(:active) { // Todo - Da scrivere
-    @content;
-  }
-}
-
-@mixin BothButtonsDOM--Focus-Visible{
-  .carousel__button--right:is(:focus-visible),
-  .carousel__button--left:is(:focus-visible) { // Todo - Da scrivere
-    @content;
-  }
-}
-@mixin BothButtonsDOM--Disabled{
-  // Note - Non possiamo farlo con :disabled e :has (già provato, fidati) - Dobbiamo farlo con slide e scroll snapped query. 
-  .carousel__button--right,
-  .carousel__button--left { // Todo - Da scrivere
-    @content;
-  }
-}
 ////////////////////////////////////////////////////////////////////////////////////////
+// Interactivity
+
+@mixin BothButtons--Hover {
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev,
+  .carousel::scroll-button(right):is(:hover),
+  .carousel::scroll-button(down):is(:hover),
+  .carousel::scroll-button(left):is(:hover),
+  .carousel::scroll-button(up):is(:hover) {
+    @content;
+  }
+}
+@mixin BothButtons--Active {
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev,
+  .carousel::scroll-button(right):is(:active),
+  .carousel::scroll-button(down):is(:active),
+  .carousel::scroll-button(left):is(:active),
+  .carousel::scroll-button(up):is(:active) {
+    @content;
+  }
+}
+@mixin BothButtons--Focus-Visible {
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev,
+  .carousel::scroll-button(right):is(:focus-visible),
+  .carousel::scroll-button(down):is(:focus-visible),
+  .carousel::scroll-button(left):is(:focus-visible),
+  .carousel::scroll-button(up):is(:focus-visible) {
+    @content;
+  }
+}
+@mixin BothButtons--Disabled {
+  .carousel__button-artificial-after--next,
+  .carousel__button-artificial-after--prev,
+  .carousel::scroll-button(right):is(:disabled),
+  .carousel::scroll-button(down):is(:disabled),
+  .carousel::scroll-button(left):is(:disabled),
+  .carousel::scroll-button(up):is(:disabled) {
+    @content;
+  }
+}

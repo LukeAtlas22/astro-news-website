@@ -19,3 +19,5 @@ async function infiniteScroll(params){
     infiniteScroll[params.type]();
 }
 
+
+

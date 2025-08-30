@@ -190,7 +190,7 @@
 // Note - Questa dovrebbe essere la prima cosa, o almeno una delle prime
 // Navigation Inline Size Calculation
 
-  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers); 
+  $scroll-marker-group-margins-from-buttons: 0rem; 
   // Todo - This should be a css var
 
   $-CALCULATION-Of-Inline-Size-Carousel-Navigation: calc(
@@ -211,44 +211,48 @@
     }
   }
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 
 
+// #region Deprecated
 // Todo Da fixare questo giù
 
 // Questi sono i margins inline, se e quando i buttons vengono inseriti nella navigation
 
 ////////////////////////////////////////////////////
-// Notes - I don't know where this should be
-// Notes - I wish i can do this in a different way
-//Todo - Da sistemare meglio
-//! Setting inline margins if buttons position it's inside navigation
-@if (true){ // If to do
-  $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
-  $buttons-width: $carousel-buttons-width;
-  @container --carousel-container style(--buttons-position: inside-navigation){
-    .carousel::scroll-marker-group {
-      margin-inline: calc(
-        $buttons-width +
-        $buttons-margins -
-        0.95rem // Tokenize?
-      );
-    }
-  }
-}
+// // Notes - I don't know where this should be
+// // Notes - I wish i can do this in a different way
+// //Todo - Da sistemare meglio
+// //! Setting inline margins if buttons position it's inside navigation
+// @if (true){ // If to do
+//   $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+//   $buttons-width: $carousel-buttons-width;
+//   @container --carousel-container style(--buttons-position: inside-navigation){
+//     .carousel::scroll-marker-group {
+//       margin-inline: calc(
+//         $buttons-width +
+//         $buttons-margins -
+//         0.95rem // Tokenize?
+//       );
+//     }
+//   }
+// }
 
-@if (true){ // If general behaviour it's NOT Stretch with navigation
-  $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
-  $buttons-width: $carousel-buttons-width;
-  @container --carousel-container
-  style(--buttons-position: inside-navigation) and
-  style(--scroll-marker-group-orientation: vertical) {
-    .carousel::scroll-marker-group{
-      margin-inline: calc(
-        $buttons-width -
-        $buttons-margins -
-        0.95rem // Tokenize?
-      );
-    }
-  }
-}
+// @if (true){ // If general behaviour it's NOT Stretch with navigation
+//   $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+//   $buttons-width: $carousel-buttons-width;
+//   @container --carousel-container
+//   style(--buttons-position: inside-navigation) and
+//   style(--scroll-marker-group-orientation: vertical) {
+//     .carousel::scroll-marker-group{
+//       margin-inline: calc(
+//         $buttons-width -
+//         $buttons-margins -
+//         0.95rem // Tokenize?
+//       );
+//     }
+//   }
+// }
+
+// We decided to deprecated this ^ 
+// #endregion

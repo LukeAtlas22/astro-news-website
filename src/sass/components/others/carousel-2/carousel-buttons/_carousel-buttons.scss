@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "../tokens" as *;
+
 @use "../../../../abstracts/" as *;
 @use "../../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
 @use "../abstract/" as *;
@@ -28,30 +29,70 @@
 
   // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
   // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
-  @include BothButtonsPseudo{
-    content: "";
-    opacity: 0;
-    cursor: pointer;
-  }
 
   @include BothButtons() {
-    width: var(--buttons-width);
-    height: var(--buttons-height);
     border-radius: $carousel-buttons-border-radius;
   }
 
-  // Only apply style on DOM Buttons for performance
-  @include BothButtonsDOM(){
-    box-shadow: $carousel-buttons-box-shadows;
-    background: $carousel-buttons-background;
-    color: $carousel-buttons-color;
+  @include BothButtonsPseudo{
+    content: "";
+    cursor: pointer;
+    
+    //opacity: 0;
+    // z-index: 1; //?Putting the pseudoelements over the normal elements
+    // Questo non serve più - Da ora lavoriamo solo con gli pseudo-element
   }
 
-  //?Putting the pseudoelements over the normal elements
-  //Todo: da spostare
-  .carousel::scroll-button(*) {
-    z-index: 1;
+  // Only apply style on Real-DOM Buttons (for optimization)
+  // Note - Ma perchè poi ho scelto di usare questi buttons DOM se nell'implementazione non li usiamo proprio per hokkare il click? - Ah, per l'icona.
+  @include BothButtonsDOM(){
+  
+    @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+      $Map: $carousel-buttons-style,
+      $props-directives-map: (
+        
+        (
+          prop-name: color,
+        ),
+        (
+          prop-name: background,
+        ),
+        (
+          prop-name: border,
+        ),
+        (
+          prop-name: border-radius,
+        ),
+        (
+          prop-name: border-offset,
+          as: padding,
+        ),
+      )
+    );
+
+    background-clip: content-box;
   }
+
+  @include BothButtonsDOM{
+    opacitY: 0;
+  }
+  @include BothButtonsPseudo{
+    opacity: 1;
+  }
+  
+  .carousel::scroll-button(right){
+    anchor-name: --test-right-button;
+  }
+  
+  // @include BothButtonsDOM--Active{
+
+  // }
+  // @include BothButtonsDOM--Focus-Visible{
+
+  // }
+  
+  // @include BothButtonsDOM--Disabled{} // Note da vedere come fare nei mixin sel
+ 
 
   // █ ▄▀▀ ▄▀▄ █▄ █
   // █ ▀▄▄ ▀▄▀ █ ▀█
@@ -72,15 +113,30 @@
     );
   }
 
+
+  // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀  
+  // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ 
+  
+  @include NextButton {
+    @container style(--buttons-orientation: horizontal) {  
+      width: var(--buttons-height);
+      height: var(--buttons-width);
+    }
+  }
+
+  @include PrevButton {
+    @container style(--buttons-orientation: horizontal) {
+      width: var(--buttons-height);
+      height: var(--buttons-width);
+    }
+  }
+
   // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
   // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
 
   @include NextButton() {
     @container style(--buttons-orientation: horizontal) {
       rotate: 90deg;
-      // Inverting height & width
-      width: $carousel-buttons-height;
-      height: $carousel-buttons-width;
     }
     @container style(--buttons-orientation: vertical) {
       rotate: 180deg;
@@ -89,9 +145,6 @@
   @include PrevButton() {
     @container style(--buttons-orientation: horizontal) {
       rotate: -90deg;
-      // Inverting height & width
-      width: $carousel-buttons-height;
-      height: $carousel-buttons-width;
     }
     @container style(--buttons-orientation: vertical) {
       rotate: 0deg;
@@ -111,9 +164,6 @@
   @include BothButtons() {
     translate: 0 -50%;
   }
-
-  // Note - Potrei rimuovere questa variabile e usare un semplice offset-vertical && offset-horizontal - Tramite CSS Var.
-  // Note - Sarebbe meglio usare inline e block perchè oppure vertical e horizontal (?) -
 
   // Position 1 - Outside carousel
   @container style(--buttons-position: outside-carousel) {
@@ -211,51 +261,52 @@
 
 
   // Position 6 - Inside Navigation
-  @container --carousel-container style(--buttons-position: inside-navigation) {
-    @include BothButtons{
-      position-anchor: --scroll-marker-group;
-    }
+  // We decided to remove this.
+  // @container --carousel-container style(--buttons-position: inside-navigation) {
+  //   @include BothButtons{
+  //     position-anchor: --scroll-marker-group;
+  //   }
 
-    @container --carousel-container style(--scroll-marker-group-orientation: horizontal){
-      @include NextButton() {
-        top: anchor(center);
-        left: anchor(right);
-      }
-      @include PrevButton() {
-        top: anchor(center);
-        right: anchor(left);
-      }
-    }
+  //   @container --carousel-container style(--scroll-marker-group-orientation: horizontal){
+  //     @include NextButton() {
+  //       top: anchor(center);
+  //       left: anchor(right);
+  //     }
+  //     @include PrevButton() {
+  //       top: anchor(center);
+  //       right: anchor(left);
+  //     }
+  //   }
 
-    @container --carousel-container style(--scroll-marker-group-orientation: vertical){
-      @include NextButton() {
-        top: anchor(bottom);
-        left: anchor(center);
-      }
-      @include PrevButton() {
-        bottom: anchor(top);
-        left: anchor(center);
-      }
-      @include BothButtons(){
-        translate: -50% 0;
-      }
-    }
-  }
+  //   @container --carousel-container style(--scroll-marker-group-orientation: vertical){
+  //     @include NextButton() {
+  //       top: anchor(bottom);
+  //       left: anchor(center);
+  //     }
+  //     @include PrevButton() {
+  //       bottom: anchor(top);
+  //       left: anchor(center);
+  //     }
+  //     @include BothButtons(){
+  //       translate: -50% 0;
+  //     }
+  //   }
+  // }
 
   // anchor(<anchor-name> <anchor-side>, <length-percentage>)
   // Memo - No need to offset here.
-  @container --carousel-container style(--buttons-position: align-on-navigation-and-space-between){
+  @container --carousel-container style(--buttons-position: align-on-navigation-and-carousel-margins){
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
       @include BothButtons{
         
       }
       @include PrevButton{
         top: anchor(--scroll-marker-group center);
-        left: anchor(--carousel left);
+        left: calc(anchor(--carousel left) + var(--buttons-position-horizontal-offset));
       }
       @include NextButton {
         top: anchor(--scroll-marker-group center);
-        right: anchor(--carousel right);
+        right: calc(anchor(--carousel right) + var(--buttons-position-horizontal-offset));
       }
     }
     @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
@@ -263,11 +314,11 @@
         translate: 50% 0;
       }
       @include PrevButton{
-        top: anchor(--carousel top);
+        top: calc(anchor(--carousel top) + var(--buttons-position-vertical-offset));
         right: anchor(--scroll-marker-group center);
       }
       @include NextButton {
-        bottom: anchor(--carousel bottom);
+        bottom: calc(anchor(--carousel bottom) + var(--buttons-position-vertical-offset));
         right: anchor(--scroll-marker-group center);
       }
     }

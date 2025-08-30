@@ -1,4 +1,4 @@
-@mixin BothButtons() {
+@mixin BothButtons {
   .carousel__button--right,
   .carousel__button--left,
   .carousel::scroll-button(right),
@@ -10,7 +10,7 @@
   //! In attesa che i valori next e prev di scroll-button() diventino disponibili, utilizziamo questo meccanismo
 }
 
-@mixin NextButton() {
+@mixin NextButton {
   .carousel__button--right,
   .carousel::scroll-button(right),
   .carousel::scroll-button(down) {
@@ -18,7 +18,7 @@
   }
 }
 
-@mixin PrevButton() {
+@mixin PrevButton {
   .carousel__button--left,
   .carousel::scroll-button(left),
   .carousel::scroll-button(up) {
@@ -26,7 +26,7 @@
   }
 }
 
-@mixin BothButtonsPseudo() {
+@mixin BothButtonsPseudo {
   .carousel::scroll-button(right),
   .carousel::scroll-button(down),
   .carousel::scroll-button(left),
@@ -35,11 +35,39 @@
   }
 }
 
-@mixin BothButtonsDOM() {
+@mixin BothButtonsDOM {
   .carousel__button--right,
   .carousel__button--left {
     @content;
   }
 }
 
+
+@mixin BothButtonsDOM--Hover{
+  .carousel__button--right:is(:hover),
+  .carousel__button--left:is(:hover) { 
+    @content;
+  }
+}
+
+@mixin BothButtonsDOM--Active{
+  .carousel__button--right:is(:active),
+  .carousel__button--left:is(:active) { // Todo - Da scrivere
+    @content;
+  }
+}
+
+@mixin BothButtonsDOM--Focus-Visible{
+  .carousel__button--right:is(:focus-visible),
+  .carousel__button--left:is(:focus-visible) { // Todo - Da scrivere
+    @content;
+  }
+}
+@mixin BothButtonsDOM--Disabled{
+  // Note - Non possiamo farlo con :disabled e :has (già provato, fidati) - Dobbiamo farlo con slide e scroll snapped query. 
+  .carousel__button--right,
+  .carousel__button--left { // Todo - Da scrivere
+    @content;
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,25 @@
+@use 'sass:meta';
+@use 'sass:list';
+
+@function is-border($value) {
+  // Verifica se $value è una lista di 3 elementi
+  @if meta.type-of($value) == 'list' and list.length($value) == 3 {
+    $width: list.nth($value, 1);
+    $style: list.nth($value, 2);
+    $color: list.nth($value, 3);
+
+    // Controllo se $width è un numero
+    $valid-width: meta.type-of($width) == 'number';
+
+    // Controllo se $style è uno dei valori border validi
+    $valid-styles: solid dashed dotted double groove ridge inset outset none hidden;
+    $valid-style: list.index($valid-styles, $style) != null;
+
+    // Controllo se $color è un colore valido
+    $valid-color: meta.type-of($color) == 'color';
+
+    @return $valid-width and $valid-style and $valid-color;
+  }
+
+  @return false;
+}

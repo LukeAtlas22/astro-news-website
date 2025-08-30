@@ -98,6 +98,7 @@
 
 .carousel__anchor-scope {
   anchor-scope: --carousel;
+  
 }
 .carousel__container {
   @include create-container($type: inline-size, $name: --carousel-container);

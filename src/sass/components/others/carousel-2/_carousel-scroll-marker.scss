@@ -34,11 +34,7 @@
   @include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
   // Note Deprecare in favore di Consume-PropsDirective Mixins ?
 
-  background-clip: padding-box;
-  outline: none; // Gives animation problems - Use box-shadow instead
-  
-
-  
+  background-clip: content-box !important;  
 }
 
 // ==========================================================================================

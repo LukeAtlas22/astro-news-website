@@ -1,5 +1,12 @@
 @use "../../../abstracts" as *;
 
+// Note - Alla fine tutto deve andare in una mappa, tipo
+// - carousel
+// - - - buttons
+// - - - - - - layout
+// - - - - - - style
+// - - - - - - icon
+
 // Todo - Maybe it wants to be contained "size" (?)
 
 // Note Con breakpoint map è possibile anche fare cose tipo
@@ -56,7 +63,7 @@ $carousel-buttons: (
     width: clamp(2.75rem, 10vw, 3.75rem),
     height: clamp(2.75rem, 10vw, 3.75rem),
     position: display-none,
-    orientation: vertical,
+    orientation: horizontal,
     ),
     
     '(width > 455px)': (
@@ -67,7 +74,7 @@ $carousel-buttons: (
   ),
 
   '(width > 900px)': (
-    position: right-carousel,
+    position: outside-carousel,
   )
 );
 
@@ -76,11 +83,11 @@ $carousel-buttons-style: (
     // Note - Vorrei esporre un file sass per fare qualcosa di custom, tipo custom borders on hover che ruotano, cose così.
     
     // Style
-    color: red, // Done
-    background: transparent, // Done
-    border: 2px solid red, // Done
-    border-radius: 0vw, // Done
-    border-offset: 12px, // Done (It's padding)
+    color: $body-text-color, 
+    background: transparent, 
+    border: 2px solid $body-text-color, 
+    border-radius: 75vw, 
+    border-offset: 12px, 
     
     transition: 225ms, // Note - Tokenize on Default Design Transition
 
@@ -89,11 +96,13 @@ $carousel-buttons-style: (
       scale: 1.1,
       color: red,
       background: transparent,
+      border: 2px solid red,
     ),
     active: (
       scale: 1.2,
-      color: red,
+      color: cyan,
       background: transparent,
+      border: 2px solid cyan,
     ),
     disabled: (
       opacity: 0.625,
@@ -106,11 +115,9 @@ $carousel-buttons-style: (
   ),
 );
 
-$buttons-icon: (
+$carousel-buttons-icon: (
   'default': (
-    type: 1, 
-    // Todo - Need to do on the fly modificators
-    // Todo - Validation for number
+    type: 24, // 1-25 // I like myself 3 & 24
     size: 1.25rem,
     stroke-width: 0px,
     stroke-color: transparent,
@@ -144,7 +151,7 @@ $carousel-navigation-display: yes;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: none, 
+    position: after, 
     position-inset: (top: 2rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
     orientation: horizontal, 
     alignment: center, 
@@ -193,14 +200,13 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
     background-color-active: rgb(243, 36, 71),
     background-color-target-current: rgb(253, 23, 61),
   
-    box-shadow: 0px 0px 0px 0.25px red,
-    box-shadow-hover: 0px 0px 0px 0.25px red,
-    box-shadow-active: 0px 0px 0px 0.25px cyan,
-    box-shadow-target-current: 0px 0px 0px 0.3px white,
-
-    border: 3px solid transparent, // Use as offset  
+    border: 1.75px solid red,
+    border-hover: 1.75px solid  red,
+    border-active: 1.75px solid cyan,
+    border-target-current: 1.75px solid white,
+ /* (border-offset) */ padding: 2px, 
  
-    outline-focus-visible: 1.25px solid rgb(147, 147, 255), // Note - Outline still gives animation problems
+    outline-focus-visible: 1.25px solid rgb(147, 147, 255),
     outline-offset: 3.25px,
 
     scale-hover: 1.1,
@@ -226,24 +232,24 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 
   // Memo - Do not declare width or height in here
   counter-numbers:(
-    background-color: black,
-    background-color-hover: black,
-    background-color-active: black,
-    background-color-target-current: black,
+    background-color: transparent,
+    background-color-hover: transparent,
+    background-color-active: transparent,
+    background-color-target-current: transparent,
     // Note - If things does not change - I may want to use Selective-Assignment to Better abstract naming conventions.
     color: gray,
     color-hover: gray,
     color-active: white,
     color-target-current: #fff, // Strange behaviour - Use -active
-    box-shadow: 0px 0px 0px 2px gray,
-    box-shadow-hover: 0px 0px 0px 2px gray,
-    box-shadow-active: 0px 0px 0px 2px white,
-    box-shadow-target-current: 0px 0px 0px 2px white,
-    // Note - Mettere nella documentazione che puoi fare override di questo tipo, e poi rimuovere da qui
-    border: 4px solid transparent, //! Used as border offset
+
+    border: 1.75px solid red,
+    border-hover: 1.75px solid  red,
+    border-active: 1.75px solid cyan,
+    border-target-current: 1.75px solid white,
+    /* (border-offset) */ padding: 3px, 
     
     font-family: Arial, 
-    font-size: 1.75rem,
+    font-size: 1.25rem,
     font-weight: bold,
     text-decoration: none,
   ),

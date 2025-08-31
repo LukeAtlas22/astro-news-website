@@ -2,8 +2,8 @@
 @use "helpers/utilities" as *;
 @use "functions/prop-exist" as *;
 @use "sass:meta";
+@use "sass:list";
 
-@use "helpers/literal-string-union-interface" as *;
 
 // Note - Alternative name: Selective-Apply-Declarations
 @mixin Consume-PropsDirective-Over-Map($props-directives-map, $map){
@@ -25,24 +25,29 @@
       // Note - Tutto questo tree andrebbe fatto a parte
       $validator: get-validation-hook($prop-directive);
       
-      @if (is-validator-with-parameters($validator)){
-        $validation-function: construct-validation-function(list.index($validator, 1));
-        $validation-parameters: list.index($validator, 2);
-        @debug validate($validation-function, $value, $validation-parameters)
-      }
-
-      @if Is-Literal-String-Union-Validation($validator) {
-        $union-template: get-literal-string-union-template-map($validator);
-        $value: execute-literal-string-union-validation($value, $union-template);
-      }
+      @if (is-validator-with-parameters($validator)) {
+        $validation-function-name: list.nth($validator, 1);
+        $validation-parameters: list.nth($validator, 2);
+        $validation-function: construct-validation-function($validation-function-name);
       
-      @else {
-        $validation-function: construct-validation-function($validator);
-        @if not validate-value($validation-function, $value) {
-          @error 'The value "#{$value}" is not a valid: < #{$validator} > -';
+        @if not validate($validation-function, $value, $validation-parameters) {
+          @error 'The validation failed for: "#{$validation-function-name}" - Because "#{$value}" is not valid < #{$validation-function-name} > for parameters: #{$validation-parameters}';
         }
       }
 
+      @else {
+        $validation-function: construct-validation-function($validator);
+        @if not validate($validation-function, $value) {
+          @error 'The value "#{$value}" is not a valid: < #{$validator} > -';
+        }
+      }
+    }
+
+    @if ($value and Modification-Requested($prop-directive)){
+
+      // Note - I need to make this capable to do with parameters
+      $function: construct-modificator-function($prop-directive);
+      $value: modificate($function, $value);
     }
 
     @include write-declaration-if-value-exist($css-prop, $value);

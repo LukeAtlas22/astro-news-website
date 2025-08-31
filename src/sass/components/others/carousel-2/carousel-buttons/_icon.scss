@@ -1,23 +1,32 @@
+@use "@SASS-Abstracts" as *;
+@use "../tokens" as *;
+@use "../abstract/globals/globals" as Glob;
 
 .carousel::scroll-button(*){
   font-family: carousel-arrows-font;
 
-  // Todo - Da tokenizzare (under)
-  content: '\e801';
-  font-size: 1.25rem;
-  -webkit-text-stroke-color: white;
-  -webkit-text-stroke-width: 1px;
+  @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel-buttons-icon, 
+    $props-directives-map: (
+      (
+        prop-name: type,
+        as: content,
+        validation-hook: (number-between, (1, Glob.$ICONS-AMOUNT)),
+        modificator-hook: get-unicode-from-number,
+      ),
+      (
+        prop-name: size,
+        as: font-size,
+      ),
+      (
+        prop-name: stroke-width,
+        as: -webkit-text-stroke-width,
+      ),
+      (
+        prop-name: stroke-color,
+        as: -webkit-text-stroke-color,
+        validation-hook: color,
+      ),
+    )
+  );
 }
-
-// Note - Da spostare (new rotation values based on ifons)
-// Memo - (Da portare in buttons orientation) Da ora utilizzeremo sempre icone di arrows che puntano a destra. 
-
-.carousel::scroll-button(left){
-  rotate: 180deg !important;
-}
-
-.carousel::scroll-button(right){
-  rotate: 0deg !important;
-}
-
-// Note - Temo che dovrò usare due differenti icone perchè altrimenti ho problemi di centramento

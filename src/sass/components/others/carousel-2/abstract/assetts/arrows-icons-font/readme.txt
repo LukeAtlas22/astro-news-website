@@ -1,16 +1,2 @@
-Codes:
- 
-  e800
-  e801
-  e802
-  e803
-  e804
-  e805
-  e806
-  e807
-  e808
-  e809
-  e810
-  e811
-  e812
-  e813
+Every gilf unicode starts from 57345 - This is a rule - 
+Run a script to fix the config.json and download the new fonts with the gilf ordered from 57345 on...

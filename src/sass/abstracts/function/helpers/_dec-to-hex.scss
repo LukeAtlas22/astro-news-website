@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "sass:string";
+// Funzione SCSS: converte un numero decimale in esadecimale
+@function dec-to-hex($decimal) {
+  $hex-digits: "0123456789ABCDEF";
+  $result: "";
+
+  $num: $decimal;
+
+  @while $num > 0 {
+    $remainder: $num % 16;
+    $num: math.div($num, 16);
+    $num: math.floor($num);
+    $digit: string.slice($hex-digits, $remainder + 1, $remainder + 1); // +1 perché str-index parte da 1
+    $result: $digit + $result;
+  }
+
+  @if $result == "" {
+    @return "0";
+  }
+
+  @return $result;
+}

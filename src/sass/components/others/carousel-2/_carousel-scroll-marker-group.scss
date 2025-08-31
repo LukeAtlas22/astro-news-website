@@ -83,6 +83,7 @@
 
 .carousel {
 
+  
   scroll-marker-group: var(--scroll-marker-group-position); 
   // Note forse potrei wrappare questa variabile in una function tipo Dinamyc-CSS-Variable per migliorare la lettura del codice
 
@@ -187,15 +188,15 @@
 // Note - Questa dovrebbe essere la prima cosa, o almeno una delle prime
 // Navigation Inline Size Calculation
 
-  $scroll-marker-group-margins-from-buttons: 0rem; 
+  
   // Todo - This should be a css var
 
   $-CALCULATION-Of-Inline-Size-Carousel-Navigation: calc(
     ( var(--scroll-markers-size) * var(--carousel-slide-amount) ) +
-    ( var(--scroll-marker-group-gap) * var(--carousel-slide-amount)) +
-    $scroll-marker-group-margins-from-buttons   // Todo - This should be a css var
+    ( var(--scroll-marker-group-gap) * var(--carousel-slide-amount))
   ); 
 
+  
   .carousel::scroll-marker-group{
     inline-size: $-CALCULATION-Of-Inline-Size-Carousel-Navigation;
     

@@ -6,20 +6,22 @@
 
 //! Qui è da rivedere come fare gli artificials
 
-@mixin BothButtons-Artificial-Afters {
+@mixin Artificial-Afters {
   .carousel__button-artificial-after--next,
   .carousel__button-artificial-after--prev {
     @content;
   }
 }
 
+@mixin BothButtons-And-ArtificialAfters{
+
+}
 // Note qui andrebbe migliorato il codice
 // Note - Devo fare distinzione tra visible e artificial after
 
 // Todo - Inoltre nel main codice soltanto una pair di bottoni dev'essere visibile, quando il carosello è in flow orizzontale, soltanto right e left, quando è in flow verticale, soltanto up e down - Possiamo semplicemente usare display none e display block per risolvere questo problema
  
 @mixin BothButtons {
-
   .carousel::scroll-button(right),
   .carousel::scroll-button(down),
   .carousel::scroll-button(left),

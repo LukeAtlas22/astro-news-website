@@ -91,7 +91,7 @@
 
 
   // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀  
-  // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ 
+  // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ // Note - Qui sotto, allineare con artificial pseudo button
   
   @include BothButtons {
     @container style(--buttons-orientation: horizontal) {  
@@ -109,9 +109,18 @@
 
 
   // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
-  // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
+  // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█ // Note - Qui sotto, allineare con artificial pseudo button (in caso di width & height sfasate e rotation particolari)
 
   @container --carousel-container style(--buttons-orientation: horizontal) {
+    @include NextButton {
+      rotate: 0deg;
+    }
+    @include PrevButton {
+      rotate: 180deg;
+    }
+  }
+
+  @container --carousel-container style(--buttons-orientation: vertical) {
     @include NextButton {
       rotate: 90deg;
     }
@@ -120,18 +129,9 @@
     }
   }
 
-  @container --carousel-container style(--buttons-orientation: vertical) {
-    @include NextButton {
-      rotate: 180deg;
-    }
-    @include PrevButton {
-      rotate: 0deg;
-    }
-  }
-
 
   // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
-  // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█
+  // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█ // Note - Qui sotto, allineare con artificial pseudo button
 
   @include BothButtons {
     position: absolute;

@@ -1,8 +1,10 @@
+ @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
 @use "prop-directive-type" as Prop-Directive;
 
 @use "../../../function/validations" as *;
+@use "../../../function/modificators/" as *;
 
 
 // ================ U T I L I T I E S ===========================
@@ -11,14 +13,35 @@
   @if ($value) { #{$css-prop}: #{$value} };
 }
 
+@function Modification-Requested($prop-directive){
+  @return map.has-key($prop-directive, Prop-Directive.$MODIFICATOR_HOOK_KEY);
+}
+
+@function construct-modificator-function($prop-directive){
+  $function-name: map.get($prop-directive, Prop-Directive.$MODIFICATOR_HOOK_KEY);
+  $function: meta.get-function($function-name);
+  @return $function;
+}
+
+@function modificate($modification-function, $value, $parameters: null){
+  @if ($parameters) {
+    @return meta.call($modification-function, $value, $parameters);
+  } 
+  @else {
+    @return meta.call($modification-function, $value);
+  }
+}
+
+
+
 @function is-validator-with-parameters($validator) {
   // Controlla se il valore è una lista
-  @if type-of($validator) != 'list' {
+  @if meta.type-of($validator) != 'list' {
     @return false;
   }
 
   // Controlla se la lista ha esattamente due elementi
-  @if length($validator) == 2 {
+  @if list.length($validator) == 2 {
     @return true;
   } @else {
     @return false;
@@ -31,11 +54,8 @@
   } @else {
     @return meta.call($function, $value)
   }
-}
+};
 
-@function validate-value($validation-function, $value){
-  @return meta.call($validation-function, $value);
-}
 
 @function construct-validation-function($validator-fn-name){
   $function-name: "is-#{$validator-fn-name}";

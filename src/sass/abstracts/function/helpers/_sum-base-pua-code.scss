@@ -1,0 +1,6 @@
+/// This is a safe pua base code, it's the hex number E801 - (This has to be allignet with your node script "update-icon-codes") Or it won't work. -L
+@function sum-base-pua-code($num) {
+  $base: 59393; // inizio Private Use Area
+  $result: $num + $base;
+  @return $result;
+}

@@ -47,6 +47,7 @@
         style=`--carousel-slide-amount: ${slideAmount}`
       >
         <slot></slot>
+        <div class="test"></div>
       </List>
 
       
@@ -58,6 +59,7 @@
 </div>
 
 <script >
-  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll'))
-    console.log('I will make the scroll infinite !');
+  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll')){
+    //I will make the scroll infinite !
+  }
 </script>

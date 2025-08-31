@@ -1,6 +1,8 @@
 @use "helpers/media-query" as *;
 @use "assign-prop-from-simple-map" as *;
 
+// Note - Maybe change name in
+// Note - Selective-Apply-Properties-ForEach-Breakpoint-In-Map
 @mixin Consume-PropsDirectives-ForEach-Breakpoint-Map($Map, $props-directives-map) {
   @each $breakpoint, $breakpoint-inner-map in $Map {
     @if ($breakpoint == 'default'){

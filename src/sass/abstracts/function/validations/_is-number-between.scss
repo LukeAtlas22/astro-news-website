@@ -1,0 +1,28 @@
+@use "sass:list";
+@use "sass:meta";
+
+@function is-number-between($value, $range) {
+  // Controlla se il valore è un numero
+  @if meta.type-of($value) != 'number' {
+    @return false;
+  }
+
+  // Controlla se la lista ha esattamente due elementi
+  @if list.length($range) != 2 {
+    @error "La lista del range deve contenere esattamente 2 numeri.";
+  }
+
+  $min: list.nth($range, 1);
+  $max: list.nth($range, 2);
+
+  // Verifica se entrambi gli elementi della lista sono numeri
+  @if meta.type-of($min) != 'number' or meta.type-of($max) != 'number' {
+    @error "Entrambi gli elementi della lista devono essere numeri.";
+  }
+
+  @if $value >= $min and $value <= $max {
+    @return true;
+  } @else {
+    @return false;
+  }
+}

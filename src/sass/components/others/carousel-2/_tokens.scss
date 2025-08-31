@@ -56,7 +56,7 @@ $carousel-buttons: (
     width: clamp(2.75rem, 10vw, 3.75rem),
     height: clamp(2.75rem, 10vw, 3.75rem),
     position: display-none,
-    orientation: horizontal,
+    orientation: vertical,
     ),
     
     '(width > 455px)': (
@@ -67,25 +67,25 @@ $carousel-buttons: (
   ),
 
   '(width > 900px)': (
-    position: outside-carousel,
+    position: right-carousel,
   )
 );
 
-// Note - Facciamo un solo style di default e poi al massimo, autorizziamo multipli breakpoint?
 $carousel-buttons-style: (
   'default': (
     // Note - Vorrei esporre un file sass per fare qualcosa di custom, tipo custom borders on hover che ruotano, cose così.
     
     // Style
     color: red, // Done
-    background: blue, // Done
+    background: transparent, // Done
     border: 2px solid red, // Done
     border-radius: 0vw, // Done
-    border-offset: 10px, // Done (It's padding)
+    border-offset: 12px, // Done (It's padding)
     
-    transition: 275ms, // Note - Tokenize on Default Design Transition
+    transition: 225ms, // Note - Tokenize on Default Design Transition
 
-    hover: ( 
+    // You won't have validation on those props, at least for now.
+    hover: (
       scale: 1.1,
       color: red,
       background: transparent,
@@ -96,8 +96,8 @@ $carousel-buttons-style: (
       background: transparent,
     ),
     disabled: (
-      opacity: 0.75,
-      cursor: error,
+      opacity: 0.625,
+      cursor: not-allowed,
     ),
     focus-visible: (
       outline: 2px solid goldenrod, // Note - Tokenize on Default Design Outline
@@ -106,12 +106,18 @@ $carousel-buttons-style: (
   ),
 );
 
+$buttons-icon: (
+  'default': (
+    type: 1, 
+    // Todo - Need to do on the fly modificators
+    // Todo - Validation for number
+    size: 1.25rem,
+    stroke-width: 0px,
+    stroke-color: transparent,
+  )
+);
 
-$carousel-buttons-border-radius: 0;
-$carousel-buttons-borders: 0px 0px 0px 2px magenta; // It's a box shadow but we use it as border
-$carousel-buttons-box-shadows: $carousel-buttons-borders;
-$carousel-buttons-background: transparent; 
-$carousel-buttons-color: black; 
+
 
 
 // #region Icon, per ora non ce ne preoccupiamo

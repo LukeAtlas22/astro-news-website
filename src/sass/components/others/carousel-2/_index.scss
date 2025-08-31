@@ -1,3 +1,4 @@
+@forward "abstract/font-face/arrows-icons-font";
 @forward "carousel-reset"; 
 
 @forward "carousel";
@@ -6,8 +7,11 @@
 
 @forward "carousel-buttons/css-var-init";
 @forward "carousel-buttons/carousel-buttons";
+@forward "carousel-buttons/icon";
+@forward "carousel-buttons/artificial-pseudo-elements";
 
 @forward "carousel-scroll-marker-group";
 
 @forward "carousel-scroll-marker";
+
 

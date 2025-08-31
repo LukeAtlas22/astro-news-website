@@ -25,6 +25,12 @@
       // Note - Tutto questo tree andrebbe fatto a parte
       $validator: get-validation-hook($prop-directive);
       
+      @if (is-validator-with-parameters($validator)){
+        $validation-function: construct-validation-function(list.index($validator, 1));
+        $validation-parameters: list.index($validator, 2);
+        @debug validate($validation-function, $value, $validation-parameters)
+      }
+
       @if Is-Literal-String-Union-Validation($validator) {
         $union-template: get-literal-string-union-template-map($validator);
         $value: execute-literal-string-union-validation($value, $union-template);

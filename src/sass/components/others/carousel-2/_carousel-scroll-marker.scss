@@ -30,8 +30,7 @@
   width: var(--scroll-markers-size);
   height: var(--scroll-markers-size);
   flex-shrink: 0;
-
-  --look-here: look;
+  
   @include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
   // Note Deprecare in favore di Consume-PropsDirective Mixins ?
 

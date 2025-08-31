@@ -1,0 +1,23 @@
+
+.carousel::scroll-button(*){
+  font-family: carousel-arrows-font;
+
+  // Todo - Da tokenizzare (under)
+  content: '\e801';
+  font-size: 1.25rem;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 1px;
+}
+
+// Note - Da spostare (new rotation values based on ifons)
+// Memo - (Da portare in buttons orientation) Da ora utilizzeremo sempre icone di arrows che puntano a destra. 
+
+.carousel::scroll-button(left){
+  rotate: 180deg !important;
+}
+
+.carousel::scroll-button(right){
+  rotate: 0deg !important;
+}
+
+// Note - Temo che dovrò usare due differenti icone perchè altrimenti ho problemi di centramento

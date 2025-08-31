@@ -10,3 +10,11 @@
 // Selectors
 
 @forward "mixins/selectors/buttons-selectors"; // Note - Per ora lasciamo così, poi potrei fare as Buttons-SEL-
+
+
+
+// Fonts (Icons)
+  // - Only use the ones you really need.
+
+@use "font-face/arrows-icons-font";
+@use "font-face/moons-icons-font";

@@ -17,17 +17,9 @@
 // Wrapper
 
 .carousel__wrapper {
-  box-sizing: content-box; // Temp
+  
   // Note qui è da rifare tutta la logica del wrapper
-  width: auto;
-  
-  @container --carousel-container not style(--scroll-marker-group-position: inside-frame) {
-    height: auto;
-  }
-  
-  @container --carousel-container style(--scroll-marker-group-position: inside-frame) {
-    height: auto;
-  }
+  padding: 2rem;
 
   display: grid;
   //gap: $carousel-gap-between-carousel-and-navigation;
@@ -48,7 +40,7 @@ $-Frame-Space--Vertical: $carousel-height;
 $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
 
 .carousel__wrapper {
-  
+  // Todo - Devo scrivere queste if
   @if (true) { 
     @if (true) {
       @container --carousel-container 
@@ -61,7 +53,6 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
           column-gap: $-Wrapper-Gap;
 
           // Todo - Carousel-width deve diventare var
-          // Note, così funziona bene   
       }
     }
     
@@ -69,7 +60,9 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and
         style(--scroll-marker-group-orientation: horizontal) {
-          grid-template-rows: min-content 1fr;
+          grid-template-rows: $-Navigation-Space $-Frame-Space--Vertical;
+          grid-template-columns: $-Frame-Space--Horizontal;
+          row-gap: $-Wrapper-Gap;
       }
     }
   }
@@ -79,17 +72,23 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: vertical) {
-          grid-template-columns: 1fr min-content;
+          grid-template-columns: $-Frame-Space--Horizontal $-Navigation-Space;
+          grid-template-rows: $-Frame-Space--Vertical;
+          column-gap: $-Wrapper-Gap;
         }
     }
+
     @if (true) {
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: horizontal) {
-          grid-template-rows: 1fr min-content;
+          grid-template-rows: $-Frame-Space--Vertical $-Navigation-Space;
+          grid-template-columns: $-Frame-Space--Horizontal;
+          row-gap: $-Wrapper-Gap;
         }
     }
   }
+
 }
 
 .carousel {

@@ -137,6 +137,7 @@
       writing-mode: horizontal-tb;
 
       justify-self: var(--scroll-marker-group-alignment);
+      align-self: center; // Leave it
       
       display: flex;
       flex-direction: row;
@@ -171,7 +172,8 @@
       // Todo - If user needs orientation 
       @container --carousel-container style(--scroll-marker-group-orientation: vertical){ 
         writing-mode: vertical-lr;
-        align-self: var(--scroll-marker-group-alignment);      
+        align-self: var(--scroll-marker-group-alignment);     
+        justify-self: center;  // Leave it
       }
     
       // Flex direction (Markers direction)

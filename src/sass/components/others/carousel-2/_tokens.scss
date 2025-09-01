@@ -24,7 +24,12 @@ $carousel: (
   'default': (
     
     wrapper: (
+      /// Gap between frame & navigation inside the carousel wrapper
       gap: 2.25rem,
+      // Note - Questa proprietà potrebbe essere messa sia qui, sia in navigation
+      padding: 2rem,
+      border: 2px solid red,
+      border-radius: 2rem,
     ),
 
     frame: (
@@ -86,7 +91,7 @@ $carousel-scroll-infinite-scroll-type: order; // change-orders || duplicate-elem
 $carousel-scroll-auto-scroll: false;
 $carousel-scroll-auto-scroll-speed: 2225; // in ms
 
-$carousel-gap-between-carousel-and-navigation: 2rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
+$carousel-gap-between-carousel-and-navigation: 1.25rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
 
 // ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
@@ -170,9 +175,9 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: before, 
+    position: after, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: vertical, 
+    orientation: horizontal, 
     alignment: center, 
     
     // Todo - Qui andrebbe inserito anche max-size, però per far si che funzioni, bisogna risalire in cima, e refactorare il codice prima

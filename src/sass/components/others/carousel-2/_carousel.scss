@@ -3,7 +3,7 @@
 
 // Container
 
-.carousel__container {
+.carousel__variables-scope {
   // Note - In realtà questo non dovrebbe essere il containment context, ma soltanto il variables container, cioè un contenitore che contiene tutte le variabili css sul quale gli elements child svolgono delle container style query.  
   // Todo - Cambiare questo nome in qualcosa di più intent-revealing, in quanto l'unica cosa che fa è essere da contenitore di variabili sul quale tutti gli elementi possono fare query
   @include create-container($type: normal, $name: --carousel-container);
@@ -18,19 +18,10 @@
 
 .carousel__wrapper {
   
-  // Note qui è da rifare tutta la logica del wrapper
-  padding: 2rem;
-
   display: grid;
-  //gap: $carousel-gap-between-carousel-and-navigation;
-  // Note - Removed from here
-  
-  border: 3px solid red;
-
-  // Note - Allora qua bisogna fare alcune considerazione - La width e la height che applichiamoa  carousel, in realtà il nostro intento è applicarla alla frame, che può essere una row o una column della main grid dichiarate all'interno di __Wrapper (cioè le grid sotto) - 
-  
-  // Note - Dunque, dovremmo lasciare qui, width e height in auto, perchè il sizing della column o row dedicata alla frame lo stiamo decidendo sotto
-  // Note - Così come il sizing della column o della row dedicata alla navigation
+  padding: 1.25rem;
+  border: 0.125rem solid rgb(31, 63, 131);
+  border-radius: 2rem;
 }
 
 
@@ -38,6 +29,9 @@ $-Navigation-Space: var(--scroll-markers-size);
 $-Frame-Space--Horizontal: $carousel-width;
 $-Frame-Space--Vertical: $carousel-height;
 $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
+// Note momentanei private member da risolvere in futuro
+
+// Memo - The sizing of the frame & of the navigation - It's directed by this & only this abstraction
 
 .carousel__wrapper {
   // Todo - Devo scrivere queste if
@@ -47,7 +41,6 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
         style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
           // Note - Posso migliorare la leggibilità di questo codice?
-          // Note - Ci sono molte cose da migliorare.
           grid-template-columns: $-Navigation-Space $-Frame-Space--Horizontal; 
           grid-template-rows: $-Frame-Space--Vertical;
           column-gap: $-Wrapper-Gap;
@@ -96,15 +89,7 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
   position: relative;
   width: 100%;
   height: 100%;
-  // @if ($carousel-sizing-behaviour == ignore-navigation-size) {         
-  //   // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
-  //   width: $carousel-width;
-  //   height: $carousel-height;
-  // } @else if ($carousel-sizing-behaviour == stretch-with-navigation) { 
-  //   // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
-  //   width: 100%;
-  //   height: 100%;
-  // }
+
   background: $carousel-background;
   align-items: center; // Don't justify
   border-radius: $carousel-border-radius;

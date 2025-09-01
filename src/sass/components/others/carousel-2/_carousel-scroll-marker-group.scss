@@ -7,7 +7,7 @@
 
 @if Carousel.User-Wants-Navigation() {
 
-  .carousel__container{
+  .carousel__variables-scope{
     @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
       $Map: $carousel-navigation, 
       $props-directives-map: (

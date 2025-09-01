@@ -305,7 +305,7 @@
   // █▀ ▀▄█ █ ▀█ ▀▄▄  █  █ ▀▄▀ █ ▀█ █▀█ █▄▄ █  █   █
   
   // Note - In attesa che i valori next e prev di scroll-button() diventino disponibili, usiamo questo work-around
-  .carousel__container {
+  .carousel__variables-scope {
     --scroll-direction: #{$carousel-scroll-direction}; 
     // Note - May be tokenized on a css var to hydratate on client (?)
   }

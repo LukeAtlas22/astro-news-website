@@ -2,7 +2,7 @@
 @use "../tokens" as *;
 @use "../abstract/globals/globals" as Glob;
 
-.carousel__container {
+.carousel__variables-scope {
   
 
   @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(

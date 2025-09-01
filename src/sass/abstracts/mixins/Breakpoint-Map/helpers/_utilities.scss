@@ -6,8 +6,18 @@
 @use "../../../function/validations" as *;
 @use "../../../function/modificators/" as *;
 
+// Note - Da refactorare tutta questa roba
+
 
 // ================ U T I L I T I E S ===========================
+
+@function is-prop-in-exclude-list($prop-name, $props-to-exclude) {
+  @if list.index($props-to-exclude, $prop-name) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
 
 @mixin write-declaration-if-value-exist($css-prop, $value){
   @if ($value) { #{$css-prop}: #{$value} };

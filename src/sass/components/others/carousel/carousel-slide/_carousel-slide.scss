@@ -1,7 +1,8 @@
-@use "../../../abstracts/" as *;
+@use "@SASS-Abstracts" as *;
 
-@use "tokens" as *;
-@use "abstract/" as *;
+
+@use "../tokens" as *;
+@use "../abstract/" as *;
 
 
 .carousel__slide {

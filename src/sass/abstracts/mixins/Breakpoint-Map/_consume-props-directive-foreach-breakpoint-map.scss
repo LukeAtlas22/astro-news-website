@@ -1,5 +1,5 @@
 @use "helpers/media-query" as *;
-@use "assign-prop-from-simple-map" as *;
+@use "consume-props-directive-over-map" as *;
 
 // Note - Maybe change name in
 // Note - Selective-Apply-Properties-ForEach-Breakpoint-In-Map

@@ -5,7 +5,7 @@
 
 // Mixins
 
-@forward "assign-props-from-breakpoints-map" as Breakpoints-Map--*;
-@forward "assign-prop-from-simple-map" as Simple-Map--*;
+@forward "consume-props-directive-foreach-breakpoint-map" as Breakpoints-Map--*;
+@forward "consume-props-directive-over-map" as Simple-Map--*;
 
-@forward "spread-every-prop-from-submap" as Breakpoints-Map--*;
+@forward "spread-every-prop-from-submap-foreach-breakpoint-in-map" as Breakpoints-Map--*;

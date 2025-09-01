@@ -1,37 +1,24 @@
-@use "../../../abstracts/" as *;
-@use "tokens" as *;
-
-// Container
-
-.carousel__variables-scope {
-  // Note - In realtà questo non dovrebbe essere il containment context, ma soltanto il variables container, cioè un contenitore che contiene tutte le variabili css sul quale gli elements child svolgono delle container style query.  
-  // Todo - Cambiare questo nome in qualcosa di più intent-revealing, in quanto l'unica cosa che fa è essere da contenitore di variabili sul quale tutti gli elementi possono fare query
-  @include create-container($type: normal, $name: --carousel-container);
-}
-
-.carousel__anchor-scope {
-  anchor-scope: --carousel;
-}
-
-
-// Wrapper
+@use "@SASS-Abstracts" as *;
+@use "../tokens" as *;
 
 .carousel__wrapper {
   
   display: grid;
-  padding: 1.25rem;
+  padding: 0rem;
   border: 0.125rem solid rgb(31, 63, 131);
   border-radius: 2rem;
 }
 
 
 $-Navigation-Space: var(--scroll-markers-size);
-$-Frame-Space--Horizontal: $carousel-width;
-$-Frame-Space--Vertical: $carousel-height;
+$-Frame-Space--Horizontal: $carousel-width; // Todo - CSS Var
+$-Frame-Space--Vertical: $carousel-height; // Todo - CSS Var
 $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
 // Note momentanei private member da risolvere in futuro
 
 // Memo - The sizing of the frame & of the navigation - It's directed by this & only this abstraction
+
+// Note - Posso migliorare la leggibilità di questo codice?
 
 .carousel__wrapper {
   // Todo - Devo scrivere queste if
@@ -40,12 +27,9 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
-          // Note - Posso migliorare la leggibilità di questo codice?
           grid-template-columns: $-Navigation-Space $-Frame-Space--Horizontal; 
           grid-template-rows: $-Frame-Space--Vertical;
           column-gap: $-Wrapper-Gap;
-
-          // Todo - Carousel-width deve diventare var
       }
     }
     
@@ -83,30 +67,3 @@ $-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
   }
 
 }
-
-.carousel {
-  margin-inline: auto;
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  background: $carousel-background;
-  align-items: center; // Don't justify
-  border-radius: $carousel-border-radius;
-  gap: $carousel-slide-gap;
-
-  anchor-name: --carousel;
-  counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
-  @include create-snap-scroller(
-    $direction: $carousel-scroll-direction,
-    $scroll-snap-type: $carousel-scroll-snap-type,
-    $scroll-snap-stop: $carousel-scroll-snap-stop,
-    $scroll-snap-align: $carousel-scroll-snap-align,
-    $scrolling-items-selector: ".carousel__slide",
-    $scroll-behaviour: $carousel-scroll-behaviour,
-    $scrollbar: none
-  );
-}
-
-
-

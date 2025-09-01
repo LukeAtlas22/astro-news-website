@@ -1,4 +1,4 @@
-@mixin create-snap-scroller(
+@mixin create-flexbox-snap-scroller(
   $direction: horizontal,
   $scroll-snap-type: mandatory,
   $scroll-snap-stop: always,

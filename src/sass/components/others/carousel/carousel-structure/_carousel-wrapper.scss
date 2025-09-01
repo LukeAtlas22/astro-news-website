@@ -1,22 +1,38 @@
 @use "@SASS-Abstracts" as *;
 @use "../tokens" as *;
 
+.carousel__variables-scope{
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel, 
+    $props-directives-map: (
+      (
+        sub-map: wrapper,
+        prop-name: gap,
+        as: --carousel-gap-between-frame-and-navigation,
+      ),
+    )
+  );
+}
+
 .carousel__wrapper {
-  
   display: grid;
-  padding: 0rem;
-  border: 0.125rem solid rgb(31, 63, 131);
-  border-radius: 2rem;
+
+  @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    $breakpoint-map: $carousel, 
+    $submap-to-spread: wrapper,
+    $props-to-exclude: (gap),
+  );
 }
 
 
 $-Navigation-Space: var(--scroll-markers-size);
-$-Frame-Space--Horizontal: $carousel-width; // Todo - CSS Var
-$-Frame-Space--Vertical: $carousel-height; // Todo - CSS Var
-$-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
+$-Frame-Space--Horizontal: var(--carousel-frame-width); // Todo - CSS Var
+$-Frame-Space--Vertical: var(--carousel-frame-height); // Todo - CSS Var
+$-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
 // Note momentanei private member da risolvere in futuro
 
 // Memo - The sizing of the frame & of the navigation - It's directed by this & only this abstraction
+
 
 // Note - Posso migliorare la leggibilità di questo codice?
 

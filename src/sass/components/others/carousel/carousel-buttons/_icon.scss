@@ -5,7 +5,7 @@
 .carousel::scroll-button(*){
   font-family: carousel-arrows-font;
 
-  @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
     $Map: $carousel-buttons-icon, 
     $props-directives-map: (
       (

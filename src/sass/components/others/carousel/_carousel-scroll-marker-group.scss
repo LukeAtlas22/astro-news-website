@@ -8,7 +8,7 @@
 @if Carousel.User-Wants-Navigation() {
 
   .carousel__variables-scope{
-    @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
       $Map: $carousel-navigation, 
       $props-directives-map: (
         (
@@ -151,7 +151,7 @@
 
       anchor-name: --scroll-marker-group;
 
-      @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map( 
+      @include Consume-PropsDirectives-ForEach-Breakpoint-Map( 
         $Map: $carousel-navigation,
         $props-directives-map:(
           (

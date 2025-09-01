@@ -25,28 +25,27 @@ $carousel: (
     
     wrapper: (
       /// Gap between frame & navigation inside the carousel wrapper
-      gap: 2.25rem,
-      // Note - Questa proprietà potrebbe essere messa sia qui, sia in navigation
-      padding: 2rem,
-      border: 2px solid red,
+      gap: 1.75rem, // Note - Questa proprietà potrebbe essere messa sia qui, sia in navigation
+      padding: 0rem,
+      border: none,
       border-radius: 2rem,
     ),
 
     frame: (
-      width: clamp(18rem, 95cqw, 40rem),
-      height: clamp(18rem, 95cqw, 40rem),
+      width: 425px, //clamp(18rem, 95cqw, 40rem),        
+      height: 275px, //clamp(18rem, 25cqw, 40rem), 
+      gap: 5.75%, // Gaps between slides
+      padding: 0rem, // Todo - Da implementare
       background: rgba(128, 128, 128, 0.267),
       border: none,
-      border-radius: 12px,
-      padding: 0rem, // Todo - Da implementare
+      border-radius: 2rem,
     ),
 
     slide: (
       width: 100%,
       height: 100%,
-      first-child-margin-start: 0%, // Note - Implement Exluder on my Spreader?
+      first-child-margin-start: 0%, 
       last-child-margin-end: 0%,
-      gap: 5.75%,
     ),
 
     scroll: (
@@ -69,9 +68,12 @@ $carousel: (
 $carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
 $carousel-height: clamp(10rem, 65cqw, 27.75rem); //Container: 'container' | Only use cqw
 // Temporaney test value
-$carousel-width: 625px; //Container: 'container' | Only use cqw
-$carousel-height: 250px; //Container: 'container' | Only use cqw
+$carousel-width: 325px; //Container: 'container' | Only use cqw
+$carousel-height: 300px; //Container: 'container' | Only use cqw
 // Temporaney test value
+
+$carousel-gap-between-carousel-and-navigation: 2.25rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
+
 $carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
 
@@ -88,18 +90,17 @@ $carousel-scroll-snap-type: mandatory;
 $carousel-scroll-snap-stop: always;
 $carousel-scroll-snap-align: start;
 
-$carousel-scroll-infinite-scroll: false;
+$carousel-scroll-infinite-scroll: true;
 $carousel-scroll-infinite-scroll-type: order; // change-orders || duplicate-elements (The first it's better for performance but it doesn't work everywhere)
 $carousel-scroll-auto-scroll: false;
 $carousel-scroll-auto-scroll-speed: 2225; // in ms
 
-$carousel-gap-between-carousel-and-navigation: 1.25rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
 
 // ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
 
 // true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: true; 
+$carousel-buttons-display: false; 
 
 $carousel-buttons: (
   'default': (

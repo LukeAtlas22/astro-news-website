@@ -3,20 +3,23 @@
 
 
 .carousel {
-  width: 100%;
-  height: 100%;
-  margin-inline: auto;
-  position: relative;
-
-  background: $carousel-background;
-  
-  border-radius: $carousel-border-radius;
-  padding: 0rem;
-  border: none;
-  
-  anchor-name: --carousel;
+  width: 100%;  // leave it
+  height: 100%; // leave it
+  place-items: center;
+  anchor-name: --carousel; 
+  counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
   
   
+  @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    $breakpoint-map: $carousel, 
+    $submap-to-spread: frame,
+    $props-to-exclude: (width, height),
+  );
+  
+  
+  // Note - Come vogliamo implementare questa cosa? Usiamo CSS VARS?
+  // Note - Questo dovremmo lasciarlo così, poi vediamo.
+  // Note - Facciamo che questo non sarà dinamico.
   @include create-flexbox-snap-scroller(
     $direction: $carousel-scroll-direction,
     $scroll-snap-type: $carousel-scroll-snap-type,
@@ -26,8 +29,24 @@
     $scroll-behaviour: $carousel-scroll-behaviour,
     $scrollbar: none
   );
-  gap: $carousel-slide-gap;
-  place-items: center; // Leave it
+  //gap: $carousel-slide-gap;
 
-  counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
+}
+
+.carousel__variables-scope {
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel, 
+    $props-directives-map: (
+      (
+        sub-map: frame,
+        prop-name: width,
+        as: --carousel-frame-width,
+      ),
+      (
+        sub-map: frame,
+        prop-name: height,
+        as: --carousel-frame-height
+      ),
+    )
+  );
 }

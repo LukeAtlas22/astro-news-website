@@ -1,8 +1,25 @@
 @use "@SASS-Abstracts" as *;
 
-
 @use "../tokens" as *;
 @use "../abstract/" as *;
+
+.carousel__variables-scope{
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel, 
+    $props-directives-map: (
+      (
+        sub-map: slide,
+        prop-name: first-child-margin-start,
+        as: --carousel-slide-first-child-margin-start,
+      ),
+      (
+        sub-map: slide,
+        prop-name: last-child-margin-end,
+        as: --carousel-slide-last-child-margin-end,
+      ),
+    )
+  );
+}
 
 
 .carousel__slide {
@@ -17,23 +34,29 @@
 
 .carousel__slide {
   flex-shrink: 0;
-  width: $carousel-slide-width;
-  height: $carousel-slide-height;
+  
+  @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    $breakpoint-map: $carousel, 
+    $submap-to-spread: slide,
+    $props-to-exclude: (first-child-margin-start, last-child-margin-end),
+  );
 
   &:first-child {
+    // Note questo conferma che scroll direction non può essere idratato, almeno per ora.
+    // Note per idratare scroll direction dovrei eliminare o modificare quel mixin
     @if ($carousel-scroll-direction == horizontal) {
-      margin-inline-start: $carousel-slide-first-margin-start;
+      margin-inline-start: var(--carousel-slide-first-child-margin-start);
     }
     @if ($carousel-scroll-direction == vertical) {
-      margin-block-start: $carousel-slide-first-margin-start;
+      margin-block-start: var(--carousel-slide-first-child-margin-start);
     }
   }
   &:last-child {
     @if ($carousel-scroll-direction == horizontal) {
-      margin-inline-end: $carousel-slide-last-margin-end;
+      margin-inline-end: var(--carousel-slide-last-child-margin-end);
     }
     @if ($carousel-scroll-direction == vertical) {
-      margin-block-end: $carousel-slide-last-margin-end;
+      margin-block-end: var(--carousel-slide-last-child-margin-end);
     }
   }
 }

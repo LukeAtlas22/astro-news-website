@@ -5,7 +5,7 @@
 .carousel__variables-scope {
   
 
-  @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
     $Map: $carousel-buttons, 
     
     $props-directives-map: (

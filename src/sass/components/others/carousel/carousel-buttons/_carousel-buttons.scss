@@ -19,7 +19,7 @@
     cursor: pointer;
     z-index: 99;
   
-    @include Breakpoints-Map--Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
       $Map: $carousel-buttons-style,
       $props-directives-map: (
         
@@ -54,21 +54,21 @@
   // Note - Memo - For the interaction selectors, we had problems on artificial afters
 
   @include BothButtons--Hover{
-    @include Breakpoints-Map--Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
       $breakpoint-map: $carousel-buttons-style, 
       $submap-to-spread: hover,
     );
   }
 
   @include BothButtons--Active{
-    @include Breakpoints-Map--Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
       $breakpoint-map: $carousel-buttons-style, 
       $submap-to-spread: active,
     );  
   }
 
   @include BothButtons--Focus-Visible{
-    @include Breakpoints-Map--Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+    @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
       $breakpoint-map: $carousel-buttons-style, 
       $submap-to-spread: focus-visible,
     );
@@ -77,7 +77,7 @@
   @container --carousel-container not style(--infinite-scroll: true){ 
     // Note - Memo - Questa custom prop non è stata ancora implementata
     @include BothButtons--Disabled{
-      @include Breakpoints-Map--Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+      @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
         $breakpoint-map: $carousel-buttons-style, 
         $submap-to-spread: disabled,
       );

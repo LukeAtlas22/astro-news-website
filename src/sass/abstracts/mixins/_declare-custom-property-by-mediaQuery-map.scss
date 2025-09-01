@@ -12,7 +12,7 @@
 ///       $carousel-buttons-position: (
 ///         (min, width, 1000px): outside-carousel,
 ///         (max, width, 1000px): feet-carousel,
-///         (max, width, 500px): inside-carousel,
+///         (max, width, 500px): inside-frame,
 ///         (max, width, 375px): display-none,
 ///       );
 ///     customProperty-to-change:
@@ -28,7 +28,7 @@
 ///       --buttons-position: feet-carousel;
 ///     }
 ///     @media screen and (max-width: 500px) {
-///       --buttons-position: inside-carousel;
+///       --buttons-position: inside-frame;
 ///     }
 ///     @media screen and (max-width: 375px) {
 ///       --buttons-position: display-none;
@@ -63,7 +63,7 @@
             $carousel-buttons-position: (
             (min, width, 1000px): outside-carousel,
             (max, width, 1000px): feet-carousel,
-            (max, width, 500px): inside-carousel,
+            (max, width, 500px): inside-frame,
             (max, width, 375px): display-none,
             );
         customProperty-to-change:
@@ -80,7 +80,7 @@
             --buttons-position: feet-carousel;
         }
         @media screen and (max-width: 500px){
-            --buttons-position: inside-carousel;
+            --buttons-position: inside-frame;
         }
         @media screen and (max-width: 375px){
             --buttons-position: display-none;

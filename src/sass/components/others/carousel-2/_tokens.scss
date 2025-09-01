@@ -8,6 +8,7 @@
 // - - - - - - icon
 
 // Todo - Maybe it wants to be contained "size" (?)
+// Todo - Alla fine togliamo i big comments
 
 // Note Con breakpoint map è possibile anche fare cose tipo
 // Note (width > 500px) and (heigth > 1000px)
@@ -19,8 +20,51 @@
 // Note - It can respond easily to landscape mode - It can do easily multiple media queries
 // Note - Given examples:
 
+$carousel: (
+  'default': (
+    
+    wrapper: (
+      gap: 2.25rem,
+    ),
+
+    frame: (
+      width: clamp(18rem, 95cqw, 40rem),
+      height: clamp(18rem, 95cqw, 40rem),
+      border-radius: 12px,
+      background: rgba(128, 128, 128, 0.267),
+    ),
+
+    slide: (
+      width: 100%,
+      height: 100%,
+      first-margin-start: 0%,
+      first-margin-end: 0%,
+      gap: 5.75%,
+    ),
+
+    scroll: (
+      behaviour: smooth,
+      direction: horizontal,
+      snap-type: mandatory,
+      snap-stop: always,
+      snap-align: start,
+
+      infinite-scroll: false, // Note - Abbiamo detto che questo lo avremmo deciso con Astro
+      infinite-scroll-type: order, // Note - Si era detto che lo avremmo fatto automatico
+      auto-scroll: false, // Note - Anche questo volevamo gestirlo con astro
+      auto-scroll-speed: 3725ms, // Note- stessa cpsa
+    ),
+
+    // Note - gap from navigation lo spostiamo?
+  )
+);
+
 $carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
 $carousel-height: clamp(10rem, 65cqw, 27.75rem); //Container: 'container' | Only use cqw
+// Temporaney test value
+$carousel-width: 425px; //Container: 'container' | Only use cqw
+$carousel-height: 350px; //Container: 'container' | Only use cqw
+// Temporaney test value
 $carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
 
@@ -42,14 +86,13 @@ $carousel-scroll-infinite-scroll-type: order; // change-orders || duplicate-elem
 $carousel-scroll-auto-scroll: false;
 $carousel-scroll-auto-scroll-speed: 2225; // in ms
 
-$carousel-gap-between-carousel-and-navigation: 2.5rem;
-
+$carousel-gap-between-carousel-and-navigation: 2rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
 
 // ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
 
 // true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: true; 
+$carousel-buttons-display: false; 
 
 $carousel-buttons: (
   'default': (
@@ -63,7 +106,7 @@ $carousel-buttons: (
     '(width > 455px)': (
     width: clamp(3.75rem, 10vw, 4.5rem),
     height: clamp(3.75rem, 10vw, 4.5rem),
-    position: inside-carousel,
+    position: inside-frame,
     position-offset: (horizontal: 2rem, vertical: 0rem),
   ),
 
@@ -127,9 +170,9 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: after, 
+    position: before, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: horizontal, 
+    orientation: vertical, 
     alignment: center, 
     
     // Todo - Qui andrebbe inserito anche max-size, però per far si che funzioni, bisogna risalire in cima, e refactorare il codice prima
@@ -147,22 +190,6 @@ $carousel-navigation:( // Note - Name is temporaney
     markers-justification: center,
     markers-size: 24px, 
     markers-style: default, 
-  ),
-
-  '(width > 1000px)': (
-    position: after, 
-    orientation: horizontal, 
-    alignment: center,
-
-    gap: 2.25rem, 
-    
-    outline: none,
-    outline-offset: none,
-    outline-radius: none,
-    
-    markers-justification: start,
-    markers-size: 52px, 
-    markers-style: slide-image, 
   ),
 );
 

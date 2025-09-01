@@ -25,17 +25,17 @@ $carousel-buttons-orientations: (
 );
 $carousel-buttons-positions-change-property: --buttons-position; //Leave it like that | Dovrei lasciarlo così?
 $carousel-buttons-positions: (
-  /// Valid positions: outside-carousel | feet-carousel | head-carousel | inside-carousel | left-carousel | right-carousel | display-none
+  /// Valid positions: outside-carousel | feet-carousel | head-carousel | inside-frame | left-carousel | right-carousel | display-none
   (min, width, 1000px): outside-carousel,
   (max, width, 1000px): feet-carousel,
-  (max, width, 500px): inside-carousel,
+  (max, width, 500px): inside-frame,
   (max, width, 375px): display-none
 );
 $carousel-buttons-position-outside-carousel: (
   horizontal-offset: -5.75rem,
   vertical-offset: 0rem,
 );
-$carousel-buttons-position-inside-carousel: (
+$carousel-buttons-position-inside-frame: (
   horizontal-offset: 2.75rem,
   vertical-offset: 0rem,
 );
@@ -166,17 +166,17 @@ $carousel-buttons-orientations: (
 );
 $carousel-buttons-positions-change-property: --buttons-position; //Leave it like that | Dovrei lasciarlo così?
 $carousel-buttons-positions: (
-  /// Valid positions: outside-carousel | feet-carousel | head-carousel | inside-carousel | left-carousel | right-carousel | display-none
+  /// Valid positions: outside-carousel | feet-carousel | head-carousel | inside-frame | left-carousel | right-carousel | display-none
   (min, width, 1000px): outside-carousel,
   (max, width, 1000px): feet-carousel,
-  (max, width, 500px): inside-carousel,
+  (max, width, 500px): inside-frame,
   (max, width, 375px): display-none
 );
 $carousel-buttons-position-outside-carousel: (
   horizontal-offset: -5.75rem,
   vertical-offset: 0rem,
 );
-$carousel-buttons-position-inside-carousel: (
+$carousel-buttons-position-inside-frame: (
   horizontal-offset: 2.75rem,
   vertical-offset: 0rem,
 );

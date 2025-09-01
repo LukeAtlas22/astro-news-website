@@ -1,27 +1,51 @@
 @use "../../../abstracts/" as *;
 @use "tokens" as *;
 
-
+// Container
 
 .carousel__container {
-  margin-inline: auto;
-  width: $carousel-width;
-  height: $carousel-height;
+  // Note - In realtà questo non dovrebbe essere il containment context, ma soltanto il variables container, cioè un contenitore che contiene tutte le variabili css sul quale gli elements child svolgono delle container style query.  
+  // Todo - Cambiare questo nome in qualcosa di più intent-revealing, in quanto l'unica cosa che fa è essere da contenitore di variabili sul quale tutti gli elementi possono fare query
+  @include create-container($type: normal, $name: --carousel-container);
 }
+
+.carousel__anchor-scope {
+  anchor-scope: --carousel;
+}
+
+
+// Wrapper
 
 .carousel__wrapper {
-  @container --carousel-container not style(--scroll-marker-group-position: inside-frame){
-    height: calc( $carousel-height);
-  }
-
-  @container --carousel-container style(--scroll-marker-group-position: inside-frame){
-    height: $carousel-height;
+  box-sizing: content-box; // Temp
+  // Note qui è da rifare tutta la logica del wrapper
+  width: auto;
+  
+  @container --carousel-container not style(--scroll-marker-group-position: inside-frame) {
+    height: auto;
   }
   
-  gap: $carousel-gap-between-carousel-and-navigation;
+  @container --carousel-container style(--scroll-marker-group-position: inside-frame) {
+    height: auto;
+  }
 
   display: grid;
+  //gap: $carousel-gap-between-carousel-and-navigation;
+  // Note - Removed from here
+  
+  border: 3px solid red;
+
+  // Note - Allora qua bisogna fare alcune considerazione - La width e la height che applichiamoa  carousel, in realtà il nostro intento è applicarla alla frame, che può essere una row o una column della main grid dichiarate all'interno di __Wrapper (cioè le grid sotto) - 
+  
+  // Note - Dunque, dovremmo lasciare qui, width e height in auto, perchè il sizing della column o row dedicata alla frame lo stiamo decidendo sotto
+  // Note - Così come il sizing della column o della row dedicata alla navigation
 }
+
+
+$-Navigation-Space: var(--scroll-markers-size);
+$-Frame-Space--Horizontal: $carousel-width;
+$-Frame-Space--Vertical: $carousel-height;
+$-Wrapper-Gap: $carousel-gap-between-carousel-and-navigation;
 
 .carousel__wrapper {
   
@@ -30,10 +54,14 @@
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
-          grid-template-columns: var(--scroll-markers-size) $carousel-width; 
-          // Note - Potrei migliorarlo così
-          // Note - Carousel-width diventerebbe una CSS-Variable, e la userei in ogni breakpoint
-          
+          // Note - Posso migliorare la leggibilità di questo codice?
+          // Note - Ci sono molte cose da migliorare.
+          grid-template-columns: $-Navigation-Space $-Frame-Space--Horizontal; 
+          grid-template-rows: $-Frame-Space--Vertical;
+          column-gap: $-Wrapper-Gap;
+
+          // Todo - Carousel-width deve diventare var
+          // Note, così funziona bene   
       }
     }
     
@@ -67,8 +95,8 @@
 .carousel {
   margin-inline: auto;
   position: relative;
-  width: $carousel-width;
-  height: $carousel-height;
+  width: 100%;
+  height: 100%;
   // @if ($carousel-sizing-behaviour == ignore-navigation-size) {         
   //   // Note - Questo ci serve davvero? Non ha senso, ogni cosa gestisce le sue dimensioni, invividualmente, un sizing di un elemento non dovrebbe dipendere dal sizing di un altro elemento
   //   width: $carousel-width;
@@ -96,18 +124,5 @@
   );
 }
 
-.carousel__anchor-scope {
-  anchor-scope: --carousel;
-  
-}
-.carousel__container {
-  @include create-container($type: inline-size, $name: --carousel-container);
-}
 
-// #region Debug
-@if ($carousel-debug-mode-on == yes) {
-  .carousel {
-    @include debug;
-  }
-}
-// #endregion
+

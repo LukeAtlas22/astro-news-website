@@ -74,7 +74,8 @@
     );
   }
 
-  @container --carousel-container not style(--infinite-scroll: true){
+  @container --carousel-container not style(--infinite-scroll: true){ 
+    // Note - Memo - Questa custom prop non è stata ancora implementata
     @include BothButtons--Disabled{
       @include Breakpoints-Map--Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
         $breakpoint-map: $carousel-buttons-style, 
@@ -150,7 +151,7 @@
   }
 
   // Position 2 - Inside carousel
-  @container style(--buttons-position: inside-carousel) {
+  @container style(--buttons-position: inside-frame) {
     @include NextButton() {
       top: calc(anchor(center) + var(--buttons-position-vertical-offset));
       right: calc(anchor(right) + var(--buttons-position-horizontal-offset));

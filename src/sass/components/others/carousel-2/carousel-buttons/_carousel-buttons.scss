@@ -4,12 +4,12 @@
 @use "../../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
 @use "../abstract/" as *;
 @use "../abstract/globals/globals" as Glob;
-
+@use "../abstract/function/carousel-functions.scss" as Carousel;
 // Note - Migliorare la gestione di questi import come abbiamo fatto con l'Article Component
 
+@if not Carousel.User-Wants-Buttons() { @include BothButtons { display: none }};
 
-@if ($carousel-buttons-display == yes){
-
+@if Carousel.User-Wants-Buttons(){
 
   // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
   // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
@@ -82,13 +82,6 @@
       );
     }
   }
-
-
-  // █ ▄▀▀ ▄▀▄ █▄ █
-  // █ ▀▄▄ ▀▄▀ █ ▀█ // Notes - Questa è tutta da rifare
-
-  
-
 
   // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀  
   // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ // Note - Qui sotto, allineare con artificial pseudo button

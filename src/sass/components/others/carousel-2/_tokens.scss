@@ -24,12 +24,6 @@ $carousel-height: clamp(10rem, 65cqw, 27.75rem); //Container: 'container' | Only
 $carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
 
-$carousel-sizing-behaviour: ignore-navigation-size; // stretch-with-navigation || ignore-navigation-size
-// Note - Secondo me questa complica molto le cose - 
-// Note - Togliamola, e facciamo che l'unica fonte di verità per le dimensioni del carosello è carousel width e height.
-// Note - In fondo, quand'è che avrò bisogno di un carosello che stretcha appresso alla navigation? mi sembra assurdo
-//
-
 $carousel-slide-width: 100%;
 $carousel-slide-height: 100%;
 $carousel-slide-first-margin-start: 0%;
@@ -54,8 +48,8 @@ $carousel-gap-between-carousel-and-navigation: 2.5rem;
 // ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
 
-// yes || no - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: yes; 
+// true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
+$carousel-buttons-display: true; 
 
 $carousel-buttons: (
   'default': (
@@ -74,7 +68,7 @@ $carousel-buttons: (
   ),
 
   '(width > 900px)': (
-    position: outside-carousel,
+    position: align-on-navigation-and-carousel-margins,
   )
 );
 
@@ -117,50 +111,33 @@ $carousel-buttons-style: (
 
 $carousel-buttons-icon: (
   'default': (
-    type: 24, // 1-25 // I like myself 3 & 24
+    type: 11, // 1-25 // I like myself 3 & 24
     size: 1.25rem,
     stroke-width: 0px,
     stroke-color: transparent,
   )
 );
 
-
-
-
-// #region Icon, per ora non ce ne preoccupiamo
-// Note - Per ora non ci preoccuperemo dell'icona
-// Note - Perchè ho delle possibilità di agire sull'icona che vorrei mantenere.
-$carousel-buttons-arrow-icon-shape: 1; // The SVG Shape (1-3)
-$carousel-buttons-arrow-icon-inset: 0;
-$carousel-buttons-arrow-icon-rescale: 1; // Leave it
-$carousel-buttons-arrow-icon-stroke-width: 2;
-$carousel-buttons-arrow-icon-color: goldenrod;
-$carousel-buttons-arrow-icon-outline: 0.75; 
-$carousel-buttons-arrow-icon-outline-offset: 0;
-$carousel-buttons-arrow-icon-outline-color: red;
-
-// Note - Non posso gestire il size dell'icona? wut? - Forse ho un modo più ottimizzato per farlo, sfruttrando Astro, senza usare background-image
-// #endregion
-
 // ▄▀▀ ▄▀▀ █▀▄ ▄▀▄ █   █      █▄ ▄█ ▄▀▄ █▀▄ █▄▀ ██▀ █▀▄    ▄▀  █▀▄ ▄▀▄ █ █ █▀▄ 
 // ▄█▀ ▀▄▄ █▀▄ ▀▄▀ █▄▄ █▄▄    █ ▀ █ █▀█ █▀▄ █ █ █▄▄ █▀▄    ▀▄█ █▀▄ ▀▄▀ ▀▄█ █▀  
 
 // Todo Questa variabile sotto
 // Same as buttons display - If you don't need AT ALL the navigation, set on no, and the code won't be injected to the css final sheet.
-$carousel-navigation-display: yes; 
+$carousel-navigation-display: true; 
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
     position: after, 
-    position-inset: (top: 2rem, right: 1rem), // Note - Done (Almost) Problema con defaults (container querys with ANDs)
+    position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
     orientation: horizontal, 
     alignment: center, 
     
     // Todo - Qui andrebbe inserito anche max-size, però per far si che funzioni, bisogna risalire in cima, e refactorare il codice prima
     // Todo - con la mappa breakpoint, dedicata al carousel, dopodichè far diventare width & height una css var
-    // Todo - dopodichè avremo i mezzi per implementare il max size
+    // Todo - dopodichè avremo i mezzi per implementare il max size token
+    // This will override the default max-size (set on carousel size)
 
-    gap: 1rem, 
+    gap: 0.75rem, 
     
     outline: none,        
     outline-offset: none, 
@@ -173,8 +150,8 @@ $carousel-navigation:( // Note - Name is temporaney
   ),
 
   '(width > 1000px)': (
-    position: none, 
-    orientation: vertical, 
+    position: after, 
+    orientation: horizontal, 
     alignment: center,
 
     gap: 2.25rem, 

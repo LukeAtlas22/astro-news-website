@@ -9,3 +9,11 @@
     @return y;
   }
 }
+
+@function User-Wants-Buttons(){
+  @return $carousel-buttons-display;
+}
+
+@function User-Wants-Navigation(){
+  @return $carousel-navigation-display;
+}

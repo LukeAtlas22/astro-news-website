@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "../../../abstracts/" as *;
 @use "tokens" as *;
+@use "abstract/globals/globals" as Glob;
 
 
 // ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▄ ▄█ ▄▀▄ █▀▄  // =================================================
@@ -35,6 +36,7 @@
   // Note Deprecare in favore di Consume-PropsDirective Mixins ?
 
   background-clip: content-box !important;  
+  transition-property: Glob.$CAROUSEL-ELEMENT-TRANSITION-PROPS; 
 }
 
 // ==========================================================================================

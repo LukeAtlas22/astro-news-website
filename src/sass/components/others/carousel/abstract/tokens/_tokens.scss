@@ -93,7 +93,7 @@ $carousel-scroll-auto-scroll-speed: 2225; // in ms
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
 
 // true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: true; 
+$carousel-buttons-display: false; 
 
 $carousel-buttons: (
   'default': (
@@ -171,7 +171,7 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: inside-frame, 
+    position: after, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
     orientation: horizontal, 
     alignment: center, 

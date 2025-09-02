@@ -1,6 +1,8 @@
 ---
 import { AstroError } from 'astro/errors';
 import { parseHTML } from 'linkedom'
+import { wrapper } from './utils/getSlotLength';
+
 const html = await Astro.slots.render('default')
 const { document } = parseHTML(html)
 const children = Array.from(document.children);
@@ -21,12 +23,12 @@ const {
 
 if (type !== 'unordered' && type !== 'ordered') throw new AstroError('Wrong type for <List/>');
 
-const wrappedChildren = children.map(child => {
-  const li = document.createElement('li');
-  li.classList.add(classItems);
-  li.appendChild(child);
-  return li;
-})
+const wrappedChildren = wrapper({
+  elements: children,
+  classList: classItems,
+  wrapper: 'li',
+  html: html,
+});
 
 {/* Migliorare: Fare solo 1 statement */}
 ---

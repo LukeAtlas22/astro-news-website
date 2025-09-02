@@ -1,9 +1,19 @@
 ---
   import List from "@utilities/lists/List.astro"
   import { getSlotLength } from "@utilities/lists/utils/getSlotLength"
+  import { parseHTML } from "linkedom";
+  import { wrapper } from "@utilities/lists/utils/getSlotLength";
 
   const html = await Astro.slots.render('default');
   const slideAmount = getSlotLength(html);
+  const { document } = parseHTML(html)
+  const carouselSlides = Array.from(document.children);
+  const wrappedCarouselSlides = wrapper({
+    elements: carouselSlides,
+    wrapper: 'li',
+    classList: "carousel__slide",
+    html: html,
+  });
 
   interface Props {
     infiniteScroll: boolean,
@@ -49,6 +59,7 @@
         <slot></slot>
       </List>
 
+      {/* Qui forse devo rifare l'astrazione della list */}
       
   
       <!-- <button class="carousel__button-artificial-after--next"> </button>

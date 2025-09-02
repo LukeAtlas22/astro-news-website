@@ -1,34 +1,32 @@
 @use "@SASS-Abstracts" as *;
 @use "../tokens" as *;
 
-.carousel__variables-scope{
-  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
-    $Map: $carousel, 
-    $props-directives-map: (
-      (
-        sub-map: wrapper,
-        prop-name: gap,
-        as: --carousel-gap-between-frame-and-navigation,
-      ),
-    )
-  );
-}
-
 .carousel__wrapper {
   display: grid;
 
   @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
     $breakpoint-map: $carousel, 
     $submap-to-spread: wrapper,
-    $props-to-exclude: (gap),
-    $props-to-unallow: (width, height),
+    $props-to-exclude: (border-offset),
+    $props-to-unallow: (width, height, gap),
+  );
+
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel, 
+    $props-directives-map: (
+      (
+        sub-map: wrapper,
+        prop-name: border-offset,
+        as: padding,
+      ),
+    )
   );
 }
 
 
 $-Navigation-Space: var(--scroll-markers-size);
-$-Frame-Space--Horizontal: var(--carousel-frame-width); // Todo - CSS Var
-$-Frame-Space--Vertical: var(--carousel-frame-height); // Todo - CSS Var
+$-Frame-Space--Horizontal: var(--carousel-frame-width); 
+$-Frame-Space--Vertical: var(--carousel-frame-height); 
 $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
 // Note momentanei private member da risolvere in futuro
 
@@ -81,6 +79,15 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
           row-gap: $-Wrapper-Gap;
         }
     }
+  }
+
+  @if (true) {
+    @container --carousel-container
+      style(--scroll-marker-group-position: inside-frame) {
+        grid-template-columns: $-Frame-Space--Horizontal;
+        grid-template-rows: $-Frame-Space--Vertical;
+        // No gap in this case
+      }
   }
 
 }

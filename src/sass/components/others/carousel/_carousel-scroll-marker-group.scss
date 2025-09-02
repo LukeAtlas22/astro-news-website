@@ -12,6 +12,11 @@
       $Map: $carousel-navigation, 
       $props-directives-map: (
         (
+          prop-name: distance,
+          as: --carousel-gap-between-frame-and-navigation,
+          validation-hook: length,
+        ),
+        (
           prop-name: position,
           as: --scroll-marker-group-position,
           validation-hook: (literal-string-union, Glob.$NAVIGATION_POSITIONS),
@@ -193,18 +198,17 @@
     $-CALCULATION-Of-Inline-Size-Carousel-Navigation: calc(
       ( var(--scroll-markers-size) * var(--carousel-slide-amount) ) +
       ( var(--scroll-marker-group-gap) * var(--carousel-slide-amount))
-    ); 
+    );  // 🔒 - Need it for positoin: inside-frame
 
-    
     .carousel::scroll-marker-group{
       inline-size: $-CALCULATION-Of-Inline-Size-Carousel-Navigation;
       
       @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
-        max-inline-size: $carousel-width; // Note - Those may become vars 
+        max-inline-size: var(--carousel-frame-width); 
       }
 
       @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
-        max-inline-size: $carousel-height; // Note - Those may become vars
+        max-inline-size: var(--carousel-frame-height);
       }
     }
 

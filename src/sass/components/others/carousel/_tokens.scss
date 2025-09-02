@@ -23,20 +23,23 @@
 $carousel: (
   'default': (
     
-    wrapper: (
-      /// Gap between frame & navigation inside the carousel wrapper
-      gap: 1.75rem, // Note - Questa proprietà potrebbe essere messa sia qui, sia in navigation
-      // Do not put width or height, in here.
+    wrapper: ( 
+      // Note - Wrapper la potrei eliminare da qua, per rendere più pulito...
+      // Note - Facciamo così, in wrapper non mettiamo revelant properties, ma solo l'essenziale per offrire un background, un border, una box-shadow, e robe così.
+      // Note - E magari releghiamo questa sottomappa in fondo
+      // Note ^ Da aggiungere alla documentazione
+      // Do not put width or height or gap, in here.
       // ...
       
-      padding: 0rem,
       background: transparent,
       border: none,
-      border-radius: 2rem,
+      border-radius: 0rem,
+      border-offset: 0rem,
+      box-shadow: none,
     ),
 
     frame: (
-      width: 425px, //clamp(18rem, 95cqw, 40rem),        
+      width: 400px, //clamp(18rem, 95cqw, 40rem),        
       height: 275px, //clamp(18rem, 25cqw, 40rem), 
       gap-between-slides: 5.75%, // Gaps between slides
 
@@ -49,8 +52,8 @@ $carousel: (
     ),
 
     slide: (
-      width: 70%, // Only use <percentage> (?)
-      height: 70%, // Only use <percentage> (?)
+      width: 100%, // Only use <percentage> (?)
+      height: 100%, // Only use <percentage> (?)
       
       // Those togheter works as offset between carousel-frame boundaries.
       first-slide-margin-start: 25%,  // Only allow <percentage> (?)
@@ -192,21 +195,20 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: after, 
+    position: inside-frame, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
     orientation: horizontal, 
     alignment: center, 
+    distance: 0.75rem, // Distance from frame | <length>
     
-    // Todo - Qui andrebbe inserito anche max-size, però per far si che funzioni, bisogna risalire in cima, e refactorare il codice prima
-    // Todo - con la mappa breakpoint, dedicata al carousel, dopodichè far diventare width & height una css var
-    // Todo - dopodichè avremo i mezzi per implementare il max size token
     // This will override the default max-size (set on carousel size)
+    // Note - Serve davvero?
 
     gap: 0.75rem, 
     
-    outline: none,        
-    outline-offset: none, 
-    outline-radius: none, 
+    outline: none,        // Note Qui è da rifare con borders?
+    outline-offset: none, // Note Qui è da rifare con borders?
+    outline-radius: none, // Note Qui è da rifare con borders?
     
     markers-direction: auto,
     markers-justification: center,

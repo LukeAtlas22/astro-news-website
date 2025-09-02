@@ -4,7 +4,7 @@
 @use "sass:map";
 
 /// Does not allow you to specify alias
-@mixin Spread-Properties-From-Map($map, $props-to-exclude) {
+@mixin Spread-Properties-From-Map($map, $props-to-exclude: null, $props-to-unallow: null) {
   @each $prop-name, $prop-value in $map{
     // Note - Room for error handling... 
     // Note - map exist
@@ -14,6 +14,11 @@
     @if $props-to-exclude and is-prop-in-exclude-list($prop-name, $props-to-exclude) { 
       $prop-value: null 
     };
+
+    @if $props-to-unallow and is-prop-in-unallow-list($prop-name, $props-to-unallow) {
+      $map-reference: map-to-string($map);
+      @error (' < #{$prop-name} > IS NOT ALLOWED IN THIS MAP !! ---> #{$map-reference}');
+    }
     
     @include write-declaration-if-value-exist($prop-name, $prop-value)
   }
@@ -24,18 +29,18 @@
 /// @param {type} $submap-to-spread - The submap to spread for each breakpoint
 /// @param {type} $props-to-exlude [null] - (Optional) - A list of props to exclude from the spread
 /// @output 
-@mixin Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map ($breakpoint-map, $submap-to-spread, $props-to-exclude: null) {
+@mixin Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map ($breakpoint-map, $submap-to-spread, $props-to-exclude: null, $props-to-unallow: null) {
   // Note - val: breakpoint-map exist
   @each $breakpoint, $maps-entry in $breakpoint-map {
     
     $map: map.get($maps-entry, $submap-to-spread);
 
     @if ($breakpoint == default) {
-      @include Spread-Properties-From-Map( $map, $props-to-exclude )
+      @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow )
     }
     @else {
       @include Media-Query(#{$breakpoint}) {
-        @include Spread-Properties-From-Map( $map, $props-to-exclude );
+        @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow );
       } 
     }
   }

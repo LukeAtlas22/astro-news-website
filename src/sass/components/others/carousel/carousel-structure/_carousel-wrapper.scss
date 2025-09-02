@@ -21,6 +21,7 @@
     $breakpoint-map: $carousel, 
     $submap-to-spread: wrapper,
     $props-to-exclude: (gap),
+    $props-to-unallow: (width, height),
   );
 }
 

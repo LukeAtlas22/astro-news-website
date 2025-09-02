@@ -26,7 +26,11 @@ $carousel: (
     wrapper: (
       /// Gap between frame & navigation inside the carousel wrapper
       gap: 1.75rem, // Note - Questa proprietà potrebbe essere messa sia qui, sia in navigation
+      // Do not put width or height, in here.
+      // ...
+      
       padding: 0rem,
+      background: transparent,
       border: none,
       border-radius: 2rem,
     ),
@@ -34,7 +38,10 @@ $carousel: (
     frame: (
       width: 425px, //clamp(18rem, 95cqw, 40rem),        
       height: 275px, //clamp(18rem, 25cqw, 40rem), 
-      gap: 5.75%, // Gaps between slides
+      gap-between-slides: 5.75%, // Gaps between slides
+
+      // Others... (No validation, use only real css prop)
+      // Note - Alla fine di ogni main props directive, potrei fare un mixin che implementa le others... prop
       padding: 0rem, // Todo - Da implementare
       background: rgba(128, 128, 128, 0.267),
       border: none,
@@ -42,18 +49,25 @@ $carousel: (
     ),
 
     slide: (
-      width: 100%,
-      height: 100%,
-      first-child-margin-start: 0%, 
-      last-child-margin-end: 0%,
+      width: 70%, // Only use <percentage> (?)
+      height: 70%, // Only use <percentage> (?)
+      
+      // Those togheter works as offset between carousel-frame boundaries.
+      first-slide-margin-start: 25%,  // Only allow <percentage> (?)
+      last-slide-margin-end: 25%, // Only allow <percentage> (?)
+      // Note da rifare sotto
+      // Note - C'è un modo migliore di chiamare questa cosa?
     ),
 
     scroll: (
-      behaviour: smooth,
-      direction: horizontal,
-      snap-type: mandatory,
+      behavior: smooth,
+      direction: horizontal, // Note - Var
+      snap-type: mandatory, // Note - Var // Mandatory | Proximity
       snap-stop: always,
-      snap-align: start,
+      snap-align: center,
+
+      scrollbar-width: none, //< none | thin | auto >
+      scrollbar-color: red orange, // <color> <color> syntax
 
       infinite-scroll: false, // Note - Abbiamo detto che questo lo avremmo deciso con Astro
       infinite-scroll-type: order, // Note - Si era detto che lo avremmo fatto automatico
@@ -85,7 +99,7 @@ $carousel-slide-gap: 5.75%;
 //$carousel-slide-amount: 4; // Provide the number of slides for computing reasons
 
 $carousel-scroll-behaviour: smooth;
-$carousel-scroll-direction: horizontal;
+$carousel-scroll-direction: vertical;
 $carousel-scroll-snap-type: mandatory;
 $carousel-scroll-snap-stop: always;
 $carousel-scroll-snap-align: start;
@@ -100,7 +114,7 @@ $carousel-scroll-auto-scroll-speed: 2225; // in ms
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
 
 // true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: false; 
+$carousel-buttons-display: true; 
 
 $carousel-buttons: (
   'default': (
@@ -119,7 +133,7 @@ $carousel-buttons: (
   ),
 
   '(width > 900px)': (
-    position: align-on-navigation-and-carousel-margins,
+    position: outside-carousel,
   )
 );
 

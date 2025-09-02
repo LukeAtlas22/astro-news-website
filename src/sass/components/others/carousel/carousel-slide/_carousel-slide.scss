@@ -41,30 +41,36 @@
     $props-to-exclude: (first-child-margin-start, last-child-margin-end),
   );
 
-  &:first-child {
-    // Note questo conferma che scroll direction non può essere idratato, almeno per ora.
-    // Note per idratare scroll direction dovrei eliminare o modificare quel mixin
-    @if ($carousel-scroll-direction == horizontal) {
-      margin-inline-start: var(--carousel-slide-first-child-margin-start);
-    }
-    @if ($carousel-scroll-direction == vertical) {
-      margin-block-start: var(--carousel-slide-first-child-margin-start);
-    }
-  }
-  &:last-child {
-    @if ($carousel-scroll-direction == horizontal) {
-      margin-inline-end: var(--carousel-slide-last-child-margin-end);
-    }
-    @if ($carousel-scroll-direction == vertical) {
-      margin-block-end: var(--carousel-slide-last-child-margin-end);
-    }
-  }
+  // &:first-child {
+  //   // Note - Magari c'è un modo migliore per farlo
+  //   @if ($carousel-scroll-direction == horizontal) {
+  //     margin-inline-start: var(--carousel-slide-first-child-margin-start);
+  //   }
+  //   @if ($carousel-scroll-direction == vertical) {
+  //     margin-block-start: var(--carousel-slide-first-child-margin-start);
+  //   }
+  // }
+  // &:last-child {
+  //   @if ($carousel-scroll-direction == horizontal) {
+  //     margin-inline-end: var(--carousel-slide-last-child-margin-end);
+  //   }
+  //   @if ($carousel-scroll-direction == vertical) {
+  //     margin-block-end: var(--carousel-slide-last-child-margin-end);
+  //   }
+  // }
 }
+
 
 // █ █ █ ██▀ █   █    ▀█▀ █ █▄ ▄█ ██▀ █   █ █▄ █ ██▀ 
 // ▀▄▀ █ █▄▄ ▀▄▀▄▀     █  █ █ ▀ █ █▄▄ █▄▄ █ █ ▀█ █▄▄ // Note rimuovi quando ri-organizzato
 .carousel__slide {
-  view-timeline-axis: Carousel-Utils-getScrollDirection();
+  @container --carousel-container style(--carousel-scroll-direction: vertical){
+    view-timeline-axis: y;
+  }
+  @container --carousel-container style(--carousel-scroll-direction: horizontal){
+    view-timeline-axis: x;
+  }
+  
   view-timeline-name: --carousel-slide-view-timeline;
 }
 

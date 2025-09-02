@@ -305,16 +305,12 @@
   // █▀ ▀▄█ █ ▀█ ▀▄▄  █  █ ▀▄▀ █ ▀█ █▀█ █▄▄ █  █   █
   
   // Note - In attesa che i valori next e prev di scroll-button() diventino disponibili, usiamo questo work-around
-  .carousel__variables-scope {
-    --scroll-direction: #{$carousel-scroll-direction}; 
-    // Note - May be tokenized on a css var to hydratate on client (?)
-  }
   
-  @container --carousel-container style(--scroll-direction: horizontal){
+  @container --carousel-container style(--carousel-scroll-direction: horizontal){
     @include Buttons-Axis-Vertical { display: none }
   }
   
-  @container --carousel-container style(--scroll-direction: vertical) {
+  @container --carousel-container style(--carousel-scroll-direction: vertical) {
     @include Buttons-Axis-Horizontal { display: none };
   }
 

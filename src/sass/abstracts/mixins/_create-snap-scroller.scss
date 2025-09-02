@@ -1,6 +1,11 @@
+// Note questo mixin dovrebbe solo creare uno snap-scroller, 
+// Note - Mixin da rifare
+// Note - Voglio rifare questo mixin seguendo un approccio più single responsibility, modulare, e composite.
+
+// Note - Forse questo mixin lo eliminiamo, perchè complica molto le cose
 @mixin create-flexbox-snap-scroller(
   $direction: horizontal,
-  $scroll-snap-type: mandatory,
+  $scroll-snap-type: mandatory, // Note - Ma che ho combinato?
   $scroll-snap-stop: always,
   $scroll-snap-align: center,
   $scrolling-items-selector: ".my_scrolling_item",
@@ -13,13 +18,13 @@
   @if ($direction == horizontal) {
     flex-direction: row;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x $scroll-snap-type;
     overflow-y: clip;
   }
   @if ($direction == vertical) {
     flex-direction: column;
     overflow-y: auto;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y $scroll-snap-type;
     overflow-x: clip;
   } @else if ($direction != horizontal and $direction != vertical) {
     @error 'Wrong direction, chose between: horizontal | vertical';

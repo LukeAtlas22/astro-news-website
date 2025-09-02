@@ -10,13 +10,20 @@
 
 
 // ================ U T I L I T I E S ===========================
-
-@function is-prop-in-exclude-list($prop-name, $props-to-exclude) {
-  @if list.index($props-to-exclude, $prop-name) {
+@function is-string-in-list($string, $list){
+  @if list.index($list, $string) {
     @return true;
   } @else {
     @return false;
   }
+}
+
+@function is-prop-in-exclude-list($prop-name, $props-to-exclude) {
+  @return is-string-in-list($prop-name, $props-to-exclude);
+}
+
+@function is-prop-in-unallow-list($prop-name, $props-to-unallow) {
+  @return is-string-in-list($prop-name, $props-to-unallow);
 }
 
 @mixin write-declaration-if-value-exist($css-prop, $value){
@@ -117,3 +124,13 @@
 }
 
 // ================================================================
+
+@function map-to-string($map) {
+  $result: "";
+
+  @each $key, $value in $map {
+    $result: if($result == "", "#{$key}: #{$value}", "#{$result}, #{$key}: #{$value}");
+  }
+
+  @return $result;
+}

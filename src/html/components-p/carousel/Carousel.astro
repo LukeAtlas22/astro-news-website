@@ -8,12 +8,6 @@
   const slideAmount = getSlotLength(html);
   const { document } = parseHTML(html)
   const carouselSlides = Array.from(document.children);
-  const wrappedCarouselSlides = wrapper({
-    elements: carouselSlides,
-    wrapper: 'li',
-    classList: "carousel__slide",
-    html: html,
-  });
 
   interface Props {
     infiniteScroll: boolean,
@@ -47,7 +41,24 @@
 <div class="carousel__anchor-scope | carousel__variables-scope">
   <div class="carousel__grid-wrapper"> 
     
-      <List
+    <ul class="carousel"
+        data-infinite-scroll={infiniteScroll}
+        data-autoplay={autoplay}
+        data-interval={interval}
+        style=`--carousel-slide-amount: ${slideAmount}`
+    >
+      {
+        wrapper({
+          elements: carouselSlides,
+          wrapper: 'li',
+          classList: "carousel__slide",
+          html: html,
+        })
+      }
+    </ul>
+
+      {/* Keep this for reference */}
+      <!-- <List
         type="unordered"
         class="carousel"
         classItems="carousel__slide"
@@ -57,7 +68,7 @@
         style=`--carousel-slide-amount: ${slideAmount}`
       >
         <slot></slot>
-      </List>
+      </List> -->
 
       {/* Qui forse devo rifare l'astrazione della list */}
       

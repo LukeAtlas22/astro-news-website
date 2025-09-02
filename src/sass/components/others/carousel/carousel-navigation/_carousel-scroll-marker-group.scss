@@ -1,11 +1,10 @@
-@use "tokens" as *;
-@use "../../../abstracts/" as *;
+@use "@SASS-Abstracts" as *;
+@use "@SASS-Carousel-Abstracts" as *;
 @use "sass:map";
-@use "abstract/globals/globals" as Glob;
-@use "abstract/function/carousel-functions.scss" as Carousel;
+
 @function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
 
-@if Carousel.User-Wants-Navigation() {
+@if User-Wants-Navigation() {
 
   .carousel__variables-scope{
     @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
@@ -19,7 +18,7 @@
         (
           prop-name: position,
           as: --scroll-marker-group-position,
-          validation-hook: (literal-string-union, Glob.$NAVIGATION_POSITIONS),
+          validation-hook: (literal-string-union, $NAVIGATION_POSITIONS),
         ),
         (
           prop-name: orientation,

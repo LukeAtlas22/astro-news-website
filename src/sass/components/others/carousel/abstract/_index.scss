@@ -1,21 +1,23 @@
 // Globals
 
-@forward "globals/globals" as Glob-*;
+@forward "globals/globals";
 
 // Utilities - Functions
 
-@forward "function/carousel-functions.scss" as Carousel-Utils-*;
+@forward "function/carousel-functions.scss";
 
 // Mixins
 
-@forward "mixins/snap-change-event/on-snap-changed" as Carousel-*;
-@forward "mixins/snap-change-event/on-snap-changing" as Carousel-*;
+@forward "mixins/snap-change-event/on-snap-changed";
+@forward "mixins/snap-change-event/on-snap-changing";
 
 // Selectors
 
-@forward "mixins/selectors/buttons-selectors"; // Note - Per ora lasciamo così, poi potrei fare as Buttons-SEL-
+@forward "mixins/selectors/buttons-selectors";
 
+// Tokens
 
+@forward "tokens/tokens";
 
 // Fonts (Icons)
   // - Only use the ones you really need.

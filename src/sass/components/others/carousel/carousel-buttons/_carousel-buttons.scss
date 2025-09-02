@@ -1,15 +1,12 @@
 @use "sass:map";
-@use "../tokens" as *;
-@use "../../../../abstracts/" as *;
-@use "../../../../icons/" as *; // Note - Da rivedere, questo è fuori dal Carousel Domain
-@use "../abstract/" as *;
-@use "../abstract/globals/globals" as Glob;
-@use "../abstract/function/carousel-functions.scss" as Carousel;
+@use "@SASS-Abstracts" as *;
+
+@use "@SASS-Carousel-Abstracts" as *;
 // Note - Migliorare la gestione di questi import come abbiamo fatto con l'Article Component
 
-@if not Carousel.User-Wants-Buttons() { @include BothButtons { display: none }};
+@if not User-Wants-Buttons() { @include BothButtons { display: none }};
 
-@if Carousel.User-Wants-Buttons(){
+@if User-Wants-Buttons(){
 
   // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
   // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
@@ -47,7 +44,7 @@
     );
 
     background-clip: content-box !important; // For border offset | Leave it
-    transition-property: Glob.$CAROUSEL-ELEMENT-TRANSITION-PROPS; 
+    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
   }
 
 

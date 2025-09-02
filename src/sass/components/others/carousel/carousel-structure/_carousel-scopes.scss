@@ -1,5 +1,4 @@
 @use "@SASS-Abstracts" as *;
-@use "../tokens" as *;
 
 .carousel__variables-scope {
   @include create-container($type: normal, $name: --carousel-container);

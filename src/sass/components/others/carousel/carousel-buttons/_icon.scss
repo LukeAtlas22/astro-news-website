@@ -1,6 +1,5 @@
 @use "@SASS-Abstracts" as *;
-@use "../tokens" as *;
-@use "../abstract/globals/globals" as Glob;
+@use "@SASS-Carousel-Abstracts" as *;
 
 .carousel::scroll-button(*){
   font-family: carousel-arrows-font;
@@ -11,7 +10,7 @@
       (
         prop-name: type,
         as: content,
-        validation-hook: (number-between, (1, Glob.$ICONS-AMOUNT)),
+        validation-hook: (number-between, (1, $ICONS-AMOUNT)),
         modificator-hook: get-unicode-from-number,
       ),
       (

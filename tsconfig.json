@@ -22,7 +22,7 @@
       "@SASS-Article-Selectors-Metadata": ["src/sass/components/others/article/mixins/selectors/metadata/_article-meta.scss"], 
       "@SASS-Article-Utilities": ["src/sass/components/others/article/mixins/utilities/"],
       
-      
+      "@SASS-Carousel-Abstracts": ["src/sass/components/others/carousel/abstract"],
       // Typescript
       "@types": ["src/html/components-p/navigation/typescript/types"], // Questi si riferiscono a un file, e non a una cartella
       "@utils": ["src/utils"], // Questi si riferiscono a un file, e non a una cartella

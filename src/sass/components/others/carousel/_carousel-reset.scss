@@ -4,6 +4,6 @@
   box-sizing: border-box;
 }
 
-ul:is(.carousel) {
+:where(ul:is(.carousel)) {
   list-style: none;
 }

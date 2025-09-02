@@ -1,9 +1,6 @@
 @use "sass:map";
-@use "../../../abstracts/" as *;
-
-@use "tokens" as *;
-@use "abstract/globals/globals" as Glob;
-
+@use "@SASS-Abstracts" as *;
+@use "@SASS-Carousel-Abstracts" as *;
 
 // ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▄ ▄█ ▄▀▄ █▀▄  // =================================================
 // ▄█▀  █   █  █▄▄ █▄▄    █ ▀ █ █▀█ █▀   // =================================================
@@ -23,9 +20,8 @@
 // ==========================================================================================
 
 
-
-// █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  // ===========================================================
-// █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  // ============================================================
+// █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  
+// █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  
 
 .carousel__slide::scroll-marker{
   @include pseudo;
@@ -37,15 +33,15 @@
   // Note Deprecare in favore di Consume-PropsDirective Mixins ?
 
   background-clip: content-box !important;  
-  transition-property: Glob.$CAROUSEL-ELEMENT-TRANSITION-PROPS; 
+  transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
 }
 
 // ==========================================================================================
 
 
 
-// ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀ // ==============================================
-// ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄ // ==============================================
+// ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀ 
+// ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄ 
 
 @if (true){ // Todo - Need to fix those ifs
   // Note - Questo dovrebbe essere fatto con Astro, getImage <-
@@ -71,8 +67,8 @@
 
 
 
-// ▄▀▀ ▄▀▄ █ █ █▄ █ ▀█▀ ██▀ █▀▄    █▄ █ █ █ █▄ ▄█ ██▄ ██▀ █▀▄ // =============================
-// ▀▄▄ ▀▄▀ ▀▄█ █ ▀█  █  █▄▄ █▀▄    █ ▀█ ▀▄█ █ ▀ █ █▄█ █▄▄ █▀▄ // =============================
+// ▄▀▀ ▄▀▄ █ █ █▄ █ ▀█▀ ██▀ █▀▄    █▄ █ █ █ █▄ ▄█ ██▄ ██▀ █▀▄ 
+// ▀▄▄ ▀▄▀ ▀▄█ █ ▀█  █  █▄▄ █▀▄    █ ▀█ ▀▄█ █ ▀ █ █▄█ █▄▄ █▀▄ 
 
 @if (true){ // Todo - Need to fix those ifs
   @container --carousel-container style(--scroll-markers-style: counter-numbers){

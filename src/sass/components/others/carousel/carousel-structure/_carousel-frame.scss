@@ -1,5 +1,5 @@
 @use "@SASS-Abstracts" as *;
-@use "../tokens" as *;
+@use "@SASS-Carousel-Abstracts" as *;
 
 .carousel__variables-scope {
   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(

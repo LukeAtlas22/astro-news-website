@@ -44,8 +44,7 @@ $carousel: (
       gap-between-slides: 5.75%, // Gaps between slides
 
       // Others... (No validation, use only real css prop)
-      // Note - Alla fine di ogni main props directive, potrei fare un mixin che implementa le others... prop
-      padding: 0rem, // Todo - Da implementare
+      padding: 2rem, 
       background: rgba(128, 128, 128, 0.267),
       border: none,
       border-radius: 2rem,
@@ -58,55 +57,31 @@ $carousel: (
       // Those togheter works as offset between carousel-frame boundaries.
       first-slide-margin-start: 25%,  // Only allow <percentage> (?)
       last-slide-margin-end: 25%, // Only allow <percentage> (?)
-      // Note da rifare sotto
-      // Note - C'è un modo migliore di chiamare questa cosa?
+
+      border: 2px solid red,
+      border-radius: 2rem,
     ),
 
     scroll: (
       behavior: smooth,
-      direction: horizontal, // Note - Var
-      snap-type: mandatory, // Note - Var // Mandatory | Proximity
+      direction: horizontal, 
+      snap-type: mandatory, // Mandatory | Proximity
       snap-stop: always,
       snap-align: center,
 
       scrollbar-width: none, //< none | thin | auto >
       scrollbar-color: red orange, // <color> <color> syntax
-
-      infinite-scroll: false, // Note - Abbiamo detto che questo lo avremmo deciso con Astro
-      infinite-scroll-type: order, // Note - Si era detto che lo avremmo fatto automatico
-      auto-scroll: false, // Note - Anche questo volevamo gestirlo con astro
-      auto-scroll-speed: 3725ms, // Note- stessa cpsa
     ),
+  ),
 
-    // Note - gap from navigation lo spostiamo?
+  '(width > 1000px)': (
+    scroll: (
+      direction: vertical, // Done - Works good
+    )
   )
 );
 
-$carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
-$carousel-height: clamp(10rem, 65cqw, 27.75rem); //Container: 'container' | Only use cqw
-// Temporaney test value
-$carousel-width: 325px; //Container: 'container' | Only use cqw
-$carousel-height: 300px; //Container: 'container' | Only use cqw
-// Temporaney test value
-
-$carousel-gap-between-carousel-and-navigation: 2.25rem; // Note questo forse possiamo spostarlo all'interno di navigation, sotto il nome di "distance" (the gap between the carousel and the navigation)
-
-$carousel-border-radius: 12px; //clamp(1rem, 12cqw, 2.75rem);
-$carousel-background: rgba(128, 128, 128, 0.267);
-
-$carousel-slide-width: 100%;
-$carousel-slide-height: 100%;
-$carousel-slide-first-margin-start: 0%;
-$carousel-slide-last-margin-end: 0%;
-$carousel-slide-gap: 5.75%;
-//$carousel-slide-amount: 4; // Provide the number of slides for computing reasons
-
-$carousel-scroll-behaviour: smooth;
-$carousel-scroll-direction: vertical;
-$carousel-scroll-snap-type: mandatory;
-$carousel-scroll-snap-stop: always;
-$carousel-scroll-snap-align: start;
-
+// Note - Gestire in framework
 $carousel-scroll-infinite-scroll: true;
 $carousel-scroll-infinite-scroll-type: order; // change-orders || duplicate-elements (The first it's better for performance but it doesn't work everywhere)
 $carousel-scroll-auto-scroll: false;
@@ -290,7 +265,7 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 // Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
 // Note - Sarà importante creare una buona documentazione - Con tanti examples
   
-$carousel-debug-mode-on: no; // yes || no
+$carousel-debug-mode-on: yes; // yes || no
 
 
 

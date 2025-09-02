@@ -1,7 +1,7 @@
 @use "@SASS-Abstracts" as *;
 @use "../tokens" as *;
 
-.carousel__wrapper {
+.carousel__grid-wrapper {
   display: grid;
 
   @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
@@ -35,7 +35,7 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
 
 // Note - Posso migliorare la leggibilità di questo codice?
 
-.carousel__wrapper {
+.carousel__grid-wrapper {
   // Todo - Devo scrivere queste if
   @if (true) { 
     @if (true) {

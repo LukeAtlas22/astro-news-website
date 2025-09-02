@@ -1,0 +1,77 @@
+@use "../abstract/mixins/snap-change-event/on-snap-changed" as *;
+@use "../abstract/mixins/snap-change-event/on-snap-changing" as *;
+
+// █ █ █ ██▀ █   █    ▀█▀ █ █▄ ▄█ ██▀ █   █ █▄ █ ██▀ 
+// ▀▄▀ █ █▄▄ ▀▄▀▄▀     █  █ █ ▀ █ █▄▄ █▄▄ █ █ ▀█ █▄▄ // Note rimuovi quando ri-organizzato
+.carousel__slide {
+  @container --carousel-container style(--carousel-scroll-direction: vertical){
+    view-timeline-axis: y;
+  }
+  @container --carousel-container style(--carousel-scroll-direction: horizontal){
+    view-timeline-axis: x;
+  }
+  
+  view-timeline-name: --carousel-slide-view-timeline;
+}
+
+.carousel__slide {
+  animation: fade-in;
+  animation-fill-mode: forwards;
+  animation-timeline: --carousel-slide-view-timeline;
+  animation-range: cover 0% cover 117%; // Note - Qui è strano
+  opacity: 0;
+}
+
+@keyframes fade-in {
+  from {
+  }
+  50% {
+    opacity: 100%;
+  }
+  to {
+  }
+  //! Secondo me è sbagliato usare il trucchetto del 50%
+  //! Dovrei usare ciò che view timeline mette e disposizione
+  //! Questa cosa dovrebbe funzionare sia con il protipo 1 che con il prototipo 2
+}
+
+//! Siamo arrivati a un punto un po' complicato in cui dobbiamo decidere se questo carosello sarà poi possibile farlo diventare uno slider, un tv show slider, insomma, estenderlo anche a tipi molto diversi di caroselli, oppure lasciarlo così e magari creare altri components
+@mixin Slide-on-ScrollViewTimeline() { // Note volevamo scrivere questo mixin
+  //? The animations inside this mixin, will base their timeline on the slides of the carousels.
+}
+// Note - Perchè ho messo mixin e non include?
+
+//Todo: Spostare questi due mixins da un'altra parte, e magari anche gli include
+//Todo: Potrei fare un modulo... on snap changing e on snap changed non so...
+//Todo: Qualcosa legato alle query - Questo modulo dev'essere una sorta di tokenization
+//Todo: Però legata alle query
+/*
+  Ci sono tante cose che possono accadere all'interno di una slide 
+  Tanto stile e mi serve un modo per organizzare tutto lo stile, legato all'interno delle slide, che deve essere renderizzato soltanto in un preciso momento.
+  Quindi potrei creare un file a parte, dove l'utente va a scrivere i propri stili del proprio design, on scroll snap changing, on scroll snap changed, on scroll view timeline, eccetera...
+*/
+
+
+
+
+// Note - Da rivedere, riorganizzare, refactorare
+
+@include Slide-is-ScrollSnapChanging {
+  // Here goes the content when a scroll snap changing event is fired on a slide
+  // Here, you can only select things inside the slide.
+
+  //.carousel__slide:is(.scroll-snap-changing){
+
+  //}
+
+  // Note qui non funziona? che succede?
+}
+
+@include Slide-is-ScrollSnapChanged() {
+  // Here goes the content when a scroll snap change event fires on a slide
+  // Here, you can select only things inside the slide
+
+  //.carousel__slide:is(.scroll-snap-changed){
+
+  //}
+}

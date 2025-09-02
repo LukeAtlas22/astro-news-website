@@ -1,3 +1,7 @@
+// Globals
+
+@forward "globals/globals" as Glob-*;
+
 // Utilities - Functions
 
 @forward "function/carousel-functions.scss" as Carousel-Utils-*;

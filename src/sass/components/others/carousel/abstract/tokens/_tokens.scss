@@ -45,15 +45,15 @@ $carousel: (
       gap-between-slides: 5.75%, // Gaps between slides
 
       // Others... (No validation, use only real css prop)
-      padding: 2rem, 
+      padding: 0rem, 
       background: rgba(128, 128, 128, 0.267),
       border: none,
       border-radius: 2rem,
     ),
 
     slide: (
-      width: 100%, // Only use <percentage> (?)
-      height: 100%, // Only use <percentage> (?)
+      width: 90%, // Only use <percentage> (?)
+      height: 90%, // Only use <percentage> (?)
       
       // Those togheter works as offset between carousel-frame boundaries.
       first-slide-margin-start: 25%,  // Only allow <percentage> (?)
@@ -171,7 +171,7 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: none, 
+    position: after, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
     orientation: horizontal, 
     alignment: center, 

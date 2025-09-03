@@ -58,10 +58,10 @@
 
       {/* Qui non so come gestirlo */}
     </ul>
-    <!-- <div class="carousel__scroll-marker-group"></div>  -->
+    {/* !-- <div class="carousel__scroll-marker-group"></div>  --> */}
 
       {/* Keep this for reference */}
-      <!-- <List
+      {/*<List
         type="unordered"
         class="carousel"
         classItems="carousel__slide"
@@ -71,20 +71,21 @@
         style=`--carousel-slide-amount: ${slideAmount}`
       >
         <slot></slot>
-      </List> -->
+      </List> */ }
 
       {/* Qui forse devo rifare l'astrazione della list */}
       
   
-      <!-- <button class="carousel__button-artificial-after--next"> </button>
-      <button class="carousel__button-artificial-after--prev">  </button> -->
+      {/* <!-- <button class="carousel__button-artificial-after--next"> </button>
+      <button class="carousel__button-artificial-after--prev">  </button>  */}
       {/* Questi non sono ancora in position absolute, per ora tienili così finchè non li implementi */}
 
   </div>
 </div>
 
-<script >
-  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll')){
-    //I will make the scroll infinite !
+<script>
+  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll')){ // Note - Questo potrebbe diventare utils
+    const infiniteScroll = await import("../../../javascript/components/carousel/infinite-scroll.ts");
+    infiniteScroll.byDuplicateElements(document.querySelector('.carousel'));
   }
 </script>

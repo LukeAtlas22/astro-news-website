@@ -171,9 +171,9 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: before, 
+    position: none, 
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: vertical, 
+    orientation: horizontal, 
     alignment: center, 
     distance: 0.75rem, // Distance from frame | <length>
     

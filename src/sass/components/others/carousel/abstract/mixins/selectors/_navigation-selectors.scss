@@ -1,0 +1,5 @@
+@mixin Carousel-Navigation {
+  .carousel__scroll-marker-group{
+    @content;
+  }
+}

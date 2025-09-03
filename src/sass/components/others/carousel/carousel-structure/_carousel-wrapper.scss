@@ -42,9 +42,11 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and 
         style(--scroll-marker-group-orientation: vertical) {
-          grid-template-columns: $-Navigation-Space $-Frame-Space--Horizontal; 
+          grid-template-columns: [Navigation] $-Navigation-Space $-Frame-Space--Horizontal; 
           grid-template-rows: $-Frame-Space--Vertical;
           column-gap: $-Wrapper-Gap;
+
+          //@include Carousel-Navigation { grid-column: Navigation; }
       }
     }
     
@@ -52,9 +54,11 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
       @container --carousel-container 
         style(--scroll-marker-group-position: before) and
         style(--scroll-marker-group-orientation: horizontal) {
-          grid-template-rows: $-Navigation-Space $-Frame-Space--Vertical;
+          grid-template-rows: [Navigation] $-Navigation-Space $-Frame-Space--Vertical;
           grid-template-columns: $-Frame-Space--Horizontal;
           row-gap: $-Wrapper-Gap;
+
+          //@include Carousel-Navigation { grid-row: Navigation; }
       }
     }
   }
@@ -64,9 +68,11 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: vertical) {
-          grid-template-columns: $-Frame-Space--Horizontal $-Navigation-Space;
+          grid-template-columns: $-Frame-Space--Horizontal [Navigation] $-Navigation-Space;
           grid-template-rows: $-Frame-Space--Vertical;
           column-gap: $-Wrapper-Gap;
+
+          //@include Carousel-Navigation { grid-column: Navigation; }
         }
     }
 
@@ -74,19 +80,24 @@ $-Wrapper-Gap: var(--carousel-gap-between-frame-and-navigation);
       @container --carousel-container 
         style(--scroll-marker-group-position: after) and
         style(--scroll-marker-group-orientation: horizontal) {
-          grid-template-rows: $-Frame-Space--Vertical $-Navigation-Space;
+          grid-template-rows: $-Frame-Space--Vertical [Navigation] $-Navigation-Space;
           grid-template-columns: $-Frame-Space--Horizontal;
           row-gap: $-Wrapper-Gap;
+
+          //@include Carousel-Navigation { grid-column: Navigation; }
         }
     }
   }
 
   @if (true) {
     @container --carousel-container
-      style(--scroll-marker-group-position: inside-frame) {
+      style(--scroll-marker-group-position: inside-frame) or
+      style(--scroll-marker-group-position: none) {
         grid-template-columns: $-Frame-Space--Horizontal;
         grid-template-rows: $-Frame-Space--Vertical;
         // No gap in this case
+
+        //@include Carousel-Navigation { display: none; }
       }
   }
 

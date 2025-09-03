@@ -64,7 +64,12 @@
 
   //}
 
-  // Note qui non funziona? che succede?
+  // > You cannot target the slide element himself
+  // > You can target EVERYTHING inside the slide
+  
+  // Note - Con CSS non posso targettare la slide
+  // Note - Magari per migliorarlo possiamo farlo semplicemente con JS?
+  
 }
 
 @include Slide-is-ScrollSnapChanged() {
@@ -74,4 +79,7 @@
   //.carousel__slide:is(.scroll-snap-changed){
 
   //}
+
+  // > You cannot target the slide element himself
+  // > You can target EVERYTHING inside the slide
 }

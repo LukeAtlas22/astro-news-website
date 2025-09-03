@@ -1,11 +1,19 @@
 @use "../../function/carousel-functions.scss" as *;
 
 @mixin Slide-is-ScrollSnapChanging() {
-  $carousel-scroll-direction: getScrollDirection();
-
-  .carousel__slide {
-    @container --carousel-scroll-container scroll-state(snapped: #{$carousel-scroll-direction}) {
-      @content;
+  
+  @container --carousel-container style(--carousel-scroll-direction: horizontal) {
+    .carousel__slide {
+      @container --carousel-scroll-container scroll-state(snapped: x) {
+        @content;
+      }
+    }
+  }
+  @container --carousel-container style(--carousel-scroll-direction: horizontal) {
+    .carousel__slide {
+      @container --carousel-scroll-container scroll-state(snapped: y) {
+        @content;
+      }
     }
   }
 }

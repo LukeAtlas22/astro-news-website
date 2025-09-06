@@ -51,3 +51,26 @@
 }
 
 
+
+// Note - Debug
+@if ($debug == true) {
+  .carousel__slide {
+    --content: attr(data-index, type(*));
+  }
+  .carousel__slide::after {
+    
+    content: var(--content);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: rgba(0, 0, 0, 0.637);
+    padding: 10%;
+    padding-inline: 20%;
+    border-radius: 100vw;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Arial';
+    aspect-ratio: 1/1;
+  }
+}

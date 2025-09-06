@@ -24,13 +24,18 @@
   
   display: flex;
   overflow: auto;
-  scroll-snap-type: both var(--carousel-scroll-snap-type);
+  
+  
+  // Note - il problema era questo, doveva rimanere in x o y... 
+  // Note - Order non funziona bene con both
   
   
   @container --carousel-container style(--carousel-scroll-direction: vertical) {
+    scroll-snap-type: y var(--carousel-scroll-snap-type);
     writing-mode: vertical-lr;
   }
   @container --carousel-container style(--carousel-scroll-direction: horizontal) {
+    scroll-snap-type: x var(--carousel-scroll-snap-type);
     writing-mode: horizontal-tb;
   }
 

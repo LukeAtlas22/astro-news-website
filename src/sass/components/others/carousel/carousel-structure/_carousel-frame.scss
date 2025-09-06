@@ -26,6 +26,11 @@
   anchor-name: --carousel; 
   counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
   
+
+  &__slide {
+    flex-shrink: 0 !important;
+  }
+  
   @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
     $breakpoint-map: $carousel, 
     $submap-to-spread: frame,

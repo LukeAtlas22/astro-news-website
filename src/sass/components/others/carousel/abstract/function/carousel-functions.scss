@@ -8,3 +8,11 @@
 @function User-Wants-Navigation(){
   @return $carousel-navigation-display;
 }
+
+@function User-Wants-Normal-Navigation() {
+  @return false;
+}
+
+@function User-Wants-Artificial-Navigation() {
+  @return true;
+}

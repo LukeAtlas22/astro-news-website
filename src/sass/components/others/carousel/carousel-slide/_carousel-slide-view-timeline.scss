@@ -15,20 +15,34 @@
 }
 
 .carousel__slide {
-  animation: fade-in;
+  animation: fade-in--infinite-scroll;
   animation-fill-mode: forwards;
   animation-timeline: --carousel-slide-view-timeline;
-  animation-range: cover 0% cover 117%; // Note - Qui è strano
+  // Note - Dobbiamo modificare questo per farlo funzionare
+  animation-range: cover 0% cover 107%; // Note - Qui è strano
   opacity: 0;
 }
 
-@keyframes fade-in {
+.save-from-black {
+  opacity: 1;
+}
+
+@keyframes fade-in--simple-scroll {
+  from {}
+  50%{
+    opacity: 100%;
+  }
+  to{}
+}
+
+@keyframes fade-in--infinite-scroll {
   from {
   }
   50% {
-    opacity: 100%;
+    opacity: 1;
   }
   to {
+    
   }
   //! Secondo me è sbagliato usare il trucchetto del 50%
   //! Dovrei usare ciò che view timeline mette e disposizione

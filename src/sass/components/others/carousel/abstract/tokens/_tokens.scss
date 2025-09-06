@@ -52,12 +52,13 @@ $carousel: (
     ),
 
     slide: (
-      width: 90%, // Only use <percentage> (?)
-      height: 90%, // Only use <percentage> (?)
+      width: 100%, // Only use <percentage> (?)
+      height: 100%, // Only use <percentage> (?)
       
       // Those togheter works as offset between carousel-frame boundaries.
-      first-slide-margin-start: 25%,  // Only allow <percentage> (?)
-      last-slide-margin-end: 25%, // Only allow <percentage> (?)
+      // Note - Questo da problemi con infinite scroll, bisogna modificarlo verso un padding, qualcosa relativo alla frame.
+      first-slide-margin-start: 0,  // Only allow <percentage> (?)
+      last-slide-margin-end: 0, // Only allow <percentage> (?)
 
       border: 2px solid red,
       border-radius: 2rem,
@@ -66,8 +67,8 @@ $carousel: (
     scroll: (
       behavior: smooth,
       direction: horizontal, 
-      snap-type: mandatory, // Mandatory | Proximity
-      snap-stop: always,
+      snap-type: mandatory, // mandatory | proximity | // Todo - Do not allow none
+      snap-stop: always, // always | normal // Todo - Only allow infinite scroll with snap-stop always
       snap-align: center,
 
       scrollbar-width: none, //< none | thin | auto >
@@ -171,11 +172,13 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: after, 
+    position: before, 
+    // Todo: display-none (al posto di none)
+    // Note - Change Documentation
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: horizontal, 
+    orientation: vertical, 
     alignment: center, 
-    distance: 0.75rem, // Distance from frame | <length>
+    distance: 1.75rem, // Distance from frame | <length>
     
     // This will override the default max-size (set on carousel size)
     // Note - Serve davvero?
@@ -189,7 +192,7 @@ $carousel-navigation:( // Note - Name is temporaney
     markers-direction: auto,
     markers-justification: center,
     markers-size: 24px, 
-    markers-style: default, 
+    markers-style: counter-numbers, 
   ),
 );
 
@@ -266,7 +269,7 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 // Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
 // Note - Sarà importante creare una buona documentazione - Con tanti examples
   
-$carousel-debug-mode-on: yes; // yes || no
+$debug: true; //true false
 
 
 

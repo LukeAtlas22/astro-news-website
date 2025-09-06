@@ -23,7 +23,7 @@
 // █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  
 // █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █  
 
-.carousel__slide::scroll-marker{
+.carousel__slide::scroll-marker {
   @include pseudo;
   width: var(--scroll-markers-size);
   height: var(--scroll-markers-size);
@@ -49,6 +49,7 @@
   // Note - Dovrebbe esistere una directory particolare tipo: Carousel Scroll Marker Images
 
   @container --carousel-container style(--scroll-markers-style: slide-image) {
+    // Note - Qui faremo in modo diverso?
     @include apply-background-image-on-sequence-of-child(
       $childs-selector: '.carousel__slide',
       $childs-pseudo-element: '::scroll-marker',
@@ -72,7 +73,7 @@
 
 @if (true){ // Todo - Need to fix those ifs
   @container --carousel-container style(--scroll-markers-style: counter-numbers){
-    .carousel__slide::scroll-marker{
+    .carousel__slide::scroll-marker { // Note - Qui dobbiamo fare in modo diverso
       content: counter(carousel-slide-counter);
       @include flex-center;
       @include apply-declarations($from: map.get($carousel-scroll-marker-styles, counter-numbers));

@@ -3,11 +3,17 @@
   import { getSlotLength } from "@utilities/lists/utils/getSlotLength"
   import { parseHTML } from "linkedom";
   import { wrapper } from "@utilities/lists/utils/getSlotLength";
+import { AstroError } from "astro/errors";
 
   const html = await Astro.slots.render('default');
   const slideAmount = getSlotLength(html);
+  if (slideAmount < 3)
+    throw new AstroError('<Carousel> says: The carousel needs to have at least 3 slides');
   const { document } = parseHTML(html)
   const carouselSlides = Array.from(document.children);
+
+  // Only if using artificial navigation
+  const carouselId = Math.floor(1000 + Math.random() * 9000);
 
   interface Props {
     infiniteScroll: boolean,
@@ -39,9 +45,10 @@
 {/* Vuole essere contenuto */}
 
 <div class="carousel__anchor-scope | carousel__variables-scope">
-  <div class="carousel__grid-wrapper"> 
+  <div class="carousel__grid-wrapper | carousel__wrapper"> 
     
     <ul class="carousel"
+        id={carouselId}
         data-infinite-scroll={infiniteScroll}
         data-autoplay={autoplay}
         data-interval={interval}
@@ -49,6 +56,7 @@
     >
       {
         wrapper({
+          id: carouselId,
           elements: carouselSlides,
           wrapper: 'li',
           classList: "carousel__slide",
@@ -56,36 +64,35 @@
         })
       }
 
-      {/* Qui non so come gestirlo */}
     </ul>
-    {/* !-- <div class="carousel__scroll-marker-group"></div>  --> */}
 
-      {/* Keep this for reference */}
-      {/*<List
-        type="unordered"
-        class="carousel"
-        classItems="carousel__slide"
-        data-infinite-scroll={infiniteScroll}
-        data-autoplay={autoplay}
-        data-interval={interval}
-        style=`--carousel-slide-amount: ${slideAmount}`
-      >
-        <slot></slot>
-      </List> */ }
-
-      {/* Qui forse devo rifare l'astrazione della list */}
-      
-  
-      {/* <!-- <button class="carousel__button-artificial-after--next"> </button>
-      <button class="carousel__button-artificial-after--prev">  </button>  */}
-      {/* Questi non sono ancora in position absolute, per ora tienili così finchè non li implementi */}
+    {/* This will happen only under determinate conditions
+        Make a CarouselNavigation Component (?)
+    */}
+    <ul class="carousel__scroll-marker-group--artificial">
+      {
+        carouselSlides.map((slide: Element, i: number) => (
+          <li>
+            <a 
+              href={`#${carouselId}-slide-${i + 1}`} 
+              class="carousel__scroll-marker--artificial"
+            >
+              {/* Various Icon In Here... */}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
   </div>
 </div>
 
 <script>
-  if (document.querySelector('.carousel')?.getAttribute('data-infinite-scroll')){ // Note - Questo potrebbe diventare utils
-    const infiniteScroll = await import("../../../javascript/components/carousel/infinite-scroll.ts");
-    infiniteScroll.byDuplicateElements(document.querySelector('.carousel'));
-  }
+    const carousel = document.querySelector('.carousel');
+    const navigation = document.querySelector('.carousel__scroll-marker-group--artificial');
+    
+    const infiniteScroll = await import('src/javascript/components/carousel/infinite-scroll/infinite-scroll-wrapper.ts');
+    infiniteScroll.initInfiniteScroll(carousel);
+    const navigationModule = await import('src/javascript/components/carousel/navigation/target-current-class-dispatcher');
+    navigationModule.dispatchTargetCurrentClassOnMarkers(carousel, navigation);
 </script>

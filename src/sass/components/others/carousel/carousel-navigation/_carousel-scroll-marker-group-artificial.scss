@@ -1,0 +1,41 @@
+@use "@SASS-Abstracts" as *;
+@use "@SASS-Carousel-Abstracts" as *;
+
+
+// Note - Qui ci preoccupiamo solo di questo a livello visivo, poi il resto in JS
+// Note - This will be used only under determinated conditions
+
+// Note - Temporaney
+// Note - To revert things, basta cambiare questo
+
+// Note - Quali sono i casi per il quale avviene questo?
+// Note -   User wants infinite scroll
+// Note -   User wants advanced settings on navigation markers
+
+.carousel {
+  &::scroll-marker-group {
+   // display: none;
+  }
+}
+// Note -
+
+.carousel__scroll-marker-group--artificial {
+  background: rgba(255, 255, 255, 0.527);
+  display: none !important; // Temp 
+  
+  
+  @container --carousel-container style(--scroll-marker-group-orientation: vertical){
+    grid-column: Navigation;
+  }
+  @container --carousel-container style(--scroll-marker-group-orientation: horizontal){
+    grid-row: Navigation;
+  }
+
+  display: flex;
+  gap: 1rem;
+
+  > li {
+    flex-shrink: 0;
+  }
+}
+

@@ -1,0 +1,15 @@
+// Note - This will USE JS - For .target-current
+
+.carousel__scroll-marker--artificial {
+  width: var(--scroll-markers-size);
+  height: var(--scroll-markers-size);
+  display: flex;
+  background-color: red;
+
+  transition: 225ms;
+}
+
+
+.carousel__scroll-marker--artificial:is(.target-current){
+  scale: 1.5;
+}

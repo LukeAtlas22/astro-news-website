@@ -17,25 +17,10 @@
    // display: none;
   }
 }
-// Note -
 
 .carousel__scroll-marker-group--artificial {
-  background: rgba(255, 255, 255, 0.527);
+  
   display: none !important; // Temp 
   
-  
-  @container --carousel-container style(--scroll-marker-group-orientation: vertical){
-    grid-column: Navigation;
-  }
-  @container --carousel-container style(--scroll-marker-group-orientation: horizontal){
-    grid-row: Navigation;
-  }
-
-  display: flex;
-  gap: 1rem;
-
-  > li {
-    flex-shrink: 0;
-  }
 }
 

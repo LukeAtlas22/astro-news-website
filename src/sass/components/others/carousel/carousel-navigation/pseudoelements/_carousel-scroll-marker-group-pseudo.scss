@@ -95,7 +95,7 @@
     @if User-Needs(position inside-frame) {
       @container --carousel-container style(--scroll-marker-group-position: inside-frame){
 
-        &::scroll-marker-group, &__scroll-marker-group--artificial { 
+        &::scroll-marker-group { 
           position: absolute; 
           position-anchor: --carousel;
 
@@ -133,8 +133,7 @@
     // Note - Magari questa roba potrebbe essere spostata in position o positioning ^^
     // -----------------------------------------------------------------------------
 
-    &::scroll-marker-group, &__scroll-marker-group--artificial {
-
+    &::scroll-marker-group {
     
       block-size: calc(var(--scroll-markers-size) * 1.75); // Leave the 1.75 (Treeshold to avoid overflow-clip)
       

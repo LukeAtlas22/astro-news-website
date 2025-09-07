@@ -1,0 +1,34 @@
+@use "@SASS-Abstracts" as *;
+@use "@SASS-Carousel-Abstracts" as *;
+@use "sass:map";
+
+  // █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  
+  // █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █
+  
+  $-Default-Map: map.get($carousel-scroll-marker-styles, default);
+  $-Default--Normal: map.get($-Default-Map, normal);
+  $-Default--Hover: map.get($-Default-Map, hover);
+  $-Default--Active: map.get($-Default-Map, active);
+  $-Default--Target-Current: map.get($-Default-Map, target-current);
+  $-Default--Focus-Visible: map.get($-Default-Map, focus-visible);
+  // Note questo blocco posso migliorarlo? magari lo sposto e lo importo con namespace?
+
+  .carousel__slide::scroll-marker {
+    content: '';
+    display: block;
+    width: var(--scroll-markers-size);
+    height: var(--scroll-markers-size);
+    flex-shrink: 0;
+
+    
+    //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
+
+    @include apply-declarations($from: $-Default-Map);
+    // Note - Migliorare questo mixins? Aggiungere exclude e alias?
+    --look-here: true;
+    background-clip: content-box !important;  
+    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
+  }
+
+  // Note per il resto degli styles, posso semplicemente copiare questo blocco sopra ^ Escludendo background clip e transition prop, mi riferisco ai 5 mixins e semplicemente cambiare il nome della mappa (-Default)
+  // Note - Comunque secondo me, per ogni style dovrei creare un foglio di stile, così è più ordinato.

@@ -1,0 +1,18 @@
+@use "sass:map";
+@use "sass:string";
+
+@function has-suffix($string, $suffix) {
+  @return string.index($string, $suffix) != null;
+}
+
+@function remove-suffix($string, $suffix) {
+  $index: string.index($string, $suffix);
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + string.slice($string, $index + string.length($suffix));
+  }
+  @return $string;
+}
+
+@function map-add($map, $entry) {
+  @return map.merge($map, $entry);
+}

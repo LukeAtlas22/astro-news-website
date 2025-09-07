@@ -2,25 +2,9 @@
 @use "@SASS-Carousel-Abstracts" as *;
 
 
-// Note - Qui ci preoccupiamo solo di questo a livello visivo, poi il resto in JS
-// Note - This will be used only under determinated conditions
-
-// Note - Temporaney
-// Note - To revert things, basta cambiare questo
-
-// Note - Quali sono i casi per il quale avviene questo?
-// Note -   User wants infinite scroll
-// Note -   User wants advanced settings on navigation markers
-
-.carousel {
-  &::scroll-marker-group {
-   // display: none;
-  }
-}
-
 .carousel__scroll-marker-group--artificial {
   
-  display: none !important; // Temp 
+  padding-inline: 0.5rem;
   
 }
 

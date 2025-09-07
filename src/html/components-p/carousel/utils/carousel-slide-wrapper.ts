@@ -1,14 +1,8 @@
 
 import { parseHTML } from 'linkedom'
 
-const getSlotLength = function(html: string): number {
-  const {document} = parseHTML(html);
-  const slotLength = Array.from(document.children).length;
-  return slotLength;
-}
-
-
 type wrapperConfigurator = {
+  id: string,
   elements: Array<Element>,
   classList?: string,
   wrapper: 'li' | 'dd',
@@ -31,4 +25,4 @@ const wrapper = function(config: wrapperConfigurator): Array<Element> {
   return wrappedElements;
 }
 
-export { getSlotLength, wrapper };
+export { wrapper };

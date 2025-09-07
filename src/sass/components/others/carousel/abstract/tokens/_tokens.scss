@@ -172,11 +172,11 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: before, 
+    position: inside-frame, 
     // Todo: display-none (al posto di none)
     // Note - Change Documentation
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: vertical, 
+    orientation: horizontal, 
     alignment: center, 
     distance: 1.75rem, // Distance from frame | <length>
     
@@ -192,7 +192,7 @@ $carousel-navigation:( // Note - Name is temporaney
     markers-direction: auto,
     markers-justification: center,
     markers-size: 24px, 
-    markers-style: counter-numbers, 
+    markers-style: default, 
   ),
 );
 
@@ -219,6 +219,7 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
     scale-hover: 1.1,
     scale-target-current: 1.25, 
     transition: 375ms,
+    
   ),
 
   // Note - Forse per questo bisogna usare javascript, per ottimizzarlo bene.
@@ -239,27 +240,45 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 
   // Memo - Do not declare width or height in here
   counter-numbers:(
-    background-color: transparent,
-    background-color-hover: transparent,
-    background-color-active: transparent,
-    background-color-target-current: transparent,
+    // Note - Rifare counter-number e slide images affinchè i default selezionati siano sempre presenti? In questo modo l'utente però non potrà cambiare colore
+    background-color: black,
+    background-color-hover: black,
+    background-color-active: black,
+    background-color-target-current: black,
     // Note - If things does not change - I may want to use Selective-Assignment to Better abstract naming conventions.
     color: gray,
     color-hover: gray,
     color-active: white,
     color-target-current: #fff, // Strange behaviour - Use -active
 
-    border: 1.75px solid red,
+    border: 1.75px solid rgb(0, 26, 255),
     border-hover: 1.75px solid  red,
     border-active: 1.75px solid cyan,
     border-target-current: 1.75px solid white,
-    /* (border-offset) */ padding: 3px, 
+    /* (border-offset) */ padding: 0px, 
     
     font-family: Arial, 
     font-size: 1.25rem,
     font-weight: bold,
     text-decoration: none,
   ),
+
+  // You need advanced navigation to use this
+  multiple-icons: (
+    icons: (
+      transition: 75ms, // Keep it low
+      font-family-icon: t, 
+      target-current: (
+        0-slide-away: t,
+        1-slide-away: t,
+        2-slide-away: t,
+        3-slide-away: t,
+        4-slide-away: t,
+        5-slide-away: t,
+        // Note - Questo vorrei farlo indefinito, cioè l'utente può inserire quanti slide-away preferisce.
+      ),
+    ),
+  )
 );
 
 // Note - Sarà importante esporre una buona documentazione

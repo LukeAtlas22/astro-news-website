@@ -1,0 +1,6 @@
+@use "shared-style/carousel-navigation-shared" as *;
+@use "shared-style/carousel-scroll-marker-shared" as *;
+@use "pseudoelements/carousel-scroll-marker-group-pseudo" as *;
+@use "pseudoelements/carousel-scroll-marker-pseudo" as *;
+
+@include Carousel-Navigation-Shared-Style($SELECTOR: '::scroll-marker-group');

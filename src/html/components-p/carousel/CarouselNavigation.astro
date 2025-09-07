@@ -1,0 +1,60 @@
+---
+type NavDirective = {
+  /**
+   * The index number of the slide the link is pointing
+   */
+  pointsTo: number,
+  /**
+   * The rendered text of the link
+   */
+  text: string,
+};
+
+interface Props {
+  carouselSlides: Array<Element>
+  carouselId: string,
+  navigationDirectives: Array<NavDirective>,
+};
+
+const {
+  carouselSlides,
+  carouselId,
+  navigationDirectives,
+} = Astro.props;
+---
+
+{
+  (! navigationDirectives) &&
+  <ul class="carousel__scroll-marker-group--artificial">
+    {
+      carouselSlides.map((slide: Element, i: number) => (
+        <li>
+          <a 
+            href={`#${carouselId}-slide-${i + 1}`} 
+            class="carousel__scroll-marker--artificial"
+          >
+            <span aria-hidden="true" class="carousel__scroll-marker--icon"></span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+}
+{
+  (navigationDirectives) &&
+  <ul class="carousel__scroll-marker-group--artificial">
+    {
+      navigationDirectives.map((directive: NavDirective) => (
+        <li><a href={`#${carouselId}-slide-${directive.pointsTo}`}> {directive.text} </a></li>
+      ))
+    }
+  </ul>
+}
+
+
+<script>
+  const navigationModule = await import('src/javascript/components/carousel/navigation/target-current-class-dispatcher');
+  navigationModule.initNavigation();
+  // Note - Questo component porta con sè lo script della navigation
+  // Note - Credo che dovrebbe essere global
+</script>

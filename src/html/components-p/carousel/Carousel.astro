@@ -1,19 +1,19 @@
 ---
-  import List from "@utilities/lists/List.astro"
-  import { getSlotLength } from "@utilities/lists/utils/getSlotLength"
+  import CarouselNavigation from "./CarouselNavigation.astro";
+  import { getSlideAmount } from "./utils/get-slide-amount";
   import { parseHTML } from "linkedom";
-  import { wrapper } from "@utilities/lists/utils/getSlotLength";
-import { AstroError } from "astro/errors";
+  import { wrapper } from "./utils/carousel-slide-wrapper";
+  import { AstroError } from "astro/errors";
 
   const html = await Astro.slots.render('default');
-  const slideAmount = getSlotLength(html);
+  const slideAmount = getSlideAmount(html);
   if (slideAmount < 3)
     throw new AstroError('<Carousel> says: The carousel needs to have at least 3 slides');
   const { document } = parseHTML(html)
   const carouselSlides = Array.from(document.children);
 
   // Only if using artificial navigation
-  const carouselId = Math.floor(1000 + Math.random() * 9000);
+  const carouselId = (Math.floor(1000 + Math.random() * 9000)).toString();
 
   interface Props {
     infiniteScroll: boolean,
@@ -35,11 +35,13 @@ import { AstroError } from "astro/errors";
   infiniteScroll,
   autoplay,
   interval = 3.75,
+  navigation = 'advanced', // temp namespace
 
   class: className,
   style,
   ...props
   } = Astro.props;
+
 ---
 
 {/* Vuole essere contenuto */}
@@ -66,33 +68,24 @@ import { AstroError } from "astro/errors";
 
     </ul>
 
-    {/* This will happen only under determinate conditions
-        Make a CarouselNavigation Component (?)
-    */}
-    <ul class="carousel__scroll-marker-group--artificial">
-      {
-        carouselSlides.map((slide: Element, i: number) => (
-          <li>
-            <a 
-              href={`#${carouselId}-slide-${i + 1}`} 
-              class="carousel__scroll-marker--artificial"
-            >
-              {/* Various Icon In Here... */}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    {
+      (navigation === 'advanced') &&
+      <CarouselNavigation
+      carouselSlides = {carouselSlides}
+      carouselId = {carouselId}
+      />
+    }
+    
 
   </div>
 </div>
 
 <script>
-    const carousel = document.querySelector('.carousel');
-    const navigation = document.querySelector('.carousel__scroll-marker-group--artificial');
+  // Usare un component astro per gestire lo sciprt?
+    const carouselList = document.querySelectorAll('.carousel');
     
     const infiniteScroll = await import('src/javascript/components/carousel/infinite-scroll/infinite-scroll-wrapper.ts');
-    infiniteScroll.initInfiniteScroll(carousel);
-    const navigationModule = await import('src/javascript/components/carousel/navigation/target-current-class-dispatcher');
-    navigationModule.dispatchTargetCurrentClassOnMarkers(carousel, navigation);
+    carouselList.forEach(carousel => {
+      infiniteScroll.initInfiniteScroll(carousel);
+    });
 </script>

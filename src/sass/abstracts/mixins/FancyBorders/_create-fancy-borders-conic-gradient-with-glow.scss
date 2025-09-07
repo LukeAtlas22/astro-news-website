@@ -1,6 +1,11 @@
 @use "../../tokens" as *;
 @use "../masking" as *;
 
+//! Note - Questo dovrebbe essere un abstract, ma stavamo facendo dei test quindi importa del codice in fase di build - Dunque per ora lo disabilitiamo
+//! Note - è stato anche rimosso dal forward dell'index
+
+@mixin temporaney-disabled {
+
 @property --gradient-angle {
   syntax: "<angle>";
   initial-value: 90deg;
@@ -82,4 +87,6 @@ $speed: 5.5s;
   100% {
     --gradient-angle: 360deg;
   }
+}
+
 }

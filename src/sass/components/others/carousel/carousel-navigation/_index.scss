@@ -1,6 +1,5 @@
+// Temporaney invoking (Questi due invoker saranno importati dinamicamente in Astro)
 
-
-@forward "pseudoelements/carousel-scroll-marker-group-pseudo";
-@forward "pseudoelements/carousel-scroll-marker-pseudo";
-@forward "artificial/carousel-scroll-marker-group-artificial";
-@forward "artificial/carousel-scroll-marker-artificial";
+@use "carousel-navigation-pseudo-invoker";
+//@use "carousel-navigation-artificial-invoker";
+// Note - Allineare bene il padding in futuro

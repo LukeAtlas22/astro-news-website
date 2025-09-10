@@ -2,9 +2,7 @@
 @use "@SASS-Carousel-Abstracts" as *;
 
 
-.carousel__scroll-marker-group--artificial {
-  
-  padding-inline: 0.5rem;
-  
+.carousel__navigation {
+  padding-inline: 0.5rem; // Note - Is this ok?
 }
 

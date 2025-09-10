@@ -1,0 +1,21 @@
+@use "sass:map";
+
+/// Controlla se una proprietà è presente tra le chiavi della mappa aliasies
+/// @param {String} $prop-name - nome della proprietà da testare
+/// @param {Map} $aliasies - mappa di aliasies (key: alias, value: prop reale)
+/// @return {Boolean} true se $prop-name è una key in $aliasies, altrimenti false
+@function is-prop-in-aliasies-list($prop-name, $aliasies) {
+  @return map.has-key($aliasies, $prop-name);
+}
+
+/// Restituisce il nome reale di una proprietà in base agli alias
+/// @param {String} $prop-name - nome della proprietà da rinominare
+/// @param {Map} $aliasies - mappa alias (key: alias, value: prop reale)
+/// @return {String} il nome della proprietà reale o la stessa property se non è alias
+@function rename-prop($prop-name, $aliasies) {
+  @if map.has-key($aliasies, $prop-name) {
+    @return map.get($aliasies, $prop-name);
+  }
+  @return $prop-name;
+}
+

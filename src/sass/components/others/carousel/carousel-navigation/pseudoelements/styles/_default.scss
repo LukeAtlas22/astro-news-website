@@ -6,11 +6,7 @@
   // █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █
   
   $-Default-Map: map.get($carousel-scroll-marker-styles, default);
-  $-Default--Normal: map.get($-Default-Map, normal);
-  $-Default--Hover: map.get($-Default-Map, hover);
-  $-Default--Active: map.get($-Default-Map, active);
-  $-Default--Target-Current: map.get($-Default-Map, target-current);
-  $-Default--Focus-Visible: map.get($-Default-Map, focus-visible);
+
   // Note questo blocco posso migliorarlo? magari lo sposto e lo importo con namespace?
 
   .carousel__slide::scroll-marker {
@@ -23,9 +19,11 @@
     
     //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
 
-    @include apply-declarations($from: $-Default-Map);
-    // Note - Migliorare questo mixins? Aggiungere exclude e alias?
-    --look-here: true;
+    @include apply-declarations(
+      $from: $-Default-Map,
+      $aliasies: (border-offset: padding),
+    );
+    
     background-clip: content-box !important;  
     transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
   }

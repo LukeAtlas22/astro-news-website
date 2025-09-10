@@ -1,8 +1,1 @@
-@use "sass:map";
-@use "@SASS-Abstracts" as *;
-@use "@SASS-Carousel-Abstracts" as *;
-
-
-.carousel__scroll-marker--icon::after {
-  pointer-events: all;
-}
+@use "styles/" as *;

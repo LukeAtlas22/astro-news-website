@@ -3,5 +3,5 @@
 @use "artificial/carousel-scroll-marker-artificial" as *;
 @use "artificial/carousel-scroll-marker-group-artificial" as *;
 
-@include Carousel-Navigation-Shared-Style($SELECTOR: '__scroll-marker-group--artificial');
+@include Carousel-Navigation-Shared-Style($SELECTOR: '__navigation');
 //@include Carousel-Scroll-Marker-Shared-Style($SELECTOR: '.carousel__scroll-marker--icon::after');

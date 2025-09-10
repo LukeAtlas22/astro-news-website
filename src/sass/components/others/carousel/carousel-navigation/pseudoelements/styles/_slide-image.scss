@@ -21,8 +21,9 @@
         $images-path-ending-divisor: map.get($carousel-scroll-marker-styles, divisor),
         $images-ext: map.get($carousel-scroll-marker-styles, ext),
       );
-      @include apply-declarations(
-        $on: '.carousel__slide::scroll-marker', 
-        $from: map.get($carousel-scroll-marker-styles, slide-image))
+
+      .carousel__slide::scroll-marker {
+        @include apply-declarations($from: map.get($carousel-scroll-marker-styles, slide-image));
+      }
     }
   }

@@ -40,7 +40,7 @@ $carousel: (
     ),
 
     frame: (
-      width: 400px, //clamp(18rem, 95cqw, 40rem),        
+      width: 475px, //clamp(18rem, 95cqw, 40rem),        
       height: 275px, //clamp(18rem, 25cqw, 40rem), 
       gap-between-slides: 5.75%, // Gaps between slides
 
@@ -52,8 +52,8 @@ $carousel: (
     ),
 
     slide: (
-      width: 100%, // Only use <percentage> (?)
-      height: 100%, // Only use <percentage> (?)
+      width: 25%, // Only use <percentage> (?)
+      height: 25%, // Only use <percentage> (?)
       
       // Those togheter works as offset between carousel-frame boundaries.
       // Note - Questo da problemi con infinite scroll, bisogna modificarlo verso un padding, qualcosa relativo alla frame.
@@ -172,7 +172,7 @@ $carousel-navigation-display: true;
 
 $carousel-navigation:( // Note - Name is temporaney
   'default': (
-    position: inside-frame, 
+    position: after, 
     // Todo: display-none (al posto di none)
     // Note - Change Documentation
     position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
@@ -202,16 +202,16 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
   default:(
     // Todo - I may still to want to use my Selective-Property-Assignment for better name abstractions
     border-radius: 100vw,
-    background-color: pink,
+    background-color: rgb(192, 209, 255),
     background-color-hover: rgb(253, 106, 131),
     background-color-active: rgb(243, 36, 71),
     background-color-target-current: rgb(253, 23, 61),
   
-    border: 1.75px solid red,
-    border-hover: 1.75px solid  red,
-    border-active: 1.75px solid cyan,
-    border-target-current: 1.75px solid white,
- /* (border-offset) */ padding: 2px, 
+    border: 1.25px solid red,
+    border-hover: 1.25px solid red,
+    border-active: 1.25px solid red,
+    border-target-current: 1.25px solid red,
+    border-offset: 0px, 
  
     outline-focus-visible: 1.25px solid rgb(147, 147, 255),
     outline-offset: 3.25px,
@@ -255,7 +255,7 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
     border-hover: 1.75px solid  red,
     border-active: 1.75px solid cyan,
     border-target-current: 1.75px solid white,
-    /* (border-offset) */ padding: 0px, 
+    border-offset: 2px, 
     
     font-family: Arial, 
     font-size: 1.25rem,
@@ -263,20 +263,50 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
     text-decoration: none,
   ),
 
+  // Note - Questa roba sotto la dobbiamo mettere nella documentazione
   // You need advanced navigation to use this
-  multiple-icons: (
-    icons: (
-      transition: 75ms, // Keep it low
-      font-family-icon: t, 
-      target-current: (
-        0-slide-away: t,
-        1-slide-away: t,
-        2-slide-away: t,
-        3-slide-away: t,
-        4-slide-away: t,
-        5-slide-away: t,
-        // Note - Questo vorrei farlo indefinito, cioè l'utente può inserire quanti slide-away preferisce.
-      ),
+  // This one inherits everything from default, allows you to declare multiple properties based on how many slide away the target current marker is (in both directions)
+  // Example:
+  // - You have 12 slides with 12 markers
+  // - Your target-current slide is the slide n.4
+  // - The 0-slide-away will be the scroll marker n.4
+  // - The 1-slide-away will be the scroll markers n.3 & n.5
+  // - The 2-slide-away will be the scroll markers n.2 & n.6 
+  // - And so on...
+  // You don't have to use an icon -- If you don't want to use an icon, just leave the icon parameter empty.
+  // If you only need the icon, just remove every "slide-away" except the number 0.
+  // I think most of the properties for this kind of thing are already there. Remember this inherits from default, so, for now, you can't add other props.
+  multiple-variant-from-target-current: ( // Note find better name  
+    icon-font-family: '',
+    transition: 225ms, // Keep it small
+    target-current: (
+      // Note - Qui funziona bene, ora però sorge una domanda, dovrei lasciare icon qui? In questo modo?
+      // Note - Magari farne uno fisso e gestire l'icona in un altro modo... 
+      // Note - Più che altro, le icone e il cambiamento delle icone potrei gestirle tramite HTML - Qui semplicemente, gestisco scale, opacity, background-color e color per ogni slide away ?
+      // Note - Così mi piace, magari troviamo un modo migliore per gestire le icone... non lo so... 
+      
+      // Todo - Dovrei fare anche in modo che le props dell'ultima mappa, si propagano anche a tutte le ultime altre slide, se non specifico qualcosa per slide oltre tale numero
+
+      // Note - Il problema è che diventa complicato gestire dinamicamente le icone, se ogni volta devi creare un font di icone...
+      // Note - >>> Poi dovrei rendere questa API un po' più composite e fare in modo che l'utente può scegliere anche 0-slide-away-right e 0-slide-away-left <<<
+      // Note - Magari potrei fare un interfaccia a parte per le icone?
+      // Note >>> Serve JS per fare una cosa del genere fatta bene... <<< (?)
+      // Note - Per animazioni soprattutto, se voglio fare anche un leggero fade-in e fade-out
+      // Note - Se volessi usare gifs...
+      // Note - Se volessi dare un animation particolare a un target-current, tipo rotate, pulse, glow...
+
+      0-slide-away: ( icon: 0, scale: 1.25, opacity: 1, background-color: transparent, color: 1 ),
+      1-slide-away: ( icon: 0, scale: 1, opacity: 0.9, background-color: transparent, color: 1 ),
+      2-slide-away: ( icon: 0, scale: 0.9, opacity: 0.8, background-color: transparent, color: 1 ),
+      3-slide-away: ( icon: 0, scale: 0.8, opacity: 0.75, background-color: transparent, color: 1 ),
+      4-slide-away: ( icon: 0, scale: 0.7, opacity: 0.7, background-color: transparent, color: 1 ),
+      5-slide-away: ( icon: 0, scale: 0.65, opacity: 0.6, background-color: transparent, color: 1 ),
+      6-slide-away: ( icon: 0, scale: 0.6, opacity: 0.6, background-color: transparent, color: 1 ),
+      7-slide-away: ( icon: 0, scale: 0.55, opacity: 0.6, background-color: transparent, color: 1 ),
+      8-slide-away: ( icon: 0, scale: 0.5, opacity: 0.6, background-color: transparent, color: 1 ),
+      9-slide-away: ( icon: 0, scale: 0.5, opacity: 0.6, background-color: transparent, color: 1 ),
+      // Note - Questo vorrei farlo indefinito, cioè l'utente può inserire quanti slide-away preferisce.
+      // Note - OCP
     ),
   )
 );
@@ -288,7 +318,7 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 // Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
 // Note - Sarà importante creare una buona documentazione - Con tanti examples
   
-$debug: true; //true false
+$debug: true;
 
 
 

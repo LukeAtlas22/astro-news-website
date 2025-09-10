@@ -57,6 +57,7 @@
         style=`--carousel-slide-amount: ${slideAmount}`
     >
       {
+        /* Qui bisogna fare che se non c'è infinite scroll, usiamo gli id. e non importiamo, il navigation scroll handler */
         wrapper({
           id: carouselId,
           elements: carouselSlides,
@@ -83,7 +84,6 @@
 <script>
   // Usare un component astro per gestire lo sciprt?
     const carouselList = document.querySelectorAll('.carousel');
-    
     const infiniteScroll = await import('src/javascript/components/carousel/infinite-scroll/infinite-scroll-wrapper.ts');
     carouselList.forEach(carousel => {
       infiniteScroll.initInfiniteScroll(carousel);

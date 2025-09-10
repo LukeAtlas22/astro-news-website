@@ -108,7 +108,7 @@ const byDuplicateElements = (carouselWrapper: Element): void => {
     const carousel = carouselWrapper.querySelector('.carousel');
         if (! carousel)
             throw Error('No Carousel')
-    const navigation = carouselWrapper.querySelector('.carousel__scroll-marker-group--artificial');
+    const navigation = carouselWrapper.querySelector('.carousel__scroll-marker-group');
         if (! navigation)
             throw Error('No Nav')
     cloneElements(carousel);

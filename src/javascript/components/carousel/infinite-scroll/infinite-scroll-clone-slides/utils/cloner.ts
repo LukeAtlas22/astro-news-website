@@ -28,6 +28,7 @@ const Cloner = (config: ClonerConfigOBJ): Element => {
     clone.removeAttribute("class");
   }
 
+  clone.dataset.clone = 'true';
   return config.clone.cloneNode(true) as Element;
 }
 

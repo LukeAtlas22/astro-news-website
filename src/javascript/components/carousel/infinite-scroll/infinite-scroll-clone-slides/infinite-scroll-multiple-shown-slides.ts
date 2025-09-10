@@ -2,33 +2,26 @@ import { getShownSlides } from "./utils/get-shown-slide";
 import { SiblingGetter } from "./utils/get-sibling";
 import { CreateSubsequentUtilities } from "./utils/subsequent";
 import { Cloner } from "./utils/cloner";
+import { CurrentSlideHelper } from "../../navigation/scroll-handler-utils/current-slide";
 
 const initInfiniteScroll = (carousel: HTMLElement, SHOWN_SLIDES: number): void => {
 
-
   const slides = carousel.querySelectorAll('.carousel__slide');
   const firstSlideClone = Cloner({clone: slides[0], keepID: true});
-  console.log('First slide clone: ', firstSlideClone);
   const lastSlideClone = Cloner({clone: slides[slides.length - 1], keepID: true});
-  console.log('Last slide clone: ', lastSlideClone);
-
   const SHOWN_SLIDE_AMOUNT = getShownSlides(carousel); 
   
   const SubSequentOBJECT = CreateSubsequentUtilities(Array.from(slides), SHOWN_SLIDE_AMOUNT);
-  
   const SubsAfterArray = SubSequentOBJECT.getAfterArray();
   const SubBeforeArray = SubSequentOBJECT.getBeforeArray();
+
   
   // Setting bridges
   lastSlideClone.dataset.bridge = 'B';
-  lastSlideClone.dataset.clone = '';
-  lastSlideClone.removeAttribute('id');
   slides[0].dataset.bridge = 'B';
 
   slides[slides.length - 1].dataset.bridge = 'A';
   firstSlideClone.dataset.bridge = 'A';
-  firstSlideClone.dataset.clone = '';
-  firstSlideClone.removeAttribute('id');
   
 
   carousel.appendChild(firstSlideClone);
@@ -97,7 +90,9 @@ const initInfiniteScroll = (carousel: HTMLElement, SHOWN_SLIDES: number): void =
   // Preventing the slides keeping opacity 1 when snap changing again
   carousel.addEventListener('scrollsnapchanging', (e) => {
     carousel.querySelectorAll('.carousel__slide').forEach(slide => slide.classList.remove('save-from-black'));
-  })
+    
+  });
+
   carousel.addEventListener('pointerdown', (e) => {
     carousel.querySelectorAll('.carousel__slide').forEach(slide => slide.classList.remove('save-from-black'));
   })

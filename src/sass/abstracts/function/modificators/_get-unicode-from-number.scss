@@ -6,6 +6,5 @@
   
   $decimal-unicode: sum-base-pua-code($number);
   $hex-unicode: dec-to-hex($decimal-unicode);
-
   @return string.unquote('\"' + '\\' + $hex-unicode + '\"');
 }

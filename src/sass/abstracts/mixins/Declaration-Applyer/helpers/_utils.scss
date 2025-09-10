@@ -1,16 +1,82 @@
 @use "sass:map";
 @use "sass:string";
 
-@function has-suffix($string, $suffix) {
-  @return string.index($string, $suffix) != null;
+/// Crea una mappa di stati con mappe vuote
+@function create-states-map($allowed-pseudo-classes) {
+  $States-Map: (normal: ());
+  @each $pseudo in $allowed-pseudo-classes {
+    $States-Map: map.merge($States-Map, ($pseudo: ()));
+  }
+  @return $States-Map;
 }
 
-@function remove-suffix($string, $suffix) {
-  $index: string.index($string, $suffix);
-  @if $index {
-    @return string.slice($string, 1, $index - 1) + string.slice($string, $index + string.length($suffix));
+/// @function has-pseudoclass-as-suffix($property, $allowed-pseudo-classes)
+/// @param {String} $property - la key della mappa da testare (es. "button-hover")
+/// @param {List} $allowed-pseudo-classes - lista delle pseudo-classi consentite (es. (hover, active))
+/// @return {Boolean} true se $property termina con "-<pseudo>" e <pseudo> è nella lista, altrimenti false
+@function has-suffix-pseudoclass($property, $allowed-pseudo-classes) {
+  $prop-len: string.length($property);
+
+  @each $pseudo in $allowed-pseudo-classes {
+    $suffix: "-" + $pseudo;
+    $suf-len: string.length($suffix);
+
+    @if $prop-len >= $suf-len {
+      $start: $prop-len - $suf-len + 1;
+      $tail: string.slice($property, $start);
+
+      @if $tail == $suffix {
+        @return true;
+      }
+    }
   }
-  @return $string;
+
+  @return false;
+}
+
+
+/// @function get-pseudoclass-suffix($property, $allowed-pseudo-classes)
+/// @param {String} $property - la chiave da testare (es. "button-hover")
+/// @param {List} $allowed-pseudo-classes - lista delle pseudo-classi consentite (es. (hover, active))
+/// @return {String|null} il nome della pseudo-class senza "-" se corrisponde, altrimenti null
+@function get-suffix-pseudoclass($property, $allowed-pseudo-classes) {
+  $prop-len: string.length($property);
+
+  @each $pseudo in $allowed-pseudo-classes {
+    $suffix: "-" + $pseudo;
+    $suf-len: string.length($suffix);
+
+    @if $prop-len >= $suf-len {
+      $start: $prop-len - $suf-len + 1;
+      $tail: string.slice($property, $start);
+
+      @if $tail == $suffix {
+        @return $pseudo;
+      }
+    }
+  }
+
+  @return null;
+}
+
+
+/// Rimuove il suffisso "-<suffix>" da una property
+@function remove-suffix($property, $suffix) {
+
+  $remove: "-" + $suffix;
+  $prop-len: string.length($property);
+  $suf-len: string.length($remove);
+
+  @if $prop-len >= $suf-len {
+    $start: $prop-len - $suf-len + 1;
+    $tail: string.slice($property, $start);
+
+    @if $tail == $remove {
+      @return string.slice($property, 1, $start - 1);
+    }
+  }
+
+  @return $property;
 }
 
 @function map-add($map, $entry) {

@@ -1,10 +1,11 @@
 
 @use "helpers/utilities" as *;
+@use "helpers/aliasies/utils" as *;
 @use "helpers/media-query" as *;
 @use "sass:map";
 
 /// Does not allow you to specify alias
-@mixin Spread-Properties-From-Map($map, $props-to-exclude: null, $props-to-unallow: null) {
+@mixin Spread-Properties-From-Map($map, $props-to-exclude: null, $props-to-unallow: null, $aliasies: null) {
   @each $prop-name, $prop-value in $map{
     // Note - Room for error handling... 
     // Note - map exist
@@ -18,6 +19,10 @@
     @if $props-to-unallow and is-prop-in-unallow-list($prop-name, $props-to-unallow) {
       $map-reference: map-to-string($map);
       @error (' < #{$prop-name} > IS NOT ALLOWED IN THIS MAP !! ---> #{$map-reference}');
+    }
+
+    @if $aliasies and is-prop-in-aliasies-list($prop-name, $aliasies) {
+      $prop-name: rename-prop($prop-name, $aliasies);  
     }
     
     @include write-declaration-if-value-exist($prop-name, $prop-value)

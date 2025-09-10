@@ -11,7 +11,10 @@
     .carousel__slide::scroll-marker { 
       content: counter(carousel-slide-counter);
       @include flex-center;
-      @include apply-declarations($from: map.get($carousel-scroll-marker-styles, counter-numbers));
+      @include apply-declarations(
+        $from: map.get($carousel-scroll-marker-styles, counter-numbers),
+        $aliasies: (border-offset: padding),
+      );
     }
   }
 }

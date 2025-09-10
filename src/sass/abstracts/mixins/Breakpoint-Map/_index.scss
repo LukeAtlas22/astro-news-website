@@ -6,6 +6,6 @@
 // Mixins
 
 @forward "consume-props-directive-foreach-breakpoint-map";
-@forward "consume-props-directive-over-map" as Simple-Map--*;
+@forward "consume-props-directive-over-map";
 
 @forward "spread-every-prop-from-submap-foreach-breakpoint-in-map";

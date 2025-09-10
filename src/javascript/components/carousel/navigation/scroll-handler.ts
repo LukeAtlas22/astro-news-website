@@ -4,6 +4,8 @@ import { getClosestSlide } from "./scroll-handler-utils/get-closest-slide";
 
 const handleScroll = (wrapper: Element) => {
   const navigation = wrapper.querySelector('.carousel__navigation');
+  const markers = navigation?.querySelectorAll('.carousel__scroll-marker');
+  markers?.forEach(marker => marker.removeAttribute('href'));
   const carousel = wrapper.querySelector('.carousel');
   const carouselSlides: Element[] = Array.from(carousel.querySelectorAll('.carousel__slide'));
   const CurrentSlide = CurrentSlideHelper();

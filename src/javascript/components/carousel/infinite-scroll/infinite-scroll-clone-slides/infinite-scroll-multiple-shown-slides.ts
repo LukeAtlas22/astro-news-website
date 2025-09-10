@@ -2,11 +2,13 @@ import { getShownSlides } from "./utils/get-shown-slide";
 import { SiblingGetter } from "./utils/get-sibling";
 import { CreateSubsequentUtilities } from "./utils/subsequent";
 import { Cloner } from "./utils/cloner";
-import { CurrentSlideHelper } from "../../navigation/scroll-handler-utils/current-slide";
 
-const initInfiniteScroll = (carousel: HTMLElement, SHOWN_SLIDES: number): void => {
+const initInfiniteScroll = (carousel: Element): void => {
 
   const slides = carousel.querySelectorAll('.carousel__slide');
+  /* Se usiamo il cloner, rimuoviamo l'id */
+  slides.forEach(slide => slide.removeAttribute('id'));
+
   const firstSlideClone = Cloner({clone: slides[0], keepID: true});
   const lastSlideClone = Cloner({clone: slides[slides.length - 1], keepID: true});
   const SHOWN_SLIDE_AMOUNT = getShownSlides(carousel); 

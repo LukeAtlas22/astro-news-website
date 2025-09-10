@@ -67,7 +67,7 @@ export function byChangingOrder(e){
 }
 
 
-const initInfiniteScroll = (carousel: HTMLElement) => {
+const initInfiniteScroll = (carousel: Element) => {
     carousel.addEventListener('scrollsnapchange', (e) => {
         byChangingOrder(e);
     });

@@ -41,7 +41,7 @@ $carousel: (
 
     frame: (
       width: 475px, //clamp(18rem, 95cqw, 40rem),        
-      height: 275px, //clamp(18rem, 25cqw, 40rem), 
+      height: 305px, //clamp(18rem, 25cqw, 40rem), 
       gap-between-slides: 5.75%, // Gaps between slides
 
       // Others... (No validation, use only real css prop)
@@ -52,8 +52,8 @@ $carousel: (
     ),
 
     slide: (
-      width: 25%, // Only use <percentage> (?)
-      height: 25%, // Only use <percentage> (?)
+      width: 100%, // Only use <percentage> (?)
+      height: 100%, // Only use <percentage> (?)
       
       // Those togheter works as offset between carousel-frame boundaries.
       // Note - Questo da problemi con infinite scroll, bisogna modificarlo verso un padding, qualcosa relativo alla frame.
@@ -82,13 +82,6 @@ $carousel: (
     )
   )
 );
-
-// Note - Gestire in framework
-$carousel-scroll-infinite-scroll: true;
-$carousel-scroll-infinite-scroll-type: order; // change-orders || duplicate-elements (The first it's better for performance but it doesn't work everywhere)
-$carousel-scroll-auto-scroll: false;
-$carousel-scroll-auto-scroll-speed: 2225; // in ms
-
 
 // ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
 // █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 

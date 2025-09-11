@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:scss-index": "node generate-index.js"
   },
   "dependencies": {
     "astro": "^5.12.0",
@@ -14,6 +15,7 @@
     "linkedom": "^0.18.11"
   },
   "devDependencies": {
+    "fast-glob": "^3.3.3",
     "postcss-scss": "^4.0.9",
     "sass": "^1.91.0",
     "stylelint": "^16.23.1"

@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:string";
+@use "undisplay-items-not-on-grid" as *;
+@use "../../abstracts//mixins/apply-simple-declarations" as *;
+
+@mixin Consume-Macro-Layout-Map ($macro-layout-map, $grid-area-map) {
+  @each $index, $map in $macro-layout-map{
+    $breakpoint: map.get($map, at);
+    $grid-template: map.get($map, grid-template);
+    $height: map.get($map, height);
+    //$query-target: map.get($map, query);
+    //$container-name: map.get($map, name);
+    
+    @media (width #{$breakpoint}){
+      grid-template: $grid-template;
+      @if ($height) {height: $height;}
+      @include Undisplay-Items-Currently-Not-On-Grid($grid-template, $grid-area-map)
+    }
+  }
+}
+
+@mixin Consume-Grid-Area-Map ($grid-area-map) {
+    @each $selector, $area in $grid-area-map{
+      .#{$selector}{
+        container-type: size;
+        container-name: --macro-layout-area;
+        grid-area: string.unquote($area);
+      }
+  }
+}
+
+@mixin Create-Macro-Layout($macro-layout-map, $grid-area-map, $Defaults-Map){
+  display: grid;
+  contain: layout;
+  
+  @include Apply-Simple-Declarations($Defaults);
+
+  @include Consume-Macro-Layout-Map($macro-layout-map, $grid-area-map);
+
+  @include Consume-Grid-Area-Map($grid-area-map: $grid-area-map);
+
+}

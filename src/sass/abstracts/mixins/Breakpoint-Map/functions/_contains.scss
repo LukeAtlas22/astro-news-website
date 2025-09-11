@@ -1,7 +1,7 @@
-@function does-map-contains--key($map, $target-key) {
+@function is-key-in-breakpoint-map($map, $key) {
   @each $breakpoint, $props-map in $map {
     @each $key, $value in $props-map {
-      @if $key == $target-key {
+      @if $key == $key {
         @return true;
       }
     }
@@ -9,10 +9,10 @@
   @return false;
 }
 
-@function does-map-contains--value($map, $target-value) {
+@function is-value-in-breakpoint-map($map, $value) {
   @each $breakpoint, $props-map in $map {
     @each $key, $value in $props-map {
-      @if $value == $target-value {
+      @if $value == $value {
         @return true;
       }
     }
@@ -23,10 +23,10 @@
 /// Don't use ':'
 /// @example
 /// does-map-contains--entry($map, (position after))
-@function does-map-contains--entry($map, $target-entry) {
+@function is-entry-in-breakpoint-map($map, $entry) {
   @each $breakpoint, $props-map in $map {
     @each $entry in $props-map {
-      @if $entry == $target-entry {
+      @if $entry == $entry {
         @return true;
       }
     }

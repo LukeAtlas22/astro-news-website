@@ -1,91 +1,78 @@
 @use "sass:map";
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 
 @use "@SASS-Carousel-Abstracts" as *;
 // Note - Migliorare la gestione di questi import come abbiamo fatto con l'Article Component
 
-@if not User-Wants-Buttons() { @include BothButtons { display: none }};
+@if not User-Wants-Buttons() {
+  @include BothButtons {
+    display: none;
+  }
+}
 
-@if User-Wants-Buttons(){
-
+@if User-Wants-Buttons() {
   // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
   // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
 
-  @include BothButtons(){
+  @include BothButtons() {
     content: ""; // Notes - Here we gonna tokenize our variable for the icon font
     cursor: pointer;
     z-index: 99;
-  
+
     @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
       $Map: $carousel-buttons-style,
       $props-directives-map: (
-        
-        (
-          prop-name: color,
-        ),
-        (
-          prop-name: background,
-        ),
-        (
-          prop-name: border,
-        ),
-        (
-          prop-name: border-radius,
-        ),
-        (
-          prop-name: border-offset,
-          as: padding,
-        ),
-        (
-          prop-name: transition,
-          as: transition-duration
-        ),
+        (prop-name: color),
+        (prop-name: background),
+        (prop-name: border),
+        (prop-name: border-radius),
+        (prop-name: border-offset, as: padding),
+        (prop-name: transition, as: transition-duration),
       )
     );
 
     background-clip: content-box !important; // For border offset | Leave it
-    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
+    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS;
   }
-
 
   // Note - Memo - For the interaction selectors, we had problems on artificial afters
 
-  @include BothButtons--Hover{
+  @include BothButtons--Hover {
     @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
-      $breakpoint-map: $carousel-buttons-style, 
-      $submap-to-spread: hover,
+      $breakpoint-map: $carousel-buttons-style,
+      $submap-to-spread: hover
     );
   }
 
-  @include BothButtons--Active{
+  @include BothButtons--Active {
     @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
-      $breakpoint-map: $carousel-buttons-style, 
-      $submap-to-spread: active,
-    );  
-  }
-
-  @include BothButtons--Focus-Visible{
-    @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
-      $breakpoint-map: $carousel-buttons-style, 
-      $submap-to-spread: focus-visible,
+      $breakpoint-map: $carousel-buttons-style,
+      $submap-to-spread: active
     );
   }
 
-  @container --carousel-container not style(--infinite-scroll: true){ 
+  @include BothButtons--Focus-Visible {
+    @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
+      $breakpoint-map: $carousel-buttons-style,
+      $submap-to-spread: focus-visible
+    );
+  }
+
+  @container --carousel-container not style(--infinite-scroll: true) {
     // Note - Memo - Questa custom prop non è stata ancora implementata
-    @include BothButtons--Disabled{
+    @include BothButtons--Disabled {
       @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
-        $breakpoint-map: $carousel-buttons-style, 
-        $submap-to-spread: disabled,
+        $breakpoint-map: $carousel-buttons-style,
+        $submap-to-spread: disabled
       );
     }
   }
 
-  // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀  
+  // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀
   // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ // Note - Qui sotto, allineare con artificial pseudo button
-  
+
   @include BothButtons {
-    @container style(--buttons-orientation: horizontal) {  
+    @container style(--buttons-orientation: horizontal) {
       width: var(--buttons-height);
       height: var(--buttons-width);
     }
@@ -97,7 +84,6 @@
       height: var(--buttons-width);
     }
   }
-
 
   // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
   // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█ // Note - Qui sotto, allineare con artificial pseudo button (in caso di width & height sfasate e rotation particolari)
@@ -119,7 +105,6 @@
       rotate: -90deg;
     }
   }
-
 
   // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
   // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█ // Note - Qui sotto, allineare con artificial pseudo button
@@ -230,60 +215,78 @@
 
   // anchor(<anchor-name> <anchor-side>, <length-percentage>)
   // Memo - No need to offset here.
-  @container --carousel-container style(--buttons-position: align-on-navigation-and-carousel-margins){
+  @container --carousel-container style(--buttons-position: align-on-navigation-and-carousel-margins) {
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
-      @include BothButtons{
-        
+      @include BothButtons {
       }
-      @include PrevButton{
+      @include PrevButton {
         top: anchor(--scroll-marker-group center);
-        left: calc(anchor(--carousel left) + var(--buttons-position-horizontal-offset));
+        left: calc(
+          anchor(--carousel left) + var(--buttons-position-horizontal-offset)
+        );
       }
       @include NextButton {
         top: anchor(--scroll-marker-group center);
-        right: calc(anchor(--carousel right) + var(--buttons-position-horizontal-offset));
+        right: calc(
+          anchor(--carousel right) + var(--buttons-position-horizontal-offset)
+        );
       }
     }
     @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
-      @include BothButtons{
+      @include BothButtons {
         translate: 50% 0;
       }
-      @include PrevButton{
-        top: calc(anchor(--carousel top) + var(--buttons-position-vertical-offset));
+      @include PrevButton {
+        top: calc(
+          anchor(--carousel top) + var(--buttons-position-vertical-offset)
+        );
         right: anchor(--scroll-marker-group center);
       }
       @include NextButton {
-        bottom: calc(anchor(--carousel bottom) + var(--buttons-position-vertical-offset));
+        bottom: calc(
+          anchor(--carousel bottom) + var(--buttons-position-vertical-offset)
+        );
         right: anchor(--scroll-marker-group center);
       }
     }
   }
 
   // anchor(<anchor-name> <anchor-side>, <length-percentage>)
-    @container --carousel-container style(--buttons-position: align-on-navigation){
+  @container --carousel-container style(--buttons-position: align-on-navigation) {
     @container --carousel-container style(--scroll-marker-group-orientation: horizontal) {
-      @include BothButtons{
-        
+      @include BothButtons {
       }
-      @include PrevButton{
+      @include PrevButton {
         top: anchor(--scroll-marker-group center);
-        right: calc(anchor(--scroll-marker-group left) + var(--buttons-position-horizontal-offset));
+        right: calc(
+          anchor(--scroll-marker-group left) +
+            var(--buttons-position-horizontal-offset)
+        );
       }
       @include NextButton {
         top: anchor(--scroll-marker-group center);
-        left: calc(anchor(--scroll-marker-group right) + var(--buttons-position-horizontal-offset));
+        left: calc(
+          anchor(--scroll-marker-group right) +
+            var(--buttons-position-horizontal-offset)
+        );
       }
     }
     @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
-      @include BothButtons{
+      @include BothButtons {
         translate: 50% 0;
       }
-      @include PrevButton{
-        bottom: calc(anchor(--scroll-marker-group top) + var(--buttons-position-vertical-offset));
+      @include PrevButton {
+        bottom: calc(
+          anchor(--scroll-marker-group top) +
+            var(--buttons-position-vertical-offset)
+        );
         right: anchor(--scroll-marker-group center);
       }
       @include NextButton {
-        top: calc(anchor(--scroll-marker-group bottom) + var(--buttons-position-vertical-offset));
+        top: calc(
+          anchor(--scroll-marker-group bottom) +
+            var(--buttons-position-vertical-offset)
+        );
         right: anchor(--scroll-marker-group center);
       }
     }
@@ -296,21 +299,20 @@
     }
   }
 
-
-
   // █▀ █ █ █▄ █ ▄▀▀ ▀█▀ █ ▄▀▄ █▄ █ ▄▀▄ █   █ ▀█▀ ▀▄▀
   // █▀ ▀▄█ █ ▀█ ▀▄▄  █  █ ▀▄▀ █ ▀█ █▀█ █▄▄ █  █   █
-  
+
   // Note - In attesa che i valori next e prev di scroll-button() diventino disponibili, usiamo questo work-around
-  
-  @container --carousel-container style(--carousel-scroll-direction: horizontal){
-    @include Buttons-Axis-Vertical { display: none }
+
+  @container --carousel-container style(--carousel-scroll-direction: horizontal) {
+    @include Buttons-Axis-Vertical {
+      display: none;
+    }
   }
-  
+
   @container --carousel-container style(--carousel-scroll-direction: vertical) {
-    @include Buttons-Axis-Horizontal { display: none };
+    @include Buttons-Axis-Horizontal {
+      display: none;
+    }
   }
-
-  
 } // <--  Ending Main IF Statement
-

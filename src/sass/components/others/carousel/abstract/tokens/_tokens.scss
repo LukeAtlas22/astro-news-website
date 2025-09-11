@@ -1,5 +1,17 @@
+@use "@SASS-Tools" as *;
 @use "@SASS-Abstracts" as *;
 
+$questa-e-una-prova: (
+  'default': (
+    background-color: blue,
+    background-color-hover: purple,
+  ),
+  '(width < 500px) and (height > 1000px)': (
+    border: 1px solid blue,
+    border-hover: 2px solid blue,
+    border-active: 10px solid red,
+  ),
+);
 
 // Note - Alla fine tutto deve andare in una mappa, tipo
 // - carousel
@@ -22,16 +34,14 @@
 // Note - Given examples:
 
 $carousel: (
-  'default': (
-    
-    wrapper: ( 
+  "default": (
+    wrapper: (
       // Note - Wrapper la potrei eliminare da qua, per rendere più pulito...
       // Note - Facciamo così, in wrapper non mettiamo revelant properties, ma solo l'essenziale per offrire un background, un border, una box-shadow, e robe così.
       // Note - E magari releghiamo questa sottomappa in fondo
       // Note ^ Da aggiungere alla documentazione
       // Do not put width or height or gap, in here.
       // ...
-      
       background: transparent,
       border: none,
       border-radius: 0rem,
@@ -40,96 +50,112 @@ $carousel: (
     ),
 
     frame: (
-      width: 475px, //clamp(18rem, 95cqw, 40rem),        
-      height: 305px, //clamp(18rem, 25cqw, 40rem), 
-      gap-between-slides: 5.75%, // Gaps between slides
+      width: 475px,
+      //clamp(18rem, 95cqw, 40rem),
+      height: 305px,
+      //clamp(18rem, 25cqw, 40rem),
+      gap-between-slides: 5.75%,
 
+      // Gaps between slides
       // Others... (No validation, use only real css prop)
-      padding: 0rem, 
+      padding: 0rem,
       background: rgba(128, 128, 128, 0.267),
       border: none,
       border-radius: 2rem,
     ),
 
     slide: (
-      width: 100%, // Only use <percentage> (?)
-      height: 100%, // Only use <percentage> (?)
-      
+      width: 100%,
+      // Only use <percentage> (?)
+      height: 100%,
+
+      // Only use <percentage> (?)
       // Those togheter works as offset between carousel-frame boundaries.
       // Note - Questo da problemi con infinite scroll, bisogna modificarlo verso un padding, qualcosa relativo alla frame.
-      first-slide-margin-start: 0,  // Only allow <percentage> (?)
-      last-slide-margin-end: 0, // Only allow <percentage> (?)
+      first-slide-margin-start: 0,
+      // Only allow <percentage> (?)
+      last-slide-margin-end: 0,
 
+      // Only allow <percentage> (?)
       border: 2px solid red,
       border-radius: 2rem,
     ),
 
     scroll: (
       behavior: smooth,
-      direction: horizontal, 
-      snap-type: mandatory, // mandatory | proximity | // Todo - Do not allow none
-      snap-stop: always, // always | normal // Todo - Only allow infinite scroll with snap-stop always
+      direction: horizontal,
+      snap-type: mandatory,
+      // mandatory | proximity | // Todo - Do not allow none
+      snap-stop: always,
+      // always | normal // Todo - Only allow infinite scroll with snap-stop always
       snap-align: center,
 
-      scrollbar-width: none, //< none | thin | auto >
-      scrollbar-color: red orange, // <color> <color> syntax
+      scrollbar-width: none,
+      //< none | thin | auto >
+      scrollbar-color: red orange,
+      // <color> <color> syntax
     ),
   ),
 
-  '(width > 1000px)': (
+  "(width > 1000px)": (
     scroll: (
-      direction: horizontal, // Done - Works good
-    )
-  )
+      direction: horizontal,
+      // Done - Works good
+    ),
+  ),
 );
 
-// ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀ 
-// █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀ 
+// ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀
+// █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀
 
 // true || false - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
-$carousel-buttons-display: false; 
+$carousel-buttons-display: true;
 
 $carousel-buttons: (
-  'default': (
+  "default": (
     // Layout
     width: clamp(2.75rem, 10vw, 3.75rem),
     height: clamp(2.75rem, 10vw, 3.75rem),
     position: display-none,
     orientation: horizontal,
-    ),
-    
-    '(width > 455px)': (
+  ),
+
+  "(width > 455px)": (
     width: clamp(3.75rem, 10vw, 4.5rem),
     height: clamp(3.75rem, 10vw, 4.5rem),
     position: inside-frame,
-    position-offset: (horizontal: 2rem, vertical: 0rem),
+    position-offset: (
+      horizontal: 2rem,
+      vertical: 0rem,
+    ),
   ),
 
-  '(width > 900px)': (
+  "(width > 900px)": (
     position: outside-carousel,
-  )
+  ),
 );
 
 $carousel-buttons-style: (
-  'default': (
+  "default": (
     // Note - Vorrei esporre un file sass per fare qualcosa di custom, tipo custom borders on hover che ruotano, cose così.
-    
     // Style
-    color: $body-text-color, 
-    background: transparent, 
-    border: 2px solid $body-text-color, 
-    border-radius: 75vw, 
-    border-offset: 12px, 
-    
-    transition: 225ms, // Note - Tokenize on Default Design Transition
+    color: $body-text-color,
+    background: transparent,
+    border: 2px solid $body-text-color,
+    border-radius: 75vw,
+    border-offset: 12px,
 
+    transition: 225ms,
+
+    // Note - Tokenize on Default Design Transition
     // You won't have validation on those props, at least for now.
-    hover: (
-      scale: 1.1,
-      color: red,
-      background: transparent,
-      border: 2px solid red,
-    ),
+    hover:
+      (
+        scale: 1.1,
+        color: red,
+        background: transparent,
+        border: 2px solid red,
+      ),
     active: (
       scale: 1.2,
       color: cyan,
@@ -141,120 +167,135 @@ $carousel-buttons-style: (
       cursor: not-allowed,
     ),
     focus-visible: (
-      outline: 2px solid goldenrod, // Note - Tokenize on Default Design Outline
+      outline: 2px solid goldenrod,
+      // Note - Tokenize on Default Design Outline
       outline-offset: 2.75px,
-    )
+    ),
   ),
 );
 
 $carousel-buttons-icon: (
-  'default': (
-    type: 11, // 1-25 // I like myself 3 & 24
+  "default": (
+    type: 11,
+    // 1-25 // I like myself 3 & 24
     size: 1.25rem,
     stroke-width: 0px,
     stroke-color: transparent,
-  )
+  ),
 );
 
-// ▄▀▀ ▄▀▀ █▀▄ ▄▀▄ █   █      █▄ ▄█ ▄▀▄ █▀▄ █▄▀ ██▀ █▀▄    ▄▀  █▀▄ ▄▀▄ █ █ █▀▄ 
-// ▄█▀ ▀▄▄ █▀▄ ▀▄▀ █▄▄ █▄▄    █ ▀ █ █▀█ █▀▄ █ █ █▄▄ █▀▄    ▀▄█ █▀▄ ▀▄▀ ▀▄█ █▀  
+// ▄▀▀ ▄▀▀ █▀▄ ▄▀▄ █   █      █▄ ▄█ ▄▀▄ █▀▄ █▄▀ ██▀ █▀▄    ▄▀  █▀▄ ▄▀▄ █ █ █▀▄
+// ▄█▀ ▀▄▄ █▀▄ ▀▄▀ █▄▄ █▄▄    █ ▀ █ █▀█ █▀▄ █ █ █▄▄ █▀▄    ▀▄█ █▀▄ ▀▄▀ ▀▄█ █▀
 
 // Todo Questa variabile sotto
 // Same as buttons display - If you don't need AT ALL the navigation, set on no, and the code won't be injected to the css final sheet.
-$carousel-navigation-display: true; 
+$carousel-navigation-display: true;
 
-$carousel-navigation:( // Note - Name is temporaney
-  'default': (
-    position: after, 
-    // Todo: display-none (al posto di none)
-    // Note - Change Documentation
-    position-inset: (top: 1rem, right: 1rem), // Only works with position: inside-frame
-    orientation: horizontal, 
-    alignment: center, 
-    distance: 1.75rem, // Distance from frame | <length>
-    
-    // This will override the default max-size (set on carousel size)
-    // Note - Vorrei estendere la Carousel Navigation anche per tipo i player delle serie tv, quella roba lì....
+$carousel-navigation: (
+  // Note - Name is temporaney
+  "default":
+    (
+      position: after,
+      // Todo: display-none (al posto di none)
+      // Note - Change Documentation
+      position-inset:
+        (
+          top: 1rem,
+          right: 1rem,
+        ),
+      // Only works with position: inside-frame
+      orientation: horizontal,
+      alignment: center,
+      distance: 1.75rem,
 
-    gap: 0.75rem, 
-    
-    outline: none,        // Note Qui è da rifare con borders?
-    outline-offset: none, // Note Qui è da rifare con borders?
-    outline-radius: none, // Note Qui è da rifare con borders?
-    
-    markers-direction: auto,
-    markers-justification: center,
-    markers-size: 24px, 
-    markers-style: default, 
-  ),
+      // Distance from frame | <length>
+      // This will override the default max-size (set on carousel size)
+      // Note - Vorrei estendere la Carousel Navigation anche per tipo i player delle serie tv, quella roba lì....
+      gap: 0.75rem,
+
+      outline: none,
+      // Note Qui è da rifare con borders?
+      outline-offset: none,
+      // Note Qui è da rifare con borders?
+      outline-radius: none,
+
+      // Note Qui è da rifare con borders?
+      markers-direction: auto,
+      markers-justification: center,
+      markers-size: 24px,
+      markers-style: default,
+    )
 );
 
+$carousel-scroll-marker-styles: (
+  // Do not declare width or height in here
+  default:
+    (
+      // Todo - I may still to want to use my Selective-Property-Assignment for better name abstractions
+      border-radius: 100vw,
+      background-color: rgb(192, 209, 255),
+      background-color-hover: rgb(253, 106, 131),
+      background-color-active: rgb(243, 36, 71),
+      background-color-target-current: rgb(253, 23, 61),
+      border: 1.25px solid red,
+      border-hover: 1.25px solid red,
+      border-active: 1.25px solid red,
+      border-target-current: 1.25px solid red,
+      border-offset: 0px,
 
-$carousel-scroll-marker-styles: (  // Do not declare width or height in here  
+      outline-focus-visible: 1.25px solid rgb(147, 147, 255),
+      outline-offset: 3.25px,
 
-  default:(
-    // Todo - I may still to want to use my Selective-Property-Assignment for better name abstractions
-    border-radius: 100vw,
-    background-color: rgb(192, 209, 255),
-    background-color-hover: rgb(253, 106, 131),
-    background-color-active: rgb(243, 36, 71),
-    background-color-target-current: rgb(253, 23, 61),
-  
-    border: 1.25px solid red,
-    border-hover: 1.25px solid red,
-    border-active: 1.25px solid red,
-    border-target-current: 1.25px solid red,
-    border-offset: 0px, 
- 
-    outline-focus-visible: 1.25px solid rgb(147, 147, 255),
-    outline-offset: 3.25px,
-
-    scale-hover: 1.1,
-    scale-target-current: 1.25, 
-    transition: 375ms,
-    
-  ),
+      scale-hover: 1.1,
+      scale-target-current: 1.25,
+      transition: 375ms
+    ),
 
   // Note - Forse per questo bisogna usare javascript, per ottimizzarlo bene.
-  slide-image-path:'https://picsum.photos/800/400?random', divisor: '=', ext: '', 
-  // Note - Qui non so se conviene farlo così... 
-  // Note - Forse potrei usare Astro - 
+  slide-image-path: "https://picsum.photos/800/400?random",
+  divisor: "=",
+  ext: "",
+  // Note - Qui non so se conviene farlo così...
+  // Note - Forse potrei usare Astro -
   // Note - Magari potrei usare dei mini-placeholder per delle immagini molto piccole estrapolate con getImage e caricarli solo se nella mappa layout c'è "slide-image"
   // Memo - Do not declare width or height in here
-  slide-image:(
-    background-color: transparent,
-    background-color-hover: transparent,
-    background-color-active: transparent,
-    background-color-target-current: transparent,
-    background-size: cover,
-    background-repeat: no-repeat,
-    background-position: center,
-  ),
+  slide-image:
+    (
+      background-color: transparent,
+      background-color-hover: transparent,
+      background-color-active: transparent,
+      background-color-target-current: transparent,
+      background-size: cover,
+      background-repeat: no-repeat,
+      background-position: center,
+    ),
 
   // Memo - Do not declare width or height in here
-  counter-numbers:(
-    // Note - Rifare counter-number e slide images affinchè i default selezionati siano sempre presenti? In questo modo l'utente però non potrà cambiare colore
-    background-color: black,
-    background-color-hover: black,
-    background-color-active: black,
-    background-color-target-current: black,
-    // Note - If things does not change - I may want to use Selective-Assignment to Better abstract naming conventions.
-    color: gray,
-    color-hover: gray,
-    color-active: white,
-    color-target-current: #fff, // Strange behaviour - Use -active
+  counter-numbers:
+    (
+      // Note - Rifare counter-number e slide images affinchè i default selezionati siano sempre presenti? In questo modo l'utente però non potrà cambiare colore
+      background-color: black,
+      background-color-hover: black,
+      background-color-active: black,
+      background-color-target-current: black,
+      // Note - If things does not change - I may want to use Selective-Assignment to Better abstract naming conventions.
+      color: gray,
+      color-hover: gray,
+      color-active: white,
+      color-target-current: #fff,
 
-    border: 1.75px solid rgb(0, 26, 255),
-    border-hover: 1.75px solid  red,
-    border-active: 1.75px solid cyan,
-    border-target-current: 1.75px solid white,
-    border-offset: 2px, 
-    
-    font-family: Arial, 
-    font-size: 1.25rem,
-    font-weight: bold,
-    text-decoration: none,
-  ),
+      // Strange behaviour - Use -active
+      border: 1.75px solid rgb(0, 26, 255),
+      border-hover: 1.75px solid red,
+      border-active: 1.75px solid cyan,
+      border-target-current: 1.75px solid white,
+      border-offset: 2px,
+
+      font-family: Arial,
+      font-size: 1.25rem,
+      font-weight: bold,
+      text-decoration: none
+    ),
 
   // Note - Questa roba sotto la dobbiamo mettere nella documentazione
   // You need advanced navigation to use this
@@ -264,44 +305,115 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
   // - Your target-current slide is the slide n.4
   // - The 0-slide-away will be the scroll marker n.4
   // - The 1-slide-away will be the scroll markers n.3 & n.5
-  // - The 2-slide-away will be the scroll markers n.2 & n.6 
+  // - The 2-slide-away will be the scroll markers n.2 & n.6
   // - And so on...
   // You don't have to use an icon -- If you don't want to use an icon, just leave the icon parameter empty.
   // If you only need the icon, just remove every "slide-away" except the number 0.
   // I think most of the properties for this kind of thing are already there. Remember this inherits from default, so, for now, you can't add other props.
-  multiple-variant-from-target-current: ( // Note find better name  
-    icon-font-family: '',
-    transition: 225ms, // Keep it small
-    target-current: (
-      // Note - Qui funziona bene, ora però sorge una domanda, dovrei lasciare icon qui? In questo modo?
-      // Note - Magari farne uno fisso e gestire l'icona in un altro modo... 
-      // Note - Più che altro, le icone e il cambiamento delle icone potrei gestirle tramite HTML - Qui semplicemente, gestisco scale, opacity, background-color e color per ogni slide away ?
-      // Note - Così mi piace, magari troviamo un modo migliore per gestire le icone... non lo so... 
-      
-      // Todo - Dovrei fare anche in modo che le props dell'ultima mappa, si propagano anche a tutte le ultime altre slide, se non specifico qualcosa per slide oltre tale numero
-
-      // Note - Il problema è che diventa complicato gestire dinamicamente le icone, se ogni volta devi creare un font di icone...
-      // Note - >>> Poi dovrei rendere questa API un po' più composite e fare in modo che l'utente può scegliere anche 0-slide-away-right e 0-slide-away-left <<<
-      // Note - Magari potrei fare un interfaccia a parte per le icone?
-      // Note >>> Serve JS per fare una cosa del genere fatta bene... <<< (?)
-      // Note - Per animazioni soprattutto, se voglio fare anche un leggero fade-in e fade-out
-      // Note - Se volessi usare gifs...
-      // Note - Se volessi dare un animation particolare a un target-current, tipo rotate, pulse, glow...
-
-      0-slide-away: ( icon: 0, scale: 1.25, opacity: 1, background-color: transparent, color: 1 ),
-      1-slide-away: ( icon: 0, scale: 1, opacity: 0.9, background-color: transparent, color: 1 ),
-      2-slide-away: ( icon: 0, scale: 0.9, opacity: 0.8, background-color: transparent, color: 1 ),
-      3-slide-away: ( icon: 0, scale: 0.8, opacity: 0.75, background-color: transparent, color: 1 ),
-      4-slide-away: ( icon: 0, scale: 0.7, opacity: 0.7, background-color: transparent, color: 1 ),
-      5-slide-away: ( icon: 0, scale: 0.65, opacity: 0.6, background-color: transparent, color: 1 ),
-      6-slide-away: ( icon: 0, scale: 0.6, opacity: 0.6, background-color: transparent, color: 1 ),
-      7-slide-away: ( icon: 0, scale: 0.55, opacity: 0.6, background-color: transparent, color: 1 ),
-      8-slide-away: ( icon: 0, scale: 0.5, opacity: 0.6, background-color: transparent, color: 1 ),
-      9-slide-away: ( icon: 0, scale: 0.5, opacity: 0.6, background-color: transparent, color: 1 ),
-      // Note - Questo vorrei farlo indefinito, cioè l'utente può inserire quanti slide-away preferisce.
-      // Note - OCP
-    ),
-  )
+  multiple-variant-from-target-current:
+    (
+      // Note find better name
+      icon-font-family: "",
+      transition: 225ms,
+      // Keep it small
+      target-current:
+        (
+          // Note - Qui funziona bene, ora però sorge una domanda, dovrei lasciare icon qui? In questo modo?
+          // Note - Magari farne uno fisso e gestire l'icona in un altro modo...
+          // Note - Più che altro, le icone e il cambiamento delle icone potrei gestirle tramite HTML - Qui semplicemente, gestisco scale, opacity, background-color e color per ogni slide away ?
+          // Note - Così mi piace, magari troviamo un modo migliore per gestire le icone... non lo so...
+          // Todo - Dovrei fare anche in modo che le props dell'ultima mappa, si propagano anche a tutte le ultime altre slide, se non specifico qualcosa per slide oltre tale numero
+          // Note - Il problema è che diventa complicato gestire dinamicamente le icone, se ogni volta devi creare un font di icone...
+          // Note - >>> Poi dovrei rendere questa API un po' più composite e fare in modo che l'utente può scegliere anche 0-slide-away-right e 0-slide-away-left <<<
+          // Note - Magari potrei fare un interfaccia a parte per le icone?
+          // Note >>> Serve JS per fare una cosa del genere fatta bene... <<< (?)
+          // Note - Per animazioni soprattutto, se voglio fare anche un leggero fade-in e fade-out
+          // Note - Se volessi usare gifs...
+          // Note - Se volessi dare un animation particolare a un target-current, tipo rotate, pulse, glow...
+          0-slide-away:
+            (
+              icon: 0,
+              scale: 1.25,
+              opacity: 1,
+              background-color: transparent,
+              color: 1,
+            ),
+          1-slide-away:
+            (
+              icon: 0,
+              scale: 1,
+              opacity: 0.9,
+              background-color: transparent,
+              color: 1,
+            ),
+          2-slide-away:
+            (
+              icon: 0,
+              scale: 0.9,
+              opacity: 0.8,
+              background-color: transparent,
+              color: 1,
+            ),
+          3-slide-away:
+            (
+              icon: 0,
+              scale: 0.8,
+              opacity: 0.75,
+              background-color: transparent,
+              color: 1,
+            ),
+          4-slide-away:
+            (
+              icon: 0,
+              scale: 0.7,
+              opacity: 0.7,
+              background-color: transparent,
+              color: 1,
+            ),
+          5-slide-away:
+            (
+              icon: 0,
+              scale: 0.65,
+              opacity: 0.6,
+              background-color: transparent,
+              color: 1,
+            ),
+          6-slide-away:
+            (
+              icon: 0,
+              scale: 0.6,
+              opacity: 0.6,
+              background-color: transparent,
+              color: 1,
+            ),
+          7-slide-away:
+            (
+              icon: 0,
+              scale: 0.55,
+              opacity: 0.6,
+              background-color: transparent,
+              color: 1,
+            ),
+          8-slide-away:
+            (
+              icon: 0,
+              scale: 0.5,
+              opacity: 0.6,
+              background-color: transparent,
+              color: 1,
+            ),
+          9-slide-away:
+            (
+              icon: 0,
+              scale: 0.5,
+              opacity: 0.6,
+              background-color: transparent,
+              color: 1,
+            ),
+          // Note - Questo vorrei farlo indefinito, cioè l'utente può inserire quanti slide-away preferisce.
+          // Note - OCP
+        )
+    )
 );
 
 // Note - Sarà importante esporre una buona documentazione
@@ -310,8 +422,5 @@ $carousel-scroll-marker-styles: (  // Do not declare width or height in here
 
 // Note - Inserire nella documentazione: Usare justification center se i buttons non sono ancorati **all'interno** della navigation
 // Note - Sarà importante creare una buona documentazione - Con tanti examples
-  
+
 $debug: true;
-
-
-

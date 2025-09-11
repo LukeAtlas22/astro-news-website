@@ -2,6 +2,8 @@
 @use "@SASS-Abstracts" as *;
 @use "../components/others/article/mixins/selectors/article-selectors" as Article;
 
+// Note - Example of Macro-Layout-Map
+
 // Use from the smallest media query to the largest - 
 // Todo - (Note) - Automatic Undisplay item that are not present on the grid-template 
 $Hero-Macro-Layout-Map: (
@@ -56,6 +58,9 @@ $Hero-Macro-Layout-Map: (
   ),
 );
 
+// Note - Example of Macro Layout Areas
+// Note - (( Selector - Grid Area )) Pairs 
+
 $Hero-Macro-Layout-Areas: (
   'area-article-relevant':  'AAA',
   'area-article-secondary': 'BBB',
@@ -78,6 +83,8 @@ $Hero-Macro-Layout-Areas: (
 // Todo - Oppure creo un macro layout nei component (sass), e lo metto lì
 
 // Temp
+// Note - Questa roba non dovrebbe stare qui
+// Note - Magari si potrebbe creare un'astrazione per gestire padding e margin e gaps e sizing in generale, collegata al mio macro layout helper
 .area-article-relevant{
   padding-block: 1rem;
   padding-inline: 1.5rem;

@@ -4,7 +4,7 @@
 @use "helpers/media-query" as *;
 @use "sass:map";
 
-/// Does not allow you to specify alias
+// Note - dobbiamo lasciarlo come core (?)
 @mixin Spread-Properties-From-Map($map, $props-to-exclude: null, $props-to-unallow: null, $aliasies: null) {
   @each $prop-name, $prop-value in $map{
     // Note - Room for error handling... 
@@ -27,25 +27,29 @@
     
     @include write-declaration-if-value-exist($prop-name, $prop-value)
   }
-}
+} // Note questo ci serve, è il core di apply-declaration 
+// Note - Dev'essere migliorata la gestione delle validation, modification, aliasies, ecc
 
-/// 
+
+// Note - Questo non mi piace tanto, potrei modificarlo - Però mi serve un decl applyer che funziona anche per Breakpoints Maps.
+// Note - Get rid of this under?
+///
 /// @param {type} $breakpoint-map - The main breakpoint map, on which the submap are contained
 /// @param {type} $submap-to-spread - The submap to spread for each breakpoint
 /// @param {type} $props-to-exlude [null] - (Optional) - A list of props to exclude from the spread
 /// @output 
-@mixin Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map ($breakpoint-map, $submap-to-spread, $props-to-exclude: null, $props-to-unallow: null) {
+@mixin Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map ($breakpoint-map, $submap-to-spread, $props-to-exclude: null, $props-to-unallow: null, $aliasies: null) {
   // Note - val: breakpoint-map exist
   @each $breakpoint, $maps-entry in $breakpoint-map {
     
     $map: map.get($maps-entry, $submap-to-spread);
 
     @if ($breakpoint == default) {
-      @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow )
+      @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow, $aliasies )
     }
     @else {
       @include Media-Query(#{$breakpoint}) {
-        @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow );
+        @include Spread-Properties-From-Map( $map, $props-to-exclude, $props-to-unallow, $aliasies );
       } 
     }
   }

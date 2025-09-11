@@ -1,0 +1,10 @@
+@mixin line-clamp-fade { // ! SHIM
+  @warn 'line-clamp-fade is a outdated name and will be deprecated, use line-clamp-fade-out';
+  @include line-clamp-fade-out($lines, $Line-height: 1.5);
+}
+
+@mixin line-clamp-fade-out($lines, $line-height: 1.5) {
+  max-height: calc($lines * 1em * $line-height);
+  overflow: hidden;
+  mask-image: linear-gradient(180deg, #000 70%, rgba(0, 0, 0, 0));
+}

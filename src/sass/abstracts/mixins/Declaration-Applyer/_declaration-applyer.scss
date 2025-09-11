@@ -2,6 +2,8 @@
 @use "sass:string";
 @use "../Breakpoint-Map/spread-every-prop-from-submap-foreach-breakpoint-in-map" as *;
 @use "helpers/utils" as *;
+@use "../Breakpoint-Map/helpers/media-query" as *;
+// Note - Ho bisogno di un fix quassù ^
 
 $ALLOWED_DEFAULT: (
   hover,
@@ -66,3 +68,16 @@ $ALLOWED_DEFAULT: (
   
 }
 
+// Here we call apply-declaration for each breakpoint INNER MAP 
+@mixin apply-declarations-for-each-breakpoint($from, $allowed-pseudo-classes: $ALLOWED_DEFAULT, $exclude: null, $unallow: null, $aliasies: null) {
+  @each $breakpoint, $breakpoint-inner-map in $from {
+    @if ($breakpoint == 'default') {
+      @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+    }
+    @else if ($breakpoint != 'default') {
+      @include Media-Query(#{$breakpoint}) {
+        @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+      }
+    }
+  }
+}

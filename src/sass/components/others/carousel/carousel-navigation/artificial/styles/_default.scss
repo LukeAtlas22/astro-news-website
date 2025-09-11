@@ -1,26 +1,27 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 @use "sass:map";
-  
-  $-Default-Map: map.get($carousel-scroll-marker-styles, default); // Note - Tokenize this per utility ?
 
-  .carousel__scroll-marker {
-    
-    display: block;
-    width: var(--scroll-markers-size);
-    height: var(--scroll-markers-size);
-    flex-shrink: 0;
-    
+$-Default-Map: map.get(
+  $carousel-scroll-marker-styles,
+  default
+); // Note - Tokenize this per utility ?
 
-    //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
+.carousel__scroll-marker {
+  display: block;
+  width: var(--scroll-markers-size);
+  height: var(--scroll-markers-size);
+  flex-shrink: 0;
 
-    @include apply-declarations(
-      $from: $-Default-Map,
-      $aliasies: (border-offset: padding),
-    );
-    
-    background-clip: content-box !important;  
-    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
-    
-  }
+  //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
 
+  @include apply-declarations(
+    $from: $-Default-Map,
+    $aliasies: (
+      border-offset: padding,
+    )
+  );
+
+  background-clip: content-box !important;
+  transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS;
+}

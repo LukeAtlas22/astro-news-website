@@ -1,25 +1,23 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 
-
-.carousel__variables-scope{
+.carousel__variables-scope {
   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
-    $Map: $carousel, 
+    $Map: $carousel,
     $props-directives-map: (
       (
         sub-map: slide,
         prop-name: first-child-margin-start,
-        as: --carousel-slide-first-child-margin-start,
+        as: --carousel-slide-first-child-margin-start
       ),
       (
         sub-map: slide,
         prop-name: last-child-margin-end,
-        as: --carousel-slide-last-child-margin-end,
+        as: --carousel-slide-last-child-margin-end
       ),
     )
   );
 }
-
 
 .carousel__slide {
   @include create-container(
@@ -31,26 +29,27 @@
   position: relative;
 
   > * {
-      // Memo - Gli elementi all'interno della slide devono essere width: 100% - height: 100%
-      width: 100%;
-      height: 100%;
-    }
+    // Memo - Gli elementi all'interno della slide devono essere width: 100% - height: 100%
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .carousel__slide {
   flex-shrink: 0;
-  
+
   @include Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map(
-    $breakpoint-map: $carousel, 
+    $breakpoint-map: $carousel,
     $submap-to-spread: slide,
-    $props-to-exclude: (first-child-margin-start, last-child-margin-end),
+    $props-to-exclude: (
+      first-child-margin-start,
+      last-child-margin-end,
+    )
   );
 
   // Note - Shall put this in contain-layout ? Controllare affinità con scroll-state
-    overflow: clip;
+  overflow: clip;
 }
-
-
 
 // Note - Debug
 @if ($debug == true) {
@@ -58,7 +57,6 @@
     --content: attr(data-index, type(*));
   }
   .carousel__slide::after {
-    
     content: var(--content);
     position: absolute;
     top: 50%;
@@ -70,7 +68,7 @@
     border-radius: 100vw;
     font-size: 2rem;
     font-weight: bold;
-    font-family: 'Arial';
+    font-family: "Arial";
     aspect-ratio: 1/1;
   }
 }

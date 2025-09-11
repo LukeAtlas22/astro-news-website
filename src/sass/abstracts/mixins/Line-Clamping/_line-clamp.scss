@@ -1,0 +1,14 @@
+//
+//
+// Line clamp
+///
+/// @param {type} $n - Specify the maximum number of lines to show
+@mixin line-clamp($n) {
+  @if (not($n == none or meta.type-of($n) != number or $n == 0)) {
+    display: -webkit-box;
+    overflow: clip;
+    -webkit-line-clamp: $n; /* number of lines to show */
+    line-clamp: $n;
+    -webkit-box-orient: vertical;
+  }
+}

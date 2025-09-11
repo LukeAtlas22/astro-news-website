@@ -1,32 +1,33 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 @use "sass:map";
 
-  // █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀  
-  // █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █
-  
-  $-Default-Map: map.get($carousel-scroll-marker-styles, default);
+// █▀▄ ██▀ █▀ ▄▀▄ █ █ █   ▀█▀
+// █▄▀ █▄▄ █▀ █▀█ ▀▄█ █▄▄  █
 
-  // Note questo blocco posso migliorarlo? magari lo sposto e lo importo con namespace?
+$-Default-Map: map.get($carousel-scroll-marker-styles, default);
 
-  .carousel__slide::scroll-marker {
-    content: '';
-    display: block;
-    width: var(--scroll-markers-size);
-    height: var(--scroll-markers-size);
-    flex-shrink: 0;
+// Note questo blocco posso migliorarlo? magari lo sposto e lo importo con namespace?
 
-    
-    //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
+.carousel__slide::scroll-marker {
+  content: "";
+  display: block;
+  width: var(--scroll-markers-size);
+  height: var(--scroll-markers-size);
+  flex-shrink: 0;
 
-    @include apply-declarations(
-      $from: $-Default-Map,
-      $aliasies: (border-offset: padding),
-    );
-    
-    background-clip: content-box !important;  
-    transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS; 
-  }
+  //@include apply-declarations($from: map.get($carousel-scroll-marker-styles, default));
 
-  // Note per il resto degli styles, posso semplicemente copiare questo blocco sopra ^ Escludendo background clip e transition prop, mi riferisco ai 5 mixins e semplicemente cambiare il nome della mappa (-Default)
-  // Note - Comunque secondo me, per ogni style dovrei creare un foglio di stile, così è più ordinato.
+  @include apply-declarations(
+    $from: $-Default-Map,
+    $aliasies: (
+      border-offset: padding,
+    )
+  );
+
+  background-clip: content-box !important;
+  transition-property: $CAROUSEL-ELEMENT-TRANSITION-PROPS;
+}
+
+// Note per il resto degli styles, posso semplicemente copiare questo blocco sopra ^ Escludendo background clip e transition prop, mi riferisco ai 5 mixins e semplicemente cambiare il nome della mappa (-Default)
+// Note - Comunque secondo me, per ogni style dovrei creare un foglio di stile, così è più ordinato.

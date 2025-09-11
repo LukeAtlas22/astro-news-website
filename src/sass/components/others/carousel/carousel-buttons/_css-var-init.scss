@@ -1,61 +1,46 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 
 .carousel__variables-scope {
-  
-
   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
-    $Map: $carousel-buttons, 
-    
+    $Map: $carousel-buttons,
+
     $props-directives-map: (
+      // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀
+      // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█
+      (prop-name: width,  as: --buttons-width,  validation-hook: length),
+      (prop-name: height, as: --buttons-height, validation-hook: length),
 
-        
-    // ▄▀▀ █ ▀█▀ █ █▄ █ ▄▀  
-    // ▄█▀ █ █▄▄ █ █ ▀█ ▀▄█ 
-      (
-        prop-name: width,
-        as: --buttons-width,
-        //validation-hook: length,
-      ),
-      (
-        prop-name: height,
-        as: --buttons-height,
-        //validation-hook: length,
-      ),
-
-
-    // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
-    // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
+      // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
+      // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
       (
         prop-name: orientation,
         as: --buttons-orientation,
-        validation-hook: axis-long-name,
+        validation-hook: axis-long-name
       ),
-  
 
-    // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀  
-    // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█ 
+      // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
+      // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█
       (
         prop-name: position,
         as: --buttons-position,
-        validation-hook: (literal-string-union, $BUTTONS_POSITIONS),
+        validation-hook: (
+          literal-string-union,
+          $BUTTONS_POSITIONS
+        )
       ),
       (
         sub-map: position-offset,
         prop-name: horizontal,
         as: --buttons-position-horizontal-offset,
-        validation-hook: length,
+        validation-hook: length
       ),
       (
         sub-map: position-offset,
         prop-name: vertical,
         as: --buttons-position-vertical-offset,
-        validation-hook: length,
-      ),
-
-
+        validation-hook: length
+      )
     )
-  )
-
-
+  );
 }

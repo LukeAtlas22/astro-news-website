@@ -1,5 +1,0 @@
-@mixin Apply-Simple-Declarations($declarations) {
-  @each $property, $value in $declarations {
-    #{$property}: $value;
-  }
-}

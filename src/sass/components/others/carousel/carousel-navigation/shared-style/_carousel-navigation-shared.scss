@@ -1,185 +1,190 @@
 @use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 
-@function User-Needs($entry){ @return Breakpoint-Map--does-map-contains--entry($map: $carousel-navigation, $target-entry: $entry) };
+@function User-Needs($entry) { @return is-entry-in-breakpoint-map( $map: $carousel-navigation, $entry: $entry ) };
 
-@mixin Carousel-Navigation-Shared-Style ($SELECTOR) {
+@mixin Carousel-Navigation-Shared-Style($SELECTOR) {
+  @if User-Wants-Navigation() {
+    .carousel__variables-scope {
+      @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+        $Map: $carousel-navigation,
+        $props-directives-map: (
+          (
+            prop-name: distance,
+            as: --carousel-gap-between-frame-and-navigation,
+            validation-hook: length
+          ),
+          (
+            prop-name: position,
+            as: --scroll-marker-group-position,
+            validation-hook: (
+              literal-string-union,
+              $NAVIGATION_POSITIONS,
+            )
+          ),
+          (
+            prop-name: orientation,
+            as: --scroll-marker-group-orientation,
+            validation-hook: axis-long-name
+          ),
+          (
+            prop-name: alignment,
+            as: --scroll-marker-group-alignment,
+            validation-hook: self-alignment
+          ),
+          (
+            prop-name: gap,
+            as: --scroll-marker-group-gap,
+            // Need like that because we use it in calculations
+            validation-hook: length
+          ),
+          // Markers
+          (
+              prop-name: markers-size,
+              as: --scroll-markers-size,
+              validation-hook: length
+            ),
+          (
+            prop-name: markers-justification,
+            as: --scroll-marker-group-content-justify
+          ),
+          (
+            prop-name: markers-direction,
+            as: --scroll-marker-group-direction,
+            validation-hook: (
+              literal-string-union,
+              (auto, invert),
+            )
+          ),
+          /* Evalutating anchor position insets for navigation (scroll marker group) */
+            (
+              sub-map: position-inset,
+              prop-name: top,
+              as: --scroll-marker-position-inset--anchor-top,
+              validation-hook: length
+            ),
+          (
+            sub-map: position-inset,
+            prop-name: right,
+            as: --scroll-marker-position-inset--anchor-right,
+            validation-hook: length
+          ),
+          (
+            sub-map: position-inset,
+            prop-name: bottom,
+            as: --scroll-marker-position-inset--anchor-bottom,
+            validation-hook: length
+          ),
+          (
+            sub-map: position-inset,
+            prop-name: left,
+            as: --scroll-marker-position-inset--anchor-left,
+            validation-hook: length
+          ),
+          /* ========================================================================= */
+        )
+      );
+    }
 
-@if User-Wants-Navigation() {
+    .carousel {
+      @if User-Needs(position inside-frame) {
+        @container --carousel-container style(--scroll-marker-group-position: inside-frame) {
+          &#{$SELECTOR} {
+            position: absolute;
+            position-anchor: --carousel;
 
-  .carousel__variables-scope{
-    @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
-      $Map: $carousel-navigation, 
-      $props-directives-map: (
-        (
-          prop-name: distance,
-          as: --carousel-gap-between-frame-and-navigation,
-          validation-hook: length,
-        ),
-        (
-          prop-name: position,
-          as: --scroll-marker-group-position,
-          validation-hook: (literal-string-union, $NAVIGATION_POSITIONS),
-        ),
-        (
-          prop-name: orientation,
-          as: --scroll-marker-group-orientation,
-          validation-hook: axis-long-name,
-        ),
-        (
-          prop-name: alignment,
-          as: --scroll-marker-group-alignment,
-          validation-hook: self-alignment,
-        ),
-        (
-          prop-name: gap,
-          as: --scroll-marker-group-gap, // Need like that because we use it in calculations
-          validation-hook: length,
-        ),
+            @container --carousel-container style(--scroll-marker-position-inset--anchor-top) {
+              top: calc(
+                anchor(top) + var(--scroll-marker-position-inset--anchor-top)
+              );
+            }
 
-        // Markers
+            @container --carousel-container style(--scroll-marker-position-inset--anchor-right) {
+              right: calc(
+                anchor(right) +
+                  var(--scroll-marker-position-inset--anchor-right)
+              );
+            }
 
-        (
-          prop-name: markers-size,
-          as: --scroll-markers-size,
-          validation-hook: length,
-        ),
-        (
-          prop-name: markers-justification,
-          as: --scroll-marker-group-content-justify,
-        ),
-        (
-          prop-name: markers-direction,
-          as: --scroll-marker-group-direction,
-          validation-hook: (literal-string-union, (auto, invert)),
-        ),
+            @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) {
+              bottom: calc(
+                anchor(bottom) +
+                  var(--scroll-marker-position-inset--anchor-bottom) - 1.5rem
+              );
+            }
 
-        /* Evalutating anchor position insets for navigation (scroll marker group) */
-        (
-          sub-map: position-inset,
-          prop-name: top,
-          as: --scroll-marker-position-inset--anchor-top,
-          validation-hook: length,
-        ),
-        (
-          sub-map: position-inset,
-          prop-name: right,
-          as: --scroll-marker-position-inset--anchor-right,
-          validation-hook: length,
-        ),
-        (
-          sub-map: position-inset,
-          prop-name: bottom,
-          as: --scroll-marker-position-inset--anchor-bottom,
-          validation-hook: length,
-        ),
-        (
-          sub-map: position-inset,
-          prop-name: left,
-          as: --scroll-marker-position-inset--anchor-left,
-          validation-hook: length,
-        ),
-        /* ========================================================================= */
-      )
-    );
-  }
+            @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {
+              left: calc(
+                anchor(left) + var(--scroll-marker-position-inset--anchor-left)
+              );
+            }
 
-  .carousel {
+            /* ============================================================================================ */
 
-    @if User-Needs(position inside-frame) {
-      @container --carousel-container style(--scroll-marker-group-position: inside-frame){
-
-        &#{$SELECTOR} { 
-          position: absolute; 
-          position-anchor: --carousel;
-
-          @container --carousel-container style(--scroll-marker-position-inset--anchor-top) {   
-            top: calc(anchor(top) + var(--scroll-marker-position-inset--anchor-top));
+            /* Applying - Fallback - Default ============================= */
+            // Note - I don't know why this is not working
+            // @container --carousel-container
+            //   not style(--scroll-marker-position-inset--anchor-top),
+            //   not style(--scroll-marker-position-inset--anchor-right),
+            //   not style(--scroll-marker-position-inset--anchor-bottom),
+            //   not style(--scroll-marker-position-inset--anchor-left){
+            //   }
           }
-      
-          @container --carousel-container style(--scroll-marker-position-inset--anchor-right) { 
-            right: calc(anchor(right) + var(--scroll-marker-position-inset--anchor-right));
-          }
-      
-          @container --carousel-container style(--scroll-marker-position-inset--anchor-bottom) { 
-            bottom: calc(anchor(bottom) + var(--scroll-marker-position-inset--anchor-bottom) - 1.5rem);
-          }
-      
-          @container --carousel-container style(--scroll-marker-position-inset--anchor-left) {   
-            left: calc(anchor(left) + var(--scroll-marker-position-inset--anchor-left));
-          }
-
-          /* ============================================================================================ */
-
-          /* Applying - Fallback - Default ============================= */
-          // Note - I don't know why this is not working
-          // @container --carousel-container 
-          //   not style(--scroll-marker-position-inset--anchor-top),
-          //   not style(--scroll-marker-position-inset--anchor-right),
-          //   not style(--scroll-marker-position-inset--anchor-bottom), 
-          //   not style(--scroll-marker-position-inset--anchor-left){
-          //   }
         }
       }
 
-    }
+      // Note - Magari questa roba potrebbe essere spostata in position o positioning ^^
+      // -----------------------------------------------------------------------------
 
-    // Note - Magari questa roba potrebbe essere spostata in position o positioning ^^
-    // -----------------------------------------------------------------------------
+      &#{$SELECTOR} {
+        block-size: calc(
+          var(--scroll-markers-size) * 1.75
+        ); // Leave the 1.75 (Treeshold to avoid overflow-clip)
 
-    &#{$SELECTOR} {
-      block-size: calc(var(--scroll-markers-size) * 1.75); // Leave the 1.75 (Treeshold to avoid overflow-clip)
-      
-      writing-mode: horizontal-tb;
+        writing-mode: horizontal-tb;
 
-      justify-self: var(--scroll-marker-group-alignment);
-      align-self: center; // Leave it
-      
-      display: flex;
-      flex-direction: row;
-      justify-content: var(--scroll-marker-group-content-justify); // Note queste proprietà sono strane
-      align-items: center; 
-      gap: var(--scroll-marker-group-gap); 
-      
-      overflow: auto;
-      scrollbar-width: none;
-      scroll-behavior: smooth;    
+        justify-self: var(--scroll-marker-group-alignment);
+        align-self: center; // Leave it
 
-      anchor-name: --scroll-marker-group;
+        display: flex;
+        flex-direction: row;
+        justify-content: var(
+          --scroll-marker-group-content-justify
+        ); // Note queste proprietà sono strane
+        align-items: center;
+        gap: var(--scroll-marker-group-gap);
 
-      @include Consume-PropsDirectives-ForEach-Breakpoint-Map( 
-        $Map: $carousel-navigation,
-        $props-directives-map:(
-          (
-            prop-name: outline,
-          ),
-          (
-            prop-name: outline-offset
-          ),
-          (
-            prop-name: outline-radius,
-            as: border-radius,
-          ),
-        )
-      );
+        overflow: auto;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
 
-      // Orientation
+        anchor-name: --scroll-marker-group;
 
-      // Todo - If user needs orientation 
-      @container --carousel-container style(--scroll-marker-group-orientation: vertical){ 
-        writing-mode: vertical-lr;
-        align-self: var(--scroll-marker-group-alignment);     
-        justify-self: center;  // Leave it
-      }
-    
-      // Flex direction (Markers direction)
-      // Todo - If user needs markers orientation
-      @container --carousel-container style(--scroll-marker-group-direction: invert){ 
-        flex-direction: row-reverse;
+        @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+          $Map: $carousel-navigation,
+          $props-directives-map: (
+            (prop-name: outline),
+            (prop-name: outline-offset),
+            (prop-name: outline-radius, as: border-radius),
+          )
+        );
+
+        // Orientation
+
+        // Todo - If user needs orientation
+        @container --carousel-container style(--scroll-marker-group-orientation: vertical) {
+          writing-mode: vertical-lr;
+          align-self: var(--scroll-marker-group-alignment);
+          justify-self: center; // Leave it
+        }
+
+        // Flex direction (Markers direction)
+        // Todo - If user needs markers orientation
+        @container --carousel-container style(--scroll-marker-group-direction: invert) {
+          flex-direction: row-reverse;
+        }
       }
     }
-
-  }
-    
   } // <- Main if ending
 }

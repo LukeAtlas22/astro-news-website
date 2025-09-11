@@ -3,6 +3,8 @@
 // Note - Voglio rifare questo mixin seguendo un approccio più single responsibility, modulare, e composite.
 
 // Note - Forse questo mixin lo eliminiamo, perchè complica molto le cose
+
+// Note - Da eliminare? fa troppe cose
 @mixin create-flexbox-snap-scroller(
   $direction: horizontal,
   $scroll-snap-type: mandatory, // Note - Ma che ho combinato?

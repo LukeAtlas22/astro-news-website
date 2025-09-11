@@ -1,4 +1,5 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
+@use "@SASS-Tools" as *;
 
 .carousel__variables-scope {
   @include create-container($type: normal, $name: --carousel-container);

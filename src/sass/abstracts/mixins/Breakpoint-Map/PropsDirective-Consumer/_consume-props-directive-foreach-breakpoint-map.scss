@@ -1,0 +1,84 @@
+@use "helpers/media-query" as *;
+@use "consume-props-directive-over-map" as *;
+
+// Note - Maybe change name in
+// Note - Selective-Apply-Properties-ForEach-Breakpoint-In-Map
+
+/// Consuma una mappa di dichiarazioni custom organizzate per breakpoint
+/// e applica un insieme di "props directives" per generare proprietà CSS.
+/// 
+/// @param {Map} $Map - La mappa delle dichiarazioni per breakpoint.
+///   - La chiave `'default'` rappresenta lo stile base.
+///   - Le altre chiavi devono essere media query valide (es. `'(width > 455px)'`).
+///   - Si possono anche utilizzare query di questo tipo: '(width > 555px) and  (height > 1000px)
+///   - O altre tipologie di query non strettamente legate al size del viewport, come orientation
+///   - Ogni valore è una mappa di proprietà/valori custom.
+/// 
+/// @param {List} $props-directives-map - Lista di props directives.
+///   Ogni direttiva è una mappa con:
+///   - `sub-map` {String} *(opzionale)*: per utilizzare sottomappa di $Map.
+///   - `prop-name` {String} **(obbligatorio)**: nome della prop presente in `$Map`.
+///   - `as` {String} *(opzionale)*: nome alternativo della proprietà CSS finale.
+///   - `validation-hook` {Function} *(opzionale)*: funzione di validazione.
+///   - `modificator-hook` {Function} *(opzionale)*: funzione di trasformazione.
+///   
+/// 
+/// @example scss - Stili semplici
+///   $carousel-buttons: (
+///     'default': (width: 2rem, height: 2rem, position: display-none),
+///     '(width > 455px)': (width: 3rem, position: inside-frame),
+///   );
+///
+///   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+///     $Map: $carousel-buttons,
+///     $props-directives-map: (
+///       (prop-name: width),
+///       (prop-name: height),
+///       (prop-name: position, as: --carousel-position),
+///     )
+///   );
+///
+///   // Output CSS:
+///   // width: 2rem;
+///   // height: 2rem;
+///   // --carousel-position: display-none;
+///   //
+///   // @media (width > 455px) {
+///   //   width: 3rem;
+///   //   --carousel-position: inside-frame;
+///   // }
+///
+/// @example scss - Props in sub-map
+///   $carousel: (
+///     'default': (
+///       slide: (
+///         first-child-margin-start: 1rem,
+///         last-child-margin-end: 2rem,
+///       )
+///     )
+///   );
+///
+///   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+///     $Map: $carousel,
+///     $props-directives-map: (
+///       (sub-map: slide, prop-name: first-child-margin-start, as: --carousel-slide-first-child-margin-start),
+///       (sub-map: slide, prop-name: last-child-margin-end, as: --carousel-slide-last-child-margin-end),
+///     )
+///   );
+///
+///   // Output CSS:
+///   // --carousel-slide-first-child-margin-start: 1rem;
+///   // --carousel-slide-last-child-margin-end: 2rem;
+///
+@mixin Consume-PropsDirectives-ForEach-Breakpoint-Map($Map, $props-directives-map) {
+  @each $breakpoint, $breakpoint-inner-map in $Map {
+    @if ($breakpoint == 'default'){
+      @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
+    }
+    @else if ($breakpoint != 'default') {
+      @include Media-Query(#{$breakpoint}) {
+        @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
+      }
+    }
+  }
+}

@@ -1,27 +1,28 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
-@use "sass:map";  
+@use "sass:map";
 
-
-@if (true) { // Todo - Need to fix those ifs
-  @container --carousel-container style(--scroll-markers-style: counter-numbers){
-    
+@if (true) {
+  // Todo - Need to fix those ifs
+  @container --carousel-container style(--scroll-markers-style: counter-numbers) {
     .carousel__scroll-marker-group {
-      counter-set: markers-counter 0; 
+      counter-set: markers-counter 0;
       > li {
-        counter-increment: markers-counter
+        counter-increment: markers-counter;
       }
     }
 
-    .carousel__scroll-marker { 
+    .carousel__scroll-marker {
       @include flex-center;
       @include apply-declarations(
         $from: map.get($carousel-scroll-marker-styles, counter-numbers),
-        $aliasies: (border-offset: padding),
+        $aliasies: (
+          border-offset: padding,
+        )
       );
     }
 
-    .carousel__scroll-marker--icon::after{
+    .carousel__scroll-marker--icon::after {
       content: counter(markers-counter);
     }
   }

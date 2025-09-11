@@ -1,23 +1,19 @@
 @use "sass:map";
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 
 // $SELECTOR
 // For pseudo: .carousel__slide::scroll-marker
 // For artificial: ??? Sicuramente devo farlo su uno pseudo element artificiale se voglio semplificare le cose
 
-  // ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▄ ▄█ ▄▀▄ █▀▄
-  // ▄█▀  █   █  █▄▄ █▄▄    █ ▀ █ █▀█ █▀ 
+// ▄▀▀ ▀█▀ ▀▄▀ █   ██▀    █▄ ▄█ ▄▀▄ █▀▄
+// ▄█▀  █   █  █▄▄ █▄▄    █ ▀ █ █▀█ █▀
 
-  .carousel__variables-scope {
-    @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
-      $Map: $carousel-navigation, 
-      $props-directives-map: (
-        (
-          prop-name: markers-style,
-          as: --scroll-markers-style,
-        ),
-      )
-    );
-  }
-
+.carousel__variables-scope {
+  @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
+    $Map: $carousel-navigation,
+    $props-directives-map: (
+      (prop-name: markers-style, as: --scroll-markers-style),
+    )
+  );
+}

@@ -1,8 +1,8 @@
 @use "sass:map";
 @use "../../../abstract" as *;
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 
-// Note - Qui siamo indecisi sul nome 
+// Note - Qui siamo indecisi sul nome
 
 .carousel__scroll-marker:is(.target-current, :hover, :active, :focus-visible) {
   // Reset di scale
@@ -13,58 +13,88 @@
 /// @description
 ///   Generates a repeated subsequent selector string (e.g. "+ li + li + li").
 ///   Useful for building dynamic sibling selectors in CSS.
-/// 
+///
 /// @param {Number} $n - The number of repetitions.
 /// @param {String} $subsequent-selector ['+ li'] - The selector to be repeated.
-/// 
+///
 /// @return {String} A concatenated string containing `$n` repetitions of `$subsequent-selector`.
 ///
 /// @example
 ///   resolve-dinamyc-subsequent-selector(2)  // returns "+ li + li"
 ///   resolve-dinamyc-subsequent-selector(3, '~ div')  // returns "~ div ~ div ~ div"
 @function generate-dinamyc-subsequent-selector($n, $subsequent-selector) {
-  $result: '';
-  @if ($n == 0){
+  $result: "";
+  @if ($n == 0) {
     @return $result;
   }
 
   @for $i from 1 through $n {
-    $result: if($i == 1, $subsequent-selector, $result + ' ' + $subsequent-selector);
+    $result: if(
+      $i == 1,
+      $subsequent-selector,
+      $result + " " + $subsequent-selector
+    );
   }
   @return $result;
 }
 
-
 @mixin After-Target-Current($N) {
-  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector($N, '+ li');
-  li:has(.carousel__scroll-marker.target-current) #{$dinamyc-subsequent-selector} .carousel__scroll-marker{
+  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector(
+    $N,
+    "+ li"
+  );
+  li:has(.carousel__scroll-marker.target-current)
+    #{$dinamyc-subsequent-selector}
+    .carousel__scroll-marker {
     @content;
   }
 }
 
 @mixin Before-Target-Current($N) {
-  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector($N, '+ li');
-  li:has(#{$dinamyc-subsequent-selector} > a.carousel__scroll-marker.target-current) .carousel__scroll-marker{
+  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector(
+    $N,
+    "+ li"
+  );
+  li:has(
+      #{$dinamyc-subsequent-selector} > a.carousel__scroll-marker.target-current
+    )
+    .carousel__scroll-marker {
     @content;
   }
 }
 
 @mixin Both-After-Before-Target-Current($N) {
-  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector($N, '+ li');
-  li:has(.carousel__scroll-marker.target-current) #{$dinamyc-subsequent-selector} .carousel__scroll-marker,
-  li:has(#{$dinamyc-subsequent-selector} > a.carousel__scroll-marker.target-current) .carousel__scroll-marker {
+  $dinamyc-subsequent-selector: generate-dinamyc-subsequent-selector(
+    $N,
+    "+ li"
+  );
+  li:has(.carousel__scroll-marker.target-current)
+    #{$dinamyc-subsequent-selector}
+    .carousel__scroll-marker,
+  li:has(
+      #{$dinamyc-subsequent-selector} > a.carousel__scroll-marker.target-current
+    )
+    .carousel__scroll-marker {
     @content;
   }
 }
 
-$Multiple-Variant-Map: map.get($carousel-scroll-marker-styles, multiple-variant-from-target-current);
+$Multiple-Variant-Map: map.get(
+  $carousel-scroll-marker-styles,
+  multiple-variant-from-target-current
+);
 $Target-Current-Map: map.get($Multiple-Variant-Map, target-current);
 
 $i: 0;
 @each $_, $target-current-map in $Target-Current-Map {
-  @include Both-After-Before-Target-Current($i){
+  @include Both-After-Before-Target-Current($i) {
     --look-here: true;
-    @include apply-declarations($from: $target-current-map, $exclude: (icon));
+    @include apply-declarations(
+      $from: $target-current-map,
+      $exclude: (
+        icon,
+      )
+    );
     .carousel__scroll-marker--icon::after {
       @include Consume-PropsDirective-Over-Map(
         $map: $target-current-map,
@@ -73,10 +103,10 @@ $i: 0;
             prop-name: icon,
             modificator-hook: get-unicode-from-number,
             validation-hook: number,
-            as: content,
+            as: content
           ),
-        ),
-      )
+        )
+      );
     }
   }
   $i: $i + 1;
@@ -94,13 +124,12 @@ $i: 0;
   background-color: black;
 }
 
-.carousel__scroll-marker--icon{
-  font-family: moon-phases; 
+.carousel__scroll-marker--icon {
+  font-family: moon-phases;
   @include flex-center;
-  
+
   &::after {
     @include flex-center;
-    
   }
 }
 

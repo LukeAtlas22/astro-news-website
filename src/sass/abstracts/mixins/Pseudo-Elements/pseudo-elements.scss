@@ -1,0 +1,14 @@
+@mixin pseudo {
+  content: "";
+  display: block;
+}
+@mixin pseudo-absolute {
+  content: "";
+  display: block;
+  position: absolute;
+}
+@mixin pseudo-fixed-inset-0 {
+  content: "";
+  position: fixed;
+  inset: 0;
+}

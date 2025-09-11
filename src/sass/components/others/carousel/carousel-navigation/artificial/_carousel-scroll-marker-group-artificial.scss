@@ -1,8 +1,6 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
-
 
 .carousel__navigation {
   padding-inline: 0.5rem; // Note - Is this ok?
 }
-

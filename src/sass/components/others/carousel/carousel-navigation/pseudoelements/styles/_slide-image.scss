@@ -1,29 +1,33 @@
-@use "@SASS-Abstracts" as *;
+@use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
-@use "sass:map";  
-  
-  // ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀ 
-  // ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄ 
+@use "sass:map";
 
-  @if (true){ // Todo - Need to fix those ifs
-    // Note - Questo dovrebbe essere fatto con Astro, getImage <-
-    // Note - Di norma, le immagini dei markers, non saranno mai prese da internet
-    // Note - Dovrebbe esistere una directory particolare tipo: Carousel Scroll Marker Images
-    // Note - In realtà non so se offre benefici farlo con HTML - Ci ritorniamo
+// ▄▀▀ █   █ █▀▄ ██▀    █ █▄ ▄█ ▄▀▄ ▄▀  ██▀
+// ▄█▀ █▄▄ █ █▄▀ █▄▄    █ █ ▀ █ █▀█ ▀▄█ █▄▄
 
-    @container --carousel-container style(--scroll-markers-style: slide-image) {
-      // Note - Qui faremo in modo diverso?
-      @include apply-background-image-on-sequence-of-child(
-        $childs-selector: '.carousel__slide',
-        $childs-pseudo-element: '::scroll-marker',
-        $childs-number: 7,
-        $images-path: map.get($carousel-scroll-marker-styles, slide-image-path),
-        $images-path-ending-divisor: map.get($carousel-scroll-marker-styles, divisor),
-        $images-ext: map.get($carousel-scroll-marker-styles, ext),
+@if (true) {
+  // Todo - Need to fix those ifs
+  // Note - Questo dovrebbe essere fatto con Astro, getImage <-
+  // Note - Di norma, le immagini dei markers, non saranno mai prese da internet
+  // Note - Dovrebbe esistere una directory particolare tipo: Carousel Scroll Marker Images
+  // Note - In realtà non so se offre benefici farlo con HTML - Ci ritorniamo
+
+  @container --carousel-container style(--scroll-markers-style: slide-image) {
+    // Note - Qui faremo in modo diverso?
+    @include apply-background-image-on-sequence-of-child(
+      $childs-selector: ".carousel__slide",
+      $childs-pseudo-element: "::scroll-marker",
+      $childs-number: 7,
+      $images-path: map.get($carousel-scroll-marker-styles, slide-image-path),
+      $images-path-ending-divisor:
+        map.get($carousel-scroll-marker-styles, divisor),
+      $images-ext: map.get($carousel-scroll-marker-styles, ext)
+    );
+
+    .carousel__slide::scroll-marker {
+      @include apply-declarations(
+        $from: map.get($carousel-scroll-marker-styles, slide-image)
       );
-
-      .carousel__slide::scroll-marker {
-        @include apply-declarations($from: map.get($carousel-scroll-marker-styles, slide-image));
-      }
     }
   }
+}

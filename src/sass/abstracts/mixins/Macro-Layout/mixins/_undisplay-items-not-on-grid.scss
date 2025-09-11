@@ -1,7 +1,7 @@
 @use "../functions/is-itemArea-on-gridTemplate";
 
-@mixin Undisplay-Items-Currently-Not-On-Grid($grid-template, $macro-layout-areas) {
-  @each $selector, $area in $macro-layout-areas {
+@mixin Undisplay-Items-Currently-Not-On-Grid($grid-template, $grid-area-map) {
+  @each $selector, $area in $grid-area-map {
     @if not is-item-on-grid($area, $grid-template) {
       .#{$selector} {
         display: none;

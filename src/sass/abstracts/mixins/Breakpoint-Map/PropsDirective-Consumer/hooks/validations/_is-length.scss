@@ -1,0 +1,53 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+
+/// is-length($value, $strict: false)
+/// - restituisce true se $value è:
+//    * un number con unità
+//    * una calculation (clamp/min/max/calc) — accettata direttamente a meno che $strict: true
+//    * un string/list che contiene letteralmente "clamp(", "min(", "max(", "calc(", "var("
+// - se $strict: true e $value è una calculation, la funzione controlla gli argomenti
+@function is-length($value, $strict: false) {
+  $type: meta.type-of($value);
+
+  // 1) numero con unità
+  @if $type == "number" and not math.is-unitless($value) {
+    @return true;
+  }
+
+  // 2) calculation (Dart Sass >= 1.40) — accettiamo direttamente
+  @if $type == "calculation" {
+    @if not $strict {
+      @return true;
+    }
+
+    // modalità strict: controlla gli argomenti della calc/clamp
+    $args: meta.calc-args($value); // es. 50px, unquote("var(--x)"), 100px
+    @each $arg in $args {
+      @if meta.type-of($arg) == "number" and not math.is-unitless($arg) {
+        @return true;
+      }
+      @if meta.type-of($arg) == "string" {
+        $repr: string.to-lower-case(string.unquote(meta.inspect($arg)));
+        @if str-index($repr, "var(") { @return true; }
+      }
+    }
+    @return false;
+  }
+
+  // 3) string o list che contengono testo tipo "clamp(...)" o "var(...)"
+  //    (utile per implementazioni Sass più vecchie che non espongono 'calculation')
+  @if $type == "string" or $type == "list" {
+    $repr: string.to-lower-case(string.unquote(meta.inspect($value)));
+    @if str-index($repr, "clamp(")
+      or str-index($repr, "min(")
+      or str-index($repr, "max(")
+      or str-index($repr, "calc(")
+      or str-index($repr, "var(") {
+      @return true;
+    }
+  }
+
+  @return false;
+}

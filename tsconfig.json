@@ -16,6 +16,7 @@
       "@components-p/*": ["src/html/components-p/*"],
       // Sass
       "@SASS-Abstracts": ["src/sass/abstracts"], // Leave like that, with no *
+      "@SASS-Tools": ["src/sass/abstracts/mixins/_index.scss"],
 
       // Sass - Article Component
       "@SASS-Article-Selectors": ["src/sass/components/others/article/mixins/selectors/_article-selectors.scss"], 

@@ -1,6 +1,8 @@
 @use "sass:string";
 @use "undisplay-items-not-on-grid";
 
+// Note questa non la stavamo usando
+
 @mixin Macro-Layouts($macro-layout-map, $macro-layout-area){
   @each $index, $map in $macro-layout-map{
     $breakpoint: map.get($map, at);

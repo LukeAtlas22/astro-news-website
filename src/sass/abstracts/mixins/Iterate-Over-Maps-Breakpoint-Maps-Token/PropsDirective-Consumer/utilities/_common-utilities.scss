@@ -1,0 +1,5 @@
+// Note - @use prop-spreader disallower & excluder for: map-to-string, is-prop-in-unallow-list, is-prop-in-exclude-list, is-string-in-list
+
+// - This is a pointer to common utilities from (Props-Spreader) to avoid duplication
+
+// ! Facciamo che questo per: map-to-string, is-prop-in-unallow-list, is-prop-in-exclude-list, is-string-in-list | Utilizza le utilities di prop-spreader, che vanno bene, per il resto utilizza le proprie utilities.

@@ -1,0 +1,17 @@
+@function is-string-in-list($string, $list){
+  @if list.index($list, $string) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function is-prop-in-exclude-list($prop-name, $props-to-exclude) {
+  @return is-string-in-list($string: $prop-name, $list: $props-to-exclude);
+}
+
+@function exclude($prop-name, $prop-value) {
+  $prop-name: _excluded;
+  $prop-value: null; // <- This will make the write-declaration-if-value-exist test fail and will not write the declaration
+}
+

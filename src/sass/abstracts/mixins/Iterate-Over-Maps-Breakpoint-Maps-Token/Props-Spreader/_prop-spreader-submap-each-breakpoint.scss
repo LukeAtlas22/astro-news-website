@@ -1,0 +1,22 @@
+// Note - Questo volevo eliminarlo, però è un peccato, possiamo farlo semplicemente vivere insieme agli altri, in fondo non è un problema e potrebbe avere la sua utilità un giorno
+///
+/// @param {type} $breakpoint-map - The main breakpoint map, on which the submap are contained
+/// @param {type} $submap-to-spread - The submap to spread for each breakpoint
+/// @param {type} $props-to-exlude [null] - (Optional) - A list of props to exclude from the spread
+/// @output 
+@mixin Spread-Properties-From-Submap-ForEach-Breakpoint-In-Map ($breakpoint-map, $submap-to-spread, $props-to-exclude: null, $props-to-unallow: null, $aliasies: null) {
+  // Note - val: breakpoint-map exist
+  @each $breakpoint, $breakpoint-inner-map in $breakpoint-map {
+    
+    $submap: map.get($breakpoint-inner-map, $submap-to-spread);
+
+    @if ($breakpoint == default or $breakpoint == 'default') {
+      @include Spread-Properties-From-Map( $submap, $props-to-exclude, $props-to-unallow, $aliasies )
+    }
+    @else {
+      @include Media-Query(#{$breakpoint}) {
+        @include Spread-Properties-From-Map( $submap, $props-to-exclude, $props-to-unallow, $aliasies );
+      } 
+    }
+  }
+}

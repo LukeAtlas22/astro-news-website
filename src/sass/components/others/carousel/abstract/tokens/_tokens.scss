@@ -1,18 +1,6 @@
 @use "@SASS-Tools" as *;
 @use "@SASS-Abstracts" as *;
 
-$questa-e-una-prova: (
-  'default': (
-    background-color: blue,
-    background-color-hover: purple,
-  ),
-  '(width < 500px) and (height > 1000px)': (
-    border: 1px solid blue,
-    border-hover: 2px solid blue,
-    border-active: 10px solid red,
-  ),
-);
-
 // Note - Alla fine tutto deve andare in una mappa, tipo
 // - carousel
 // - - - buttons
@@ -139,22 +127,20 @@ $carousel-buttons-style: (
   "default": (
     // Note - Vorrei esporre un file sass per fare qualcosa di custom, tipo custom borders on hover che ruotano, cose così.
     // Style
-    color: $body-text-color,
-    background: transparent,
-    border: 2px solid $body-text-color,
-    border-radius: 75vw,
-    border-offset: 12px,
-
-    transition: 225ms,
-
-    // Note - Tokenize on Default Design Transition
+    normal: (
+      color: $body-text-color,
+      background: transparent,
+      border: 2px solid $body-text-color,
+      border-radius: 75vw,
+      border-offset: 12px,
+      transition: 225ms, // Note - Tokenize on Default Design Transition
+    )
     // You won't have validation on those props, at least for now.
-    hover:
-      (
-        scale: 1.1,
-        color: red,
-        background: transparent,
-        border: 2px solid red,
+    hover: (
+      scale: 1.1,
+      color: red,
+      background: transparent,
+      border: 2px solid red,
       ),
     active: (
       scale: 1.2,
@@ -167,8 +153,7 @@ $carousel-buttons-style: (
       cursor: not-allowed,
     ),
     focus-visible: (
-      outline: 2px solid goldenrod,
-      // Note - Tokenize on Default Design Outline
+      outline: 2px solid goldenrod, // Note - Tokenize on Default Design Outline
       outline-offset: 2.75px,
     ),
   ),

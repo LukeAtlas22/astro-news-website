@@ -2,7 +2,7 @@
 @use "@SASS-Tools" as *;
 @use "@SASS-Carousel-Abstracts" as *;
 
-@function User-Needs($entry) { @return is-entry-in-breakpoint-map( $map: $carousel-navigation, $entry: $entry ) };
+@function User-Needs($entry) { @return entry-exists-in-breakpoint-map( $map: $carousel-navigation, $entry: $entry ) };
 
 @mixin Carousel-Navigation-Shared-Style($SELECTOR) {
   @if User-Wants-Navigation() {

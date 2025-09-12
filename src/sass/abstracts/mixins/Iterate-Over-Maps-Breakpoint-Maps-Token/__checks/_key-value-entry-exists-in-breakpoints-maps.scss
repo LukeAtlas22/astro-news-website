@@ -1,4 +1,4 @@
-@function is-key-in-breakpoint-map($map, $key) {
+@function key-exists-in-breakpoint-map($map, $key) {
   @each $breakpoint, $props-map in $map {
     @each $key, $value in $props-map {
       @if $key == $key {
@@ -9,7 +9,7 @@
   @return false;
 }
 
-@function is-value-in-breakpoint-map($map, $value) {
+@function value-exists-in-breakpoint-map($map, $value) {
   @each $breakpoint, $props-map in $map {
     @each $key, $value in $props-map {
       @if $value == $value {
@@ -23,12 +23,21 @@
 /// Don't use ':'
 /// @example
 /// does-map-contains--entry($map, (position after))
-@function is-entry-in-breakpoint-map($map, $entry) {
+@function entry-exists-in-breakpoint-map($map, $entry) {
   @each $breakpoint, $props-map in $map {
     @each $entry in $props-map {
       @if $entry == $entry {
         @return true;
       }
+    }
+  }
+  @return false;
+}
+
+@function prop-exists-in-breakpoints-map($Map, $prop) {
+  @each $breakpoint, $props in $Map {
+    @if map.has-key($props, $prop) {
+      @return true;
     }
   }
   @return false;

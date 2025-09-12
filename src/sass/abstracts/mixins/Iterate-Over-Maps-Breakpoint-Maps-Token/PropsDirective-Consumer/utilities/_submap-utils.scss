@@ -1,0 +1,24 @@
+
+@function Submap-Request-Specified-On($props-directives-map){
+  @return map.has-key($props-directives-map, Prop-Directive.$SUBMAP_KEY);
+}
+
+
+@function get-submap($map, $prop-directive){
+  $sub-map-name: map.get($prop-directive, sub-map);
+  $sub-map: map.get($map, $sub-map-name);
+  @return $sub-map;
+}
+
+
+/// @return {null | CSS-Value} -
+@function get-value-from-submap($sub-map, $prop-name){
+  @if (not $sub-map) {@return null};
+
+  $value: map.get($sub-map, $prop-name);
+  @return $value;
+}
+
+@function get-value-from-map($map, $prop-name){
+  @return map.get($map, $prop-name);
+}

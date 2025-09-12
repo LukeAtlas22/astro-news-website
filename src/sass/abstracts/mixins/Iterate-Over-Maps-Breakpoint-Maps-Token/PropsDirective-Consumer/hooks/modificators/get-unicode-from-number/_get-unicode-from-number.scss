@@ -1,0 +1,46 @@
+@use "sass:string";
+@use "sass:math";
+
+// #region Utilities
+// Funzione SCSS: converte un numero decimale in esadecimale
+@function dec-to-hex($decimal) {
+  $hex-digits: "0123456789ABCDEF";
+  $result: "";
+
+  $num: $decimal;
+
+  @while $num > 0 {
+    $remainder: $num % 16;
+    $num: math.div($num, 16);
+    $num: math.floor($num);
+    $digit: string.slice($hex-digits, $remainder + 1, $remainder + 1); // +1 perché str-index parte da 1
+    $result: $digit + $result;
+  }
+
+  @if $result == "" {
+    @return "0";
+  }
+
+  @return $result;
+}
+
+/// This is a safe pua base code, it's the hex number E801 - (This has to be allignet with your node script "update-icon-codes") Or it won't work. -L
+@function sum-base-pua-code($num) {
+  $base: 59393; // inizio Private Use Area
+  $result: $num + $base;
+  @return $result;
+}
+// #endregion
+
+/// Transforma un numero in un carattere Unicode relativo ad un font icone
+/// 
+/// La funzione calcola un codice Unicode partendo da un numero (es. 1, 2, 3...),
+/// sommato ad una base PUA (`$base: 59393`). Questo permette di utilizzare
+/// indici numerici semplici nelle mappe Sass per selezionare icone
+/// all’interno di un font generato con Fontello - Da usare in sinergia con l'utility script - update-icon-codes.js
+///
+@function get-unicode-from-number($number) {
+  $decimal-unicode: sum-base-pua-code($number);
+  $hex-unicode: dec-to-hex($decimal-unicode);
+  @return string.unquote('\"' + '\\' + $hex-unicode + '\"');
+}

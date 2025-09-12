@@ -1,0 +1,3 @@
+@mixin write-declaration-if-value-exist($css-prop, $value){
+  @if ($value) { #{$css-prop}: #{$value} };
+}

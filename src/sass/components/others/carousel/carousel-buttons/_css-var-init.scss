@@ -24,10 +24,7 @@
       (
         prop-name: position,
         as: --buttons-position,
-        validation-hook: (
-          literal-string-union,
-          $BUTTONS_POSITIONS
-        )
+        validation-hook: (literal-string-union, $BUTTONS_POSITIONS)
       ),
       (
         sub-map: position-offset,

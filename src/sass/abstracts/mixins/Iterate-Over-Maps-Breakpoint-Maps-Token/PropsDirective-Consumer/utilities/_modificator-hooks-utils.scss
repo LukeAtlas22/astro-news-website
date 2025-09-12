@@ -1,0 +1,18 @@
+@function Modification-Requested($prop-directive){
+  @return map.has-key($prop-directive, Prop-Directive.$MODIFICATOR_HOOK_KEY);
+}
+
+@function construct-modificator-function($prop-directive){
+  $function-name: map.get($prop-directive, Prop-Directive.$MODIFICATOR_HOOK_KEY);
+  $function: meta.get-function($function-name);
+  @return $function;
+}
+
+@function modificate($modification-function, $value, $parameters: null){
+  @if ($parameters) {
+    @return meta.call($modification-function, $value, $parameters);
+  } 
+  @else {
+    @return meta.call($modification-function, $value);
+  }
+}

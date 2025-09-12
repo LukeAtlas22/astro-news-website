@@ -1,7 +1,6 @@
 @use "sass:map";
 @use "sass:string";
 @use "undisplay-items-not-on-grid" as *;
-@use "../../abstracts//mixins/apply-simple-declarations" as *;
 
 @mixin Consume-Macro-Layout-Map ($macro-layout-map, $grid-area-map) {
   @each $index, $map in $macro-layout-map{
@@ -33,7 +32,8 @@
   display: grid;
   contain: layout;
   
-  @include Apply-Simple-Declarations($Defaults);
+  // Note questo mixins è stato deprecato
+  //@include Apply-Simple-Declarations($Defaults);
 
   @include Consume-Macro-Layout-Map($macro-layout-map, $grid-area-map);
 

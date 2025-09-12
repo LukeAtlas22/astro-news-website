@@ -1,0 +1,35 @@
+@function validate($function, $value, $parameters: null){
+  @if ($parameters) {
+    @return meta.call($function, $value, $parameters);
+  } @else {
+    @return meta.call($function, $value)
+  }
+};
+
+@function construct-validation-function($validator-fn-name){
+  $function-name: "is-#{$validator-fn-name}";
+  $function: meta.get-function($function-name);
+  @return $function;
+}
+
+@function get-validation-hook($prop-directive){
+  @return map.get($prop-directive, Prop-Directive.$VALIDATION_HOOK_KEY);
+}
+
+@function Validation-Requested($prop-directive){
+  @return map.has-key($prop-directive, Prop-Directive.$VALIDATION_HOOK_KEY);
+}
+
+@function is-validator-with-parameters($validator) {
+  // Controlla se il valore è una lista
+  @if meta.type-of($validator) != 'list' {
+    @return false;
+  }
+
+  // Controlla se la lista ha esattamente due elementi
+  @if list.length($validator) == 2 {
+    @return true;
+  } @else {
+    @return false;
+  }
+}

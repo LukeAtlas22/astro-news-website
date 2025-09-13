@@ -11,7 +11,7 @@
     
     $prop-name: get-prop-name($prop-directive);
     $css-prop: resolve-css-prop-name($prop-directive);
-    $value: null;
+    $value: null; // Note - Qui potrei fare un resolve-value
 
     @if Submap-Request-Specified-On($prop-directive) {
       $sub-map: get-submap($map, $prop-directive);
@@ -21,7 +21,7 @@
       $value: get-value-from-map($map, $prop-name);
     }
 
-    @if ($value and Validation-Requested($prop-directive)){
+    @if ($value and Validation-Requested($prop-directive)){ // Note - Questo potrebbe diventare una function execute-validation
       // Note - Tutto questo tree andrebbe fatto a parte
       $validator: get-validation-hook($prop-directive);
       
@@ -43,7 +43,7 @@
       }
     }
 
-    @if ($value and Modification-Requested($prop-directive)){
+    @if ($value and Modification-Requested($prop-directive)){ 
 
       // Note - I need to make this capable to do with parameters
       $function: construct-modificator-function($prop-directive);

@@ -79,7 +79,7 @@ $ONLY_NORMAL: (
       @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
     }
     @else if ($breakpoint != 'default') {
-      @include Media-Query(#{$breakpoint}) {
+      @include media-query(#{$breakpoint}) {
         @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
       }
     }
@@ -98,7 +98,7 @@ $ONLY_NORMAL: (
       @include apply-declarations($submap, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
     }
     @else if ($breakpoint != 'default') {
-      @include Media-Query(#{$breakpoint}) {
+      @include media-query(#{$breakpoint}) {
         @include apply-declarations($submap, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
       }
     }

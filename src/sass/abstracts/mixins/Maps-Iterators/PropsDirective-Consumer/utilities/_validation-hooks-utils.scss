@@ -1,3 +1,5 @@
+@use "sass:string";
+
 @function validate($function, $value, $parameters: null){
   @if ($parameters) {
     @return meta.call($function, $value, $parameters);
@@ -6,8 +8,15 @@
   }
 };
 
+@function resolve-function-name($validator-fn-name) {
+  @if string.index($validator-fn-name, "is-") == 1 {
+    @return $validator-fn-name;
+  }
+  @return "is-#{$validator-fn-name}";
+}
+
 @function construct-validation-function($validator-fn-name){
-  $function-name: "is-#{$validator-fn-name}";
+  $function-name: resolve-function-name($validator-fn-name);
   $function: meta.get-function($function-name);
   @return $function;
 }
@@ -19,6 +28,7 @@
 @function Validation-Requested($prop-directive){
   @return map.has-key($prop-directive, Prop-Directive.$VALIDATION_HOOK_KEY);
 }
+
 
 @function is-validator-with-parameters($validator) {
   // Controlla se il valore è una lista

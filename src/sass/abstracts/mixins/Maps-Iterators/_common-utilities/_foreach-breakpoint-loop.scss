@@ -1,12 +1,12 @@
 // Note - Da vedere se vogliamo utilizzare un'astrazione di questo tipo
 // Note - Forse devo abbassare un po' il livello di questa utility
-@mixin forEach-Breakpoint($Breakpoint-Map) {
+@mixin forEach-breakpoint($Breakpoint-Map) {
   @each $breakpoint, $breakpoint-inner-map in $Breakpoint-Map {
     @if ($breakpoint == 'default') {
       @content;
     }
     @else if (is-media-query($breakpoint)) {
-      @include Media-Query(#{$breakpoint}) { 
+      @include media-query(#{$breakpoint}) { 
         @content; 
       }
     }

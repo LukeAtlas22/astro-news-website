@@ -2,12 +2,6 @@
 @use "sass:meta";
 @use "sass:string";
 
-/// is-length($value, $strict: false)
-/// - restituisce true se $value è:
-//    * un number con unità
-//    * una calculation (clamp/min/max/calc) — accettata direttamente a meno che $strict: true
-//    * un string/list che contiene letteralmente "clamp(", "min(", "max(", "calc(", "var("
-// - se $strict: true e $value è una calculation, la funzione controlla gli argomenti
 @function is-length($value, $strict: false) {
   $type: meta.type-of($value);
 

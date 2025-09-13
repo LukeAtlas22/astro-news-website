@@ -76,7 +76,7 @@
       @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
     }
     @else if ($breakpoint != 'default') {
-      @include Media-Query(#{$breakpoint}) {
+      @include media-query(#{$breakpoint}) {
         @include Consume-PropsDirective-Over-Map($props-directives-map, $map: $breakpoint-inner-map);
       }
     }

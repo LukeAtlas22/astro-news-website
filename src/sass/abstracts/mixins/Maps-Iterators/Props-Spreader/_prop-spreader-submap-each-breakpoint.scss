@@ -14,7 +14,7 @@
       @include Spread-Properties-From-Map( $submap, $props-to-exclude, $props-to-unallow, $aliasies )
     }
     @else {
-      @include Media-Query(#{$breakpoint}) {
+      @include media-query(#{$breakpoint}) {
         @include Spread-Properties-From-Map( $submap, $props-to-exclude, $props-to-unallow, $aliasies );
       } 
     }

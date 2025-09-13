@@ -1,0 +1,18 @@
+// Note - Questo potrebbe sostituire il prop-spreader-submap, così rendiamo prop-spreader una dipendenza di declaration applyer, e non lo usiamo più nel codice - apply-declaration quindi potrebbe cominciare a funzionare
+// Note - Sia così -> hover: (background-color, ecc, ecc)
+// Note - Sia così -> background-color-hover, ecc-hover, ecc-hover
+@mixin apply-declaration-from-submap-for-each-breakpoint ($breakpoint-map, $submap, $allowed-pseudo-classes: $ONLY_NORMAL, $exclude: null, $unallow: null, $aliasies: null) {
+  @each $breakpoint, $breakpoint-inner-map in $from {
+
+    $submap: map.get($breakpoint-inner-map, $submap);
+
+    @if ($breakpoint == 'default') {
+      @include apply-declarations($submap, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+    }
+    @else if ($breakpoint != 'default') {
+      @include media-query(#{$breakpoint}) {
+        @include apply-declarations($submap, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+      }
+    }
+  }
+}

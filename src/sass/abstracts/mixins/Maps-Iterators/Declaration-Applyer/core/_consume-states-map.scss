@@ -1,0 +1,24 @@
+@use "../../Props-Spreader/prop-spreader-over-map" as *;
+
+@mixin consume-states-map($States-Map, $exclude, $unallow, $aliasies){
+  @each $state, $declaration-map in $States-Map {
+   @if ($state != normal) {
+      &:is(:#{$state}, .#{$state}) {
+        @include Spread-Properties-From-Map(
+          $map: $declaration-map, 
+          $props-to-exclude: $exclude, 
+          $props-to-unallow: $unallow,
+          $aliasies: $aliasies
+        );
+      }
+    }
+    @if ($state == normal) {
+      @include Spread-Properties-From-Map(
+        $map: $declaration-map, 
+        $props-to-exclude: $exclude, 
+        $props-to-unallow: $unallow,
+        $aliasies: $aliasies
+      );
+    } 
+  }
+}

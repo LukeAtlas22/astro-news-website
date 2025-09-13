@@ -16,16 +16,21 @@
 @forward "Various/_apply-background-image-on-sequence-of-child";
 @forward "Various/_screen-reader-only";
 @forward "Various/_to-unset";
-@forward "Breakpoint-Maps/Declaration-Applyer/_declaration-applyer";
-@forward "Breakpoint-Maps/Props-Spreader/_prop-spreader-map";
-@forward "Breakpoint-Maps/PropsDirective-Consumer/_consume-props-directive-foreach-breakpoint-map";
-@forward "Breakpoint-Maps/PropsDirective-Consumer/_consume-props-directive-over-map";
-@forward "Breakpoint-Maps/PropsDirective-Consumer/glob/_prop-directive-type";
+@forward "Maps-Iterators/checks/_breakpoint-map-checks";
+@forward "Maps-Iterators/Declaration-Applyer/_declaration-applyer";
+@forward "Maps-Iterators/Declaration-Applyer/_foreach-breakpoint";
+@forward "Maps-Iterators/Declaration-Applyer/_submap-foreach-breakpoint";
+@forward "Maps-Iterators/Props-Spreader/_prop-spreader-over-map";
+@forward "Maps-Iterators/Props-Spreader/_prop-spreader-submap-each-breakpoint";
+@forward "Maps-Iterators/PropsDirective-Consumer/_consume-props-directive";
+@forward "Maps-Iterators/PropsDirective-Consumer/_foreach-breakpoint";
+@forward "Maps-Iterators/Declaration-Applyer/core/_consume-states-map";
+@forward "Maps-Iterators/Declaration-Applyer/core/_generate-states-map";
+@forward "Maps-Iterators/PropsDirective-Consumer/schema/_prop-directive.schema";
 
 
-// Note - Qui c'è della roba che manda codice
+//@forward "Macro-Layout/_hero-macro-layout";
 // @forward "Macro-Layout/functions/_is-itemArea-on-gridTemplate";
-// @forward "Macro-Layout/_hero-macro-layout";
 // @forward "Macro-Layout/mixins/_macro-layouts-container";
 // @forward "Macro-Layout/mixins/_macro-layouts";
 // @forward "Macro-Layout/mixins/_undisplay-items-not-on-grid";

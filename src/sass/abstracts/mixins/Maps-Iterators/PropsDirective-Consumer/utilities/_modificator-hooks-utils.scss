@@ -1,4 +1,10 @@
-@function Modification-Requested($prop-directive){
+@use "sass:map";
+@use "sass:meta";
+
+@use "../schema/prop-directive.schema" as Prop-Directive;
+@use "../hooks/modificators/" as *;
+
+@function is-modification-requested-in($prop-directive){
   @return map.has-key($prop-directive, Prop-Directive.$MODIFICATOR_HOOK_KEY);
 }
 

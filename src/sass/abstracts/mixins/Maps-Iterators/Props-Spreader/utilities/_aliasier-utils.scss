@@ -4,7 +4,7 @@
 /// @param {String} $prop-name - nome della proprietà da testare
 /// @param {Map} $aliasies - mappa di aliasies (key: alias, value: prop reale)
 /// @return {Boolean} true se $prop-name è una key in $aliasies, altrimenti false
-@function is-prop-in-aliasies-list($prop-name, $aliasies) {
+@function is-prop-in-aliasies-map-keys($prop-name, $aliasies) {
   @return map.has-key($aliasies, $prop-name);
 }
 

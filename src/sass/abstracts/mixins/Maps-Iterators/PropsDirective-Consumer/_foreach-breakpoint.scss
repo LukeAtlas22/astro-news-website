@@ -1,5 +1,6 @@
-@use "helpers/media-query" as *;
-@use "consume-props-directive-over-map" as *;
+@use "consume-props-directive" as *;
+@use "../_common-utilities/media-query" as *;
+@use "../_common-utilities/foreach-breakpoint-loop" as *;
 
 // Note - Maybe change name in
 // Note - Selective-Apply-Properties-ForEach-Breakpoint-In-Map

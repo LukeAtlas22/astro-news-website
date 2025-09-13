@@ -1,4 +1,8 @@
 @use "sass:map";
+@use "../_common-utilities/write-declaration" as *;
+@use "utilities/aliasier-utils" as *;
+@use "utilities/disallower-utils" as *;
+@use "utilities/excluder-utils" as *;
 
 // Note - dobbiamo lasciarlo come core (?)
 @mixin Spread-Properties-From-Map($map, $props-to-exclude: null, $props-to-unallow: null, $aliasies: null) {
@@ -15,9 +19,10 @@
     @if $props-to-unallow and is-prop-in-unallow-list($prop-name, $props-to-unallow) {
       $map-reference: map-to-string($map);
       @error (' < #{$prop-name} > IS NOT ALLOWED IN THIS MAP !! ---> #{$map-reference}');
+      //$error: throw-unallow-prop-error($prop-name, $map-reference) << Vorrei fare così
     }
 
-    @if $aliasies and is-prop-in-aliasies-list($prop-name, $aliasies) {
+    @if $aliasies and is-prop-in-aliasies-map-keys($prop-name, $aliasies) {
       $prop-name: rename-prop($prop-name, $aliasies);  
     }
     

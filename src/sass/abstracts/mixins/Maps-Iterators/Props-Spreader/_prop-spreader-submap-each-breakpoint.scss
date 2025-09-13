@@ -1,4 +1,9 @@
-// Note - Questo volevo eliminarlo, però è un peccato, possiamo farlo semplicemente vivere insieme agli altri, in fondo non è un problema e potrebbe avere la sua utilità un giorno
+
+// Note - Questo è eliminabile, perchè Declaration-Applyer copre questa funzionalità, insieme a altre -
+@use "prop-spreader-over-map" as *;
+@use "sass:map";
+@use "../_common-utilities/media-query" as *;
+
 ///
 /// @param {type} $breakpoint-map - The main breakpoint map, on which the submap are contained
 /// @param {type} $submap-to-spread - The submap to spread for each breakpoint
@@ -20,3 +25,4 @@
     }
   }
 }
+

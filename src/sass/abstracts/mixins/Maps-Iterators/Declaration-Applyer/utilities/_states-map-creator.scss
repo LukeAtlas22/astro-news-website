@@ -1,6 +1,8 @@
 @use "sass:map";
 @use "sass:string";
 
+// Utilities to generate states map
+
 /// Crea una mappa di stati con mappe vuote
 @function create-states-map($allowed-pseudo-classes) {
   $States-Map: (normal: ());

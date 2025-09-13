@@ -1,0 +1,24 @@
+@use "sass:map";
+@use "sass:string";
+@use "core/consume-states-map" as *;
+@use "core/generate-states-map" as *;
+@use "utilities/allowed-pseudo-classes" as *;
+
+///
+/// @param {SCSS Map} $from - The map where you will get the declarations
+/// @param {List of string} $exclude - Props name you want to exclude
+/// @param {List of string} $unallow - Props name you want to disable (throws error if user tries to write an unallowed prop in the map)
+/// @output
+@mixin apply-declarations(
+  $from, 
+  $allowed-pseudo-classes: $ALLOWED_DEFAULT,
+  $exclude: null,
+  $unallow: null,
+  $aliasies: null,
+) {
+  $States-Map: generate-states-map($from, $allowed-pseudo-classes);
+  @include consume-states-map($States-Map, $exclude, $unallow, $aliasies);
+}
+
+
+

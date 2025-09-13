@@ -1,12 +1,15 @@
+@use "sass:map";
+@use "../schema/prop-directive.schema" as Prop-Directive;
 
-@function Submap-Request-Specified-On($props-directives-map){
-  @return map.has-key($props-directives-map, Prop-Directive.$SUBMAP_KEY);
+@function is-submap-retrieve-requested-in($props-directives){
+  @return map.has-key($props-directives, Prop-Directive.$SUBMAP_KEY);
 }
 
 
 @function get-submap($map, $prop-directive){
   $sub-map-name: map.get($prop-directive, sub-map);
   $sub-map: map.get($map, $sub-map-name);
+ 
   @return $sub-map;
 }
 
@@ -20,5 +23,6 @@
 }
 
 @function get-value-from-map($map, $prop-name){
-  @return map.get($map, $prop-name);
+  $value: map.get($map, $prop-name);
+  @return $value;
 }

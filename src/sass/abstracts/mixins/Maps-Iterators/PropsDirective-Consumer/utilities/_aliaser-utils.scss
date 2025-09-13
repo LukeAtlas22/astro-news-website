@@ -1,11 +1,18 @@
+@use "sass:map";
+@use "../schema/prop-directive.schema" as Prop-Directive;
+
 @function get-prop-name($prop-directive){
   @return map.get($prop-directive, Prop-Directive.$PROP_NAME_KEY);
 }
 
-@function resolve-css-prop-name($prop-directive) {
+@function resolve-prop-name-alias($prop-directive) {
   $css-prop: map.get($prop-directive, prop-name);
-  @if (map.get($prop-directive, Prop-Directive.$CSS_ALIAS_KEY)) {
-    $css-prop: map.get($prop-directive, Prop-Directive.$CSS_ALIAS_KEY);
+  @if (map.get($prop-directive, Prop-Directive.$PROP_NAME_ALIAS_KEY)) {
+    $css-prop: map.get($prop-directive, Prop-Directive.$PROP_NAME_ALIAS_KEY);
   }
   @return $css-prop;
+}
+
+@function is-alias-requested-in($prop-directive) {
+  @return map.has-key($prop-directive, Prop-Directive.$PROP_NAME_ALIAS_KEY);
 }

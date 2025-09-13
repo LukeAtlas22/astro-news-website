@@ -1,0 +1,17 @@
+@use "sass:map";
+@use "../utilities/states-map-creator" as *;
+
+@function generate-states-map($from, $allowed-pseudo-classes) {
+  $States-Map: create-states-map($allowed-pseudo-classes);
+
+    @each $property, $value in $from {
+      $suffix: get-suffix-pseudoclass($property, $allowed-pseudo-classes);
+      @if (not $suffix) { $suffix: normal }; // Note - Non so se può dare problemi
+      $clean-property: remove-suffix($property, $suffix);
+      $target-state: map.get($States-Map, $suffix);
+      $target-state: map.merge($target-state, ($clean-property: $value));
+      $States-Map: map.merge($States-Map, ($suffix: $target-state));
+    }
+
+    @return $States-Map;
+};

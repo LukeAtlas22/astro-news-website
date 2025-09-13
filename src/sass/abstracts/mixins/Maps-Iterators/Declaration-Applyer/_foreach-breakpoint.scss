@@ -1,0 +1,13 @@
+// Here we call apply-declaration for each breakpoint INNER MAP 
+@mixin apply-declarations-for-each-breakpoint($from, $allowed-pseudo-classes: $ALLOWED_DEFAULT, $exclude: null, $unallow: null, $aliasies: null) {
+  @each $breakpoint, $breakpoint-inner-map in $from {
+    @if ($breakpoint == 'default') {
+      @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+    }
+    @else if ($breakpoint != 'default') {
+      @include media-query(#{$breakpoint}) {
+        @include apply-declarations($breakpoint-inner-map, $allowed-pseudo-classes, $exclude, $unallow, $aliasies );
+      }
+    }
+  }
+}

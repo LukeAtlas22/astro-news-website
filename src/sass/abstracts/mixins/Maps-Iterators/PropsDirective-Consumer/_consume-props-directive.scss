@@ -1,0 +1,88 @@
+@use "sass:meta";
+@use "sass:list";
+@use "sass:map";
+@use "utilities/aliaser-utils" as *;
+@use "utilities/modificator-hooks-utils" as *;
+@use "utilities/validation-hooks-utils" as *;
+@use "utilities/submap-utils" as *;
+@use "../_common-utilities/write-declaration" as *;
+@use "schema/prop-directive.schema" as Prop-Directive;
+
+/// This function returns the value, either if it is specificied a submap-retrieve-request, or a simple re-quest. If no maps exist, it returns false - Otherwise it returns the value of the specified prop.
+@function resolve-value($prop-directive, $map) {
+
+  $prop-name: get-prop-name($prop-directive);
+  $value: null;
+
+  @if is-submap-retrieve-requested-in($prop-directive) { // Note - Questo blocco non mi convince
+    $sub-map: get-submap($map, $prop-directive);
+    $value: get-value-from-submap($sub-map, $prop-name);
+  }
+  @else { 
+    $value: get-value-from-map($map, $prop-name);
+  }
+
+  @return $value;
+}
+
+/// This function returns the prop-name specified in the prop-directive, if an alias is specified (by the key 'as') then, it returns that alias value.
+@function resolve-prop-name($prop-directive) {
+  $prop-name: get-prop-name($prop-directive);
+  @if (is-alias-requested-in($prop-directive)) {
+    $prop-name: resolve-prop-name-alias($prop-directive);
+  }
+
+  @return $prop-name;
+}
+
+/// Creates a function by the validation-hook specified in the prop-directive, and validates the value using that function
+@function start-validation-routine($prop-directive, $value){
+  $validator: get-validation-hook($prop-directive);
+    
+  @if (is-validator-with-parameters($validator)) { // Note - Qui volevamo togliere questa if
+    // Note - Praticamente dovrebbe funzionare bene, sia senza parametri, sia con i parametri, basterebeb passare un null iniziale
+    $validation-function-name: list.nth($validator, 1);
+    $validation-parameters: list.nth($validator, 2);
+    $validation-function: construct-validation-function($validation-function-name);
+  
+    @if not validate($validation-function, $value, $validation-parameters) {
+      @error 'The validation failed for: "#{$validation-function-name}" - Because "#{$value}" is not valid < #{$validation-function-name} > for parameters: #{$validation-parameters}';
+    }
+  }
+
+  @else {
+    $validation-function: construct-validation-function($validator);
+    @if not validate($validation-function, $value) {
+      @error 'The value "#{$value}" is not a valid: < #{$validator} > -';
+    }
+  }
+  @return $value;
+}
+
+/// Creates a function by the modificator-hook specified in the prop-directive, and modificates the value using that function
+@function start-modification-routine($prop-directive, $value){
+  // Note - I need to make this capable to do with parameters
+  $function: construct-modificator-function($prop-directive);
+  $value: modificate($function, $value);
+  @return $value;
+}
+
+// Note - C'è ancora un po' di confusione con i nomi sopra e sotto
+// Note - Alternative name: Selective-Apply-Declarations
+@mixin Consume-PropsDirective-Over-Map($props-directives-map, $map){
+  @each $prop-directive in $props-directives-map {
+    
+    $prop-name: resolve-prop-name($prop-directive);
+    $value: resolve-value($prop-directive, $map); // Note - Qui potrei fare un resolve-value
+
+    @if ($value and is-validation-requested-in($prop-directive)){  
+      $value: start-validation-routine($prop-directive, $value);
+    }
+
+    @if ($value and is-modification-requested-in($prop-directive)) { 
+      $value: start-modification-routine($prop-directive, $value);
+    }
+
+    @include write-declaration-if-value-exist($prop-name, $value);
+  }
+}

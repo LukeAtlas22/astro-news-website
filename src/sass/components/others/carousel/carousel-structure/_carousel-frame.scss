@@ -2,6 +2,7 @@
 @use "@SASS-Carousel-Abstracts" as *;
 
 .carousel__variables-scope {
+  --look-here: true;
   @include Consume-PropsDirectives-ForEach-Breakpoint-Map(
     $Map: $carousel, 
     $props-directives-map: (

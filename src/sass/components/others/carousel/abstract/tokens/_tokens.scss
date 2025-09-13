@@ -127,14 +127,21 @@ $carousel-buttons-style: (
   "default": (
     // Note - Vorrei esporre un file sass per fare qualcosa di custom, tipo custom borders on hover che ruotano, cose così.
     // Style
-    normal: (
-      color: $body-text-color,
-      background: transparent,
-      border: 2px solid $body-text-color,
-      border-radius: 75vw,
-      border-offset: 12px,
-      transition: 225ms, // Note - Tokenize on Default Design Transition
-    )
+    // normal: ( // Note - Todo ?
+    //   color: $body-text-color,
+    //   background: transparent,
+    //   border: 2px solid $body-text-color,
+    //   border-radius: 75vw,
+    //   border-offset: 12px,
+    //   transition: 225ms, // Note - Tokenize on Default Design Transition
+    // ),
+
+    color: $body-text-color,
+    background: transparent,
+    border: 2px solid $body-text-color,
+    border-radius: 75vw,
+    border-offset: 12px,
+    transition: 225ms, // Note - Tokenize on Default Design Transition
     // You won't have validation on those props, at least for now.
     hover: (
       scale: 1.1,
